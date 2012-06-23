@@ -15,7 +15,7 @@ GIT
       rake
 
 GEM
-  remote: http://ruby.taobao.org/
+  remote: https://rubygems.org/
   specs:
     actionmailer (3.2.6)
       actionpack (= 3.2.6)
