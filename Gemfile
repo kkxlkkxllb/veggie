@@ -5,9 +5,6 @@ gem 'rails', '3.2.6'
 group :production do
   gem 'mysql2'
 end
-group :development, :test do
-  gem 'sqlite3'
-end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -52,6 +49,9 @@ gem 'rails_autolink'
 group :development, :test do
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 	gem 'haml-rails'
+	gem 'sqlite3'
 end
 
 gem "devise"
+gem 'geo_location'
+gem 'has_scope'

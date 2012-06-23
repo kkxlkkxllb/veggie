@@ -81,12 +81,14 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    geo_location (0.4.2)
     haml (3.1.6)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
+    has_scope (0.5.1)
     hashie (1.2.0)
     highline (1.6.13)
     hike (1.2.1)
@@ -216,8 +218,10 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger
   devise
+  geo_location
   haml
   haml-rails
+  has_scope
   jquery-rails
   kaminari
   mysql2

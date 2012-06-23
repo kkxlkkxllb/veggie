@@ -2,13 +2,15 @@
 #
 # Table name: leafs
 #
-#  id          :integer         not null, primary key
+#  id          :integer          not null, primary key
 #  content     :text
 #  provider_id :integer
 #  image_url   :string(255)
 #  time_stamp  :datetime
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
+#  weibo_id    :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  video       :string(255)
 #
 
 require 'test_helper'

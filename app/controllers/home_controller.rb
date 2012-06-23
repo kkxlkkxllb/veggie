@@ -22,7 +22,7 @@ class HomeController < ApplicationController
   end
   
   def lab
-    
+    @request = request.remote_ip
   end
   
   private
