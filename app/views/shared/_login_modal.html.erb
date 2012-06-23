@@ -1,0 +1,22 @@
+<div id="login_modal" class="hide modal fade">
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>登录</h3>
+  </div>
+  <div class="modal-body">
+    <%= form_tag '/members/sign_in',:id=>"login_form" do %>
+			<p>
+				<%= label_tag "email","邮箱：" %> 
+				<input id="email" name="member[email]" type="text">
+			</p>
+			<p>
+				<%= label_tag "password","密码：" %> 
+				<input id="password" name="member[password]" type="password">
+			</p>
+		<% end %>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">取消</a>
+    <a href="#" class="btn btn-primary" onclick="$('#login_form').submit();return false;">提交</a>
+  </div>
+</div>

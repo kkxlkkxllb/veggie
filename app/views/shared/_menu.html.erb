@@ -1,0 +1,38 @@
+<div id="menu">
+	<ul class="clearfix">
+		<li class="action">
+			<a href="/">
+				<span class="label">
+					<i class="icon-home"></i>首页
+				</span>
+			</a>
+		</li>
+		<% if current_member %>
+		<li class="action" onclick="grow_leaf(1,<%= params[:pid].to_i %>);">
+			<span class="label label-info"><i class="icon-refresh"></i> 更新</span>
+		</li>
+		<li class="action" onclick="grow_leaf(0,<%= params[:pid].to_i %>);">
+			<span class="label label-info"><i class="icon-refresh"></i> 更多</span>
+		</li>
+		<% end %>
+		<li class="action">
+			<a href="/users">
+				<span class="label label-success">
+					<i class="icon-user"></i> <%= Provider.count %>
+				</span>
+			</a>
+		</li>
+		<li><i class="icon-leaf"></i> <%= Leaf.count %></li>
+		<% if current_member %>
+			<li class="action">				
+				<a href="/members/sign_out" data-method="delete" rel="nofollow">
+					<span class="label label-important"><i class="icon-off"></i> 登出</span>
+				</a>
+			</li>
+		<% else %>		  
+			<li class="action" onclick="login();">
+				<i class="icon-off"></i> 登录
+			</li>
+		<% end %>
+	</ul>
+</div>

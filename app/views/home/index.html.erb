@@ -1,0 +1,26 @@
+<% content_for :head do %>
+	<div id="header_contain">
+		<div id="title">
+			<span>17up</span>
+			<span class="logo"><%= image_tag('icon/logo.png') %></span>
+		</div>
+		<% if params[:pid] %>
+		<div id="tag" pid="<%=params[:pid]%>">
+			<span class="label label-success">
+				<a href="/"><%= Provider.find(params[:pid]).user_name %> &times;</a>
+			</span>
+		</div>
+		<% end %>
+		<div id="author">
+			<a href="/admin" target="blank">
+				veggie<i class="icon-chevron-right"></i>
+			</a>
+		</div>
+	</div>
+<% end %>
+<div id="home">
+	<%= render 'leafs' %>
+</div>
+<nav class="pagination">
+	<a href="/home/index?page=2<%= '&pid='+params[:pid] if params[:pid] %>" data-remote="true" rel="next"></a>
+</nav>

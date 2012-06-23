@@ -1,0 +1,66 @@
+// 
+// @TODO: Add docs to round!
+//
+@mixin round($dist) {
+  -moz-border-radius:$dist;
+	-webkit-border-radius:$dist;
+	border-radius:$dist;
+}
+// 
+// @TODO: Add docs to shadow!
+//
+@mixin shadow($x,$y,$r,$color) {
+  -moz-box-shadow:$x $y $r $color;
+	-webkit-box-shadow:$x $y $r $color;
+	box-shadow:$x $y $r $color;
+}
+// 
+// @TODO: Add docs to transition!
+//
+@mixin transition($span) {
+  -webkit-transition: all $span linear;
+	-moz-transition: all $span linear;
+	transition: all $span linear;
+}
+// 
+// @TODO: Add docs to menu!
+//
+@mixin menu($lh,$padx,$pady,$blc,$brc,$hc) {
+  ul{
+		margin:0;
+		height:$lh;
+		li{
+			list-style: none;
+			line-height:$lh;
+			float:left;
+			padding:$padx $pady;
+			border-left:1px solid $blc;
+			border-right:1px solid $brc;
+			a{
+				text-decoration: none;
+			}	
+		}
+		li.action{
+			cursor:pointer;
+		}
+		li.action:hover{
+			background:$hc;
+		}
+	}
+}
+// 
+// @TODO: Add docs to loader!
+//
+@mixin loader($left) {
+  text-align: center;
+	z-index: 100;
+	position: fixed;
+	left: $left;
+	bottom: 40px;
+	width: 200px;
+	padding: 10px;
+	background: black;
+	opacity: 0.8;
+	color: white;
+	@include round(10px);
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%=raw @title %></title>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta content="<%= @meta_description %>" name="description">
+  <meta content="<%= @meta_keywords %>" name="keywords">
+	<%= stylesheet_link_tag  "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<nav>
+		<div id="header">
+			<%= yield :head %>
+		</div>
+	</nav>
+	<section>
+		<div id="main">
+			<%= yield %>
+		</div>
+		<div id="modal">
+			<%= render 'shared/login_modal' %>
+		</div>
+	</section>
+	<footer>
+		<%= render 'shared/menu' %>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%=raw @title %></title>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta content="<%= @meta_description %>" name="description">
+  <meta content="<%= @meta_keywords %>" name="keywords">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0, minimum-scale=1, maximum-scale=1">
+	<meta meta name="apple-mobile-web-app-capable" content="yes">
+  <%= stylesheet_link_tag    "mobile/application", :media => "all" %>
+  <%= javascript_include_tag "mobile/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="main">
+		<%= yield %>
+	</div>	
+</body>
+</html>

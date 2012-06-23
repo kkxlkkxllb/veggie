@@ -1,0 +1,24 @@
+<% content_for :head do %>
+	<div id="header_contain">
+		<div id="title">
+			<span>17up 名将录</span>
+		</div>
+		<div id="author">
+			<a href="/admin" target="blank">veggie<i class="icon-chevron-right"></i></a>
+		</div>
+	</div>
+<% end %>
+<div id="user_list">
+	<% @users.each do |u| %>
+	<a href="/p/<%=u.id%>">
+		<div class="user_item">
+			<div class="avatar">
+				<%= image_tag(u.avatar(:large)) %>
+			</div>
+			<div class="name">
+				<%= u.user_name %>
+			</div>			
+		</div>
+	</a>
+	<% end %>
+</div>

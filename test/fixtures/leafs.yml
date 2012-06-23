@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: leafs
+#
+#  id          :integer         not null, primary key
+#  content     :text
+#  provider_id :integer
+#  image_url   :string(255)
+#  time_stamp  :datetime
+#  created_at  :datetime        not null
+#  updated_at  :datetime        not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  content: MyText
+  provider_id: 1
+  image_url: MyString
+
+two:
+  content: MyText
+  provider_id: 1
+  image_url: MyString
