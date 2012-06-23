@@ -1,9 +1,9 @@
-source 'https://rubygems.org'
-#source 'http://ruby.taobao.org'
+#source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 gem 'rails', '3.2.6'
 
 group :production do
-  gem 'pg'
+  gem 'mysql2'
 end
 group :development, :test do
   gem 'sqlite3'
