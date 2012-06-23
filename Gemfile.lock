@@ -15,7 +15,7 @@ GIT
       rake
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://ruby.taobao.org/
   specs:
     actionmailer (3.2.6)
       actionpack (= 3.2.6)
@@ -133,6 +133,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (>= 0.0.2)
       mime-types
+    pg (0.13.2)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -222,6 +223,7 @@ DEPENDENCIES
   nokogiri (~> 1.5.0)
   omniauth-weibo!
   paperclip
+  pg
   rails (= 3.2.6)
   rails_admin
   rails_autolink
