@@ -4,10 +4,11 @@
 			%a(href = "/")
 				%span.label
 					%i.icon-home
-					首页
+					片语
 		%li.action
 			%a(href="/vote_subject/index")
 				%span.label
+					%i.icon-book
 					生词本
 		- if current_member
 			%li.action{:onclick => "grow_leaf(1,#{params[:pid].to_i});"}

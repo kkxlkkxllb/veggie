@@ -13,7 +13,7 @@
 #
 
 class VoteSubject < ActiveRecord::Base
-  has_many :vote_fields
+  has_many :vote_fields,:dependent => :destroy
   has_many :votes, :through => :vote_fields
   validate :title, :presence => true
   # 问答形式的

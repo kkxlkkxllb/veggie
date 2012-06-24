@@ -10,7 +10,7 @@
 #
 
 class VoteField < ActiveRecord::Base
-  has_many :votes
+  has_many :votes,:dependent => :destroy
   belongs_to :vote_subject
   validate :content, :presence => true
   validate :vote_subject_id, :presence => true

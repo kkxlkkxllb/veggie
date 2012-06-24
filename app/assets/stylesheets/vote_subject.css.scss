@@ -1,3 +1,10 @@
 // Place all the styles related to the vote_subject controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#wrap{
+	width:1000px;
+	margin:0 auto;
+	#new_word{
+		margin:20px 0;
+	}
+}

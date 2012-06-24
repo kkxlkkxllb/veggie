@@ -85,7 +85,7 @@ function insert_word(){
 	var word = $("input#word").val();
 	$.post("/word/insert",{word:word},function(data){
 		if(data.status == 0){
-			alert("ok");
+			window.location.reload();
 		}
 	})
 }

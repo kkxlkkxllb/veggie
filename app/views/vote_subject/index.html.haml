@@ -7,16 +7,23 @@
 	.modal-body
 		= form_tag '/members/sign_in',:id=>"login_form" do
 			%p
-				%input(type="text" name="word" id="word")
+				%input(type="text" name="word" id="word" placeholder="输入单词")
 	.modal-footer
 		%a.btn.btn-primary(href="#" onclick="insert_word();")
 			提交
-#home
-	#new_word(onclick="$('#word_modal').modal();")
-		%span.btn
+#wrap
+	#new_word
+		%span.btn(onclick="$('#word_modal').modal();")
 			+生词
-	%ul
+	%table.table
+		%tr
+			%th
+				单词
+			%th
+				解释
 		- VoteSubject.words.each do |w|
-			%li
-				= w.title
-				= w.vote_fields.first.content
+			%tr
+				%td
+					= w.title
+				%td
+					= w.vote_fields.first.content
