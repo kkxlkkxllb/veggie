@@ -1,2 +1,22 @@
-%h1 VoteSubject#index
-%p Find me in app/views/vote_subject/index.html.haml
+#word_modal.hide.modal.fade
+	.modal-header
+		%button.close(type="button" data-dismiss="modal")
+			×
+		%h3
+			新建生词
+	.modal-body
+		= form_tag '/members/sign_in',:id=>"login_form" do
+			%p
+				%input(type="text" name="word" id="word")
+	.modal-footer
+		%a.btn.btn-primary(href="#" onclick="insert_word();")
+			提交
+#home
+	#new_word(onclick="$('#word_modal').modal();")
+		%span.btn
+			+生词
+	%ul
+		- VoteSubject.words.each do |w|
+			%li
+				= w.title
+				= w.vote_fields.first.content

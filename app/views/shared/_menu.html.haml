@@ -1,0 +1,38 @@
+#menu
+	%ul.clearfix
+		%li.action
+			%a(href = "/")
+				%span.label
+					%i.icon-home
+					首页
+		%li.action
+			%a(href="/vote_subject/index")
+				%span.label
+					生词本
+		- if current_member
+			%li.action{:onclick => "grow_leaf(1,#{params[:pid].to_i});"}
+				%span.label.label-info
+					%i.icon-refresh
+					更新
+			%li.action{:onclick => "grow_leaf(0,#{params[:pid].to_i});"}
+				%span.label.label-info
+					%i.icon-refresh
+					更多
+		%li.action
+			%a(href="/users")
+				%span.label.label-success
+					%i.icon-user
+					= Provider.count
+		%li
+			%i.icon-leaf
+			= Leaf.count
+		- if current_member
+			%li.action
+				%a(href = "/members/sign_out" data-method="delete" rel="nofollow")
+					%span.label.label-important
+						%i.icon-off
+						登出
+		- else
+			%li.action(onclick = "login();")
+				%i.icon-off
+				登录

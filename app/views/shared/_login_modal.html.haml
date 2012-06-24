@@ -1,0 +1,19 @@
+#login_modal.hide.modal.fade
+	.modal-header
+		%button.close(type="button" data-dismiss="modal")
+			×
+		%h3
+			登录
+	.modal-body
+		= form_tag '/members/sign_in',:id=>"login_form" do
+			%p
+				= label_tag "email","邮箱："
+				%input(id="email" name="member[email]" type="text")
+			%p
+				= label_tag "password","密码："
+				%input(id="password" name="member[password]" type="password")
+	.modal-footer
+		%a.btn(href="#" data-dismiss="modal")
+			取消
+		%a.btn.btn-primary(href="#" onclick="$('#login_form').submit();return false;")
+			提交

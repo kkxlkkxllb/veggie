@@ -1,0 +1,20 @@
+- @leafs.each do |leaf|
+	.leaf
+		- if current_member
+			%span.action.destroy.hide{:onclick => "destroy_leaf(#{leaf.id},$(this));"}
+				&times;
+			%span.action.edit.hide
+				%a{:href=>"/admin/leaf/#{leaf.id}/edit"}
+					%i.icon-pencil
+		.info.clearfix
+			%span.avatar.left
+				= my_image_tag(leaf.provider.avatar,leaf.provider.weibo)
+			%span.name.left
+				= link_to leaf.provider.user_name,"/p/#{leaf.provider.id}"
+			%span.time.right
+				= time_stamp(leaf.time_stamp)
+		.content
+			= auto_link(leaf.content)
+		- if leaf.image
+			.img
+				= my_image_tag(leaf.image(:medium),leaf.image(:large))

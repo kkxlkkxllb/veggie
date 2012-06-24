@@ -11,9 +11,7 @@
 		margin:5px;
 		border:1px solid #2F96D1;		
 		background:#3DACE0;
-		box-shadow: 0 1px 3px rgba(0,0,0,.3);
-		-moz-box-shadow: 0 1px 3px rgba(0,0,0,.3);
-		-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.3);
+		@include shadow(0,1px,3px,rgba(0,0,0,.3));
 		span.action{
 			position:absolute;
 			cursor:pointer;
@@ -25,12 +23,8 @@
 			line-height:18px;
 			text-align:center;
 			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-			-moz-border-radius:18px;
-			-webkit-border-radius:18px;
-			border-radius:18px;
-			box-shadow: 0 1px 2px rgba(0,0,0,.3);
-			-moz-box-shadow: 0 1px 2px rgba(0,0,0,.3);
-			-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3);
+			@include round(18px);
+			@include shadow(0,1px,2px,rgba(0,0,0,.3));
 		}
 		span.destroy{			
 			right:90px;
@@ -108,9 +102,7 @@
 		margin:5px;
 		border:1px solid #2F96D1;		
 		background:#3DACE0;
-		box-shadow: 2px 2px 4px rgba(0,0,0,.3);
-		-moz-box-shadow: 2px 2px 4px rgba(0,0,0,.3);
-		-webkit-box-shadow: 2px 2px 4px rgba(0,0,0,.3);
+		@include shadow(2px,2px,4px,rgba(0,0,0,.3));
 		position:relative;
 		.avatar{
 			z-index:1;

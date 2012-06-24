@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
     else
       @title = "17UP"
     end
+    @subtitle = title
     @meta_keywords = keywords
     @meta_description = desc
   end

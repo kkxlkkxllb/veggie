@@ -15,6 +15,7 @@ Veggie::Application.routes.draw do
   get "home/index"
   match "/p/:pid" => "home#index"
   match "users" => "home#users"
+  match "word/insert" => "vote_subject#insert_word"
  
   root :to => 'home#index'
 

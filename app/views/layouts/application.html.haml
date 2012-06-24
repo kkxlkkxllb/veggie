@@ -1,0 +1,21 @@
+!!!
+%html
+	%head
+		%title=raw @title
+		%meta(content="text/html; charset=UTF-8" http-equiv="content-type")
+		%meta{'name' => "description", :content => "#{@meta_description}"}
+		%meta{'name' => "keywords", :content => "#{@meta_keywords}"}
+		= csrf_meta_tag
+		= javascript_include_tag "application"
+		= stylesheet_link_tag "application", :media => "all"	
+	%body
+		%nav
+			#header
+				= render 'shared/header'
+		%section
+			#main
+				= yield
+			#modal
+				= render 'shared/login_modal'
+		%footer
+			= render 'shared/menu'

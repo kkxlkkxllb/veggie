@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # == Schema Information
 #
 # Table name: vote_subjects
@@ -23,10 +24,14 @@ class VoteSubject < ActiveRecord::Base
   scope :access, :conditions => ["(end_time IS NULL or end_time > ?) AND limit_num IS NULL",Time.current]
 
   acts_as_taggable
-  acts_as_taggable_on :subject
+  acts_as_taggable_on :subjects
   
   def is_access?
     (end_time == nil or end_time > Time.now)&&(limit_num == nil or limit_num > votes.size)
+  end
+  
+  def self.words
+    VoteSubject.tagged_with("英语词汇")
   end
   
 end
