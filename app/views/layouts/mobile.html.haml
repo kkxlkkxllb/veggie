@@ -1,0 +1,16 @@
+!!!
+%html
+	%head
+		%title=raw @title
+		%meta(content="text/html; charset=UTF-8" http-equiv="content-type")
+		%meta{'name' => "description", :content => "#{@meta_description}"}
+		%meta{'name' => "keywords", :content => "#{@meta_keywords}"}
+		%meta(name="viewport" content="width=device-width,initial-scale=1,user-scalable=0, minimum-scale=1, maximum-scale=1")
+		%meta(name="apple-mobile-web-app-capable" content="yes")
+		= csrf_meta_tag
+		= javascript_include_tag "mobile/application"
+		= stylesheet_link_tag "mobile/application", :media => "all"	
+	%body
+		%section
+			#main
+				= yield
