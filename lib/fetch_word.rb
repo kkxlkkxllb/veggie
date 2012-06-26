@@ -5,7 +5,7 @@ require 'nokogiri'
 class FetchWord
   
   def initialize(word)
-    url = "http://dict.hjenglish.com/w/"+word
+    url = DICT_SOURCE[:english]+word
     frame = Nokogiri::HTML(open(url),nil)
     if frame
       @comment = frame.css("#panel_comment")[0].content.split("\r\n")[0..2].join(" ")

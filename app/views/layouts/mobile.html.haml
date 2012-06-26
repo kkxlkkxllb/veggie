@@ -11,6 +11,8 @@
 		= javascript_include_tag "mobile/application"
 		= stylesheet_link_tag "mobile/application", :media => "all"	
 	%body
+		%nav
+			= yield :head
 		%section
 			#main
 				= yield

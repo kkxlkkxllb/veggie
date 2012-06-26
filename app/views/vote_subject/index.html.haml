@@ -20,10 +20,15 @@
 			%th
 				单词
 			%th
+				发音
+			%th
 				解释
 		- VoteSubject.words.each do |w|
 			%tr
 				%td
-					= w.title
+					= link_to w.title,DICT_SOURCE[:english]+w.title
+				%td
+					%i.icon-headphones
+					%audio{:src => DICT_SOURCE[:english_v]+w.title}
 				%td
 					= w.vote_fields.first.content

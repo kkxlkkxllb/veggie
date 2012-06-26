@@ -43,6 +43,13 @@ $(function(){
 	    });
 	  }
   );
+
+	$(".icon-headphones").live('click',function(){
+		var sound = $(this).next()[0];
+		sound.load();
+		sound.play();
+		return false;
+	});
 	
 	$("div.leaf").live('hover',function(){
 		$("span.action",$(this)).toggle();

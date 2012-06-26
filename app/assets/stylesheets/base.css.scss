@@ -36,6 +36,9 @@ a{
 .right{
   float: right;
 }
+.as_link{
+	cursor:pointer;
+}
 .round{
 	@include round(8px);
 }
