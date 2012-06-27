@@ -1,0 +1,50 @@
+@mixin round($dist)
+	-moz-border-radius: $dist
+	-webkit-border-radius: $dist
+	border-radius: $dist
+	
+@mixin shadow($x,$y,$r,$color)
+	-moz-box-shadow: $x $y $r $color
+	-webkit-box-shadow: $x $y $r $color
+	box-shadow: $x $y $r $color
+	
+@mixin transition($span)
+	-webkit-transition: all $span linear
+	-moz-transition: all $span linear
+	transition: all $span linear
+	
+@mixin menu($lh,$padx,$pady,$blc,$brc,$hc)
+	ul
+		margin: 0
+		height: $lh
+		li
+			list-style: none
+			line-height: $lh
+			float: left
+			padding: $padx $pady
+			border-left: 1px solid $blc
+			border-right: 1px solid $brc
+			a
+				text-decoration: none
+		li.action
+			cursor: pointer
+			&:hover
+				background: $hc
+			
+@mixin loader($left)
+	text-align: center
+	z-index: 100
+	position: fixed
+	left: $left
+	bottom: 40px
+	width: 200px
+	padding: 10px
+	background: black
+	opacity: 0.8
+	color: white
+	@include round(10px)
+	
+@mixin text-shadow-title-black
+	color: black
+	text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px rgba(255, 255, 255, .125)
+  

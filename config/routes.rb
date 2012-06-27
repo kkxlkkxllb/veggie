@@ -13,6 +13,7 @@ Veggie::Application.routes.draw do
   namespace :mobile do
     match '/' => "mhome#index"
     match "/p/:pid" => "mhome#index"
+    match "mweibo" => "mhome#weibo"
   end
   
   get "leafs/destroy"
