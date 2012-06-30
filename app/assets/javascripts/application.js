@@ -16,4 +16,6 @@
 //= require lib/bootstrap.min
 //= require lib/jquery.masonry.min
 //= require lib/jquery.infinitescroll.min
+//= require utils
 //= require home
+
