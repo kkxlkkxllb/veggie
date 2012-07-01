@@ -1,0 +1,7 @@
+- @words.each do |w|
+	.word
+		.title
+			%span.w_name
+				= link_to w.title,DICT_SOURCE[:english]+w.title
+			%span.w_voice
+				%audio{:src => DICT_SOURCE[:english_v]+w.title}(controls preload="auto")

@@ -7,13 +7,29 @@ class Mobile::MhomeController < ApplicationController
   
   def weibo
     @leafs = source_leafs(params[:pid],params[:page],12)
+    if params[:pid]
+      @users = ([Provider.find(params[:pid])] + Provider.all).uniq
+    end
+    respond_to do |format|
+      format.html
+			format.json{
+			  render :json => {:status => 0,:msg => "ok",:data => {
+        			:html => render_to_string(:layout => false, 
+        			                             :template => "mobile/mhome/weibo.html.haml")
+        }}
+			}			
+		end		
+  end
+  
+  def learn_en
+    @words = VoteSubject.words
     
-		respond_to do |format|
+    respond_to do |format|
 		  format.html
 			format.json{
 				render :json => {:status => 0,:msg => "ok",:data => {
     			:html => render_to_string(:layout => false, 
-    			                             :template => "mobile/mhome/weibo.html.erb")
+    			                             :template => "mobile/mhome/learn_en.html.haml")
     		}}
 			}		
 		end

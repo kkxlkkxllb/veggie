@@ -7,24 +7,33 @@ $ ->
 		$(this).hide()		
 		$wrap.infinitescroll("destroy").html("")
 		$("#m_nav").show()
-	$("#m_nav .banner").click ->
+	$("#m_nav .menu").click ->
 		rel = $(this).attr "rel"		
 		$("#m_nav_back").show()
 		$("#m_nav").hide()
-		if rel is "weibo"
-			$.post("/mobile/mweibo",(data) ->
-				if data.status is 0
-					$wrap.append(data.data.html)
-			,"json").complete ->
-				$wrap.infinitescroll
-					navSelector  : "nav.pagination",
-					nextSelector : "nav.pagination a",
-					itemSelector : ".leaf",
-					debug        : false,
-					loading: 
-						finishedMsg: '这是所有咯',
-						msgText : "正在努力加载更多内容...",
-						img: 'http://i.imgur.com/6RMhx.gif'
-		     	,
-					(newElements) ->
-						$wrap.append(newElements)
+		switch rel
+			when "weibo"
+				$.post("/mobile/mweibo",(data) ->
+					if data.status is 0
+						$wrap.append(data.data.html)
+				,"json").complete ->
+					$wrap.infinitescroll
+						navSelector  : "nav.pagination",
+						nextSelector : "nav.pagination a",
+						itemSelector : ".leaf",
+						debug        : false,
+						loading: 
+							finishedMsg: '这是所有咯',
+							msgText : "正在努力加载更多内容...",
+							img: 'http://i.imgur.com/6RMhx.gif'
+			     	,
+						(newElements) ->
+							$wrap.append(newElements)
+			when "en"
+				$.post("/mobile/learn_en",(data) ->
+					if data.status is 0
+						$wrap.append(data.data.html)
+				,"json").complete ->
+					false
+			else
+				false

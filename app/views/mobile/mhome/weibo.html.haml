@@ -1,10 +1,21 @@
+- if @users
+	#user_list_wrap
+		#user_list.clearfix
+			- @users.each do |u|
+				%a{:onclick => "get_provider(#{u.id});return false;"}(href="#")
+					.user_item
+						.avatar
+							= image_tag(u.avatar(:large))
+						.name
+							= u.user_name
 - @leafs.each do |leaf|
 	.leaf
 		.info.clearfix
 			%span.avatar.left
 				= my_image_tag(leaf.provider.avatar,leaf.provider.weibo)
 			%span.name.left
-				= link_to leaf.provider.user_name,"mobile/p/#{leaf.provider.id}"
+				%a{:onclick => "get_provider(#{leaf.provider.id});return false;"}(href="#")
+					= leaf.provider.user_name
 			%span.time.right
 				= time_stamp(leaf.time_stamp)
 		.content
