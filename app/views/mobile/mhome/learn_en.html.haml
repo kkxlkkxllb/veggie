@@ -1,7 +1,9 @@
 - @words.each do |w|
 	.word
-		.title
+		.title{:rel => "#{w.key_id}"}
+			%i.icon-headphones.icon-white{:src => "#{DICT_SOURCE[:english_v]+w.title}"}
 			%span.w_name
-				= link_to w.title,DICT_SOURCE[:english]+w.title
-			%span.w_voice
-				%audio{:src => DICT_SOURCE[:english_v]+w.title}(controls preload="auto")
+				= w.title
+		- w.word_guess.each_with_index do |f,i|
+			.field{:rel => "#{f.id}",:class => "f_#{i}"}(onclick = "is_correct($(this))")
+				= f.content

@@ -1,0 +1,4 @@
+<% if @word %>
+	$("#wrap table").append("<%= escape_javascript(render :partial => 'word',:locals => {:w => @word }) %>");
+	$("#new_word input").val("").focus();
+<% end %>	

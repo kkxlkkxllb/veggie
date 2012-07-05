@@ -1,9 +1,37 @@
+@import "utils"
+
+body
+	background: #1d1d1d
 .word:first-child
-	margin-top: 25px
+	margin-top: 35px
+	border-top: none
+.word:last-child
+	border-bottom: none
 .word
-	margin: 5px auto
+	margin: 0 auto
 	width: 300px
+	border-bottom: 1px solid #000
+	border-top: 1px solid #323232
+	padding: 10px 0
 	.title
-		height: 30px
-		font-size: 20px
-		line-height: 30px
+		height: 50px
+		font-size: 30px
+		line-height: 50px
+		@include text-shadow-content-white
+		i
+			vertical-align: middle
+			margin-right: 15px
+	.field
+		color: #1d1d1d
+		font-size: 14px
+		padding: 8px
+	.good
+		color: white
+	.f_0
+		background-color: #555
+	.f_1
+		background-color: #3DACE0
+	.f_2
+		background-color: #C1FF7D
+	.f_3
+		background-color: #EA8072

@@ -15,14 +15,13 @@
 		span.action{
 			position:absolute;
 			cursor:pointer;
-			color:white;
 			background:#3DACE0;
 			border:1px solid #2F96D1;
 			width:18px;
 			height:18px;
 			line-height:18px;
 			text-align:center;
-			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+			@include text-shadow-content-white;
 			@include round(18px);
 			@include shadow(0,1px,2px,rgba(0,0,0,.3));
 		}
@@ -97,8 +96,7 @@
 			top:0;
 			padding:5px;
 			background:rgba(0,0,0,.5);
-			color:white;
-			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+			@include text-shadow-content-white;
 		}
 	}
 }

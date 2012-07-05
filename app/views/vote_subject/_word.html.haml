@@ -1,0 +1,8 @@
+%tr
+	%td
+		= link_to w.title,DICT_SOURCE[:english]+w.title
+	%td
+		%i.icon-headphones
+		%audio{:src => DICT_SOURCE[:english_v]+w.title}
+	%td
+		= w.vote_fields.first.content

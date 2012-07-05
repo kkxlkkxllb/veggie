@@ -34,6 +34,9 @@ $ ->
 					if data.status is 0
 						$wrap.append(data.data.html)
 				,"json").complete ->
-					false
+					$(".icon-headphones").bind 'click',->
+						sound = new Audio($(this).attr("src"))
+						sound.load()
+						sound.play()
 			else
 				false

@@ -46,8 +46,3 @@ root.destroy_leaf = (leaf_id,ele) ->
 			$("#home").masonry('reload')
 root.login =->
 	$("#login_modal").modal()
-root.insert_word =->
-	word = $("input#word").val()
-	$.post "/word/insert",{word:word},(data) ->
-		if data.status is 0
-			window.location.reload()

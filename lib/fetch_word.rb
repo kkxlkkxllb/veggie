@@ -19,7 +19,8 @@ class FetchWord
       vf = vs.vote_fields.create(:content => @comment)
       vs.key_id = vf.id
       vs.subject_list << "英语词汇"
-      vs.save!
+      vs.save
+      return vs
     else
       return false
     end    

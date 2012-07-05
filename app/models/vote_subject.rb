@@ -34,4 +34,16 @@ class VoteSubject < ActiveRecord::Base
     VoteSubject.tagged_with("英语词汇")
   end
   
+  # 生产随机3个错误选项
+  def word_guess
+    guess = []
+    rest = VoteField.where(["vote_subject_id != ?",self.id]).all
+    3.times do 
+      num = rand(rest.size)
+      guess << rest[num]
+      rest.delete_at(num)
+    end
+    return guess.insert(rand(4)-1,self.vote_fields.first)
+  end
+  
 end

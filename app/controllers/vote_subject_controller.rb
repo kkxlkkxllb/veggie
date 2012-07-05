@@ -12,11 +12,6 @@ class VoteSubjectController < ApplicationController
   end
   
   def insert_word
-    if FetchWord.new(params[:word]).insert
-      status = 0
-    else
-      status = -1
-    end
-    render :json => {:status => status}
+    @word = FetchWord.new(params[:word]).insert
   end
 end
