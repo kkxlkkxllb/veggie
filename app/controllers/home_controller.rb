@@ -7,10 +7,12 @@ class HomeController < ApplicationController
     respond_to do |format|
       format.html
 			format.json{
-				render :json => {:status => 0,:msg => "ok",:data => {
-					:html => render_to_string(:layout => false, 
-					                             :template => "home/_leafs.html.erb")
-				}}
+			  html = render_to_string(
+		            :formats => :html,
+                :handlers => :haml,
+  			        :partial => "leafs"
+  			        )
+			  render_json(html)
 			}			
 		end
   end

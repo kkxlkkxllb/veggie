@@ -24,4 +24,14 @@ class ApplicationController < ActionController::Base
     @source_leafs = @pid.blank? ? Leaf : Provider.find(@pid).leafs
     return @source_leafs.order("time_stamp DESC").page(page).per(per_page)
   end
+  
+  def render_json(html)
+    render :json => {
+              :status => 0,
+              :msg => "ok",
+              :data => {
+    			      :html => html
+              }
+            }
+  end
 end

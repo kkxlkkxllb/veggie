@@ -1,0 +1,85 @@
+@import "utils"
+
+#infscr-loading
+	@include loader(45%)
+#home
+	margin: 0 auto
+	padding: 20px 0 40px 0
+	.leaf
+		width: 200px
+		margin: 5px
+		border: 1px solid #2F96D1	
+		background: #3DACE0
+		opacity: 0
+		@include shadow(0,1px,3px,rgba(0,0,0,.3))
+		span.action
+			position: absolute
+			cursor: pointer
+			background: #3DACE0
+			border: 1px solid #2F96D1
+			width: 18px
+			height: 18px
+			line-height: 18px
+			text-align: center
+			@include text-shadow-content-white
+			@include round(18px)
+			@include shadow(0,1px,2px,rgba(0,0,0,.3))
+		span.destroy		
+			right: 90px
+			top: -10px		
+		span.edit
+			top: -10px
+			right: 65px
+		.info
+			padding: 3px
+			background: #4AC0EE
+			border-bottom: 1px solid #2F96D1		
+			span
+				display: inline-block
+			span.avatar	
+				margin-right: 5px
+				img
+					width: 25px
+					height: 25px
+			span.name
+				text-shadow: 0 -1px 0 #288AC9
+				line-height: 25px
+				a
+					color: #f5f5f5
+			span.time
+				color: #2F96D1
+				font-size: 12px
+				line-height: 25px
+		.content
+			border-top: 1px solid #81C9EB
+			text-shadow: 0 -1px 0 #288AC9
+			color: white
+			padding: 3px 5px
+			a
+				text-shadow: none
+		.img
+			padding: 3px
+			text-align: center
+			min-height: 50px
+#user_list
+	margin: 0 auto
+	padding: 20px 0
+	.user_item
+		width: 180px
+		margin: 5px
+		border: 1px solid #2F96D1	
+		background: #3DACE0
+		opacity: 0
+		@include shadow(2px,2px,4px,rgba(0,0,0,.3))
+		position: relative
+		.avatar
+			z-index: 1
+			img
+				width: 180px
+		.name
+			position: absolute
+			z-index: 2
+			top: 0
+			padding: 5px
+			background: rgba(0,0,0,.5)
+			@include text-shadow-content-white

@@ -8,6 +8,13 @@
 	-webkit-box-shadow: $x $y $r $color
 	box-shadow: $x $y $r $color
 	
+@mixin glass
+	border: 1px solid rgba(0,0,0,0.5)
+	box-shadow: 0 2px 8px rgba(0,0,0,0.5),inset 0 1px rgba(255,255,255,0.3),inset 0 10px rgba(255,255,255,0.2),inset 0 10px 20px rgba(255,255,255,0.25),inset 0 -15px 30px rgba(0,0,0,0.3)
+	-o-box-shadow: 0 2px 8px rgba(0,0,0,0.5),inset 0 1px rgba(255,255,255,0.3),inset 0 10px rgba(255,255,255,0.2),inset 0 10px 20px rgba(255,255,255,0.25),inset 0 -15px 30px rgba(0,0,0,0.3)
+	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.5),inset 0 1px rgba(255,255,255,0.3),inset 0 10px rgba(255,255,255,0.2),inset 0 10px 20px rgba(255,255,255,0.25),inset 0 -15px 30px rgba(0,0,0,0.3)
+	-moz-box-shadow: 0 2px 8px rgba(0,0,0,0.5),inset 0 1px rgba(255,255,255,0.3),inset 0 10px rgba(255,255,255,0.2),inset 0 10px 20px rgba(255,255,255,0.25),inset 0 -15px 30px rgba(0,0,0,0.3)
+	
 @mixin transition($span)
 	-webkit-transition: all $span linear
 	-moz-transition: all $span linear
@@ -51,3 +58,7 @@
 @mixin text-shadow-content-white
 	color: white
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+	
+@mixin text-shadow-field
+	color: white
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000

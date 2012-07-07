@@ -13,10 +13,13 @@ class Mobile::MhomeController < ApplicationController
     respond_to do |format|
       format.html
 			format.json{
-			  render :json => {:status => 0,:msg => "ok",:data => {
-        			:html => render_to_string(:layout => false, 
-        			                             :template => "mobile/mhome/weibo.html.haml")
-        }}
+			  html = render_to_string(
+			          :layout => false,
+		            :formats => :html,
+                :handlers => :haml,
+  			        :file => "mobile/mhome/weibo"
+  			        )
+			  render_json(html)
 			}			
 		end		
   end
@@ -26,12 +29,14 @@ class Mobile::MhomeController < ApplicationController
     
     respond_to do |format|
 		  format.html
-			format.json{
-				render :json => {:status => 0,:msg => "ok",:data => {
-    			:html => render_to_string(:layout => false, 
-    			                             :template => "mobile/mhome/learn_en.html.haml")
-    		}}
-			}		
+		  format.json{
+		    html = render_to_string(
+		            :formats => :html,
+                :handlers => :haml,
+  			        :partial => "learn_en"
+  			        )
+			  render_json(html)
+      }
 		end
   end
 end

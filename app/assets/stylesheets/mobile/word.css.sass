@@ -22,16 +22,20 @@ body
 			vertical-align: middle
 			margin-right: 15px
 	.field
-		color: #1d1d1d
+		color: #999
 		font-size: 14px
 		padding: 8px
+		border: 1px solid #1d1d1d
+		@include transition(.2s)
 	.good
-		color: white
+		background: rgba(0,0,0,0.25)
+		@include glass
+		@include text-shadow-field
 	.f_0
-		background-color: #555
+		border-left: 5px solid #555
 	.f_1
-		background-color: #3DACE0
+		border-left: 5px solid #3DACE0
 	.f_2
-		background-color: #C1FF7D
+		border-left: 5px solid #C1FF7D
 	.f_3
-		background-color: #EA8072
+		border-left: 5px solid #EA8072

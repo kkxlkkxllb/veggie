@@ -55,3 +55,4 @@ end
 gem "devise"
 gem 'geo_location'
 gem 'has_scope'
+gem 'redis'

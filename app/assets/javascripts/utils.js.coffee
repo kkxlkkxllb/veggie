@@ -1,6 +1,5 @@
 root = exports ? this
 root.init_masonry = ($contain,item) ->
-	$(item).css opacity: 0
 	$contain.imagesLoaded ->	
 		$(item).animate opacity: 1
 		$contain.masonry
