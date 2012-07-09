@@ -4,3 +4,8 @@ word.is_correct = (ele) ->
 	$key = $(".title",ele.closest('.word')).attr("rel")
 	if $answer is $key
 		ele.addClass "good"
+	else
+		false
+word.reset_test = ->
+	$(".field").removeClass("good")
+	$("body").animate({scrollTop: 0},1000)

@@ -8,9 +8,10 @@
 		%tr
 			%th
 				单词
+				= @words.count
 			%th
 				发音
 			%th
 				解释
-		- VoteSubject.words.each do |w|
+		- @words.each do |w|
 			= render 'word',:w => w

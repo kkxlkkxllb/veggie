@@ -31,9 +31,10 @@ class Mobile::MhomeController < ApplicationController
 		  format.html
 		  format.json{
 		    html = render_to_string(
+		            :layout => false,
 		            :formats => :html,
                 :handlers => :haml,
-  			        :partial => "learn_en"
+  			        :file => "mobile/mhome/learn_en"
   			        )
 			  render_json(html)
       }

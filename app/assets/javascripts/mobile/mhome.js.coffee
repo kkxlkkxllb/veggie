@@ -13,7 +13,7 @@ $ ->
 		$("#m_nav").hide()
 		switch rel
 			when "weibo"
-				$.post("/mobile/mweibo",(data) ->
+				$.get("/mobile/mweibo",(data) ->
 					if data.status is 0
 						$wrap.append(data.data.html)
 				,"json").complete ->
@@ -30,7 +30,7 @@ $ ->
 						(newElements) ->
 							$wrap.append(newElements)
 			when "en"
-				$.post("/mobile/learn_en",(data) ->
+				$.get("/mobile/learn_en",(data) ->
 					if data.status is 0
 						$wrap.append(data.data.html)
 				,"json").complete ->

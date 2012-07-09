@@ -7,3 +7,6 @@
 		- w.word_guess.each_with_index do |f,i|
 			.field{:rel => "#{f.id}",:class => "f_#{i}"}(onclick = "is_correct($(this))")
 				= f.content
+#reset.word
+	%span.reset_btn(onclick = "reset_test()")
+		再次测试

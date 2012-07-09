@@ -38,17 +38,15 @@
 		text-align: center
 		min-height: 50px
 #user_list_wrap
-	overflow: hidden
-	position: relative
+	-webkit-overflow-scrolling : touch
+	overflow-x: scroll
 #user_list
 	padding-top: 35px
-	height: 80px
 	overflow-y: hidden
-	overflow-x: scroll
 	.user_item
 		width: 80px
 		margin: 5px
-		float: left
+		display: inline-block
 		border: 1px solid #2F96D1		
 		background: #3DACE0
 		@include shadow(2px,2px,4px,rgba(0,0,0,.3))
