@@ -5,7 +5,7 @@
 			%span.w_name
 				= w.title
 		- w.word_guess.each_with_index do |f,i|
-			.field{:rel => "#{f.id}",:class => "f_#{i}"}(onclick = "is_correct($(this))")
+			.field{:rel => "#{f.id}",:class => "f_#{i}",:key => "#{f.vote_subject.title}"}(onclick = "is_correct($(this))")
 				= f.content
 #reset.word
 	%span.reset_btn(onclick = "reset_test()")

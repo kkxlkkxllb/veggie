@@ -5,7 +5,10 @@ word.is_correct = (ele) ->
 	if $answer is $key
 		ele.addClass "good"
 	else
-		false
+		$("#m_flash").text(ele.attr('key')).fadeIn()
+		setTimeout("hide_flash()",5000)
 word.reset_test = ->
 	$(".field").removeClass("good")
 	$("body").animate({scrollTop: 0},1000)
+word.hide_flash = ->
+	$("#m_flash").fadeOut()

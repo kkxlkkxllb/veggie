@@ -18,6 +18,9 @@ class Provider < ActiveRecord::Base
   serialize :metadata, Hash
   after_create :init_leafs
   
+  acts_as_taggable
+  acts_as_taggable_on :tags
+  
   def avatar(style = :mudium )
     case style
     when :mudium
