@@ -1,7 +1,5 @@
 @import "utils"
 
-body
-	background: #1d1d1d
 .word:first-child
 	margin-top: 35px
 	border-top: none
@@ -18,9 +16,14 @@ body
 		font-size: 30px
 		line-height: 50px
 		@include text-shadow-content-white
-		i
+		i.icon-sound
 			vertical-align: middle
 			margin-right: 15px
+			display: inline-block
+			width: 24px
+			height: 24px
+			background: url("sound.png") no-repeat
+			background-size: 24px 24px
 	.field
 		color: #999
 		font-size: 14px

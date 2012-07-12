@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     end
     session[:pid] = pid if pid
     @source_leafs = @pid.blank? ? Leaf : Provider.find(@pid).leafs
-    return @source_leafs.order("time_stamp DESC").page(page).per(per_page)
+    return @source_leafs.includes(:provider).order("time_stamp DESC").page(page).per(per_page)
   end
   
   def render_json(html)

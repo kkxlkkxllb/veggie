@@ -2,7 +2,7 @@
 class VoteSubjectController < ApplicationController
   def index
     set_seo_meta("生词本")
-    @words = VoteSubject.words
+    @words = Word.all
   end
 
   def new

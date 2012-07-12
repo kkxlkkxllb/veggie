@@ -5,7 +5,7 @@ word.is_correct = (ele) ->
 	if $answer is $key
 		ele.addClass "good"
 	else
-		$("#m_flash").text(ele.attr('key')).fadeIn()
+		$("#m_flash").text($answer).fadeIn()
 		setTimeout("hide_flash()",5000)
 word.reset_test = ->
 	$(".field").removeClass("good")

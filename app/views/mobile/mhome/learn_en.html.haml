@@ -1,11 +1,11 @@
 - @words.each do |w|
 	.word
-		.title{:rel => "#{w.key_id}"}
-			%i.icon-headphones.icon-white{:src => "#{DICT_SOURCE[:english_v]+w.title}"}
+		.title{:rel => "#{w.title}"}
+			%i.icon-sound{:src => "#{DICT_SOURCE[:english_v]+w.title}"}
 			%span.w_name
 				= w.title
 		- w.word_guess.each_with_index do |f,i|
-			.field{:rel => "#{f.id}",:class => "f_#{i}",:key => "#{f.vote_subject.title}"}(onclick = "is_correct($(this))")
+			.field{:rel => "#{f.title}",:class => "f_#{i}"}(onclick = "is_correct($(this))")
 				= f.content
 #reset.word
 	%span.reset_btn(onclick = "reset_test()")

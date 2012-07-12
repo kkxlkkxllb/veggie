@@ -2,6 +2,61 @@
 
 #infscr-loading
 	@include loader(45%)
+body
+	background: #9fecfc
+.masonry
+	@include transition-masonry
+	.masonry-brick
+		@include transition-masonry-brick
+
+#header
+	width: 100%
+	height: 40px
+	background: #2c2c2c
+	border-bottom: 1px solid #ddd
+	#header_contain
+		width: 1000px
+		height: 100%
+		margin: 0 auto
+		#author
+			float: right
+			line-height: 40px
+			a
+				color: #999
+				text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+				text-decoration: none
+				&:hover
+					color: white
+		#tag
+			line-height: 40px
+			float: left
+			a
+				color: white
+		#title
+			float: left
+			width: 200px
+			font-weight: bold
+			@include text-shadow-title-black
+			@include transition(.2s)
+			span
+				display: inline-block
+				font-size: 20px
+				line-height: 40px
+				&.logo img
+					padding: 0
+					width: 30px
+					height: 30px
+#menu
+	position: fixed
+	bottom: 0
+	left: 0
+	width: 100%
+	background: #444
+	@include text-shadow-content-white
+	@include menu(30px,0,10px,#666,#1d1d1d,#333)
+#main
+	width: 100%
+	border-top: 1px solid #288AC9
 #home
 	margin: 0 auto
 	padding: 20px 0 40px 0

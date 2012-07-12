@@ -2,8 +2,8 @@
 	#new_word
 		= form_tag "/word/insert",:remote => true do
 			%p
-				%input(type="text" name="word" id="word" placeholder="输入单词")
-				= submit_tag "提交",:class => "btn btn-primary",:disable_with => "提交中"
+				%input(type="text" name="word" id="word" placeholder="输入单词" required="required")
+				= submit_tag "提交",:class => "btn btn-primary",:"data-disable-with" => "提交中"
 	%table.table
 		%tr
 			%th

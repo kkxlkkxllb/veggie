@@ -31,7 +31,7 @@ RailsAdmin.config do |config|
 
   #  ==> Included models
   # Add all excluded models here:
-  # config.excluded_models = [Leaf, Provider]
+  config.excluded_models = [Word]
 
   # Add models here if you want to go 'whitelist mode':
   # config.included_models = [Leaf, Provider]

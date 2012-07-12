@@ -15,16 +15,8 @@ class FetchWord
   
   def insert    
     if !@comment.blank?
-      vs = VoteSubject.create(:title => @word)
-      vf = vs.vote_fields.create(:content => @comment)
-      vs.key_id = vf.id
-      vs.subject_list << "英语词汇"
-      vs.save
-      return vs
-    else
-      return false
+      Word.create(@word,@comment)
     end    
-  end
-  
+  end  
   
 end

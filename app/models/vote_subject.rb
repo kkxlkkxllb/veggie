@@ -26,38 +26,8 @@ class VoteSubject < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :subjects
   
-  REDIS_KEY = "word_guess"
-  
   def is_access?
     (end_time == nil or end_time > Time.now)&&(limit_num == nil or limit_num > votes.size)
-  end
-  
-  def self.words
-    VoteSubject.tagged_with("英语词汇")
-  end
-  
-  def word_guess
-    unless self.hexist?
-      self.g_word_guess
-    end
-    return VoteField.where(:id => $redis.hget(REDIS_KEY,self.id).split(','))
-  end
-  
-  # 生产随机3个错误选项
-  def g_word_guess
-    guess = []
-    rest = VoteField.where(["vote_subject_id != ?",self.id]).select(:id).map{|vf| vf.id}
-    3.times do 
-      num = rand(rest.size)
-      guess << rest[num]
-      rest.delete_at(num)
-    end
-    vf_ids = guess.insert(rand(4)-1,self.key_id)
-    $redis.hset(REDIS_KEY,self.id,vf_ids.join(','))
-  end
-  
-  def hexist?
-    $redis.hexists(REDIS_KEY,self.id)
   end
   
 end
