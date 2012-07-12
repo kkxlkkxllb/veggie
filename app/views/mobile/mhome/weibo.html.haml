@@ -18,7 +18,7 @@
 					= leaf.provider.user_name
 			%span.time.right
 				= time_stamp(leaf.time_stamp)
-		.content(ontouchend="touchStart($(this));")
+		.content
 			= auto_link(leaf.content)
 		- if leaf.image
 			.img

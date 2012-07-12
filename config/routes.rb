@@ -1,4 +1,5 @@
 Veggie::Application.routes.draw do
+  match "/application.manifest" => Rails::Offline
   
   get "vote_subject/index"
 

@@ -7,5 +7,3 @@ weibo.get_provider = (pid) ->
 	,"json").complete ->
 		width = $("#user_list .user_item").length * 96
 		$("#user_list").css "width":width
-weibo.touchStart = (ele) ->
-	ele.select()
