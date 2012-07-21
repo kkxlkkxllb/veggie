@@ -35,6 +35,6 @@ module Utils
       form = data.map{|k,v| "-F #{k}=#{v}"}.join(" ")
       `curl #{form} '#{url}' 2>/dev/null`
     end
-  end#end of curl
+  end
   
 end

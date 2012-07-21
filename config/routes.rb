@@ -1,5 +1,4 @@
 Veggie::Application.routes.draw do
-  match "/application.manifest" => Rails::Offline
   
   get "vote_subject/index"
 
@@ -12,6 +11,7 @@ Veggie::Application.routes.draw do
   devise_for :members
   
   namespace :mobile do
+    match "/application.manifest" => Rails::Offline
     match '/' => "mhome#index"
     match "mweibo" => "mhome#weibo"
     match "learn_en" => "mhome#learn_en"
