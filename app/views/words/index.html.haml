@@ -1,0 +1,17 @@
+#wrap
+	#new_word
+		= form_tag words_path,:remote => true do
+			%p
+				%input(type="text" name="word" id="word" placeholder="输入单词" required="required")
+				= submit_tag "提交",:class => "btn btn-primary",:"data-disable-with" => "提交中"
+	%table.table
+		%tr
+			%th
+				单词
+				= @words.count
+			%th
+				发音
+			%th
+				解释
+		- @words.each do |w|
+			= render 'word',:w => w

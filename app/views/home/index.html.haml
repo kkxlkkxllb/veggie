@@ -1,6 +1,10 @@
-#home
-	= render 'leafs'
-%nav.pagination
-	%a(href="/home/index?page=2")
-%script(type="text/javascript")
-	init_infinitescroll($("#home"));
+#wrap
+	%a{:href => leafs_path}
+		.nav_item
+			微博
+	%a{:href => words_path}
+		.nav_item
+			词汇
+	%a{:href => "/"}
+		.nav_item
+			投票

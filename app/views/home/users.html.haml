@@ -1,6 +1,6 @@
 #user_list
 	- @users.each do |u|
-		%a{:href => "/p/#{u.id}"}
+		%a{:href => leafs_path(:pid => u.id)}
 			.user_item
 				.avatar
 					= image_tag(u.avatar(:large))

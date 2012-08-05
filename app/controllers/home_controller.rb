@@ -1,20 +1,8 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 class HomeController < ApplicationController
   before_filter :redirect_mobile,:only => :index
   def index
-    set_seo_meta(nil,"17up,NGO,梦想,实践,未来","一起暸望新世界的风景")    
-    @leafs = source_leafs(params[:pid],params[:page],30)
-    respond_to do |format|
-      format.html
-			format.json{
-			  html = render_to_string(
-		            :formats => :html,
-                :handlers => :haml,
-  			        :partial => "leafs"
-  			        )
-			  render_json(html)
-			}			
-		end
+    set_seo_meta(nil,"17up,NGO,梦想,实践,未来","一起暸望新世界的风景") 
   end
   
   def users

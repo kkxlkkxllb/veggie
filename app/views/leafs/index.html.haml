@@ -1,0 +1,6 @@
+#home
+	= render 'leafs'
+%nav.pagination
+	%a{:href => "#{leafs_path(:page => '2')}"}
+%script(type="text/javascript")
+	init_infinitescroll($("#home"));

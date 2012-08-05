@@ -1,12 +1,12 @@
 #menu
 	%ul.clearfix
 		%li.action
-			%a(href = "/")
+			%a{:href => leafs_path}
 				%span.label
 					%i.icon-home
 					片语
 		%li.action
-			%a(href="/vote_subject/index")
+			%a{:href => words_path}
 				%span.label
 					%i.icon-book
 					生词本
@@ -20,7 +20,7 @@
 					%i.icon-refresh
 					更多
 		%li.action
-			%a(href="/users")
+			%a(href="/home/users")
 				%span.label.label-success
 					%i.icon-user
 					= Provider.count

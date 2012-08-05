@@ -1,10 +1,4 @@
 Veggie::Application.routes.draw do
-  
-  get "vote_subject/index"
-
-  get "vote_subject/new"
-
-  get "vote_subject/create"
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'  
 
@@ -16,12 +10,15 @@ Veggie::Application.routes.draw do
     match "mweibo" => "mhome#weibo"
     match "learn_en" => "mhome#learn_en"
   end
-  
-  get "leafs/destroy"
+
   get "home/index"
-  match "/p/:pid" => "home#index"
-  match "users" => "home#users"
-  match "word/insert" => "vote_subject#insert_word"
+  get "home/users"
+
+  resources :words
+  resources :leafs do
+    post "grow"
+    post "destroy"
+  end
  
   root :to => 'home#index'
 

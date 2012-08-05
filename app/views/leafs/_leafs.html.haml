@@ -10,7 +10,7 @@
 			%span.avatar.left
 				= my_image_tag(leaf.provider.avatar,leaf.provider.weibo)
 			%span.name.left
-				= link_to leaf.provider.user_name,"/p/#{leaf.provider.id}"
+				= link_to leaf.provider.user_name,leafs_path(:pid => leaf.provider.id)
 			%span.time.right
 				= time_stamp(leaf.time_stamp)
 		.content

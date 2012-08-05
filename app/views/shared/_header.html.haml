@@ -8,7 +8,7 @@
 	- if params[:pid]
 		#tag{:pid => "#{params[:pid]}"}
 			%span.label.label-success
-				%a(href="/")
+				%a{:href => leafs_path}
 					= Provider.find(params[:pid]).user_name
 					&times;
 	#author
