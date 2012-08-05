@@ -7,6 +7,11 @@
 	-moz-box-shadow: $x $y $r $color
 	-webkit-box-shadow: $x $y $r $color
 	box-shadow: $x $y $r $color
+
+@mixin inset-shadow($x,$y,$r,$color)
+	-moz-box-shadow: inset $x $y $r $color
+	-webkit-box-shadow: inset $x $y $r $color
+	box-shadow: inset $x $y $r $color
 	
 @mixin glass
 	border: 1px solid rgba(0,0,0,0.5)

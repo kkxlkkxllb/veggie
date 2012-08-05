@@ -8,7 +8,7 @@ class FetchWord
     url = DICT_SOURCE[:english]+word
     frame = Nokogiri::HTML(open(url),nil)
     if frame
-      @comment = frame.css("#panel_comment")[0].content.split("\r\n")[0..2].join(" ")
+      @comment = frame.css("#panel_com")[0].content.split("<br>")[0..2].join(" ")
       @word = word
     end
   end

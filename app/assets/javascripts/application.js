@@ -13,10 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 
-//= require lib/bootstrap.min
-//= require lib/jquery.masonry.min
-//= require lib/jquery.infinitescroll.min
-//= require lib/lazyload.min
 //= require utils
 //= require home
-
+//= require words
+//= require_tree ./lib

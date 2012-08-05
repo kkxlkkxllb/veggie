@@ -1,10 +1,16 @@
-#wrap
+#wrap.clearfix
 	%a{:href => leafs_path}
 		.nav_item
 			微博
+			%span.icon.bird
+				= image_tag("icon/twitter.png")
 	%a{:href => words_path}
 		.nav_item
 			词汇
+			%span.icon
+				= image_tag("icon/word.png")
 	%a{:href => "/"}
 		.nav_item
 			投票
+			%span.icon
+				= image_tag("icon/vote.png")

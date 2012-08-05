@@ -1,8 +1,10 @@
 %tr
 	%td
+		%i.icon-minus.as_link(onclick="del_word($(this));")
+	%td.title
 		= link_to w.title,DICT_SOURCE[:english]+w.title
 	%td
-		%i.icon-headphones
+		%i.icon-headphones.as_link
 		%audio{:src => DICT_SOURCE[:english_v]+w.title}
 	%td
 		= w.content
