@@ -44,7 +44,7 @@ after 'deploy:update_code' do
     ]
     run "#{softlinks.join(';')}"
  
-    #run "cd #{release_path} && bundle exec rake assets:precompile RAILS_ENV=production"         
+    run "cd #{release_path} && bbundle exec rake RAILS_ENV=production RAILS_GROUPS=assets assets:precompile"         
 end
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
