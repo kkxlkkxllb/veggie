@@ -1,6 +1,7 @@
 set :application, "veggie"
 set :repository,  "git@github.com:kkxlkkxllb/veggie.git"
 
+set :rvm_type, :user
 set :scm, :git
 set :scm_username, "kkxlkkxllb@gmail.com"
 set :keep_releases, 3   # 留下多少个版本的源代码
