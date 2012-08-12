@@ -1,11 +1,7 @@
 #source 'https://rubygems.org'
 source 'http://ruby.taobao.org'
+
 gem 'rails', '3.2.6'
-
-group :production do
-  gem 'mysql2'
-end
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -27,7 +23,7 @@ gem 'jquery-rails'
 # gem 'jbuilder'
 
 # Use unicorn as the web server
-gem 'puma'
+
 
 # Deploy with Capistrano
 gem 'capistrano'
@@ -46,10 +42,16 @@ gem "omniauth-weibo", :git => 'git://github.com/ballantyne/omniauth-weibo.git'
 gem 'haml'
 gem 'rails_autolink'
 
+group :production do
+  gem 'mysql2'
+  gem 'unicorn'
+end
+
 group :development, :test do
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 	gem 'haml-rails'
 	gem 'sqlite3'
+	gem 'puma'
 end
 
 gem "devise"
