@@ -9,6 +9,10 @@ class WordsController < ApplicationController
     @word = FetchWord.new(params[:word]).insert
   end
   
+  def search
+    input = params[:word]
+  end
+  
   def destroy
     @word = Word.find(params[:title])
     if @word

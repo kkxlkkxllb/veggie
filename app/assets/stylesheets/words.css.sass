@@ -1,11 +1,32 @@
-// Place all the styles related to the words controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "utils"
 #wrap
 	width: 1000px
 	margin: 0 auto
 	margin-bottom: 40px
 	#new_word
-		margin: 20px 0
+		width: 300px
+		margin: 20px auto
+		position: relative
 		input
 			margin: 0
+			padding: 5px
+			width: 280px
+		#input_tip_modal
+			position: absolute
+			width: 291px
+			height: 140px
+			background: #f5f5f5
+			top: 30px
+			z-index: 99
+			@include shadow(0,1px,3px,rgba(0,0,0,.3))
+			ul
+				margin: 0
+				list-style-type: none
+				li
+					line-height: 24px
+					height:  24px
+					font-size:  16px
+					padding: 0 10px
+					border-bottom: 1px solid #e2e2e2
+					border-top: 1px solid #fff
+					color: #333

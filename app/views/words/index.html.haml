@@ -1,9 +1,8 @@
 #wrap
 	#new_word
+		#input_tip_modal.hide
 		= form_tag words_path,:remote => true do
-			%p
-				%input(type="text" name="word" id="word" placeholder="输入单词" required="required")
-				= submit_tag "提交",:class => "btn btn-primary",:"data-disable-with" => "提交中"
+			%input(type="text" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete)
 	%table.table
 		%tr
 			%th

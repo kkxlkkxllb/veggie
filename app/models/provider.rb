@@ -14,7 +14,7 @@
 #
 
 class Provider < ActiveRecord::Base
-  has_many :leafs
+  has_many :leafs, :dependent => :destroy
   serialize :metadata, Hash
   after_create :init_leafs
   
