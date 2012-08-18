@@ -4,6 +4,7 @@
 		= form_tag words_path,:remote => true do
 			%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
 			%i.icon-plus(onclick="$(this).submit();")
+			%i.icon-refresh.hide
 	%table.table
 		%tr
 			%th

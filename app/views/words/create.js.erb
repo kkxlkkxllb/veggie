@@ -1,4 +1,9 @@
 <% if @word %>
-$("#wrap table").append("<%= escape_javascript(render :partial => 'word',:locals => {:w => @word }) %>");
+$("#wrap table tr:first-child").after("<%= escape_javascript(render :partial => 'word',:locals => {:w => @word }) %>");
 $("#new_word input").val("").focus();
 <% end %>
+
+var ele = $("#new_word form");
+$("input",ele).removeClass("disable_event");
+$("i.icon-plus",ele).show();
+$("i.icon-refresh",ele).hide();

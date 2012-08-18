@@ -8,6 +8,11 @@ word.del_word = (ele) ->
 	$.post "/words/destroy",{title:title},(data) ->
 		if data.status is 0
 			contain.remove()
+word.form_submit = (ele) ->
+	ele.bind 'ajax:beforeSend', ->
+		$("input",ele).addClass "disable_event"
+		$("i.icon-plus",ele).hide()
+		$("i.icon-refresh",ele).show()
 word.detect = (ele) ->
 	$modal = $("#input_tip_modal")
 	input = ele.val()
