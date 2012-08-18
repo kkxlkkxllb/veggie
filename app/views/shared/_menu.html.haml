@@ -4,13 +4,13 @@
 			%a{:href => leafs_path}
 				%span.label
 					%i.icon-home
-					片语
+					= "片语 #{Leaf.count}"
 		%li.action
 			%a{:href => words_path}
 				%span.label
 					%i.icon-book
-					生词本
-		- if current_member
+					= "生词本 #{Word.all.count}"
+		- if current_member and @leafs
 			%li.action{:onclick => "grow_leaf(1,#{params[:pid].to_i});"}
 				%span.label.label-info
 					%i.icon-refresh
@@ -24,9 +24,6 @@
 				%span.label.label-success
 					%i.icon-user
 					= Provider.count
-		%li
-			%i.icon-leaf
-			= Leaf.count
 		- if current_member
 			%li.action
 				%a(href = "/members/sign_out" data-method="delete" rel="nofollow")
@@ -37,3 +34,5 @@
 			%li.action(onclick = "login();")
 				%i.icon-off
 				登录
+#modal
+	= render 'shared/login_modal'

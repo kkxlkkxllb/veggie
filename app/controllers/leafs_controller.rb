@@ -1,6 +1,6 @@
 # coding: utf-8
 class LeafsController < ApplicationController
-  
+  before_filter :authenticate_member!,:except => :index
   def index
     set_seo_meta("片语","17up,NGO,梦想,实践,未来","一起暸望新世界的风景")    
     @leafs = source_leafs(params[:pid],params[:page],30)

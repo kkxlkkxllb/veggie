@@ -4,14 +4,14 @@
 			17up
 			= @subtitle
 		%span.logo
-			= image_tag('icon/logo.png')
 	- if params[:pid]
 		#tag{:pid => "#{params[:pid]}"}
 			%span.label.label-success
 				%a{:href => leafs_path}
 					= Provider.find(params[:pid]).user_name
 					&times;
-	#author
-		%a(href="/admin" target="blank")
-			veggie
-			%i.icon-chevron-right
+	- if current_member
+		#author
+			%a(href="/admin" target="blank")
+				veggie
+				%i.icon-chevron-right

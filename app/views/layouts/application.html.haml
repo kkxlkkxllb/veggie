@@ -15,7 +15,8 @@
 		%section
 			#main
 				= yield
-			#modal
-				= render 'shared/login_modal'
 		%footer
-			= render 'shared/menu'
+			- if @is_root
+				= render 'shared/copyright'
+			- else
+				= render 'shared/menu'

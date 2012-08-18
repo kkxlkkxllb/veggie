@@ -1,5 +1,6 @@
 # coding: utf-8
 class WordsController < ApplicationController
+  before_filter :authenticate_member!,:only => :destroy
   def index
     set_seo_meta("生词本")
     @words = Word.all
@@ -11,6 +12,7 @@ class WordsController < ApplicationController
   
   def search
     input = params[:word]
+    url = "http://api.wordreference.com/0.8/621ad/json/enzh/#{input}"
   end
   
   def destroy

@@ -11,6 +11,6 @@ word.del_word = (ele) ->
 word.detect = (ele) ->
 	$modal = $("#input_tip_modal")
 	input = ele.val()
-	$.post "/words/search",{word:input},(data) ->
+	$.get "/words/search",{word:input},(data) ->
 		if data.status is 0
 			$modal.append("<ul></ul>").show()
