@@ -11,7 +11,8 @@ class HomeController < ApplicationController
     @users = Provider.all
   end
   
-  def lab
+  def info
+    set_seo_meta("简介","17up,NGO,梦想,实践,未来","一起暸望新世界的风景")
     @request = request.remote_ip
   end
   

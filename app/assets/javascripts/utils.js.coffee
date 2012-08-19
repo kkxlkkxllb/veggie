@@ -55,4 +55,6 @@ root.add_provider_view =->
 	form.bind 'ajax:success', (data) ->
 		if data.status is 0
 			$("#new_provider_modal").modal('hide')
-			
+root.init_info =->
+	$(".topic span").each (index) ->
+		$(this).animate({"left":(index+1)*200,"font-size":"20px"},5000)			

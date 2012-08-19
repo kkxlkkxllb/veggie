@@ -9,5 +9,6 @@ $ ->
 	$("div.leaf").live 'hover',->
 		$("span.action",$(this)).toggle()
 	form_submit($("#new_word form"))
+	init_info()
 	$(".nav_item span.bird").css({'left':"0px"}).animate {left:"1000px"},5000,"easeInBack",->
 		$(this).animate {left:"100px"},5000,"easeInOutSine"

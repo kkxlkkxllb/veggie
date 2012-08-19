@@ -13,6 +13,7 @@ Veggie::Application.routes.draw do
 
   get "home/index"
   get "home/users"
+  get "home/info"
 
   resource :provider do
     post "create"
