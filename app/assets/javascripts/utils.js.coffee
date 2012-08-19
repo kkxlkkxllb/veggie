@@ -53,6 +53,6 @@ root.add_provider_view =->
 		$(this).addClass("actived").siblings().removeClass("actived")
 		$("#provider_provider",form).val(rel)
 	form.bind 'ajax:success', (data) ->
-		if data is 0
+		if data.status is 0
 			$("#new_provider_modal").modal('hide')
 			

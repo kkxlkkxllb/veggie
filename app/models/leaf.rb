@@ -18,7 +18,7 @@ class Leaf < ActiveRecord::Base
   validates  :time_stamp, :uniqueness => {:scope => :provider_id }
   before_destroy :clean_image
   after_create :fetch_image
-  GET_IMAGE_REMOTE = false
+  GET_IMAGE_REMOTE = Rails.env == "production" ? false : true
   IMAGE_URL = "/system/images/leaf/"
   IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
   
@@ -44,14 +44,14 @@ class Leaf < ActiveRecord::Base
   
   def clean_image
     path = IMAGE_PATH + self.id.to_s
-    if File.exist?(path)
+    if Rails.env == "production" and File.exist?(path)
       `rm -rf #{path}`
       Leaf.logger.info("INFO #{path} has been destroyed!")
     end
   end
   
   def fetch_image
-    if !self.image_url.blank?
+    if Rails.env == "production" and !self.image_url.blank?
       FetchImage.new(self).download
     end
   end
@@ -64,7 +64,6 @@ class Leaf < ActiveRecord::Base
   def self.fetch_all_image
     Leaf.where("image_url IS NOT NULL").each do |l|
       FetchImage.new(l).download
-      return nil 
     end
   end
 end
