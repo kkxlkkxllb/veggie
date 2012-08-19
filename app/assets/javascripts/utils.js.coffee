@@ -45,3 +45,14 @@ root.destroy_leaf = (leaf_id,ele) ->
 			$("#home").masonry('reload')
 root.login =->
 	$("#login_modal").modal()
+root.add_provider_view =->
+	$("#new_provider_modal").modal()
+	form = $("form#new_provider_form")
+	$("span.btn-group span.btn",form).click ->
+		rel = $(this).attr 'rel'
+		$(this).addClass("actived").siblings().removeClass("actived")
+		$("#provider_provider",form).val(rel)
+	form.bind 'ajax:success', (data) ->
+		if data is 0
+			$("#new_provider_modal").modal('hide')
+			

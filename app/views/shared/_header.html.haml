@@ -3,13 +3,10 @@
 		%span
 			17up
 			= @subtitle
-		%span.logo
-	- if params[:pid]
-		#tag{:pid => "#{params[:pid]}"}
-			%span.label.label-success
-				%a{:href => leafs_path}
-					= Provider.find(params[:pid]).user_name
-					&times;
+		- if @leafs and params[:pid]
+			%span.tag
+				&raquo;
+				= Provider.find(params[:pid]).user_name
 	- if current_member
 		#author
 			%a(href="/admin" target="blank")

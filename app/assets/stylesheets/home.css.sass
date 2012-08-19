@@ -27,11 +27,6 @@ body
 				text-decoration: none
 				&:hover
 					color: white
-		#tag
-			line-height: 40px
-			float: left
-			a
-				color: white
 		#title
 			float: left
 			width: 200px
@@ -42,10 +37,6 @@ body
 				display: inline-block
 				font-size: 20px
 				line-height: 40px
-				&.logo img
-					padding: 0
-					width: 30px
-					height: 30px
 #footer
 	text-align: center
 	color: #171717
@@ -55,6 +46,7 @@ body
 	left: 0
 	width: 100%
 	background: #444
+	z-index: 99
 	@include text-shadow-content-white
 	@include menu(30px,0,10px,#666,#1d1d1d,#333)
 #main
@@ -83,7 +75,7 @@ body
 	
 #user_list
 	margin: 0 auto
-	padding: 20px 0
+	padding: 10px 0 40px 0
 	.user_item
 		width: 180px
 		margin: 5px
@@ -103,3 +95,7 @@ body
 			padding: 5px
 			background: rgba(0,0,0,.5)
 			@include text-shadow-content-white
+			img
+				width: 16px
+				height: 16px
+				vertical-align: top

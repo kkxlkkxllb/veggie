@@ -2,7 +2,7 @@
 class WordsController < ApplicationController
   before_filter :authenticate_member!,:only => :destroy
   def index
-    set_seo_meta("生词本")
+    set_seo_meta("词汇","language,语言,词汇,英语","英语词汇学习")
     @words = Word.all
   end
   

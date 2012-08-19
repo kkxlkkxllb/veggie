@@ -5,4 +5,5 @@
 				.avatar
 					= image_tag(u.avatar(:large))
 				.name
-					= u.user_name
+					= image_tag("icon/#{u.provider}.png")
+					= u.user_name				

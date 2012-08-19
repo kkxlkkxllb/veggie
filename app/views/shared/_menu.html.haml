@@ -9,7 +9,7 @@
 			%a{:href => words_path}
 				%span.label
 					%i.icon-book
-					= "生词本 #{Word.all.count}"
+					= "词汇 #{Word.all.count}"
 		- if current_member and @leafs
 			%li.action{:onclick => "grow_leaf(1,#{params[:pid].to_i});"}
 				%span.label.label-info
@@ -24,6 +24,9 @@
 				%span.label.label-success
 					%i.icon-user
 					= Provider.count
+			- if @users and current_member
+				%span.label
+					%i.icon-plus(onclick="add_provider_view();")
 		- if current_member
 			%li.action
 				%a(href = "/members/sign_out" data-method="delete" rel="nofollow")
@@ -36,3 +39,4 @@
 				登录
 #modal
 	= render 'shared/login_modal'
+	= render 'shared/new_provider'

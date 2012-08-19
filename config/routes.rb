@@ -14,6 +14,9 @@ Veggie::Application.routes.draw do
   get "home/index"
   get "home/users"
 
+  resource :provider do
+    post "create"
+  end
   resources :words
   resources :leafs do
     post "grow"

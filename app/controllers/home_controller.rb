@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   end
   
   def users
-    set_seo_meta("名人志","17up,NGO,梦想,实践,未来","一起暸望新世界的风景")
+    set_seo_meta("名人","17up,NGO,梦想,实践,未来","一起暸望新世界的风景")
     @users = Provider.all
   end
   

@@ -16,10 +16,14 @@
 class Provider < ActiveRecord::Base
   has_many :leafs, :dependent => :destroy
   serialize :metadata, Hash
+  validates :provider, :presence => true
+  validates :uid, :presence => true
   after_create :init_leafs
   
   acts_as_taggable
   acts_as_taggable_on :tags
+  
+  PROVIDERS = %w{twitter weibo}
   
   def avatar(style = :mudium )
     case style
