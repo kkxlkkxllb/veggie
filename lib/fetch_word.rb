@@ -9,7 +9,12 @@ class FetchWord
     frame = Nokogiri::HTML(open(url),nil)
     if frame
       begin
-        @comment = frame.css("#panel_com")[0].content.split("<br>")[0..2].join(" ")
+        body = frame.css("#panel_com")
+        if body.blank?
+          body = frame.css("#panel_comment")
+        end
+        @comment = body[0].content.split("<br>")[0..2].join(" ")
+        
         @word = word
       rescue
         nil

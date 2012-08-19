@@ -16,9 +16,9 @@
 class Leaf < ActiveRecord::Base
   belongs_to :provider
   validates  :time_stamp, :uniqueness => {:scope => :provider_id }
-  #before_destroy :clean_image
-  #after_create :fetch_image
-  GET_IMAGE_REMOTE = true
+  before_destroy :clean_image
+  after_create :fetch_image
+  GET_IMAGE_REMOTE = false
   IMAGE_URL = "/system/images/leaf/"
   IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
   
