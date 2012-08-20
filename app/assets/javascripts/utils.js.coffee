@@ -57,4 +57,4 @@ root.add_provider_view =->
 			$("#new_provider_modal").modal('hide')
 root.init_info =->
 	$(".topic span").each (index) ->
-		$(this).animate({"left":(index+1)*200,"font-size":"20px"},10000)			
+		$(this).css({"bottom":"50px"}).animate({"bottom":0,"opacity":1},1000,"easeOutBounce")			
