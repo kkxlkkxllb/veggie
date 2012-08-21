@@ -55,6 +55,8 @@ root.add_provider_view =->
 	form.bind 'ajax:success', (data) ->
 		if data.status is 0
 			$("#new_provider_modal").modal('hide')
+		else
+			smoke.signal "没成功"
 root.init_info =->
 	$(".topic span").each (index) ->
 		$(this).css({"bottom":"50px"}).animate({"bottom":0,"opacity":1},1000,"easeOutBounce")			

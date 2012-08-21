@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require _bootstrap.min
+　*= require_tree ./lib
  *= require base
  *= require home
  *= require info
