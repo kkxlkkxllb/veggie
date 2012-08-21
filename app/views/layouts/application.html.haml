@@ -6,7 +6,6 @@
 		%meta{'name' => "description", :content => "#{@meta_description}"}
 		%meta{'name' => "keywords", :content => "#{@meta_keywords}"}
 		= csrf_meta_tag
-		= javascript_include_tag "application"
 		= stylesheet_link_tag "application", :media => "all"	
 	%body
 		%nav
@@ -20,4 +19,4 @@
 				= render 'shared/copyright'
 			- else
 				= render 'shared/menu'
-		= javascript_include_tag "zlib/impress"
+		= javascript_include_tag "application"

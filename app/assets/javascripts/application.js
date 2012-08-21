@@ -17,3 +17,4 @@
 //= require home
 //= require words
 //= require_tree ./lib
+//= require_tree ./zlib
