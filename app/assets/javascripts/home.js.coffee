@@ -11,3 +11,4 @@ $ ->
 		$("span.action",$(this)).toggle()
 	form_submit($("#new_word form"))
 	init_info()
+	mixpanel.track("new visitor")

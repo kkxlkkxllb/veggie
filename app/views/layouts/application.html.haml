@@ -7,6 +7,7 @@
 		%meta{'name' => "keywords", :content => "#{@meta_keywords}"}
 		= csrf_meta_tag
 		= stylesheet_link_tag "application", :media => "all"	
+		= render "shared/track"
 	%body
 		- unless @is_root
 			%nav
