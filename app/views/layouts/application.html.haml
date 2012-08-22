@@ -8,9 +8,10 @@
 		= csrf_meta_tag
 		= stylesheet_link_tag "application", :media => "all"	
 	%body
-		%nav
-			#header
-				= render 'shared/header'
+		- unless @is_root
+			%nav
+				#header
+					= render 'shared/header'
 		%section
 			#main
 				= yield

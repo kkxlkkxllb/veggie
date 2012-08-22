@@ -3,7 +3,7 @@
 #infscr-loading
 	@include loader(45%)
 body
-	background: #9fecfc
+	background: url(img/bg_glow.png) no-repeat fixed center top, url("img/bg.gif") repeat fixed 0 0
 .masonry
 	@include transition-masonry
 	.masonry-brick
@@ -12,8 +12,7 @@ body
 #header
 	width: 100%
 	height: 40px
-	background: #3c3c3c
-	border-bottom: 1px solid #ddd
+	background: transparent
 	#header_contain
 		width: 1000px
 		height: 100%
@@ -52,15 +51,6 @@ body
 	@include menu(30px,0,10px,#666,#1d1d1d,#333)
 #main
 	width: 100%
-	border-top: 1px solid #288AC9
-	#animal
-		width: 300px
-		margin: 0 auto
-		.fish 
-			display: inline-block
-			img
-				position: relative
-				opacity: 0
 	#wrap
 		margin-top: 30px
 		a
@@ -81,9 +71,6 @@ body
 				position: absolute
 				top: -75px
 				left: 100px
-			span.bird
-				opacity: 0
-				left: -100px
 			span.title
 				position: absolute
 				bottom: 20px
@@ -98,7 +85,7 @@ body
 	.user_item
 		width: 180px
 		margin: 5px
-		border: 1px solid #2F96D1	
+		border: 1px solid #dbdbdb
 		background: #3DACE0
 		opacity: 0
 		@include shadow(2px,2px,4px,rgba(0,0,0,.3))
