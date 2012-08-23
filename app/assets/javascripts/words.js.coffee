@@ -13,6 +13,7 @@ word.form_submit = (ele) ->
 		$("input",ele).addClass "disable_event"
 		$("i.icon-plus",ele).hide()
 		$("i.icon-refresh",ele).show()
+		mixpanel.track("try add word")
 word.detect = (ele) ->
 	$modal = $("#input_tip_modal")
 	input = ele.val()
