@@ -8,20 +8,21 @@
 							= image_tag(u.avatar(:large))
 						.name
 							= u.user_name
-- @leafs.each do |leaf|
-	.leaf
-		.info.clearfix
-			%span.avatar.left{:onclick => "get_provider(#{leaf.provider.id});return false;"}
-				= image_tag(leaf.provider.avatar)
-			%span.name.left
-				%a{:onclick => "get_provider(#{leaf.provider.id});return false;"}(href="#")
-					= leaf.provider.user_name
-			%span.time.right
-				= time_stamp(leaf.time_stamp)
-		.content
-			= auto_link(leaf.content)
-		- if leaf.image
-			.img
-				= image_tag(leaf.image(:medium))
-		- if !leaf.video.blank?
-			%video{:src => "#{leaf.video}"}(preload="auto" controls height=250 width=300 webkit-playsinline)
+#leafs_wrap
+	- @leafs.each do |leaf|
+		.leaf
+			.info.clearfix
+				%span.avatar.left{:onclick => "get_provider(#{leaf.provider.id});return false;"}
+					= image_tag(leaf.provider.avatar)
+				%span.name.left
+					%a{:onclick => "get_provider(#{leaf.provider.id});return false;"}(href="#")
+						= leaf.provider.user_name
+				%span.time.right
+					= time_stamp(leaf.time_stamp)
+			.content
+				= auto_link(leaf.content)
+			- if leaf.image
+				.img
+					= image_tag(leaf.image(:medium))
+			- if !leaf.video.blank?
+				%video{:src => "#{leaf.video}"}(preload="auto" controls height=250 width=300 webkit-playsinline)

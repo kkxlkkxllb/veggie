@@ -10,5 +10,6 @@
  *
  *= require_self
  *= require base
+ *= require lib/reset-min
  *= require_tree .
 */
