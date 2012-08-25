@@ -58,5 +58,4 @@ root.add_provider_view =->
 		else
 			smoke.signal "没成功"
 root.init_info =->
-	$(".topic span").each (index) ->
-		$(this).css({"bottom":"50px"}).animate({"bottom":0,"opacity":1},1000)			
+	false		

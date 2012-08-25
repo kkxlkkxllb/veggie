@@ -2,8 +2,7 @@
 
 #infscr-loading
 	@include loader(45%)
-body
-	background: url(img/bg_glow.png) no-repeat fixed center top, url("img/bg.gif") repeat fixed 0 0
+
 .masonry
 	@include transition-masonry
 	.masonry-brick
@@ -23,7 +22,6 @@ body
 			a
 				color: #999
 				text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
-				text-decoration: none
 				&:hover
 					color: white
 		#title
@@ -41,7 +39,7 @@ body
 	text-align: center
 	color: #171717
 	.tool
-		margin-top: 20px
+		padding: 20px
 #menu
 	position: fixed
 	bottom: 0
@@ -55,8 +53,6 @@ body
 	width: 100%
 	#wrap
 		margin-top: 30px
-		a
-			text-decoration: none
 		.nav_item
 			float: left
 			margin: 5px
@@ -76,11 +72,7 @@ body
 			span.title
 				position: absolute
 				bottom: 20px
-				line-height: 20px
-				left: 130px
-				padding: 5px
-				background: #f0f0f0
-				font-size: 13px
+				left: 110px
 #user_list
 	margin: 0 auto
 	padding: 10px 0 40px 0

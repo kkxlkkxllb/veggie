@@ -16,13 +16,20 @@ html[xmlns] .clearfix
 * .clearfix
   height: 1%
 
+html
+  height: 100%
+  background: url(img/bg_glow.png) no-repeat fixed center top, url("img/bg.gif") repeat fixed 0 0
+
 a img, img
   border: none
   vertical-align: middle
 
 a
   text-decoration: none
-
+  color: #5185bc
+  &:hover
+    color: #3e6a9a
+    text-decoration: none
 .pagination
   height: 0px
   margin: 0
@@ -51,10 +58,6 @@ a
 
 .my_shadow
   @include shadow(0px,6px,10px,#5e5e5e)
-body
-  margin: 0
-  padding: 0
-  line-height: 18px
-  font-size: 13px
+
 label
   display: inline-block
