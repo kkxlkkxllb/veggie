@@ -13,8 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 
+//= require_tree ./lib
+//= require_tree ./zlib
 //= require utils
 //= require home
 //= require words
-//= require_tree ./lib
-//= require_tree ./zlib

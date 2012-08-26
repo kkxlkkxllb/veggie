@@ -10,5 +10,6 @@ $ ->
 	$("div.leaf").live 'hover',->
 		$("span.action",$(this)).toggle()
 	form_submit($("#new_word form"))
-	init_info()
 	mixpanel.track("new visitor")
+	if $("#impress").length != 0
+		init_info()
