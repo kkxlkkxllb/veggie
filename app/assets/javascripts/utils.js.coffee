@@ -58,4 +58,4 @@ root.add_provider_view =->
 		else
 			smoke.signal "没成功"
 root.init_info =->
-	impress().init()	
+	impress().init()

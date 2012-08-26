@@ -2,17 +2,17 @@
 class HomeController < ApplicationController
   before_filter :redirect_mobile,:only => :index
   def index
-    set_seo_meta(nil,"17up,NGO,梦想,实践,未来","一起暸望新世界的风景")
+    set_seo_meta(nil,"17up,NGO,梦想,实践,未来,教育","一起暸望新世界的风景，创新的育人方式")
     @is_root = true
   end
   
   def users
-    set_seo_meta("名人","17up,NGO,梦想,实践,未来","一起暸望新世界的风景")
+    set_seo_meta("名人","17up,NGO,梦想,实践,未来，教育","一起暸望新世界的风景，创新的育人方式")
     @users = Provider.all
   end
   
   def info
-    set_seo_meta("简介","17up,NGO,梦想,实践,未来","一起暸望新世界的风景")
+    set_seo_meta("简介","17up,NGO,梦想,实践,未来，教育","一起暸望新世界的风景，创新的育人方式")
     @request = request.remote_ip
     @info = TaobaoIpParser.new(@request).parse
   end
