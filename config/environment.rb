@@ -7,3 +7,8 @@ Veggie::Application.initialize!
 DICT_SOURCE = {}
 DICT_SOURCE[:english] = "http://dict.hjenglish.com/w/"
 DICT_SOURCE[:english_v] = "http://tts.yeshj.com/uk/s/"
+
+CONFIG = {}
+CONFIG[:domain] = "17up.org"
+CONFIG[:host] = "http://#{CONFIG[:domain]}"
+CONFIG[:mobile_host] = "http://m.#{CONFIG[:domain]}"
