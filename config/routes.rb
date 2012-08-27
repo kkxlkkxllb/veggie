@@ -7,18 +7,20 @@ Veggie::Application.routes.draw do
   namespace :mobile do
     match "/application.manifest" => Rails::Offline
     match '/' => "mhome#index"
-    match "mweibo" => "mhome#weibo"
+    match "t" => "mhome#weibo",:as => :t
     match "learn_en" => "mhome#learn_en"
   end
-
-  get "home/index"
-  get "home/users"
-  get "home/info"
 
   resource :provider do
     post "create"
   end
+  
+  match "hot" => "home#hot", :as => :hot
+  match "info" => "home#info", :as => :info
+  
   resources :words
+  
+  match "t" => "leafs#index", :as => :leafs
   resources :leafs do
     post "grow"
     post "destroy"

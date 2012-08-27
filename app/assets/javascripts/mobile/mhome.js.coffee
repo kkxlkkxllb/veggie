@@ -13,7 +13,7 @@ $ ->
 		$("#m_nav").hide()
 		switch rel
 			when "weibo"
-				$.get("/mobile/mweibo",(data) ->
+				$.get("/mobile/t",(data) ->
 					if data.status is 0
 						$wrap.append(data.data.html)
 				,"json").complete ->
