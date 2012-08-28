@@ -27,6 +27,17 @@ class LeafGrow
 		end
   end
   
+  # twitter api test method
+  def test(uid)
+    url = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=#{uid}&include_entities=true"
+    resp = Net::HTTP.get_response(URI.parse(url)).body
+		data = JSON.parse(resp)
+		data.each do |d|
+		  #puts some data
+	  end
+	  return uid
+  end
+  
   private
   def request_url(provider)
     case provider.provider
@@ -46,7 +57,7 @@ class LeafGrow
     when 'weibo'
       return data["original_pic"]
     when 'twitter'
-      return nil#data["entities"]["urls"]
+      return data["entities"]["media"][0]["media_url"] rescue nil
     end  
   end
   
