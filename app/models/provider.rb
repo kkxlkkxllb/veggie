@@ -47,7 +47,7 @@ class Provider < ActiveRecord::Base
     self.metadata[:weibo_url]
   end
   
-  def get_leafs(older = true)
+  def get_leafs(older = false)
     if older
       id = self.leafs.minimum(:weibo_id)
       return "&max_id=#{id}"
@@ -57,7 +57,7 @@ class Provider < ActiveRecord::Base
     end
   end
   
-  def self.build_leaf(older = true,options = {})
+  def self.build_leaf(older = false,options = {})
     if options[:provider]
       LeafGrow.new(options[:provider]).grow(:older => older)
     else
