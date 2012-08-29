@@ -12,19 +12,23 @@ class LeafGrow
     if !options.blank?  
       url = url + @provider.get_leafs(options[:older])    
     end
-    resp = Net::HTTP.get_response(URI.parse(url)).body
-		data = JSON.parse(resp)
-		data.each do |d|		  
-		  if @provider.metadata.blank?
-		    @provider.metadata = user_info(d["user"],@provider)
-		    @provider.save!
-	    end
-			Leaf.create(:provider_id => @provider.id,
-			            :content => d["text"],
-			            :time_stamp => Time.parse(d["created_at"]),
-			            :image_url => get_image(d,@provider),
-			            :weibo_id => d["id"])
-		end
+    begin
+      resp = Net::HTTP.get_response(URI.parse(url)).body
+		  data = JSON.parse(resp)
+		  data.each do |d|		  
+		    if @provider.metadata.blank?
+  		    @provider.metadata = user_info(d["user"],@provider)
+  		    @provider.save!
+  	    end
+  			Leaf.create(:provider_id => @provider.id,
+  			            :content => d["text"],
+  			            :time_stamp => Time.parse(d["created_at"]),
+  			            :image_url => get_image(d,@provider),
+  			            :weibo_id => d["id"])
+  		end
+		rescue StandardError => x
+		  Leaf.logger.error("ERROR url:#{url} msg:#{x}")
+  	end
   end
   
   # twitter api test method

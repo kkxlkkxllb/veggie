@@ -55,8 +55,5 @@ group :development, :test do
 end
 
 gem "devise"
-#gem 'geo_location'
-#gem "ipparse",:git => "git://github.com/jinzhu/ipparse.git"
-gem 'has_scope'
 gem 'redis'
-gem 'rack-offline'
+gem 'whenever', :require => false

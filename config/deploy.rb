@@ -1,3 +1,6 @@
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
+
 set :application, "veggie"
 set :repository,  "git@github.com:kkxlkkxllb/veggie.git"
 

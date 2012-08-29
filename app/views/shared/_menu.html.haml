@@ -10,15 +10,6 @@
 				%span.label
 					%i.icon-book
 					= "词汇 #{Word.all.count}"
-		- if current_member and @leafs
-			%li.action{:onclick => "grow_leaf(1,#{params[:pid].to_i});"}
-				%span.label.label-info
-					%i.icon-refresh
-					更新
-			%li.action{:onclick => "grow_leaf(0,#{params[:pid].to_i});"}
-				%span.label.label-info
-					%i.icon-refresh
-					更多
 		%li.action
 			%a{:href => hot_path}
 				%span.label.label-success

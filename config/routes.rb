@@ -5,7 +5,6 @@ Veggie::Application.routes.draw do
   devise_for :members
   
   namespace :mobile do
-    match "/application.manifest" => Rails::Offline
     match '/' => "mhome#index"
     match "t" => "mhome#weibo",:as => :t
     match "learn_en" => "mhome#learn_en"
@@ -22,7 +21,6 @@ Veggie::Application.routes.draw do
   
   match "t" => "leafs#index", :as => :leafs
   resources :leafs do
-    post "grow"
     post "destroy"
   end
  

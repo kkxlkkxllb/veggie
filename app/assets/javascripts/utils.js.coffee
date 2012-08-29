@@ -30,14 +30,6 @@ root.reload_tree =->
 			$wrap.imagesLoaded ->
 				$wrap.masonry('reload')
 	,"json"
-root.grow_leaf = (is_older,provider) ->
-	if is_older is 0
-		older = ""
-	else
-		older = 1
-	$.post "/leafs/grow",{older:older,provider:provider},(data) ->
-		if data.status is 0
-			window.location.reload()
 root.destroy_leaf = (leaf_id,ele) ->
 	$.post "/leafs/destroy",{id:leaf_id},(data) ->
 		if data.status is 0
