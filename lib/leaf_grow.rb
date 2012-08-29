@@ -24,7 +24,7 @@ class LeafGrow
   			            :content => d["text"],
   			            :time_stamp => Time.parse(d["created_at"]),
   			            :image_url => get_image(d,@provider),
-  			            :weibo_id => d["id"])
+  			            :weibo_id => d["id"].to_i)
   		end
 		rescue StandardError => x
 		  Leaf.logger.error("ERROR url:#{url} msg:#{x}")
