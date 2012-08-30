@@ -34,6 +34,14 @@ class Word
     end
     all.map{|k,v| Word.new(k,v)}
   end
+  
+  def source_link
+    $dict_source[:english] + self.title
+  end
+  
+  def source_voice
+    $dict_source[:english_v] + self.title
+  end
     
   # 生产随机3个错误选项
   def word_guess

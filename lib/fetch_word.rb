@@ -5,7 +5,7 @@ require 'nokogiri'
 class FetchWord
   
   def initialize(word)
-    url = DICT_SOURCE[:english]+word
+    url = $dict_source[:english]+word
     frame = Nokogiri::HTML(open(url),nil)
     if frame
       begin
