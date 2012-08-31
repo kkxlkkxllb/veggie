@@ -23,6 +23,8 @@ Veggie::Application.routes.draw do
   resources :leafs do
     post "destroy"
   end
+  
+  match 'callback' => "provider#auth"
  
   root :to => 'home#index'
 

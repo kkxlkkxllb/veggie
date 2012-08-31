@@ -59,3 +59,4 @@ end
 gem "devise"
 gem 'redis'
 gem 'whenever', :require => false
+gem 'weibo2'

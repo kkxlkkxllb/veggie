@@ -46,7 +46,7 @@ class LeafGrow
   def request_url(provider)
     case provider.provider
     when "weibo"
-      @base_url = "http://api.t.sina.com.cn/statuses/user_timeline.json"
+      @base_url = "https://api.weibo.com/2/statuses/user_timeline.json"
       return "#{@base_url}?source=#{$config[:oauth][:weibo][0]}&id=#{provider.uid}&feature=1"
     when "twitter"
       @base_url = "http://api.twitter.com/1/statuses/user_timeline.json"
