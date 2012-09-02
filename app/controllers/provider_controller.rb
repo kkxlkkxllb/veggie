@@ -6,7 +6,12 @@ class ProviderController < ApplicationController
   end
   
   def auth
-    render :text => response.body
+    hash = request.env["omniauth.auth"]
+    provider = hash.provider
+    uid = hash.uid
+    token = hash.to_hash["credentials"]["token"]
+    @provider = Provider.create(:provider => provider,:uid => uid,:token => token)
+    render :json => @provider.to_json
   end
   
   def failure

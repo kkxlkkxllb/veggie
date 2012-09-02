@@ -1,11 +1,10 @@
 GIT
-  remote: git://github.com/ballantyne/omniauth-weibo.git
-  revision: 40a38f3297e04a28373bef661669f55b3de57220
+  remote: git://github.com/beenhero/omniauth-weibo-oauth2.git
+  revision: 4d6d0bebd737aa57e065a660b265bea829ee65d4
   specs:
-    omniauth-weibo (1.0.1)
-      multi_json
-      omniauth (~> 1.0.0.rc2)
-      omniauth-oauth (~> 1.0.0.rc2)
+    omniauth-weibo-oauth2 (0.2.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
 
 GIT
   remote: git://github.com/ctran/annotate_models.git
@@ -130,15 +129,14 @@ GEM
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     nokogiri (1.5.4)
-    oauth (0.4.6)
     oauth2 (0.5.2)
       faraday (~> 0.7)
       multi_json (~> 1.0)
-    omniauth (1.0.3)
+    omniauth (1.1.0)
       hashie (~> 1.2)
       rack
-    omniauth-oauth (1.0.1)
-      oauth
+    omniauth-oauth2 (1.0.0)
+      oauth2 (~> 0.5.0)
       omniauth (~> 1.0)
     orm_adapter (0.3.0)
     paperclip (3.1.2)
@@ -257,7 +255,7 @@ DEPENDENCIES
   kaminari
   mysql2
   nokogiri (~> 1.5.0)
-  omniauth-weibo!
+  omniauth-weibo-oauth2!
   paperclip
   puma
   rails (= 3.2.6)

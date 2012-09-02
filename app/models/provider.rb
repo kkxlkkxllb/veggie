@@ -18,7 +18,7 @@ class Provider < ActiveRecord::Base
   serialize :metadata, Hash
   validates :provider, :presence => true
   validates :uid, :presence => true, :uniqueness => {:scope => :provider }
-  after_create :init_leafs
+  #after_create :init_leafs
   
   acts_as_taggable
   acts_as_taggable_on :tags

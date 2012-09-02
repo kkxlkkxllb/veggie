@@ -38,7 +38,7 @@ gem 'nokogiri', '~>1.5.0'
 gem 'kaminari'
 gem "remotipart", "~> 1.0"
 gem 'rails_admin'
-gem "omniauth-weibo", :git => 'git://github.com/ballantyne/omniauth-weibo.git'
+gem "omniauth-weibo-oauth2", :git => 'git://github.com/beenhero/omniauth-weibo-oauth2.git'
 gem 'haml'
 gem 'rails_autolink'
 
