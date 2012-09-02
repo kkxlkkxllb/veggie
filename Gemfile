@@ -59,4 +59,4 @@ end
 gem "devise"
 gem 'redis'
 gem 'whenever', :require => false
-gem 'weibo2', :git => 'git://github.com/fmmp3/weibo2.git'
+gem 'weibo2'
