@@ -24,7 +24,8 @@ Veggie::Application.routes.draw do
     post "destroy"
   end
   
-  match 'callback' => "provider#auth"
+  match "/auth/:provider/callback" => "provider#auth"
+  match '/auth/failure' => "provider#failure"
  
   root :to => 'home#index'
 

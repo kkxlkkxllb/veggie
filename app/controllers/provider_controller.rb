@@ -6,7 +6,11 @@ class ProviderController < ApplicationController
   end
   
   def auth
-    render :nothing => true
+    render :text => response.body
+  end
+  
+  def failure
+    redirect_to "/404.html"
   end
   
   def create
