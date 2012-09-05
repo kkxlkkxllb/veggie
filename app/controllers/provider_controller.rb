@@ -5,19 +5,6 @@ class ProviderController < ApplicationController
     
   end
   
-  def auth
-    hash = request.env["omniauth.auth"]
-    provider = hash.provider
-    uid = hash.uid
-    token = hash.to_hash["credentials"]["token"]
-    @provider = Provider.create(:provider => provider,:uid => uid,:token => token)
-    render :json => @provider.to_json
-  end
-  
-  def failure
-    redirect_to "/404.html"
-  end
-  
   def create
     if Provider::PROVIDERS.include?(provider_params["provider"])
       @provider = Provider.create(provider_params)

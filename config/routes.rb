@@ -2,7 +2,9 @@ Veggie::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'  
 
-  devise_for :members
+  devise_for :members, controllers: {
+    omniauth_callbacks: :authentications
+  }
   
   namespace :mobile do
     match '/' => "mhome#index"
@@ -23,9 +25,6 @@ Veggie::Application.routes.draw do
   resources :leafs do
     post "destroy"
   end
-  
-  match "/auth/:provider/callback" => "provider#auth"
-  match '/auth/failure' => "provider#failure"
  
   root :to => 'home#index'
 

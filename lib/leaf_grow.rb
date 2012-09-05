@@ -47,7 +47,7 @@ class LeafGrow
     case provider.provider
     when "weibo"
       @base_url = "https://api.weibo.com/2/statuses/user_timeline.json"
-      return "#{@base_url}?source=#{$config[:oauth][:weibo][0]}&id=#{provider.uid}&feature=1"
+      return "#{@base_url}?source=408518764&id=#{provider.uid}&feature=1"
     when "twitter"
       @base_url = "http://api.twitter.com/1/statuses/user_timeline.json"
       return "#{@base_url}?screen_name=#{provider.uid}&include_entities=true"

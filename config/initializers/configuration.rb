@@ -6,11 +6,3 @@ $config = {}
 $config[:domain] = "17up.org"
 $config[:host] = "http://#{$config[:domain]}"
 $config[:mobile_host] = "http://m.#{$config[:domain]}"
-
-$config[:oauth]={
-  :weibo => ["83541187","70968cae2cbaf5bf060878d5b169691e"]
-}
-
-Weibo2::Config.api_key = $config[:oauth][:weibo][0]
-Weibo2::Config.api_secret = $config[:oauth][:weibo][1]
-Weibo2::Config.redirect_uri = $config[:host]+"/auth/weibo/callback"

@@ -1,0 +1,14 @@
+common: &common
+  weibo:
+    api_key: "83541187"
+    api_secret: "70968cae2cbaf5bf060878d5b169691e"
+    redirect_uri: "http://17up.org/auth/weibo/callback"
+
+production:
+  <<: *common
+
+development:
+  <<: *common
+
+test:
+  <<: *common

@@ -19,6 +19,7 @@
 
 	  <div><%= f.submit "登录",:class => "btn" %></div>
 	<% end %>
+	<%= link_to '微博帐号登录', '/members/auth/weibo' %> 
 	<% unless Member.any? %>
 		<%= render :partial => "devise/shared/links" %>
 	<% end %>

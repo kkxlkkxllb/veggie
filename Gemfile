@@ -38,6 +38,8 @@ gem 'nokogiri', '~>1.5.0'
 gem 'kaminari'
 gem "remotipart", "~> 1.0"
 gem 'rails_admin'
+
+gem "devise"
 gem "omniauth-weibo-oauth2", :git => 'git://github.com/beenhero/omniauth-weibo-oauth2.git'
 gem 'haml'
 gem 'rails_autolink'
@@ -56,7 +58,6 @@ group :development, :test do
 	gem 'factory_girl_rails'
 end
 
-gem "devise"
+
 gem 'redis'
 gem 'whenever', :require => false
-gem 'weibo2'

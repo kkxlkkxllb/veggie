@@ -18,7 +18,8 @@ class Provider < ActiveRecord::Base
   serialize :metadata, Hash
   validates :provider, :presence => true
   validates :uid, :presence => true, :uniqueness => {:scope => :provider }
-  #after_create :init_leafs
+  belongs_to :member
+  after_create :init_leafs
   
   acts_as_taggable
   acts_as_taggable_on :tags
@@ -65,6 +66,11 @@ class Provider < ActiveRecord::Base
         LeafGrow.new(p).grow(:older => older)
       end
     end
+  end
+  
+  def self.exsit?(provider,uid)
+    providers = self.where(provider: provider, uid: uid.to_s)
+    providers.any? ? providers.first : nil
   end
   
   private
