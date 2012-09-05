@@ -40,7 +40,7 @@ gem "remotipart", "~> 1.0"
 gem 'rails_admin'
 
 gem "devise"
-gem "omniauth-weibo-oauth2", :git => 'git://github.com/beenhero/omniauth-weibo-oauth2.git'
+gem "omniauth-weibo-oauth2", '~> 0.2.0'
 gem 'haml'
 gem 'rails_autolink'
 
