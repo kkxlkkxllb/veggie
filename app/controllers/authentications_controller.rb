@@ -6,7 +6,7 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
   protected
     def omniauth_process
       omniauth = request.env['omniauth.auth']
-      provider = Provider.where(provider: provider, uid: uid.to_s).where("user_id is not null").first
+      provider = Provider.where(provider: omniauth.provider, uid: omniauth.uid.to_s).where("user_id is not null").first
       if provider
         sign_in(:member, provider.member)
         redirect_to root_path

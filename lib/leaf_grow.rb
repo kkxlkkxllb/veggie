@@ -8,7 +8,7 @@ class LeafGrow
   end
   
   def grow(options = {})
-    case provider.provider
+    case @provider.provider
     when "weibo"
       #to-do
       data = []
