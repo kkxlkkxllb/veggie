@@ -8,13 +8,21 @@ class LeafGrow
   end
   
   def grow(options = {})
-    url = request_url(@provider)
-    if !options.blank?  
-      url = url + @provider.get_leafs(options[:older])    
-    end
-    begin
+    case provider.provider
+    when "weibo"
+      #to-do
+      data = []
+    when "twitter"
+      @base_url = "http://api.twitter.com/1/statuses/user_timeline.json"
+      url = "#{@base_url}?screen_name=#{provider.uid}&include_entities=true"
+      if !options.blank?  
+        url = url + @provider.get_leafs(options[:older])    
+      end
       resp = Net::HTTP.get_response(URI.parse(url)).body
 		  data = JSON.parse(resp)
+    end
+    
+    begin     
 		  data.each do |d|		  
 		    if @provider.metadata.blank?
   		    @provider.metadata = user_info(d["user"],@provider)
@@ -43,16 +51,6 @@ class LeafGrow
   end
   
   private
-  def request_url(provider)
-    case provider.provider
-    when "weibo"
-      @base_url = "https://api.weibo.com/2/statuses/user_timeline.json"
-      return "#{@base_url}?source=408518764&id=#{provider.uid}&feature=1"
-    when "twitter"
-      @base_url = "http://api.twitter.com/1/statuses/user_timeline.json"
-      return "#{@base_url}?screen_name=#{provider.uid}&include_entities=true"
-    end
-  end
   
   def get_image(data,provider)
     case provider.provider

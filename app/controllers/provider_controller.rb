@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 class ProviderController < ApplicationController
   
-  def index
-    
-  end
-  
   def create
     if Provider::PROVIDERS.include?(provider_params["provider"])
       @provider = Provider.create(provider_params)

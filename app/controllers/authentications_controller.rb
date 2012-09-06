@@ -6,14 +6,14 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
   protected
     def omniauth_process
       omniauth = request.env['omniauth.auth']
-      
-      if p = Provider.exsit?(omniauth.provider,omniauth.uid)
-        sign_in(:user, p.member)
+      provider = Provider.where(provider: provider, uid: uid.to_s).where("user_id is not null").first
+      if provider
+        sign_in(:member, provider.member)
         redirect_to root_path
       else
-        session[:omniauth] = omniauth.except("extra")
-        
-        render :text => omniauth.except("extra")
+        Provider.create_from_hash(nil, omniauth)
+        flash[:notice] = "Thank you for your request!"
+        redirect_to root_path
       end
     end
 

@@ -13,3 +13,5 @@ $ ->
 	mixpanel.track("new visitor")
 	if $("#impress").length != 0
 		init_info()
+	if $("#flash").length != 0
+		smoke.signal $("#flash").text()

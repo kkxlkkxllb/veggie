@@ -68,9 +68,13 @@ class Provider < ActiveRecord::Base
     end
   end
   
-  def self.exsit?(provider,uid)
-    providers = self.where(provider: provider, uid: uid.to_s)
-    providers.any? ? providers.first : nil
+  def self.create_from_hash(user_id, omniauth)
+    self.create!(
+      user_id:      user_id,
+      provider:     omniauth.provider,
+      uid:          omniauth.uid,
+      token: omniauth.credentials.token
+    )
   end
   
   private

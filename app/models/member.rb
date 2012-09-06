@@ -32,4 +32,8 @@ class Member < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   has_many :providers,:foreign_key => "user_id"
+  
+  def admin?
+    self.role == "admin"
+  end
 end

@@ -5,3 +5,6 @@
 	.tool
 		%a(href="https://mixpanel.com/f/partner")
 			%img(src="https://cdn.mxpnl.com/site_media/images/partner/badge_light.png" alt="Mobile Analytics")
+- if flash[:notice]
+	#flash.notice.hide
+		= flash[:notice]

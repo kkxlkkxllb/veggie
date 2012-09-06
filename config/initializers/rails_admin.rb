@@ -8,7 +8,11 @@ RailsAdmin.config do |config|
   # I18n.default_locale = :de
 
   config.current_user_method { current_member } # auto-generated
-
+  config.authorize_with do
+		unless current_member.admin?
+		  redirect_to "/"
+	  end
+  end
   # If you want to track changes on your models:
   # config.audit_with :history, User
 
