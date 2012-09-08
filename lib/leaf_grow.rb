@@ -11,18 +11,16 @@ class LeafGrow
   def grow(options = {})
     case @provider.provider
     when "weibo"
-      veggie = Provider.where(:provider => "weibo").first
-      if veggie
+      opt = {:uid => @provider.uid,:feature => "1"}
+      if !options.blank?
+        str = @provider.get_leafs(options[:older])
+        opt.merge!(:since_id => str.split("=")[1])
+        veggie = Provider.where(:provider => "weibo",:user_id => Member.first.id).first
         client = Weibo::Client.new(veggie.token,veggie.uid)
-        opt = {:uid => @provider.uid,:feature => "1"}
-        if !options.blank?
-          str = @provider.get_leafs(options[:older])
-          opt.merge!(:since_id => str.split("=")[1])
-        end
-        data = client.statuses_user_timeline(opt)["statuses"]
       else
-        data = []
-      end    
+        client = Weibo::Client.new(@provider.token,@provider.uid)
+      end
+      data = client.statuses_user_timeline(opt)["statuses"]  
     when "twitter"
       @base_url = "http://api.twitter.com/1/statuses/user_timeline.json"
       url = "#{@base_url}?screen_name=#{@provider.uid}&include_entities=true"
