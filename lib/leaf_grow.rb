@@ -10,11 +10,21 @@ class LeafGrow
   def grow(options = {})
     case @provider.provider
     when "weibo"
-      #to-do
-      data = []
+      veggie = Provider.where(:provider => "weibo").first
+      if veggie
+        client = Weibo::Client.new(veggie.token,veggie.uid)
+        opt = {:uid => @provider.uid,:feature => "1"}
+        if !options.blank?
+          str = @provider.get_leafs(options[:older])
+          opt.merge!(:since_id => str.split("=")[1])
+        end
+        data = client.statuses_user_timeline(opt)["statuses"]
+      else
+        data = []
+      end    
     when "twitter"
       @base_url = "http://api.twitter.com/1/statuses/user_timeline.json"
-      url = "#{@base_url}?screen_name=#{provider.uid}&include_entities=true"
+      url = "#{@base_url}?screen_name=#{@provider.uid}&include_entities=true"
       if !options.blank?  
         url = url + @provider.get_leafs(options[:older])    
       end
@@ -35,7 +45,7 @@ class LeafGrow
   			            :weibo_id => d["id"].to_i)
   		end
 		rescue StandardError => x
-		  Leaf.logger.error("ERROR url:#{url} msg:#{x}")
+		  Leaf.logger.error("ERROR provider:#{@provider.provider} msg:#{x}")
   	end
   end
   

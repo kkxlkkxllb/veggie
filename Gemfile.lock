@@ -5,6 +5,13 @@ GIT
     annotate (2.5.0.pre1)
       rake
 
+GIT
+  remote: git://github.com/kkxlkkxllb/weibo2.git
+  revision: 790cc3b8e124809493fdb42565bcf08382115b8f
+  specs:
+    weibo2 (0.4.5)
+      rest-client
+
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -195,6 +202,8 @@ GEM
       json (~> 1.4)
     redis (3.0.1)
     remotipart (1.0.2)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (2.10.0)
       rspec-core (~> 2.10.0)
       rspec-expectations (~> 2.10.0)
@@ -267,4 +276,5 @@ DEPENDENCIES
   sqlite3
   uglifier (>= 1.0.3)
   unicorn
+  weibo2!
   whenever

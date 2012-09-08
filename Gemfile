@@ -1,4 +1,4 @@
-#source 'https://rubygems.org'
+#source 'http://rubygems.org'
 source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.6'
@@ -41,6 +41,7 @@ gem 'rails_admin'
 
 gem "devise"
 gem "omniauth-weibo-oauth2", '~> 0.2.0'
+gem "weibo2", :git => "git://github.com/kkxlkkxllb/weibo2.git"
 gem 'haml'
 gem 'rails_autolink'
 

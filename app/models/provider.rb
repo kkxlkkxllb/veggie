@@ -48,7 +48,7 @@ class Provider < ActiveRecord::Base
     self.metadata[:weibo_url]
   end
   
-  def get_leafs(older = false)
+  def get_leafs(older)
     if older
       id = self.leafs.minimum(:weibo_id)
       return "&max_id=#{id}"
@@ -73,7 +73,8 @@ class Provider < ActiveRecord::Base
       user_id:      user_id,
       provider:     omniauth.provider,
       uid:          omniauth.uid,
-      token: omniauth.credentials.token
+      token: omniauth.credentials.token,
+      metadata: omniauth.info
     )
   end
   
