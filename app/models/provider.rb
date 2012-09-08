@@ -19,7 +19,6 @@ class Provider < ActiveRecord::Base
   validates :provider, :presence => true
   validates :uid, :presence => true, :uniqueness => {:scope => :provider }
   belongs_to :member
-  after_create :init_leafs
   
   acts_as_taggable
   acts_as_taggable_on :tags
@@ -62,7 +61,7 @@ class Provider < ActiveRecord::Base
     if options[:provider]
       LeafGrow.new(options[:provider]).grow(:older => older)
     else
-      Provider.all.each do |p|
+      Provider.where("user_id is null").each do |p|
         LeafGrow.new(p).grow(:older => older)
       end
     end
@@ -76,11 +75,6 @@ class Provider < ActiveRecord::Base
       token: omniauth.credentials.token,
       metadata: omniauth.info
     )
-  end
-  
-  private
-  def init_leafs
-    LeafGrow.new(self).grow
   end
 
 end

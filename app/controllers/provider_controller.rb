@@ -4,6 +4,7 @@ class ProviderController < ApplicationController
   def create
     if Provider::PROVIDERS.include?(provider_params["provider"])
       @provider = Provider.create(provider_params)
+      LeafGrow.new(@provider).grow
     end
     if @provider
       status = 0
