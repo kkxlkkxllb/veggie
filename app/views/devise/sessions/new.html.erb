@@ -12,6 +12,8 @@
 	  <div><%= f.submit "登录",:class => "btn" %></div>
 	<% end %>
 	<%= link_to '微博帐号登录', member_omniauth_authorize_path(:weibo) %> 
+	<br>
+	<%= link_to "twitter登录", member_omniauth_authorize_path(:twitter) %>
 	<% unless Member.any? %>
 		<%= render :partial => "devise/shared/links" %>
 	<% end %>

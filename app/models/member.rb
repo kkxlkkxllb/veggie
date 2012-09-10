@@ -27,7 +27,7 @@ class Member < ActiveRecord::Base
          :rememberable, 
          :trackable, 
          :validatable,
-         :omniauthable, omniauth_providers: [:weibo]
+         :omniauthable, omniauth_providers: [:weibo,:twitter]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
@@ -36,4 +36,5 @@ class Member < ActiveRecord::Base
   def admin?
     self.role == "admin"
   end
+  
 end

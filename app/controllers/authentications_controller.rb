@@ -3,6 +3,10 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
     omniauth_process
   end
   
+  def twitter
+    omniauth_process
+  end
+  
   protected
     def omniauth_process
       omniauth = request.env['omniauth.auth']
@@ -13,7 +17,7 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
         redirect_to root_path
       else
         Provider.create_from_hash(nil, omniauth)
-        flash[:notice] = "Thank you for your request! #{omniauth.info}"
+        flash[:notice] = "Thank you for your request!"
         redirect_to root_path
       end
     end
