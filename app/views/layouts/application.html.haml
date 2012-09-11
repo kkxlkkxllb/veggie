@@ -23,4 +23,7 @@
 				= render 'shared/copyright'
 			- else
 				= render 'shared/menu'
+		- if flash[:notice]
+			#flash.notice.hide
+				= flash[:notice]
 		= javascript_include_tag "application"

@@ -1,5 +1,9 @@
 .logo_text
 	17up
+- unless current_member
+	.register
+		= link_to image_tag("icon/twitter_big.png"),member_omniauth_authorize_path(:twitter)
+		= link_to image_tag("icon/weibo_big.png"),member_omniauth_authorize_path(:weibo)
 #wrap.clearfix
 	%a{:href => leafs_path}
 		.nav_item
