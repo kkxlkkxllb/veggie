@@ -1,0 +1,9 @@
+zh-cn:
+  title: 17UP
+  keywords: "NGO,梦想,实践,未来,教育,校园"
+  describe: "带你重回校园，再走一次青春"
+  flash:
+    notice:
+      register: "感谢您的注册!"
+      login: "欢迎回来!"
+      bind: "绑定成功!"

@@ -37,4 +37,16 @@ class Member < ActiveRecord::Base
     self.role == "admin"
   end
   
+  def self.generate(prefix)
+    prefix ||= Time.now.to_f.to_s.split(".")[1]
+    email = prefix + "@17up.org"
+    passwd = "veggie"
+    user = Member.new(:email => email,:password => passwd,:password_confirmation => passwd)
+    if user.save!
+      user
+    else
+      self.generate(prefix + "v")
+    end
+  end
+  
 end

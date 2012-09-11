@@ -2,17 +2,17 @@
 class HomeController < ApplicationController
   before_filter :redirect_mobile,:only => :index
   def index
-    set_seo_meta(nil,"17up,NGO,梦想,实践,未来,教育","一起暸望新世界的风景，创新的育人方式")
+    set_seo_meta(nil,t('keywords'),t('describe'))
     @is_root = true
   end
   
   def hot
-    set_seo_meta("名人","17up,NGO,梦想,实践,未来，教育","一起暸望新世界的风景，创新的育人方式")
-    @users = Provider.where("metadata IS NOT null")
+    set_seo_meta("名人",t('keywords'),t('describe'))
+    @users = Provider.where("user_id is null")
   end
   
   def info
-    set_seo_meta("简介","17up,NGO,梦想,实践,未来，教育","一起暸望新世界的风景，创新的育人方式")
+    set_seo_meta("简介",t('keywords'),t('describe'))
     @request = request.remote_ip
     @info = TaobaoIpParser.new(@request).parse
   end
