@@ -28,10 +28,14 @@
 							名人
 							%span.badge.badge-info
 								= Provider.count
-				%ul.nav.pull-right
-					%li
-						%a(href = "/members/sign_out" data-method="delete" rel="nofollow")
-							%span.label.label-important
-								%i.icon-off
-								登出
+				- if current_member
+					%ul.nav.pull-right
+						%li
+							%span.avatar
+								= image_tag(current_member.avatar)
+						%li
+							%a(href = "/members/sign_out" data-method="delete" rel="nofollow")
+								%span.label.label-important
+									%i.icon-off
+									登出
 		

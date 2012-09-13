@@ -37,6 +37,11 @@ class Member < ActiveRecord::Base
     self.role == "admin"
   end
   
+  def avatar
+    p = self.providers.first
+    p ? p.avatar : "icon/avatar.png"
+  end
+  
   def self.generate(prefix = Time.now.to_f.to_s.split(".")[1])
     email = prefix + "@17up.org"
     passwd = "veggie"
