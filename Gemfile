@@ -1,7 +1,7 @@
 #source 'http://rubygems.org'
 source 'http://ruby.taobao.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.8'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -9,7 +9,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :require => 'v8'
+  #gem 'therubyracer', :require => 'v8'
   gem "twitter-bootstrap-rails"
   gem 'uglifier', '>= 1.0.3'
 end
@@ -27,10 +27,6 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
-gem "debugger"
 
 gem 'acts-as-taggable-on'
 gem 'paperclip'
@@ -61,6 +57,9 @@ group :development, :test do
 	gem 'puma'
 	gem 'rspec-rails', '~> 2.10.0'
 	gem 'factory_girl_rails'
+	# To use debugger
+  #gem 'ruby-debug19', :require => 'ruby-debug'
+  #gem "debugger"
 end
 
 
