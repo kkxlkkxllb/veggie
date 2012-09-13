@@ -1,9 +1,9 @@
 zh-cn:
   title: 17UP
-  keywords: "NGO,梦想,实践,未来,教育,校园"
-  describe: "带你重回校园，再走一次青春"
+  keywords: "自助,学习,高校,校园,青春,university"
+  describe: "带你重回校园，再走一次青春，没有老师，只有学友"
   flash:
     notice:
-      register: "感谢您的注册!"
-      login: "欢迎回来!"
+      register: "童鞋，欢迎你来 17up University 报到啦!"
+      login: "学习，任何时候开始都不晚，欢迎回来！"
       bind: "绑定成功!"

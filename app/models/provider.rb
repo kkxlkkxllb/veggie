@@ -18,7 +18,7 @@ class Provider < ActiveRecord::Base
   serialize :metadata, Hash
   validates :provider, :presence => true
   validates :uid, :presence => true, :uniqueness => {:scope => :provider }
-  belongs_to :member
+  belongs_to :member,:foreign_key => "user_id"
   
   acts_as_taggable
   acts_as_taggable_on :tags

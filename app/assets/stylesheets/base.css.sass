@@ -1,59 +1,44 @@
 @import "utils"
 
-.clearfix
-  &:after
-    visibility: hidden
-    display: block
-    font-size: 0
-    content: " "
-    clear: both
-    height: 0
-  display: block
-
-html[xmlns] .clearfix
-  display: block
-
-* .clearfix
-  height: 1%
 
 a img, img
-  border: none
-  vertical-align: middle
+	border: none
+	vertical-align: middle
 
 a
-  text-decoration: none
-  color: #5185bc
-  &:hover
-    color: #3e6a9a
-    text-decoration: none
+	text-decoration: none
+	color: #5185bc
+	&:hover
+		color: #3e6a9a
+		text-decoration: none
 .pagination
-  height: 0px
-  margin: 0
-.pagination	a
-  border: 0
+	height: 0px
+	margin: 0
+.pagination a
+	border: 0
 .text_center
-  text-align: center
+	text-align: center
 
 .text_right
-  text-align: right
+	text-align: right
 
 .left
-  float: left
+	float: left
 
 .right
-  float: right
+	float: right
 
 .as_link
-  cursor: pointer
+	cursor: pointer
 
 .disable_event
-  pointer-events: none
+	pointer-events: none
 
 .round
-  @include round(8px)
+	@include round(8px)
 
 .my_shadow
-  @include shadow(0px,6px,10px,#5e5e5e)
-
-label
-  display: inline-block
+	@include shadow(0px,6px,10px,#5e5e5e)
+#flash_message
+	.alert
+		margin: 8px 20px

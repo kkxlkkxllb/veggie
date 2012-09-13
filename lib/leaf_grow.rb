@@ -15,7 +15,7 @@ class LeafGrow
       if !options.blank?
         str = @provider.get_leafs(options[:older])
         opt.merge!(:since_id => str.split("=")[1])
-        veggie = Provider.where(:provider => "weibo",:user_id => Member.first.id).first
+        veggie = Provider.where(:provider => "weibo").first
         client = Weibo::Client.new(veggie.token,veggie.uid)
       else
         client = Weibo::Client.new(@provider.token,@provider.uid)

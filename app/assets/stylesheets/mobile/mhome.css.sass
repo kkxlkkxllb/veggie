@@ -1,5 +1,7 @@
 @import "utils"
 
+body
+	margin: 0
 .hidden
 	display: none
 img
@@ -55,3 +57,18 @@ a
 	text-align: center
 	line-height: 35px
 	z-index: 99
+.clearfix
+	&:after
+		visibility: hidden
+		display: block
+		font-size: 0
+		content: " "
+		clear: both
+		height: 0
+		display: block
+
+html[xmlns] .clearfix
+	display: block
+
+* .clearfix
+	height: 1%

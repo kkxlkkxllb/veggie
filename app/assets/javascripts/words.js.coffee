@@ -12,11 +12,5 @@ word.form_submit = (ele) ->
 	ele.bind 'ajax:beforeSend', ->
 		$("input",ele).addClass "disable_event"
 		$("i.icon-plus",ele).hide()
-		$("i.icon-refresh",ele).show()
+		$("i.icon-refresh",ele).parent().show()
 		mixpanel.track("try add word")
-word.detect = (ele) ->
-	$modal = $("#input_tip_modal")
-	input = ele.val()
-	$.get "/words/search",{word:input},(data) ->
-		if data.status is 0
-			$modal.append("<ul></ul>").show()

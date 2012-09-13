@@ -45,22 +45,6 @@
 	-moz-transition-property: left, right, top
 	-o-transition-property: left, right, top
 	transition-property: left, right, top
-	
-@mixin menu($lh,$padx,$pady,$blc,$brc,$hc)
-	ul
-		margin: 0
-		height: $lh
-		li
-			list-style: none
-			line-height: $lh
-			float: left
-			padding: $padx $pady
-			border-left: 1px solid $blc
-			border-right: 1px solid $brc
-		li.action
-			cursor: pointer
-			&:hover
-				background: $hc
 			
 @mixin loader($left)
 	text-align: center

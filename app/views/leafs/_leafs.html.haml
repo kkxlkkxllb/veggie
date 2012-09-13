@@ -1,6 +1,6 @@
 - @leafs.each do |leaf|
 	.leaf
-		- if current_member
+		- if current_member and current_member.admin?
 			%span.action.destroy.hide{:onclick => "destroy_leaf(#{leaf.id},$(this));"}
 				&times;
 			%span.action.edit.hide

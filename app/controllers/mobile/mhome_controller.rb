@@ -2,7 +2,7 @@
 class Mobile::MhomeController < ApplicationController
   layout 'mobile/application'
   def index
-    set_seo_meta("手机版","17up,NGO,梦想,实践,未来,教育","一起暸望新世界的风景，创新的育人方式")
+    set_seo_meta("手机版",t('keywords'),t('describe'))
   end
   
   def weibo

@@ -10,7 +10,7 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :require => 'v8'
-
+  gem "twitter-bootstrap-rails"
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -38,7 +38,6 @@ gem 'nokogiri', '~>1.5.0'
 gem 'kaminari'
 gem "remotipart", "~> 1.0"
 gem 'rails_admin'
-gem 'uuid'
 
 gem "devise"
 gem "omniauth-weibo-oauth2", '~> 0.2.0'

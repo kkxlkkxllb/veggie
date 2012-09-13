@@ -1,14 +1,12 @@
 #wrap
 	#new_word
-		#input_tip_modal.hide
 		= form_tag words_path,:remote => true do
 			%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
 			%i.icon-plus(onclick="$(this).submit();")
-			%i.icon-refresh.hide
+			%span.hide
+				%i.icon-refresh
 	%table.table
 		%tr
-			%th
-				删除
 			%th
 				单词
 			%th
