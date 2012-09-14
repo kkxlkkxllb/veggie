@@ -16,3 +16,5 @@ $ ->
 	mixpanel.track("new visitor")
 	if $("#impress").length != 0
 		init_info()
+	$("#add_new_btn").click ->
+		add_provider_view()

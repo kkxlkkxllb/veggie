@@ -9,26 +9,24 @@ class LeafGrow
   end
   
   def grow(options = {})
+    opt = {}
+    if !options.blank?
+      str = @provider.get_leafs(options[:older])
+      opt.merge!(:since_id => str.split("=")[1])
+    end
+    veggie = Provider.where(["provider = ? AND user_id is not null",@provider.provider]).first
+    
     case @provider.provider
     when "weibo"
-      opt = {:uid => @provider.uid,:feature => "1"}
-      if !options.blank?
-        str = @provider.get_leafs(options[:older])
-        opt.merge!(:since_id => str.split("=")[1])
-        veggie = Provider.where(:provider => "weibo").first
-        client = Weibo::Client.new(veggie.token,veggie.uid)
-      else
-        client = Weibo::Client.new(@provider.token,@provider.uid)
-      end
+      opt.merge!(:uid => @provider.uid,:feature => "1")    
+      client = Weibo::Client.new(veggie.token,veggie.uid)      
       data = client.statuses_user_timeline(opt)["statuses"]  
     when "twitter"
-      @base_url = "http://api.twitter.com/1/statuses/user_timeline.json"
-      url = "#{@base_url}?screen_name=#{@provider.uid}&include_entities=true"
-      if !options.blank?  
-        url = url + @provider.get_leafs(options[:older])    
-      end
-      resp = Net::HTTP.get_response(URI.parse(url)).body
-		  data = JSON.parse(resp)
+      client = Twitter::Client.new(
+        :oauth_token => veggie.token,
+        :oauth_token_secret => veggie.secret
+      )
+      data = client.user_timeline(@provider.uid,opt)
     end
     
     begin     
@@ -46,17 +44,6 @@ class LeafGrow
 		rescue StandardError => x
 		  Leaf.logger.error("ERROR provider:#{@provider.provider} msg:#{x}")
   	end
-  end
-  
-  # twitter api test method
-  def test(uid)
-    url = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=#{uid}&include_entities=true"
-    resp = Net::HTTP.get_response(URI.parse(url)).body
-		data = JSON.parse(resp)
-		data.each do |d|
-		  #puts some data
-	  end
-	  return uid
   end
   
   private

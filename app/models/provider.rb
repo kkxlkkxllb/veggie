@@ -19,6 +19,7 @@ class Provider < ActiveRecord::Base
   validates :provider, :presence => true
   validates :uid, :presence => true, :uniqueness => {:scope => :provider }
   belongs_to :member,:foreign_key => "user_id"
+  #after_create :send_greet
   
   acts_as_taggable
   acts_as_taggable_on :tags
@@ -73,8 +74,14 @@ class Provider < ActiveRecord::Base
       provider:     omniauth.provider,
       uid:          omniauth.uid,
       token: omniauth.credentials.token,
+      secret: omniauth.credentials.secret,
       metadata: omniauth.info
     )
+  end
+  
+  # resque job
+  def send_greet
+    #self
   end
 
 end

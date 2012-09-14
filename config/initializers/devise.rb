@@ -218,3 +218,8 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 end
+
+Twitter.configure do |config|
+  config.consumer_key = SERVICES['twitter']['app_key']
+  config.consumer_secret = SERVICES['twitter']['app_secret']
+end
