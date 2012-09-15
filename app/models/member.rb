@@ -44,7 +44,7 @@ class Member < ActiveRecord::Base
   
   def name
     p = self.providers.first
-    p ? p.name : "veggie"
+    p ? p.user_name : "veggie"
   end
   
   def self.generate(prefix = Time.now.to_f.to_s.split(".")[1])
