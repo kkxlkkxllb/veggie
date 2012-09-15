@@ -35,8 +35,6 @@ root.destroy_leaf = (leaf_id,ele) ->
 		if data.status is 0
 			ele.closest('.leaf').remove()
 			$("#home").masonry('reload')
-root.login =->
-	$("#login_modal").modal()
 root.add_provider_view =->
 	$("#new_provider_modal").modal()
 	form = $("form#new_provider_form")

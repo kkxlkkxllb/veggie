@@ -37,7 +37,7 @@ class LeafGrow
   	    end
   			Leaf.create(:provider_id => @provider.id,
   			            :content => d["text"],
-  			            :time_stamp => Time.parse(d["created_at"]),
+  			            :time_stamp => Time.parse(d["created_at"].to_s),
   			            :image_url => get_image(d,@provider),
   			            :weibo_id => d["id"].to_i)
   		end

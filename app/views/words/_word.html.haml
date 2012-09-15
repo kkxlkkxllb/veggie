@@ -2,7 +2,6 @@
 	%td.title
 		= link_to w.title,w.source_link
 	%td
-		%i.icon-headphones.as_link
-		%audio{:src => w.source_voice}
+		%audio(controls){:src => w.source_voice}
 	%td
 		= w.content
