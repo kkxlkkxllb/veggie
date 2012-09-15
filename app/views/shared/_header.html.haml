@@ -29,8 +29,8 @@
 				- if current_member
 					%ul.nav.pull-right
 						%li
-							%span.avatar
-								= image_tag(current_member.avatar)
+							%a{:href => account_path}
+								= current_member.name
 						%li
 							%a(href = "/members/sign_out" data-method="delete" rel="nofollow")
 								%span.label.label-important
