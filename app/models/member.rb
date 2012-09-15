@@ -42,6 +42,11 @@ class Member < ActiveRecord::Base
     p ? p.avatar : "icon/avatar.png"
   end
   
+  def name
+    p = self.providers.first
+    p ? p.name : "veggie"
+  end
+  
   def self.generate(prefix = Time.now.to_f.to_s.split(".")[1])
     email = prefix + "@17up.org"
     passwd = "veggie"

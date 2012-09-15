@@ -16,17 +16,17 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
         provider.update_attribute(:token,omniauth.credentials.token)
         sign_in(provider.member)
         flash[:success] = t('flash.notice.login')
-        redirect_to words_path
+        redirect_to account_path
       elsif current_member
         Provider.create_from_hash(current_member.id, omniauth)
         flash[:success] = t('flash.notice.bind')
-        redirect_to root_path
+        redirect_to account_path
       else
         new_user = Member.generate
         Provider.create_from_hash(new_user.id, omniauth)
         sign_in(new_user)
         flash[:success] = t('flash.notice.register')
-        redirect_to words_path
+        redirect_to account_path
       end
     end
 

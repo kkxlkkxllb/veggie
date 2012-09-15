@@ -3,7 +3,8 @@ Veggie::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'  
 
   devise_for :members, controllers: {
-    omniauth_callbacks: :authentications
+    omniauth_callbacks: :authentications,
+    :sessions => :sessions
   }
   
   namespace :mobile do
@@ -11,6 +12,9 @@ Veggie::Application.routes.draw do
     match "t" => "mhome#weibo",:as => :t
     match "learn_en" => "mhome#learn_en"
   end
+  
+  match "me" => "members#show",:as => :account
+  match "u/:id" => "members#show",:as => :member
 
   resource :provider do
     post "create"

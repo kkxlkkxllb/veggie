@@ -14,9 +14,9 @@
  *= require base
  *= require home
  *= require info
- *= require login
  *= require vote_subject
  *= require words
  *= require leafs
  *= require modal
+ *= require members
 */
