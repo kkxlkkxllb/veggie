@@ -10,3 +10,6 @@ $config[:blog_host] = "http://blog.#{$config[:domain]}"
 
 Resque.redis = Redis.connect(:url=>"redis://192.168.0.1:6379/")
 Resque.redis.namespace = 'veggie-resque'
+Resque::Server.use(Rack::Auth::Basic) do |user, password|
+ password == "rccrcc"
+end

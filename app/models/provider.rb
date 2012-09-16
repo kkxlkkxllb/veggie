@@ -19,7 +19,7 @@ class Provider < ActiveRecord::Base
   validates :provider, :presence => true
   validates :uid, :presence => true, :uniqueness => {:scope => :provider }
   belongs_to :member,:foreign_key => "user_id"
-  #after_create :send_greet
+  after_create :send_greet
   
   acts_as_taggable
   acts_as_taggable_on :tags
@@ -80,8 +80,8 @@ class Provider < ActiveRecord::Base
   end
   
   # resque job
-  def send_greet
-    #self
+  def send_greet  
+	  ResqueJob::SendGreetJob.new.async(:greet, self.id)
   end
 
 end

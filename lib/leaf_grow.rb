@@ -1,7 +1,3 @@
-require 'net/http'
-require 'json'
-require 'weibo'
-
 class LeafGrow
 
   def initialize(provider)        

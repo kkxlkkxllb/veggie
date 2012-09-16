@@ -13,7 +13,7 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
       omniauth = request.env['omniauth.auth']
       provider = Provider.where(provider: omniauth.provider, uid: omniauth.uid.to_s).first
       if provider
-        provider.update_attribute(:token,omniauth.credentials.token)
+        reset_token_secret(provider,omniauth)  
         sign_in(provider.member)
         flash[:success] = t('flash.notice.login')
         redirect_to account_path
@@ -32,5 +32,10 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
 
     def after_omniauth_failure_path_for(scope)
       root_path
+    end
+    
+    def reset_token_secret(provider,omniauth)    
+        provider.update_attributes(:token => omniauth.credentials.token,
+                                   :secret => omniauth.credentials.secret)
     end
 end

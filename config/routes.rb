@@ -1,6 +1,7 @@
 Veggie::Application.routes.draw do
 
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'  
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+  mount Resque::Server, :at => "/resque"  
 
   devise_for :members, controllers: {
     omniauth_callbacks: :authentications,

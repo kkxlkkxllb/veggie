@@ -16,7 +16,7 @@ module ResqueJob
     end
     
     def self.rlogger
-      @logger = CustomLogger::Logger.new(File.join(Rails.root,"log","resque-job.log"))
+      @logger = Logger.new(File.join(Rails.root,"log","resque-job.log"))
     end
     
     def rlogger
