@@ -11,9 +11,9 @@
 #  updated_at :datetime         not null
 #
 
-class Word < ActiveRecord::Base
-  has_many :u_words
-  
-  acts_as_taggable
-  acts_as_taggable_on :ctags
+# Read about factories at https://github.com/thoughtbot/factory_girl
+
+FactoryGirl.define do
+  factory :word do
+  end
 end

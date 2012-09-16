@@ -3,7 +3,7 @@ class WordsController < ApplicationController
   before_filter :authenticate_member!,:only => :destroy
   def index
     set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))
-    @words = Word.all
+    @words = RWord.all
   end
   
   def create
@@ -15,8 +15,9 @@ class WordsController < ApplicationController
     url = "http://api.wordreference.com/0.8/621ad/json/enzh/#{input}"
   end
   
+  # TO-DO destroy u_word
   def destroy
-    @word = Word.find(params[:title])
+    @word = UWord.find(params[:id])
     if @word
       @word.del
       status = 0

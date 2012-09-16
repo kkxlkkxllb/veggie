@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/ctran/annotate_models.git
-  revision: 935b435e4c4c7f6d3db419e3a43b03cfce58ed10
-  specs:
-    annotate (2.6.0.beta1)
-      activerecord (>= 2.3.0)
-      rake (>= 0.8.7)
-
-GIT
   remote: git://github.com/kkxlkkxllb/weibo2.git
   revision: 563c1d3217db1dfed8af5e5d355e11bda09ca863
   specs:
@@ -45,6 +37,8 @@ GEM
       multi_json (~> 1.0)
     acts-as-taggable-on (2.3.3)
       rails (~> 3.0)
+    annotate (2.5.0)
+      rake
     arel (3.0.2)
     bbenezech-nested_form (0.0.6)
     bcrypt-ruby (3.0.1)
@@ -287,7 +281,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-  annotate!
+  annotate (>= 2.5.0)
   capistrano
   coffee-rails (~> 3.2.1)
   devise

@@ -24,7 +24,7 @@ class FetchWord
   
   def insert    
     if !@comment.blank?
-      Word.create(@word,@comment)
+      RWord.create(@word,@comment)
     end    
   end  
   

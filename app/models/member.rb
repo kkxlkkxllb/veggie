@@ -15,6 +15,8 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  role                   :string(255)
+#  login                  :string(255)
 #
 
 class Member < ActiveRecord::Base
@@ -32,6 +34,7 @@ class Member < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   has_many :providers,:foreign_key => "user_id"
+  has_many :u_words
   
   def admin?
     self.role == "admin"

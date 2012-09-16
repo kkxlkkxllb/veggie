@@ -51,7 +51,7 @@ group :production do
 end
 
 group :development, :test do
-  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+  gem 'annotate', ">=2.5.0"
 	gem 'haml-rails'
 	gem 'sqlite3'
 	gem 'puma'

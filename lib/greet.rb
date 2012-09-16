@@ -2,7 +2,8 @@ class Greet
 
   def initialize(pid, opts={})
      @provider = Provider.find(pid)
-     @content = "Hi,@#{@provider.user_name} " + t('greet.new_user',:num => @provider.member.id)
+     @motto = "I hear the call of the wild!"
+     @content = "Hi,@#{@provider.user_name} " + I18n.t('greet.new_user',:num => @provider.member.id,:motto => @motto)
   end
   
   def deliver

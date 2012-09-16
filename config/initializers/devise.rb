@@ -1,5 +1,6 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+require 'weibo'
 SERVICES = YAML.load_file(Rails.root.join("config", "service.yml")).fetch(Rails.env)
 Devise.setup do |config|
   # ==> Mailer Configuration

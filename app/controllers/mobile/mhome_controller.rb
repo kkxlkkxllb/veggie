@@ -25,7 +25,7 @@ class Mobile::MhomeController < ApplicationController
   end
   
   def learn_en
-    @words = Word.all
+    @words = RWord.all
     
     respond_to do |format|
 		  format.html

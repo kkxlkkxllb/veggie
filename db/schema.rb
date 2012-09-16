@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906135855) do
+ActiveRecord::Schema.define(:version => 20120916123443) do
 
   create_table "leafs", :force => true do |t|
     t.text     "content"
@@ -85,6 +85,14 @@ ActiveRecord::Schema.define(:version => 20120906135855) do
     t.string "name"
   end
 
+  create_table "u_words", :force => true do |t|
+    t.integer  "member_id",                  :null => false
+    t.integer  "word_id",                    :null => false
+    t.string   "content",    :default => "", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
   create_table "vote_fields", :force => true do |t|
     t.string   "content"
     t.integer  "vote_subject_id"
@@ -107,6 +115,15 @@ ActiveRecord::Schema.define(:version => 20120906135855) do
     t.integer  "user_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "words", :force => true do |t|
+    t.string   "title",                        :null => false
+    t.string   "content"
+    t.string   "source",     :default => "en", :null => false
+    t.integer  "level"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
 end

@@ -11,9 +11,8 @@
 #  updated_at :datetime         not null
 #
 
-class Word < ActiveRecord::Base
-  has_many :u_words
-  
-  acts_as_taggable
-  acts_as_taggable_on :ctags
+require 'spec_helper'
+
+describe Word do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
