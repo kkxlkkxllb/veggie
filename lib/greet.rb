@@ -29,11 +29,3 @@ class Greet
   end
   
 end
-
-class Weather < Greet
-  def initialize(pid, opts={})
-     super
-     @content = "@"
-  end
-  
-end

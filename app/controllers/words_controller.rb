@@ -1,18 +1,19 @@
 # coding: utf-8
 class WordsController < ApplicationController
-  before_filter :authenticate_member!,:only => :destroy
+  before_filter :authenticate_member!,:only => [:destroy,:create]
   def index
     set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))
-    @words = RWord.all
+    @words = Word.all
   end
   
   def create
     @word = FetchWord.new(params[:word]).insert
   end
   
-  def search
-    input = params[:word]
-    url = "http://api.wordreference.com/0.8/621ad/json/enzh/#{input}"
+  def add_tag
+    @word = Word.find(params[:id])
+    @word.ctag_list = params[:tags].gsub("，",',')
+    @word.save
   end
   
   # TO-DO destroy u_word

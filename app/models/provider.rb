@@ -68,14 +68,15 @@ class Provider < ActiveRecord::Base
     end
   end
   
-  def self.create_from_hash(user_id, omniauth)
+  def self.create_from_hash(user_id, omniauth, expires_time)
     self.create!(
       user_id:      user_id,
       provider:     omniauth.provider,
       uid:          omniauth.uid,
       token: omniauth.credentials.token,
       secret: omniauth.credentials.secret,
-      metadata: omniauth.info
+      metadata: omniauth.info,
+      expired_at: expires_time
     )
   end
   

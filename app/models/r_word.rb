@@ -10,7 +10,7 @@ class RWord
   
   def self.create(title,content)
     $redis.hset(EN_KEY,title,content)
-    return Word.new(title,content)
+    return RWord.new(title,content)
   end
   
   def del
@@ -19,7 +19,7 @@ class RWord
   
   def self.find(title)
     if $redis.hexists(EN_KEY,title)
-      Word.new(title,$redis.hget(EN_KEY,title))
+      RWord.new(title,$redis.hget(EN_KEY,title))
     end
   end
   
@@ -32,7 +32,7 @@ class RWord
     if except
       all.delete(except)
     end
-    all.map{|k,v| Word.new(k,v)}
+    all.map{|k,v| RWord.new(k,v)}
   end
   
   def source_link
@@ -45,7 +45,7 @@ class RWord
     
   # 生产随机3个错误选项
   def word_guess
-    rest = Word.all(self.title)
+    rest = RWord.all(self.title)
     return (rest.shuffle[0..2] << self).shuffle
   end
   

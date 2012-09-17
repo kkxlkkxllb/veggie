@@ -80,7 +80,7 @@ RailsAdmin.config do |config|
   # end
   config.model Provider do
     list do
-      fields :id,:provider,:uid
+      fields :id,:provider,:uid,:created_at
       field :metadata do
         label "Info"
         pretty_value do

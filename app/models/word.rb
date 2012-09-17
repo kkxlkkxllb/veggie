@@ -16,4 +16,12 @@ class Word < ActiveRecord::Base
   
   acts_as_taggable
   acts_as_taggable_on :ctags
+  
+  def source_link
+    $dict_source[:english] + self.title
+  end
+  
+  def source_voice
+    $dict_source[:english_v] + self.title
+  end
 end

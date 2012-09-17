@@ -1,5 +1,7 @@
 .logo_text
 	17up
+	%span.badge.badge-inverse
+		Alpha
 - unless current_member
 	.register
 		= link_to image_tag("icon/twitter_big.png"),member_omniauth_authorize_path(:twitter)

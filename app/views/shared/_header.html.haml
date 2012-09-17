@@ -14,14 +14,10 @@
 						= link_to leafs_path do
 							%i.icon-leaf
 							文萃
-							%span.badge.badge-info
-								= Leaf.count
 					%li{:class => ("active" if @words)}
 						= link_to words_path do
 							%i.icon-book
 							词汇
-							%span.badge.badge-info
-								= Word.all.count
 					%li{:class => ("active" if @users)}
 						= link_to hot_path do
 							%i.icon-user
