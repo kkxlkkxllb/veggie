@@ -12,7 +12,7 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
     def omniauth_process
       omniauth = request.env['omniauth.auth']
       provider = Provider.where(provider: omniauth.provider, uid: omniauth.uid.to_s).first
-      expires_time = omniauth.credentials.expires_at ? nil : Time.at(omniauth.credentials.expires_at.to_i)
+      expires_time = omniauth.credentials.expires_at.blank? ? nil : Time.at(omniauth.credentials.expires_at.to_i)
       if provider
         reset_token_secret(provider, omniauth, expires_time)  
         sign_in(provider.member)
