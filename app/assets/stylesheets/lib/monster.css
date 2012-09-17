@@ -52,7 +52,7 @@
 						color-stop(.8, rgba(255,255,255, 0) ),
 						color-stop(.8, rgba(0,0,0, 0) ), 
 						color-stop( 1, rgba(0,0,0,.33) )), 
-						url(noise.png);
+						url(../img/noise.png);
 	background-image: -moz-radial-gradient(50% 21% 0deg, rgba(255,255,255,.8) 0%, rgba(255,255,255, 0) 80%, rgba(0,0,0, 0) 80%, rgba(0,0,0,.33) 100% ), url(noise.png);
 	background-image:   -o-radial-gradient(50% 21% 0deg, rgba(255,255,255,.8) 0%, rgba(255,255,255, 0) 80%, rgba(0,0,0, 0) 80%, rgba(0,0,0,.33) 100% ), url(noise.png);
 	background-image: 	   radial-gradient(50% 21% 0deg, rgba(255,255,255,.8) 0%, rgba(255,255,255, 0) 80%, rgba(0,0,0, 0) 80%, rgba(0,0,0,.33) 100% ), url(noise.png);
@@ -151,7 +151,7 @@
 						color-stop(.8, rgba(255,255,255, 0) ),
 						color-stop(.8, rgba(0,0,0, 0) ), 
 						color-stop( 1, rgba(0,0,0,.33) )), 
-						url(noise.png);
+						url(../img/noise.png);
 	background-image: -moz-radial-gradient(50% 20% 0deg, rgba(255,255,255,.8) 0%, rgba(255,255,255, 0) 80%, rgba(0,0,0, 0) 80%, rgba(0,0,0,.33) 100% ), url(noise.png);
 	background-image:   -o-radial-gradient(50% 20% 0deg, rgba(255,255,255,.8) 0%, rgba(255,255,255, 0) 80%, rgba(0,0,0, 0) 80%, rgba(0,0,0,.33) 100% ), url(noise.png);
 
