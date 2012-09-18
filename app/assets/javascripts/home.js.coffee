@@ -1,7 +1,8 @@
 $ ->
-	init_infinitescroll($("#home"));
+	init_infinitescroll($("#home"))
 	init_masonry($("#home"),'.leaf')
 	init_masonry($("#user_list"),'.user_item')
+	init_words_ground()
 	$("div.leaf").live 'hover',->
 		$("span.action",$(this)).toggle()
 	form_submit($("#new_word form"))

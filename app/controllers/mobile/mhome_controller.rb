@@ -8,7 +8,7 @@ class Mobile::MhomeController < ApplicationController
   def weibo
     @leafs = source_leafs(params[:pid],params[:page],12)
     if params[:pid]
-      @users = ([Provider.find(params[:pid])] + Provider.all).uniq
+      @users = ([Provider.find(params[:pid])] + Provider.where("user_id is null")).uniq
     end
     respond_to do |format|
       format.html

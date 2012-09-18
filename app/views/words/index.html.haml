@@ -5,13 +5,6 @@
 			%i.icon-plus(onclick="$(this).submit();")
 			%span.hide
 				%i.icon-refresh
-	%table.table
-		%tr
-			%th
-				单词
-			%th
-				发音
-			%th
-				解释
+	#word_ground
 		- @words.each do |w|
 			= render 'word',:w => w

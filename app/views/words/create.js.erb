@@ -1,5 +1,6 @@
 <% if @word %>
-$("#wrap table tr:first-child").after("<%= escape_javascript(render :partial => 'word',:locals => {:w => @word }) %>");
+var $newItems = $("<%= escape_javascript(render :partial => 'word',:locals => {:w => @word }) %>");
+$("#word_ground").isotope( 'insert',$newItems );
 $("#new_word input").val("").focus();
 <% end %>
 

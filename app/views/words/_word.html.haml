@@ -1,7 +1,8 @@
-%tr
-	%td.title
-		= link_to w.title,w.source_link
-	%td
-		%audio(controls){:src => w.source_voice}
-	%td
+.word_item{:data_source => w.source_link}
+	%span.title
+		= w.title
+	%span.audio
+		%audio{:src => w.source_voice}
+	%span.content
 		= w.content
+	%span.tag
