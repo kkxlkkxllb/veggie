@@ -64,5 +64,7 @@ end
 
 
 gem 'redis'
+gem 'redis-rails'
+
 gem 'whenever', :require => false
 gem 'resque', :require => "resque/server"

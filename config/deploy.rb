@@ -38,6 +38,12 @@ namespace :deploy do
   task :migration,:roles => :app do      
     run "cd #{current_path} && bundle exec rake db:migrate RAILS_ENV=production"
   end
+  
+  task :restart_resque, :roles => :app do
+      pid_file = "#{current_path}/tmp/pids/resque.pid"
+      run "test -f #{pid_file} && cd #{current_path} && kill -s QUIT `cat #{pid_file}` || rm -f #{pid_file}"
+      run "cd #{current_path} && PIDFILE=#{pid_file} RAILS_ENV=production BACKGROUND=yes QUEUE=* bundle exec rake environment resque:work"
+  end
 end
 
 after 'deploy:update_code' do  
@@ -48,8 +54,8 @@ after 'deploy:update_code' do
     run "#{softlinks.join(';')}"
  
     run "cd #{release_path} && bundle exec rake RAILS_ENV=production RAILS_GROUPS=assets assets:precompile"  
-    #run "PIDFILE=./tmp/pids/resque.pid BACKGROUND=yes QUEUE=* rake resque:work" 
     #run "RAILS_ENV=production resque-web #{current_path}/config/initializers/resque.rb"      
 end
 # if you want to clean up old releases on each deploy uncomment this:
+after 'deploy:restart', 'deploy:restart_resque'
 after "deploy:restart", "deploy:cleanup"

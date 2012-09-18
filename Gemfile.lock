@@ -206,8 +206,24 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redis (3.0.1)
+    redis-actionpack (3.2.3)
+      actionpack (~> 3.2.3)
+      redis-rack (~> 1.4.0)
+      redis-store (~> 1.1.0)
+    redis-activesupport (3.2.3)
+      activesupport (~> 3.2.3)
+      redis-store (~> 1.1.0)
     redis-namespace (1.2.1)
       redis (~> 3.0.0)
+    redis-rack (1.4.2)
+      rack (~> 1.4.1)
+      redis-store (~> 1.1.0)
+    redis-rails (3.2.3)
+      redis-actionpack (~> 3.2.3)
+      redis-activesupport (~> 3.2.3)
+      redis-store (~> 1.1.0)
+    redis-store (1.1.1)
+      redis (>= 2.2.0)
     remotipart (1.0.2)
     resque (1.21.0)
       multi_json (~> 1.0)
@@ -301,6 +317,7 @@ DEPENDENCIES
   rails_admin
   rails_autolink
   redis
+  redis-rails
   remotipart (~> 1.0)
   resque
   rspec-rails (~> 2.10.0)

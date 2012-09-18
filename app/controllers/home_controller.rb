@@ -20,7 +20,8 @@ class HomeController < ApplicationController
   private
   
   def redirect_mobile
-    if request.user_agent.downcase.include?("iphone")
+    agent = request.user_agent.downcase
+    if agent.include?("iphone") or agent.include?("android")
       redirect_to $config[:mobile_host]
     end
   end
