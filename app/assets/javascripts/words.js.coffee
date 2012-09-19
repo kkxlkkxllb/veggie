@@ -5,22 +5,13 @@ word = exports ? this
 word.form_submit = (ele) ->
 	ele.bind 'ajax:beforeSend', ->
 		$("input",ele).addClass "disable_event"
-		$("i.icon-plus",ele).hide()
-		$("i.icon-refresh",ele).parent().show()
-		mixpanel.track("try add word")
-word.init_words_ground = ->
-	$container = $("#word_ground")
-	$container.toggle(
-		-> 
-			$container.isotope
-				layoutMode : 'masonry'
-		->
-			$container.isotope
-				layoutMode : 'straightDown'
-	)
+word.audio_play = (ele) ->
+	$("audio",ele)[0].play()
+word.init_words_ground = ($container,item) ->
+	$(item,$container).animate opacity: 1
 	$container.isotope
-		itemSelector : '.word_item',
-		layoutMode : 'straightDown',
+		itemSelector : item,
+		layoutMode : 'masonry',
 		getSortData :
 			title : ( $elem ) ->
 			  $elem.find('span.title').text()

@@ -7,10 +7,6 @@
 		width: 300px
 		margin: 20px auto
 		position: relative
-		i.icon-plus,i.icon-refresh
-			position: absolute
-			right: 12px
-			top: 7px
 		input
 			margin: 0
 			padding: 5px
@@ -21,12 +17,29 @@
 			margin: 5px
 			width: 180px
 			background: #666
-			color: #fff
-			border: 1px solid #333
-			span.title
-				font-weight: bold
-				padding: 3px
+			@include text-shadow-content-white
+			border: 1px solid #444
+			position: relative
+			font-weight: bold
+			opacity: 0
+			@include shadow(0,1px,3px,rgba(0,0,0,.3))
+			a
+				color: #999
+				&:hover
+					color: #fff
+			i
+				position: absolute
+				top: 3px
+			i.icon-info-sign				
+				right: 5px				
+			i.icon-headphones
+				right: 20px
+			i.icon-tag
+				right: 38px
+			span
+				padding: 3px 10px
 				display: block
+			span.title								
+				border-bottom: 1px solid #333
 			span.content
-				display: block
-				padding: 3px
+				border-top: 1px solid #999

@@ -1,10 +1,8 @@
 #wrap
-	#new_word
-		= form_tag words_path,:remote => true do
-			%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
-			%i.icon-plus(onclick="$(this).submit();")
-			%span.hide
-				%i.icon-refresh
+	- if current_member and current_member.admin?
+		#new_word
+			= form_tag words_path,:remote => true do
+				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
 	#word_ground
 		- @words.each do |w|
 			= render 'word',:w => w

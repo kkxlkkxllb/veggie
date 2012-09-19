@@ -1,8 +1,13 @@
-.word_item{:data_source => w.source_link}
-	%span.title
-		= w.title
-	%span.audio
+.word_item
+	%a(href="#")
+		%i.icon-tag
+	%a(onclick="audio_play($(this));return false;" href="#")
+		%i.icon-headphones
 		%audio{:src => w.source_voice}
+	%a(target = "blank"){:href => w.source_link}
+		%i.icon-info-sign		
+	%span.title
+		= w.title		
 	%span.content
 		= w.content
 	%span.tag
