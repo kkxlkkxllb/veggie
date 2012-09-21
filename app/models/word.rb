@@ -17,11 +17,21 @@ class Word < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :ctags
   
+  class << self
+    def parse_tag(str)
+      str.scan(/\#(\S+)\s/).collect{|x| x[0]}
+    end
+  end
+  
   def source_link
     $dict_source[:english] + self.title
   end
   
   def source_voice
     $dict_source[:english_v] + self.title
+  end
+  
+  def hash_tags
+    self.ctags.map{|t| "#"+t.name+" " }.join
   end
 end

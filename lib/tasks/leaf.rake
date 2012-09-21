@@ -4,7 +4,7 @@ namespace :leaf do
   desc "grow leafs every day"
   task :grow => :environment do
 		Provider.build_leaf
-		num = Leaf.where(["created_at > ?",Date.today]).count
+		num = Leaf.where(["created_at > ?",Date.today - 1.hour]).count
 		Leaf.logger.info("#{Date.today.to_s} Auto grow #{num} leafs today!")
   end
 

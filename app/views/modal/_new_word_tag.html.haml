@@ -1,0 +1,14 @@
+#new_word_tag_modal.hide.modal.fade
+	.modal-header
+		%button.close(type="button" data-dismiss="modal")
+			×
+		%h3
+			Insert Word Tags
+			[
+			%span.wtitle			
+			]
+	.modal-body
+		= form_tag "/words/add_tag",:remote => true,:id => "new_word_tag_form" do
+			= hidden_field_tag :id,""
+			= text_field_tag :tags,"",:placeholder => "enter tags split by #",:required => "required"
+			= submit_tag "添加",:class => "btn-primary btn"

@@ -12,18 +12,15 @@ class LeafsController < ApplicationController
                 :handlers => :haml,
   			        :partial => "leafs"
   			        )
-			  render_json(html)
+			  render_json(0,"ok",{:html => html})
 			}			
 		end
   end
   
-  def destroy
-    @leaf = Leaf.find(params[:id])
-    if @leaf.destroy
-      status = 0
-    else
-      status = -1
-    end
-    render :json => {:status => status}
+  def destroy  
+    if @leaf = Leaf.find(params[:id])
+      @leaf.destroy
+      render_json(0,"ok")
+    end    
   end
 end

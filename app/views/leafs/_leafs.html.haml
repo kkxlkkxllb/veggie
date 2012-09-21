@@ -2,7 +2,7 @@
 	.leaf
 		- if current_member and current_member.admin?
 			%span.action.destroy.hide{:onclick => "destroy_leaf(#{leaf.id},$(this));"}
-				&times;
+				%i.icon-remove
 			%span.action.edit.hide
 				%a{:href=>"/admin/leaf/#{leaf.id}/edit"}
 					%i.icon-pencil

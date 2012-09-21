@@ -8,7 +8,7 @@
 					= image_tag("icon/#{u.provider}.png")
 					= u.user_name
 	- if current_member and current_member.admin?
-		= render 'shared/new_provider'
+		= render 'modal/new_provider'
 		#add_new_btn.user_item
 			.avatar
 				= image_tag('icon/avatar.png')

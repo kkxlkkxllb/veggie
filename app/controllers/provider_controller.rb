@@ -7,11 +7,9 @@ class ProviderController < ApplicationController
       LeafGrow.new(@provider).grow
     end
     if @provider
-      status = 0
-    else
-      status = -1
+      render_json(0,"ok")
     end
-    render :json => {:status => status}
+   
   end
   
   def destroy

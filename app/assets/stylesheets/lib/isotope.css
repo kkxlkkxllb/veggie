@@ -32,3 +32,11 @@
        -o-transition-property:         top, left, opacity;
           transition-property:         transform, opacity;
 }
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}

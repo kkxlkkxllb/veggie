@@ -20,12 +20,12 @@ class Greet
       data = client.update(@content)
     end    
     Greet.logger(data['id'].to_s + "send greet success to #{@provider.user_name}")
-  end
-  
- 
+  end 
   
   def self.logger(msg)
     Logger.new(File.join(Rails.root,"log","greet.log")).info("[#{Time.now.to_s}]" + msg.to_s)
   end
   
 end
+
+

@@ -19,7 +19,7 @@ class Mobile::MhomeController < ApplicationController
                 :handlers => :haml,
   			        :file => "mobile/mhome/weibo"
   			        )
-			  render_json(html)
+			  render_json(0,"ok",{:html => html})
 			}			
 		end		
   end
@@ -36,7 +36,7 @@ class Mobile::MhomeController < ApplicationController
                 :handlers => :haml,
   			        :file => "mobile/mhome/learn_en"
   			        )
-			  render_json(html)
+			  render_json(0,"ok",{:html => html})
       }
 		end
   end

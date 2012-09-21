@@ -1,8 +1,0 @@
-<% if @word %>
-var $newItems = $("<%= escape_javascript(render :partial => 'word',:locals => {:w => @word }) %>");
-$("#word_ground").isotope( 'insert',$newItems );
-$("#new_word input").val("").focus();
-<% end %>
-
-var ele = $("#new_word form");
-$("input",ele).removeClass("disable_event");

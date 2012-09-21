@@ -13,4 +13,4 @@ zh-cn:
     keywords: "单词,聚合"
     describe: "词汇超市"
   greet:
-    new_user: "欢迎入住 17up 外语学院，成为第 %{num} 位学员。［%{motto}］"
+    new_user: "欢迎入住 17up 外语学院 Alpha 班，成为第 %{num} 位学员。［%{motto}］"

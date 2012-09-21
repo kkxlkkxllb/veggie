@@ -30,13 +30,11 @@ class ApplicationController < ActionController::Base
     return @source_leafs.includes(:provider).order("time_stamp DESC").page(page).per(per_page)
   end
   
-  def render_json(html)
+  def render_json(status,msg,data = {})
     render :json => {
-              :status => 0,
-              :msg => "ok",
-              :data => {
-    			      :html => html
-              }
+              :status => status,
+              :msg => msg,
+              :data => data
             }
   end
 end

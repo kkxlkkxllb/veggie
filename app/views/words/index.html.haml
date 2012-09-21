@@ -3,6 +3,16 @@
 		#new_word
 			= form_tag words_path,:remote => true do
 				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
+		= render 'modal/new_word_tag'
+	#word_nav
+		%ul#filter_nav.clearfix			
+			%li
+				%a(href="#all" data-filter="*" class="selected")
+					All
+			- Word.tag_counts_on(:ctags).each do |t|
+				%li
+					%a{:href => "#"+t.name,:"data-filter" => "."+t.name}
+						= t.name.capitalize
 	#word_ground
 		- @words.each do |w|
 			= render 'word',:w => w
