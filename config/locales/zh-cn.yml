@@ -9,8 +9,16 @@ zh-cn:
       login: "学习，任何时候开始都不晚，欢迎回来！"
       bind: "绑定成功!"
   words:
-    title: "词汇"
-    keywords: "单词,聚合"
-    describe: "词汇超市"
+    title: "外语教室"
+    keywords: "词汇，文化，地域，历史"
+    describe: "17up 精心策划每周一课，教你不一样的外语噢"
+  leafs:
+    title: "大杂烩"
+    keywords: "资讯，微博，文萃"
+    describe: "收集自新浪微博和twitter的最新资讯，每日更新噢"
+  hot:
+    title: "热榜"
+    keywords: "最热，人气，排行"
+    describe: "17up 热门排行榜"
   greet:
     new_user: "欢迎入住 17up 外语学院 Alpha 班，成为第 %{num} 位学员。［%{motto}］"

@@ -7,7 +7,7 @@ class WordsController < ApplicationController
   end
   
   def create
-    @word = FetchWord.new(params[:word]).insert
+    @word = FetchWord.new(params[:word].downcase).insert
     html = render_to_string(
             :formats => :html,
             :handlers => :haml,

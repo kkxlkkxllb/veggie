@@ -2,7 +2,7 @@
 class LeafsController < ApplicationController
   before_filter :authenticate_member!,:except => :index
   def index
-    set_seo_meta("文萃",t('keywords'),t('describe'))    
+    set_seo_meta(t('leafs.title'),t('leafs.keywords'),t('leafs.describe'))    
     @leafs = source_leafs(params[:pid],params[:page],30)
     respond_to do |format|
       format.html

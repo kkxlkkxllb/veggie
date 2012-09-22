@@ -34,14 +34,13 @@ html
 			position: relative
 			@include inset-shadow(0,2px,5px,#ccc)
 			@include round(15px)
-			span.icon
-				position: absolute
-				top: -75px
-				left: 100px
+			@include transition(0.5s)
 			span.title
 				position: absolute
 				bottom: 20px
-				left: 110px
+				left: 115px
+			&:hover
+				background: #fff
 #user_list
 	margin: 0 auto
 	padding: 10px 0 40px 0

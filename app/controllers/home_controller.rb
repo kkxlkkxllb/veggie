@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   end
   
   def hot
-    set_seo_meta("名人",t('keywords'),t('describe'))
+    set_seo_meta(t("hot.title"),t('hot.keywords'),t('hot.describe'))
     @users = Provider.where("user_id is null")
   end
   

@@ -13,15 +13,15 @@
 					%li{:class => ("active" if @leafs)}
 						= link_to leafs_path do
 							%i.icon-leaf
-							文萃
+							= t("leafs.title")
 					%li{:class => ("active" if @words)}
 						= link_to words_path do
 							%i.icon-book
-							词汇
+							= t("words.title")
 					%li{:class => ("active" if @users)}
 						= link_to hot_path do
-							%i.icon-user
-							名人
+							%i.icon-fire
+							= t("hot.title")
 				- if current_member
 					%ul.nav.pull-right
 						%li

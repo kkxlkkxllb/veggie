@@ -4,27 +4,23 @@
 		Alpha
 - unless current_member
 	.register
-		= link_to image_tag("icon/twitter_big.png"),member_omniauth_authorize_path(:twitter)
+		= link_to image_tag("icon/twitter_big.png"),member_omniauth_authorize_path(:twitter)		
+		%span.login_tip.serif
+			login
 		= link_to image_tag("icon/weibo_big.png"),member_omniauth_authorize_path(:weibo)
 #wrap.clearfix
 	%a{:href => leafs_path}
 		.nav_item
-			文萃
-			%span.icon.bird
-				= image_tag("icon/message.png")
-			%span.button.xs.title.glossy.oval(data-icon=" ")
-				微言大义
+			= image_tag("fruit/bramley.png")
+			%span.button.xs.title.glossy.green(data-icon=" ")
+				bramley
 	%a{:href => words_path}
 		.nav_item
-			词汇
-			%span.icon
-				= image_tag("icon/word.png")
-			%span.button.xs.title.glossy.back(data-icon=" ")
-				词以类聚
-	%a{:href => "/"}
+			= image_tag("fruit/cherry.png")
+			%span.button.xs.title.glossy.back.pink(data-icon=" ")
+				cherry
+	%a{:href => "/hot"}
 		.nav_item
-			投票
-			%span.icon
-				= image_tag("icon/vote.png")
-			%span.button.xs.title.glossy.brackets(data-icon=" ")
-				尽请期待
+			= image_tag("fruit/mango.png")
+			%span.button.xs.title.glossy.orange(data-icon=" ")
+				mango
