@@ -3,10 +3,10 @@ class ProviderController < ApplicationController
   
   def create
     if Provider::PROVIDERS.include?(provider_params["provider"])
-      @provider = Provider.create(provider_params)
-      LeafGrow.new(@provider).grow
+      @provider = Provider.create(provider_params)    
     end
     if @provider
+      ResqueJob::GrowLeafJob.new.async(:grow, @provider.id)
       render_json(0,"ok")
     end
    

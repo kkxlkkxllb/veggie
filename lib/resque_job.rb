@@ -43,4 +43,11 @@ module ResqueJob
     end
   end
   
+  class GrowLeafJob < Base
+    @queue = :high
+    def grow(pid, opts={})
+      LeafGrow.new(Provider.find(pid)).grow
+    end
+  end
+  
 end
