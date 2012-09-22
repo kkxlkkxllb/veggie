@@ -81,8 +81,10 @@ class Provider < ActiveRecord::Base
   end
   
   # resque job
-  def send_greet  
-	  ResqueJob::SendGreetJob.new.async(:greet, self.id)
+  def send_greet
+    if !self.user_id.blank?
+	    ResqueJob::SendGreetJob.new.async(:greet, self.id)
+    end
   end
 
 end
