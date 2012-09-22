@@ -1,7 +1,7 @@
 - @leafs.each do |leaf|
 	.leaf
 		- if current_member and current_member.admin?
-			%span.action.destroy.hide{:onclick => "destroy_leaf(#{leaf.id},$(this));"}
+			%span.action.destroy.hide{:lid => leaf.id }
 				%i.icon-remove
 			%span.action.edit.hide
 				%a{:href=>"/admin/leaf/#{leaf.id}/edit"}

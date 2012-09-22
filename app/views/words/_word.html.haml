@@ -1,12 +1,16 @@
 .word_item{:class => w.ctags }
-	%a.itag(href="#" rel="tooltip" onclick="insert_tags($(this));return false;"){:title => w.hash_tags,:wid => w.id}
-		%i.icon-tag
-	%a(onclick="audio_play($(this));return false;" href="#")
+	%a.itag(href="#"){:wid => w.id}
+		%i.icon-plus
+	%a{:href => $pic_search + w.title }(target = "blank")
+		%i.icon-picture
+	%a.audio(href="#")
 		%i.icon-headphones
 		%audio{:src => w.source_voice}
-	%a(target = "blank"){:href => w.source_link}
+	%a{:href => w.source_link }(target = "blank")
 		%i.icon-info-sign		
 	%span.title
 		= w.title		
 	%span.content
 		= w.content
+	%span.ctags
+		= w.hash_tags

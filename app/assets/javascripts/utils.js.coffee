@@ -30,11 +30,13 @@ root.reload_tree =->
 			$wrap.imagesLoaded ->
 				$wrap.masonry('reload')
 	,"json"
-root.destroy_leaf = (leaf_id,ele) ->
-	$.post "/leafs/destroy",{id:leaf_id},(data) ->
-		if data.status is 0
-			ele.closest('.leaf').remove()
-			$("#home").masonry('reload')
+root.init_destroy_leaf = ->
+	$(".leaf").delegate "span.destroy","click", ->
+		ele = $(this)
+		$.post "/leafs/destroy",{id:ele.attr("lid")},(data) ->
+			if data.status is 0
+				ele.closest('.leaf').remove()
+				$("#home").masonry('reload')
 root.add_provider_view =->
 	$modal = $("#new_provider_modal")
 	$modal.modal()

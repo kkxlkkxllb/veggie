@@ -13,6 +13,7 @@
 			= text_field_tag :tags,"",:placeholder => "enter tags split by #",:required => "required"
 			= submit_tag "添加",:class => "btn-primary btn"
 		#tags_area
+			%i.icon-tags
 			- Word.tag_counts_on(:ctags).each do |t|
 				%span.label.label-success
 					= t.name
