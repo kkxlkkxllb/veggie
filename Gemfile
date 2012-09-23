@@ -9,7 +9,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  #gem 'therubyracer', :require => 'v8'
+  gem 'therubyracer','>= 0.11.0beta8', :require => 'v8'
   gem "twitter-bootstrap-rails", :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git"
   gem 'uglifier', '>= 1.0.3'
 end
