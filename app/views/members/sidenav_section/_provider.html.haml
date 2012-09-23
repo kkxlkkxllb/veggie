@@ -1,0 +1,11 @@
+.page-header
+	%h1
+		= t("members.sidenav.#{s}")
+%h3
+	绑定
+%p
+	- Provider::PROVIDERS.each do |p|
+		- if current_member.has_provider?(p)
+			= image_tag("icon/#{p}_big.png")
+		- else
+			= link_to image_tag("icon/#{p}_big.png"),member_omniauth_authorize_path(p)

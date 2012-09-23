@@ -21,7 +21,7 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
       elsif current_member
         Provider.create_from_hash(current_member.id, omniauth, expires_time)
         flash[:success] = t('flash.notice.bind')
-        redirect_to account_path
+        redirect_to setting_path + "#provider"
       else
         new_user = Member.generate
         Provider.create_from_hash(new_user.id, omniauth, expires_time)

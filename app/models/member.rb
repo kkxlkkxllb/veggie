@@ -36,6 +36,8 @@ class Member < ActiveRecord::Base
   has_many :providers,:foreign_key => "user_id"
   has_many :u_words
   
+  EDIT_SIDENAV = %w{profile provider account}
+  
   def admin?
     self.role == "admin"
   end
@@ -48,6 +50,10 @@ class Member < ActiveRecord::Base
   def name
     p = self.providers.first
     p ? p.user_name : "veggie"
+  end
+  
+  def has_provider?(p)
+    self.providers.where(:provider => p).first
   end
   
   def self.generate(prefix = Time.now.to_f.to_s.split(".")[1])

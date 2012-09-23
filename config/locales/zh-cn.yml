@@ -20,5 +20,11 @@ zh-cn:
     title: "热榜"
     keywords: "最热，人气，排行"
     describe: "17up 热门排行榜"
+  members:
+    edit: "%{name} 学员设置"
+    sidenav:
+      profile: "个人资料"
+      provider: "第三方帐号"
+      account: "帐户"
   greet:
     new_user: "欢迎入住 17up 外语学院 Alpha 班，成为第 %{num} 位学员。［%{motto}］"

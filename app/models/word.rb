@@ -14,6 +14,10 @@
 class Word < ActiveRecord::Base
   has_many :u_words
   
+  validates :title, :presence => true, :uniqueness => true
+  # 有ctag的words
+  scope :vall, joins(:ctags).group("words.id")
+  
   acts_as_taggable
   acts_as_taggable_on :ctags
   

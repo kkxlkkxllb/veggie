@@ -1,0 +1,13 @@
+#user_setting
+	.row
+		.span3.bs-docs-sidebar
+			%ul.nav.nav-list.bs-docs-sidenav(data-spy="affix" data-offset-top="200")
+				- Member::EDIT_SIDENAV.each do |n|
+					%li
+						= link_to "##{n}" do
+							= t("members.sidenav.#{n}")
+							%i.icon-chevron-right
+		.span9
+			- Member::EDIT_SIDENAV.each do |s|
+				%section{:id => s}
+					= render "members/sidenav_section/#{s}",:s => s

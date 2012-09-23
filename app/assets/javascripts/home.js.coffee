@@ -12,3 +12,5 @@ $ ->
 	$("#add_new_btn").click ->
 		add_provider_view()
 	$("a[rel='tooltip']").tooltip()
+	if $("#top_nav").length is 0
+		$("html").addClass("home")

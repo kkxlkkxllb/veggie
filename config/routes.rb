@@ -16,6 +16,7 @@ Veggie::Application.routes.draw do
   
   match "me" => "members#show",:as => :account
   match "u/:id" => "members#show",:as => :member
+  match "setting" => "members#edit",:as => :setting
 
   resource :provider do
     post "create"
@@ -25,6 +26,7 @@ Veggie::Application.routes.draw do
   match "info" => "home#info", :as => :info
   match "course" => "words#index", :as => :words
   resources :words do
+    post "create"
     post "add_tag"
   end
   

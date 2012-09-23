@@ -16,4 +16,7 @@ class UWord < ActiveRecord::Base
   belongs_to :word
   
   validates :member_id, :presence => true, :uniqueness => {:scope => :word_id }
+  
+  acts_as_taggable
+  acts_as_taggable_on :ctags
 end
