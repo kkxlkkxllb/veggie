@@ -33,7 +33,7 @@ class Member < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  has_many :providers,:foreign_key => "user_id"
+  has_many :providers,:foreign_key => "user_id",:dependent => :destroy
   has_many :u_words
   
   EDIT_SIDENAV = %w{profile provider account}

@@ -25,6 +25,10 @@ class Word < ActiveRecord::Base
     def parse_tag(str)
       str.scan(/\#(\S+)\s/).collect{|x| x[0]}
     end
+    
+    def tagged(tags)
+      Word.tagged_with(tags,:any => true).all.uniq
+    end
   end
   
   def source_link
@@ -37,5 +41,6 @@ class Word < ActiveRecord::Base
   
   def hash_tags
     self.ctags.map{|t| "#"+t.name+" " }.join
-  end
+  end  
+  
 end
