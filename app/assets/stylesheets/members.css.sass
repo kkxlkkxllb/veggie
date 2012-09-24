@@ -1,8 +1,7 @@
-// Place all the styles related to the members controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "utils"
+
 #login_contain
-	width: 1000px
+	width: 800px
 	margin: 0 auto
 	padding: 20px 0
 	.title
@@ -11,17 +10,20 @@
 		text-align: center
 	#login_form
 		padding: 20px
-		border: 2px solid #fff
+		background: #fefefe
+		@include inset-shadow(0,2px,5px,#ccc)
+		@include round(15px)
 	#register_form
 		width: 400px
 		margin-left: 20px
 		padding: 20px
-		border: 2px solid #fff
+		background: #fff
+		@include inset-shadow(0,2px,5px,#ccc)
+		@include round(15px)
 #user_home
 	.greet
 		text-align: center
 		font-size: 80px
 		line-height: 120px
 #user_setting
-	width: 940px
-	margin: 0 auto
+	
