@@ -15,6 +15,7 @@ word.init_words_ground = ($container,item,$form) ->
 	init_fill_tag($form)
 	init_filter($container)
 	form_submit($("#new_word form"))
+	init_fetch_word($container)
 word.form_submit = (ele) ->
 	ele.bind 'ajax:beforeSend', ->
 		$("input",ele).addClass "disable_event"
@@ -31,7 +32,7 @@ word.init_insert_tags = (form,$modal,$container) ->
 	$container.delegate "a.itag","click", ->
 		ele = $(this)
 		if $modal.length is 1
-			wid = ele.attr("wid")
+			wid = ele.parent('.word_item').attr("wid")
 			wtitle = $("span.title",ele.parent('.word_item')).text()
 			hash_tags = $("span.ctags",ele.parent('.word_item')).text()
 			$("span.wtitle",$modal).text(wtitle)
@@ -56,3 +57,10 @@ word.init_fill_tag = ($form) ->
 	$("#tags_area").delegate "span","click", ->
 		value = $("input#tags",$form).val()
 		$("input#tags",$form).val(value + "#" + $(this).text() + " ")
+word.init_fetch_word = ($container) ->
+	$container.delegate "a.fetch","click", ->
+		ele = $(this)
+		wid = ele.parent('.word_item').attr("wid")
+		$.post "/words/clone",{id:wid},(data) ->
+			if data.status is 0
+				ele.hide()

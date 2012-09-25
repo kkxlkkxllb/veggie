@@ -28,6 +28,7 @@ Veggie::Application.routes.draw do
   resources :words do
     post "create"
     post "add_tag"
+    post "clone"
   end
   
   match "t" => "leafs#index", :as => :leafs

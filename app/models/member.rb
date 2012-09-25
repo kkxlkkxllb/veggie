@@ -56,6 +56,10 @@ class Member < ActiveRecord::Base
     self.providers.where(:provider => p).first
   end
   
+  def has_u_word(w)
+    self.u_words.where(:word_id => w.id).first
+  end
+  
   def self.generate(prefix = Time.now.to_f.to_s.split(".")[1])
     email = prefix + "@17up.org"
     passwd = "veggie"

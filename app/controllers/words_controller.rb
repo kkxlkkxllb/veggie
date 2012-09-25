@@ -8,6 +8,9 @@ class WordsController < ApplicationController
     set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))
     
     @words = Word.vall
+    if current_member and current_member.admin?
+      @can_add_tag = true
+    end
   end
   
   # 新建词汇

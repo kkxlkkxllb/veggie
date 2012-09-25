@@ -1,13 +1,17 @@
-.word_item{:class => w.ctags }
-	%a.itag(href="#"){:wid => w.id}
-		%i.icon-plus
+.word_item{:class => w.ctags, :wid => w.id}
+	- if current_member and !current_member.has_u_word(w)
+		%a.fetch(href="#")
+			%i.icon-share(title="收录" rel="tooltip")
+	- if @can_add_tag
+		%a.itag(href="#")
+			%i.icon-plus
 	%a{:href => $pic_search + w.title }(target = "blank")
-		%i.icon-picture
+		%i.icon-picture(title="图解" rel="tooltip")
 	%a.audio(href="#")
-		%i.icon-headphones
+		%i.icon-headphones(title="发音" rel="tooltip")
 		%audio{:src => w.source_voice}
 	%a{:href => w.source_link }(target = "blank")
-		%i.icon-info-sign		
+		%i.icon-info-sign(title = "详情" rel="tooltip")	
 	%span.title
 		= w.title		
 	%span.content
