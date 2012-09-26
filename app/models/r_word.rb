@@ -1,33 +1,22 @@
 class RWord
   attr_accessor :title,:content
-  EN_KEY = "word:en"
-  JA_KET = "word:japan"
+  EN_KEY = "words:fruit"
   
   def initialize(title,content)
     @title = title
     @content = content
   end
   
-  def self.create(title,content)
-    $redis.hset(EN_KEY,title,content)
-    return RWord.new(title,content)
-  end
-  
-  def del
-    $redis.hdel(EN_KEY,self.title)
-  end
-  
-  def self.find(title)
-    if $redis.hexists(EN_KEY,title)
-      RWord.new(title,$redis.hget(EN_KEY,title))
-    end
-  end
-  
-  def self.word_plain
-    $redis.hvals(EN_KEY)
+  def self.build(key_word)
+    key = "words:#{key_word}"
+ 
+    @words = Word.tagged(key_word)
+    $redis.hmset(key,@words.map{|x| [x.title,x.content]}.flatten)
+
   end
   
   def self.all(except = nil)
+    
     all = $redis.hgetall(EN_KEY)
     if except
       all.delete(except)

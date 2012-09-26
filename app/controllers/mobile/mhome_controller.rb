@@ -25,6 +25,7 @@ class Mobile::MhomeController < ApplicationController
   end
   
   def learn_en
+    RWord.build("fruit")
     @words = RWord.all
     
     respond_to do |format|
