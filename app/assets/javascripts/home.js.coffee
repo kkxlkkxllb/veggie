@@ -4,6 +4,7 @@ $ ->
 	init_masonry($("#user_list"),'.user_item')
 	init_words_ground($("#word_ground"),".word_item",$("form#new_word_tag_form"))
 	init_destroy_leaf()
+	allen_game()
 	$("div.leaf").live 'hover',->
 		$("span.action",$(this)).toggle()
 	mixpanel.track("new visitor")

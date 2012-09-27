@@ -50,3 +50,6 @@ root.add_provider_view =->
 			$modal.modal('hide')
 root.init_info =->
 	impress().init()
+root.allen_game =->
+	week_day = new Date().getDay()
+	$("#weekdays").animate({"top":-week_day*250},1800)

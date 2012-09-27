@@ -11,16 +11,21 @@
 #wrap.clearfix.w1000
 	%a{:href => leafs_path}
 		.nav_item
-			= image_tag("fruit/bramley.png")
-			%span.button.xs.title.glossy.green(data-icon=" ")
-				bramley
+			#weekdays
+				- $home_page[:fruit].each do |f|
+					.weekday
+						= image_tag("fruit/#{f[0]}.png")
+						%span.button.xs.title.glossy{:class => f[1] }(data-icon=" ")
+							= f[0]
 	%a{:href => words_path}
 		.nav_item
-			= image_tag("fruit/cherry.png")
-			%span.button.xs.title.glossy.back.pink(data-icon=" ")
-				cherry
+			- f = $home_page[:fruit][rand(6)]
+			= image_tag("fruit/#{f[0]}.png")
+			%span.button.xs.title.glossy.back{:class => f[1]}(data-icon=" ")
+				= f[0]
 	%a{:href => "/hot"}
 		.nav_item
-			= image_tag("fruit/mango.png")
-			%span.button.xs.title.glossy.orange(data-icon=" ")
-				mango
+			- f = $home_page[:fruit][rand(6)]
+			= image_tag("fruit/#{f[0]}.png")
+			%span.button.xs.title.glossy{:class => f[1]}(data-icon=" ")
+				= f[0]
