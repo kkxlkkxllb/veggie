@@ -1,13 +1,13 @@
 GIT
   remote: git://github.com/kkxlkkxllb/weibo2.git
-  revision: 563c1d3217db1dfed8af5e5d355e11bda09ca863
+  revision: 5613900e1cbff44f189772ccec26f25bc0be48b7
   specs:
     weibo2 (0.4.5)
       rest-client
 
 GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
-  revision: dd7598bf684473b079e838d2abd2c276f25d53bf
+  revision: 82da677694d5959aae48c312030163e98a02e9e8
   specs:
     twitter-bootstrap-rails (2.1.3)
       actionpack (>= 3.1)
