@@ -1,13 +1,13 @@
 zh-cn:
   title: 17UP
-  keywords: "自助,学习,高校,校园,青春,university"
-  describe: "带你重回校园，再走一次青春，没有老师，只有学友"
+  keywords: "自助,快乐学习,高校,校园,青春,university"
+  describe: "仅仅为了使你体验到获取知识的快乐感觉，一起up"
   door: "校门口"
   flash:
     notice:
       register: "童鞋，欢迎你来 17up University 报到啦!"
       login: "学习，任何时候开始都不晚，欢迎回来！"
-      bind: "绑定成功!"
+      bind: "绑定成功啦!"
   words:
     title: "外语教室"
     keywords: "词汇，文化，地域，历史"

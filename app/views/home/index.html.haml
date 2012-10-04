@@ -2,30 +2,28 @@
 	17up
 	%span.badge.badge-inverse
 		Alpha
-- unless current_member
-	.register
-		= link_to image_tag("icon/twitter_big.png"),member_omniauth_authorize_path(:twitter)		
-		%span.login_tip.serif
-			login
-		= link_to image_tag("icon/weibo_big.png"),member_omniauth_authorize_path(:weibo)
-#wrap.clearfix.w1000
-	%a{:href => leafs_path}
-		.nav_item
-			#weekdays
-				- $home_page[:fruit].each do |f|
-					.weekday
-						= image_tag("fruit/#{f[0]}.png")
-						%span.button.xs.title.glossy{:class => f[1] }(data-icon=" ")
-							= f[0]
-	%a{:href => words_path}
-		.nav_item
-			- f = $home_page[:fruit][rand(6)]
-			= image_tag("fruit/#{f[0]}.png")
-			%span.button.xs.title.glossy.back{:class => f[1]}(data-icon=" ")
-				= f[0]
-	%a{:href => "/hot"}
-		.nav_item
-			- f = $home_page[:fruit][rand(6)]
-			= image_tag("fruit/#{f[0]}.png")
-			%span.button.xs.title.glossy{:class => f[1]}(data-icon=" ")
-				= f[0]
+#index_wrap
+	#impress
+		#a.step(data-x="0" data-y="0" data-scale="1")
+			%span.n
+				学习
+			有
+			%span.d
+				你
+			才
+			%span.n
+				快乐
+		#b.step(data-x="0" data-y="900" data-z="1500" data-scale="1")
+			%span.n
+				爱
+			能
+			%span.v
+				改变
+			一切
+		- unless current_member
+			#register.step(data-x="0" data-y="1800" data-z="3000" data-scale="1")
+				= link_to image_tag("icon/twitter_big.png"),member_omniauth_authorize_path(:twitter)		
+				%span.login_tip
+					登录或注册
+				= link_to image_tag("icon/weibo_big.png"),member_omniauth_authorize_path(:weibo)
+

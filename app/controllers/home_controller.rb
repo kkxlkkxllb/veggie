@@ -2,8 +2,12 @@
 class HomeController < ApplicationController
   before_filter :redirect_mobile,:only => :index
   def index
-    set_seo_meta(nil,t('keywords'),t('describe'))
-    @is_root = true
+    if current_member
+      redirect_to account_path
+    else
+      set_seo_meta(nil,t('keywords'),t('describe'))
+      @is_root = true
+    end
   end
   
   def hot

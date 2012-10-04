@@ -21,34 +21,23 @@ html.home
 
 #main
 	width: 100%
-	#wrap
-		margin-top: 30px
-		.nav_item
-			overflow: hidden
-			float: left
-			margin: 5px
-			background: #f5f5f5
-			width: 323px
-			height: 250px
-			line-height: 250px
-			font-size: 80px
+	#index_wrap
+		height: 300px
+		position: relative
+		.step
 			text-align: center
-			position: relative
-			@include inset-shadow(0,2px,5px,#ccc)
-			@include round(15px)
-			@include transition(0.5s)
-			#weekdays
-				position: relative
-				.weekday
-					position: relative
-					span.title
-						position: absolute
-			span.title
-				position: absolute
-				bottom: 20px
-				left: 115px
-			&:hover
-				background: #fff
+		span.n
+			text-shadow: 0 0 20px #ff6600
+			color: #f5f5f5
+			font-size: 54px
+		#register
+			img
+				margin: 5px
+			span.login_tip
+				@include text-shadow-title-black
+				font-size: 20px
+				margin-top: 20px
+	
 #user_list
 	margin: 0 auto
 	padding: 10px 0 40px 0

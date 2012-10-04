@@ -1,0 +1,16 @@
+#allen_game.clearfix.w1000
+	%a{:href => leafs_path}
+		.nav_item
+			#weekdays.relative
+				- $home_page[:fruit].each do |f|
+					.weekday
+						= image_tag("fruit/#{f[0]}.png")
+						%span.button.xs.title.glossy.back{:class => f[1] }(data-icon=" ")
+							= f[0]
+	%a{:href => words_path}
+		.nav_item
+			#rand_1.relative{:r => rand(6)}
+
+	%a{:href => hot_path}
+		.nav_item
+			#rand_2.relative{:r => rand(6)}

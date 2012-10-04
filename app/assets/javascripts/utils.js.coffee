@@ -1,12 +1,12 @@
-root = exports ? this
-root.init_masonry = ($contain,item) ->
+utils = exports ? this
+utils.init_masonry = ($contain,item) ->
 	$contain.imagesLoaded ->	
 		$(item).animate opacity: 1
 		$contain.masonry
 			itemSelector : item,
 			isAnimated: false,
 			isFitWidth: true
-root.init_infinitescroll = ($wrap) ->
+utils.init_infinitescroll = ($wrap) ->
   $wrap.infinitescroll
     navSelector  : "nav.pagination",
     nextSelector : "nav.pagination a",
@@ -22,34 +22,5 @@ root.init_infinitescroll = ($wrap) ->
       $newElems.imagesLoaded ->
         $newElems.animate opacity: 1
         $wrap.masonry( 'appended', $newElems, true )
-root.reload_tree =->
-	$wrap = $("#home")
-	$.post "/home/index",(data) ->
-		if data.status is 0
-			$wrap.html(data.data.html)
-			$wrap.imagesLoaded ->
-				$wrap.masonry('reload')
-	,"json"
-root.init_destroy_leaf = ->
-	$(".leaf").delegate "span.destroy","click", ->
-		ele = $(this)
-		$.post "/leafs/destroy",{id:ele.attr("lid")},(data) ->
-			if data.status is 0
-				ele.closest('.leaf').remove()
-				$("#home").masonry('reload')
-root.add_provider_view =->
-	$modal = $("#new_provider_modal")
-	$modal.modal()
-	form = $("form#new_provider_form")
-	$("span.btn-group span.btn",form).click ->
-		rel = $(this).attr 'rel'
-		$(this).addClass("actived").siblings().removeClass("actived")
-		$("#provider_provider",form).val(rel)
-	form.bind 'ajax:success', (d,data) ->
-		if data.status is 0
-			$modal.modal('hide')
-root.init_info =->
-	impress().init()
-root.allen_game =->
-	week_day = new Date().getDay()
-	$("#weekdays").animate({"top":-week_day*250},1800)
+
+	
