@@ -10,7 +10,7 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer','>= 0.11.0beta8', :require => 'v8'
-  gem "twitter-bootstrap-rails"#, :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git"
+  gem "twitter-bootstrap-rails"
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -39,7 +39,7 @@ gem "devise"
 gem "omniauth-weibo-oauth2", '~> 0.2.0'
 gem "omniauth-facebook"
 gem "omniauth-twitter"
-gem "weibo2", :git => "git://github.com/kkxlkkxllb/weibo2.git"
+gem "weibo_17up", :git => "git@github.com:kkxlkkxllb/weibo_17up.git"
 gem "twitter"
 
 gem 'haml'

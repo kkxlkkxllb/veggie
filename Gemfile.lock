@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/kkxlkkxllb/weibo2.git
-  revision: 76e58e327b3c7ff65714991020e793bc7ff69bc6
+  remote: git@github.com:kkxlkkxllb/weibo_17up.git
+  revision: 249803dd91c4f31c075e9a9dd2b1afd9ac1cf07c
   specs:
-    weibo2 (0.4.6)
+    weibo_17up (0.4.6)
       rest-client
 
 GEM
@@ -325,5 +325,5 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   unicorn
-  weibo2!
+  weibo_17up!
   whenever
