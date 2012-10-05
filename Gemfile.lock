@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/kkxlkkxllb/weibo2.git
-  revision: 5613900e1cbff44f189772ccec26f25bc0be48b7
+  revision: 76e58e327b3c7ff65714991020e793bc7ff69bc6
   specs:
-    weibo2 (0.4.5)
+    weibo2 (0.4.6)
       rest-client
 
 GEM
