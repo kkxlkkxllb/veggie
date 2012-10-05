@@ -317,7 +317,7 @@ DEPENDENCIES
   sqlite3
   therubyracer (>= 0.11.0beta8)
   twitter
-  twitter-bootstrap-rails
+  twitter-bootstrap-rails (= 2.1.2)
   uglifier (>= 1.0.3)
   unicorn
   weibo_17up
