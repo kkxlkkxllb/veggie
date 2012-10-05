@@ -320,5 +320,5 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   unicorn
-  weibo_17up (~> 0.4.6)
+  weibo_17up
   whenever

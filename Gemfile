@@ -39,7 +39,7 @@ gem "devise"
 gem "omniauth-weibo-oauth2", '~> 0.2.0'
 gem "omniauth-facebook"
 gem "omniauth-twitter"
-gem "weibo_17up", '~> 0.4.6'
+gem "weibo_17up"
 gem "twitter"
 
 gem 'haml'
