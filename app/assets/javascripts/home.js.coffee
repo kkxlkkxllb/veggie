@@ -28,3 +28,8 @@ root.add_provider_view =->
 root.init_info =->
 	impress().init()
 	$("#impress").show()
+	api = impress()
+	setInterval ->
+		api.next()
+	,
+		8000

@@ -1,29 +1,29 @@
 .logo_text
 	17up
-	%span.badge.badge-inverse
+	%span.badge.badge-inverse.serif
 		Alpha
 #index_wrap
 	#impress
-		#a.step(data-x="0" data-y="0" data-scale="1")
-			%span.n
-				学习
-			有
-			%span.d
-				你
-			才
-			%span.n
-				快乐
-		#b.step(data-x="0" data-y="900" data-z="1500" data-scale="1")
-			%span.n
-				爱
-			能
-			%span.v
-				改变
-			一切
 		- unless current_member
 			#register.step(data-x="0" data-y="1800" data-z="3000" data-scale="1")
 				= link_to image_tag("icon/twitter_big.png"),member_omniauth_authorize_path(:twitter)		
 				%span.login_tip
 					登录或注册
 				= link_to image_tag("icon/weibo_big.png"),member_omniauth_authorize_path(:weibo)
+		#a.step.zangti(data-x="0" data-y="900" data-z="1500" data-scale="1")
+			%span.n
+				爱
+			能
+			%span.v
+				改变
+			一切
+		#b.step.zangti(data-x="0" data-y="0" data-scale="1")
+			%span.n
+				学习
+			是
+			%span.n
+				快乐
+			之
+			%span.n
+				源
 
