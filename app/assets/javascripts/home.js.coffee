@@ -8,7 +8,7 @@ root.reload_tree =->
 				$wrap.masonry('reload')
 	,"json"
 root.init_destroy_leaf = ->
-	$(".leaf").delegate "span.destroy","click", ->
+	$(".leaf span.destroy").live "click", ->
 		ele = $(this)
 		$.post "/leafs/destroy",{id:ele.attr("lid")},(data) ->
 			if data.status is 0
@@ -29,7 +29,3 @@ root.init_info =->
 	impress().init()
 	$("#impress").show()
 	api = impress()
-	setInterval ->
-		api.next()
-	,
-		8000

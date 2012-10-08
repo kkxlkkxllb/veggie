@@ -27,7 +27,7 @@
 							= t("hot.title")
 				- if current_member
 					%ul.nav.pull-right
-						%li
+						%li{:class => ("active" if @user == current_member)}
 							%a{:href => account_path}
 								= current_member.name
 						%li

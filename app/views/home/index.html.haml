@@ -1,6 +1,7 @@
 .logo_text
 	17up
 	%span.badge.badge-inverse.serif
+		%i.icon-key
 		Alpha
 #index_wrap
 	#impress
@@ -10,6 +11,8 @@
 				%span.login_tip
 					登录或注册
 				= link_to image_tag("icon/weibo_big.png"),member_omniauth_authorize_path(:weibo)
+				%a(href="/#/a")
+					%span.icon-circle-arrow-up
 		#a.step.zangti(data-x="0" data-y="900" data-z="1500" data-scale="1")
 			%span.n
 				爱
