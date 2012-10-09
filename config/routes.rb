@@ -1,7 +1,12 @@
 Veggie::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
-  mount Resque::Server, :at => "/resque"  
+  #mount Resque::Server, :at => "/resque" 
+  require 'sidekiq/web'
+  constraint = lambda { |request| request.env["warden"].authenticate? and request.env['warden'].user.admin? }
+  constraints constraint do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   devise_for :members, controllers: {
     omniauth_callbacks: :authentications,

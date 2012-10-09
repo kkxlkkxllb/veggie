@@ -80,10 +80,10 @@ class Provider < ActiveRecord::Base
     )
   end
   
-  # resque job
+  # sidekiq job
   def send_greet
     if !self.user_id.blank?
-	    ResqueJob::SendGreetJob.new.async(:greet, self.id)
+	    HardWorker::SendGreetJob.perform_async(self.id)
     end
   end
 

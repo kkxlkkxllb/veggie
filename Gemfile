@@ -29,7 +29,6 @@ gem 'jquery-rails'
 gem 'capistrano'
 
 gem 'acts-as-taggable-on'
-gem 'paperclip'
 gem 'nokogiri', '~>1.5.0'
 gem 'kaminari'
 gem "remotipart", "~> 1.0"
@@ -67,4 +66,7 @@ gem 'redis'
 gem 'redis-rails'
 
 gem 'whenever', :require => false
-gem 'resque', :require => "resque/server"
+#gem 'resque', :require => "resque/server"
+gem 'sinatra', :require => nil
+gem 'slim'
+gem 'sidekiq'

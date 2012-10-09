@@ -1,5 +1,6 @@
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
+require 'sidekiq/capistrano'
 
 set :application, "veggie"
 set :repository,  "git@github.com:kkxlkkxllb/veggie.git"
@@ -57,5 +58,5 @@ after 'deploy:update_code' do
     #run "RAILS_ENV=production resque-web #{current_path}/config/initializers/resque.rb"      
 end
 # if you want to clean up old releases on each deploy uncomment this:
-after 'deploy:restart', 'deploy:restart_resque'
+#after 'deploy:restart', 'deploy:restart_resque'
 after "deploy:restart", "deploy:cleanup"

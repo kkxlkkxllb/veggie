@@ -6,7 +6,7 @@ class ProviderController < ApplicationController
       @provider = Provider.create(provider_params)    
     end
     if @provider
-      ResqueJob::GrowLeafJob.new.async(:grow, @provider.id)
+      HardWorker::GrowLeafJob.perform_async(@provider.id)
       render_json(0,"ok")
     end
    
