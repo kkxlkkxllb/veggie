@@ -5,12 +5,10 @@
 			= @info
 			的朋友，欢迎来到这里
 	#contact.step.text_center(data-x="0" data-y="900" data-z="1500"  data-scale="1")
-		= image_tag("icon/twitter_big.png")
-		%a.button.glass.green.round(href="https://twitter.com/He_Art_Me" target="blank" data-icon=" ")
-			@He_Art_Me
-		= image_tag("icon/weibo_big.png")
-		%a.button.glass.orange.round(href="http://weibo.com/veggie89" target="blank" data-icon=" ")
-			@蔬菜听泉
+		=contact_img_link "icon/twitter_big.png","https://twitter.com/He_Art_Me","Fo Me"
+		=contact_img_link "icon/tumblr.png","http://veggie89.tumblr.com/","On Tumblr"
+		=contact_img_link "icon/weibo_big.png","http://weibo.com/veggie89","求关注"
+		=contact_img_link "icon/douban.png","http://www.douban.com/group/434558/","加豆瓣小组"
 	#look.step.text_center(data-x="0" data-y="1800" data-z="3000"  data-scale="1")
 		%a.button.glossy.pink.skew(href="#" data-icon="✿")
 			ZARD
