@@ -1,13 +1,10 @@
 @import "utils"
 
-@font-face
-	font-family: 'Zang Ti'
-	font-style: normal
-	font-weight: normal
-	src: url('/font/z.ttf') format('truetype')
+@include font-face("Tallys","/font/Tallys/Tallys")
+@include font-face('Lobster',"/font/Lobster/Lobster",400)
 
 .zangti
-	font-family: 'Zang Ti', serif
+	font-family: "Tallys","Microsoft YaHei", sans-serif
 
 a img, img
 	border: none

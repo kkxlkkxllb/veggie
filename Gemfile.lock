@@ -35,6 +35,8 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.1.0.0)
+    bourbon (2.1.1)
+      sass (>= 3.1)
     builder (3.0.3)
     capistrano (2.13.3)
       highline
@@ -294,6 +296,7 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on
   annotate (>= 2.5.0)
+  bourbon
   capistrano
   coffee-rails (~> 3.2.1)
   devise
