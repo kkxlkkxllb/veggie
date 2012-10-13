@@ -26,6 +26,9 @@ root.add_provider_view =->
 		if data.status is 0
 			$modal.modal('hide')
 root.init_info =->
-	impress().init()
-	$("#impress").show()
-	api = impress()
+	if $.browser.msie && parseInt($.browser.version) < 9
+		$('.logo_text').text("Sorry ! IE is never supported!").css "color","#1d1d1d"
+	else
+		impress().init()
+		$("#impress").show()
+		api = impress()
