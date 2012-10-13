@@ -24,12 +24,7 @@ Following additional class names are supported:
 
 /*@import url(http://fonts.googleapis.com/css?family=Droid+Sans:bold+Lobster);
 @import url(http://fonts.googleapis.com/css?family=Lobster);*/
-@font-face {
-  font-family: 'Droid Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Droid Sans Bold'), local('DroidSans-Bold'), url(/font/1.woff) format('woff');
-}
+
 
 /* -------------- THE button -------------- */
 .button {

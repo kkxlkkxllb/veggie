@@ -57,6 +57,7 @@ group :development, :test do
 	gem 'puma'
 	gem 'rspec-rails', '~> 2.10.0'
 	gem 'factory_girl_rails'
+	gem 'quiet_assets'
 	# To use debugger
   #gem 'ruby-debug19', :require => 'ruby-debug'
   #gem "debugger"

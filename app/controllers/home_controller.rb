@@ -1,13 +1,11 @@
 # coding: utf-8
 class HomeController < ApplicationController
-  before_filter :redirect_mobile,:only => :index
+  before_filter :redirect_home,:only => :index
+  caches_page :index
+  
   def index
-    if current_member
-      redirect_to account_path
-    else
-      set_seo_meta(nil,t('keywords'),t('describe'))
-      @is_root = true
-    end
+    set_seo_meta(nil,t('keywords'),t('describe'))
+    @is_root = true
   end
   
   def hot
@@ -23,9 +21,11 @@ class HomeController < ApplicationController
   
   private
   
-  def redirect_mobile
+  def redirect_home
     agent = request.user_agent.downcase
-    if agent.include?("iphone") or agent.include?("android")
+    if current_member
+      redirect_to account_path
+    elsif agent.include?("iphone") or agent.include?("android")
       redirect_to $config[:mobile_host]
     end
   end

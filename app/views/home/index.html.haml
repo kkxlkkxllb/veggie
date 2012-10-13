@@ -2,17 +2,16 @@
 	17up
 #index_wrap
 	#impress
-		- unless current_member
-			#register.step(data-x="0" data-y="1800" data-z="3000" data-scale="1")
-				= link_to image_tag("icon/twitter_big.png"),member_omniauth_authorize_path(:twitter)		
-				%span.login_tip
-					登录或注册
-				= link_to image_tag("icon/weibo_big.png"),member_omniauth_authorize_path(:weibo)
-				%a(href="/#/a")
-					%span.icon-circle-arrow-up
-		#a.step.zangti(data-x="0" data-y="900" data-z="1500" data-scale="1")
+		#register.step(data-x="0" data-y="1800" data-z="3000" data-scale="1")
+			= link_to image_tag("icon/twitter_big.png"),member_omniauth_authorize_path(:twitter)		
+			%span.login_tip
+				登录或注册
+			= link_to image_tag("icon/weibo_big.png"),member_omniauth_authorize_path(:weibo)
+			%a(href="/#/a")
+				%span.icon-circle-arrow-up
+		#a.step.tallys(data-x="0" data-y="900" data-z="1500" data-scale="1")
 			Love can change anything
-		#b.step.zangti(data-x="0" data-y="0" data-scale="1")
+		#b.step(data-x="0" data-y="0" data-scale="1")
 			%span.n
 				学习
 			是
