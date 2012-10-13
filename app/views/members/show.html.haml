@@ -10,5 +10,5 @@
 			.eye
 				.lid
 			#mouth
-		= audio_tag("ohh.mp3",:id => "audio-ohh",:preload => "preload")
-		= audio_tag("snap.mp3",:id => "audio-snap",:preload => "preload")
+		%audio#audio-ohh(preload = "preload" src="audios/ohh.mp3")
+		%audio#audio-snap(preload = "preload" src="audios/snap.mp3")
