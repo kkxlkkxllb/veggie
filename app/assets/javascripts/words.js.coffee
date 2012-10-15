@@ -48,8 +48,8 @@ word.init_insert_tags = (form,$modal,$container) ->
 		false
 word.init_filter = ($container) ->
 	$('#filter_nav a').click ->
-		$('#filter_nav a').removeClass "selected"
-		$(this).addClass "selected"
+		$('#filter_nav li').removeClass "active"
+		$(this).parent('li').addClass "active"
 		selector = $(this).attr('data-filter')
 		$container.isotope({ filter: selector })
 		false
