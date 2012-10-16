@@ -4,13 +4,16 @@ class WordsController < ApplicationController
   
   # 外语教室
   # 按时间区间展示 1.week
-  def index
-    set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))
+  def index   
+    course = YAML.load_file(Rails.root.join("lib", "course.yml")).fetch("en")
     
-    @words = Word.vall
+    @ctitle = "Chapter One : "+course['chapter_1']['title']
+    @ctags = course['chapter_1']['ctags'].split(";")
+    @words = Word.tagged(@ctags)
     if current_member and current_member.admin?
       @can_add_tag = true
     end
+    set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))
   end
   
   # 新建词汇
@@ -26,6 +29,7 @@ class WordsController < ApplicationController
     unless admin # 普通用户返回 u_word 对象 ，admin 返回 word
       @word = current_member.u_words.create(:word_id => @word.id)
     end
+    @can_add_tag = true
     html = render_to_string(
             :formats => :html,
             :handlers => :haml,

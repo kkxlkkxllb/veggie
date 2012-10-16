@@ -7,7 +7,7 @@ $ ->
 	$("div.leaf").live 'hover',->
 		$("span.action",$(this)).toggle()
 	mixpanel.track("new visitor")
-	if $("#impress").length is 1
+	if $("#impress").length is 1 and !$('body').hasClass("impress-not-supported")
 		init_info()
 	$("#add_new_btn").click ->
 		add_provider_view()

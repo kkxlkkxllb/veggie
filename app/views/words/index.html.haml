@@ -5,18 +5,18 @@
 				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
 		= render 'modal/new_word_tag'
 	.banner_wrap
-		%h3.banner_title
-			第一章：农场篇
+		%h3.banner_title.dancer
+			= @ctitle
 	.words_container
 		#word_nav
 			%ul#filter_nav.clearfix.dark_nav	
 				%li.active
 					%a(href="#all" data-filter="*")
 						All
-				- Word.tag_counts_on(:ctags).each do |t|
+				- @ctags.each do |t|
 					%li
-						%a{:href => "#"+t.name,:"data-filter" => "."+t.name}
-							= t.name.capitalize
+						%a{:href => "#"+t,:"data-filter" => "."+t}
+							= t.capitalize
 		#word_ground
 			- @words.each do |w|
 				= render 'word',:w => w
