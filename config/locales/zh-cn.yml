@@ -9,13 +9,13 @@ zh-cn:
       login: "学习，任何时候开始都不晚，欢迎回来！"
       bind: "绑定成功啦!"
   words:
-    title: "外语教室"
+    title: "大学堂"
     keywords: "词汇，文化，地域，历史"
     describe: "17up 精心策划每周一课，教你不一样的外语噢"
   leafs:
-    title: "大杂烩"
+    title: "新葉子"
     keywords: "资讯，微博，文萃"
-    describe: "收集自新浪微博和twitter的最新资讯，每日更新噢"
+    describe: "这是一颗树苗，每天都会长新叶子哦"
   hot:
     title: "热榜"
     keywords: "最热，人气，排行"
@@ -28,3 +28,4 @@ zh-cn:
       account: "帐户"
   greet:
     new_user: "欢迎入住 17up 外语学院 Alpha 班，成为第 %{num} 位学员。［%{motto}］"
+    new_leafs: "2012年的初秋，veggie 种下了一颗树，今天又长了 %{num} 片新叶子啦，快来看看吧：http://17up.org/t"

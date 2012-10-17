@@ -15,6 +15,14 @@ module HardWorker
     end
   end
   
+  class SendNewLeafReport < Base
+    def perform(nlc)
+      %w(weibo twitter).each do |p|
+        Greet.new(nil,{:new_leaf_count => nlc,:provider => p}).deliver
+      end
+    end
+  end
+  
   class GrowLeafJob < Base
     def perform(pid, opts={})
       LeafGrow.new(Provider.find(pid)).grow

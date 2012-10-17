@@ -6,6 +6,8 @@ namespace :leaf do
 		Provider.build_leaf
 		num = Leaf.where(["created_at > ?",Date.today - 8.hour]).count
 		Leaf.logger.info("#{Date.today.to_s} Auto grow #{num} leafs today!")
+		#send to sns
+		HardWorker::SendNewLeafReport.perform_async(num)
 		# clean page cache
 		if File.exist?('public/t.html')
 		  `rm public/t.html`
