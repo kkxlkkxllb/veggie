@@ -29,4 +29,13 @@ module HardWorker
     end
   end
   
+  class UploadTumblr < Base
+    def perform(pid,content,pic)
+      provider = Provider.find(pid)
+      client = Weibo::Client.new(provider.token,provider.uid)
+      data = client.statuses_upload(content,pic)
+      self.logger(data["id"].to_s + " published to #{provider.user_name}")
+    end
+  end
+  
 end

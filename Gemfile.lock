@@ -132,8 +132,6 @@ GEM
     omniauth (1.1.1)
       hashie (~> 1.2)
       rack
-    omniauth-facebook (1.4.1)
-      omniauth-oauth2 (~> 1.1.0)
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
@@ -309,7 +307,6 @@ DEPENDENCIES
   kaminari
   mysql2
   nokogiri (~> 1.5.0)
-  omniauth-facebook
   omniauth-twitter
   omniauth-weibo-oauth2 (~> 0.2.0)
   puma
