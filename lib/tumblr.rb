@@ -16,8 +16,9 @@ class Tumblr
 		data = JSON.parse(resp)
 		if data["meta"]["status"] == 200
 		  @post = []
+		  @tm = Date.today.to_time.to_i
 		  data["response"].each do |t|
-	      if t["type"] == "photo" and t["caption"] != ""
+	      if t["type"] == "photo" and t["caption"] != "" and t["timestamp"] > @tm
 	        @post = @post<<{
 	          :photo => t["photos"][0]["original_size"]["url"],
 	          :caption => CGI::unescapeHTML(strip_tags(t["caption"])).split("\n")[0]
