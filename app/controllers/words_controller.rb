@@ -5,8 +5,7 @@ class WordsController < ApplicationController
   # 外语教室
   # 按时间区间展示 1.week
   def index   
-    course = YAML.load_file(Rails.root.join("lib", "course.yml")).fetch("en")
-    
+    course = load_course  
     @ctitle = "Chapter One : "+course['chapter_1']['title']
     @ctags = course['chapter_1']['ctags'].split(";")
     @words = Word.tagged(@ctags)

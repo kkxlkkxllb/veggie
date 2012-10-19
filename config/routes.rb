@@ -16,7 +16,7 @@ Veggie::Application.routes.draw do
   namespace :mobile do
     match '/' => "mhome#index"
     match "t" => "mhome#weibo",:as => :t
-    match "learn_en" => "mhome#learn_en"
+    match "word" => "mhome#word"
   end
   
   match "me" => "members#show",:as => :account

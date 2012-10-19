@@ -6,7 +6,7 @@ class Tumblr
   include ActionView::Helpers::SanitizeHelper
   
   def initialize(pid=38)
-    @pid = pid
+    @pid = pid #weibo运营小号
     @api_key = YAML.load_file(Rails.root.join("config", "service.yml")).fetch(Rails.env)["tumblr"]["app_key"]
   end
   
@@ -20,7 +20,7 @@ class Tumblr
 	      if t["type"] == "photo" and t["caption"] != ""
 	        @post = @post<<{
 	          :photo => t["photos"][0]["original_size"]["url"],
-	          :caption => strip_tags(t["caption"]).split("\n")[0]
+	          :caption => CGI::unescapeHTML(strip_tags(t["caption"])).split("\n")[0]
           }
 	      end
 	    end

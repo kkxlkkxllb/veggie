@@ -24,19 +24,21 @@ class Mobile::MhomeController < ApplicationController
 		end		
   end
   
-  def learn_en
-    RWord.build("fruit")
-    @words = RWord.all
-    
+  def word
+    @ctags = load_course["chapter_1"]["ctags"].split(";")
+    @tag = params[:ctag].blank? ? @ctags[0] : params[:ctag]
+    RWord.build(@tag)
+    @words = RWord.all(@tag)
+    render_f = params[:ctag].blank? ? "mobile/mhome/word" : "mobile/word/_guess"
     respond_to do |format|
 		  format.html
-		  format.json{
+		  format.json{		    
 		    html = render_to_string(
-		            :layout => false,
-		            :formats => :html,
-                :handlers => :haml,
-  			        :file => "mobile/mhome/learn_en"
-  			        )
+	            :layout => false,
+	            :formats => :html,
+              :handlers => :haml,
+			        :file => render_f
+			        )
 			  render_json(0,"ok",{:html => html})
       }
 		end

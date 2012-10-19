@@ -12,3 +12,11 @@ word.reset_test = ->
 	$("body").animate({scrollTop: 0},1000)
 word.hide_flash = ->
 	$("#m_flash").fadeOut()
+word.load_ctag = (tag) ->
+	$wrap = $("#words_wrap")
+	$.post("/mobile/word",ctag:tag,(data) ->
+		if data.status is 0
+			$wrap.html(data.data.html)
+	,"json").complete ->
+		$("body").animate({scrollTop: 0},1000)
+			

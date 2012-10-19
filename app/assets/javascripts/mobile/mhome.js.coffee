@@ -30,13 +30,13 @@ $ ->
 						(newElements) ->
 							$wrap.append(newElements)
 			when "en"
-				$.get("/mobile/learn_en",(data) ->
+				$.get("/mobile/word",(data) ->
 					if data.status is 0
 						$wrap.append(data.data.html)
 				,"json").complete ->
-					$(".icon-sound").bind 'click',->
-						sound = new Audio($(this).attr("src"))
-						sound.load()
-						sound.play()
+					$("span.reset_btn").bind 'click',->
+						reset_test()
+					$("span.tag_btn").click ->
+						load_ctag($(this).attr 'rel')
 			else
 				false

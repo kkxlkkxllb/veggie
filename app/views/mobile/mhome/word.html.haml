@@ -1,0 +1,8 @@
+#words_wrap
+	= render "mobile/word/guess"
+#reset.word
+	%span.reset_btn
+		再次测试
+	- @ctags.each do |tag|
+		%span.tag_btn{:rel => tag}
+			= tag
