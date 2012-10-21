@@ -7,7 +7,7 @@ class Greet
     else
       greet = YAML.load_file(Rails.root.join("lib", "greet.yml")).fetch("greet")   
       @provider = Provider.find(pid)
-      @motto = greet[rand(3)]
+      @motto = greet[rand(6)]
       @content = "Hi,@#{@provider.user_name} " + I18n.t('greet.new_user',:num => @provider.member.id,:motto => @motto)
     end
   end
@@ -25,7 +25,7 @@ class Greet
       )
       data = client.update(@content)
     end    
-    Greet.logger(data['id'].to_s + "send greet success to #{@provider.user_name}")
+    Greet.logger(data['id'].to_s + " send greet success to #{@provider.user_name}")
   end 
   
   def self.logger(msg)
