@@ -5,9 +5,9 @@ class Greet
       @provider = Member.first.providers.where(:provider => opts[:provider]).first
       @content = I18n.t('greet.new_leafs',:num => opts[:new_leaf_count])
     else
-      greet = YAML.load_file(Rails.root.join("lib", "greet.yml")).fetch("greet")   
+      greet = YAML.load_file(Rails.root.join("lib/cherry", "greet.yml")).fetch("greet")   
       @provider = Provider.find(pid)
-      @motto = greet[rand(6)]
+      @motto = greet[rand(greet.length)]
       @content = "Hi,@#{@provider.user_name} " + I18n.t('greet.new_user',:num => @provider.member.id,:motto => @motto)
     end
   end

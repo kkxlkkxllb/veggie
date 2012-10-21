@@ -17,9 +17,9 @@ module Olive
     end
     
     # upload to weibo
-    def upload(tag)     
-      tagged(tag).each do |p|
-	      HardWorker::UploadTumblr.perform_async(ASSIST,p[:caption],open(p[:photo]).path)
+    def upload(tag,skip_tm = false)     
+      tagged(tag,skip_tm).each do |p|
+	      HardWorker::UploadOlive.perform_async(ASSIST,p[:caption],open(p[:photo]).path)
       end
     end
   end
@@ -31,7 +31,8 @@ module Olive
       @tm = Date.today.to_time.to_i
     end
 
-    def tagged(tag)
+    def tagged(tag,skip_tm = false)
+      @tm = skip_tm ? 0 : @tm
       url = "http://api.tumblr.com/v2/tagged?tag=#{tag}&api_key=#{@api_key}"
       resp = Net::HTTP.get_response(URI.parse(url)).body
   		data = JSON.parse(resp)
@@ -65,7 +66,8 @@ module Olive
       @tm = Date.today.to_time.to_i
     end
     
-    def tagged(tag)
+    def tagged(tag,skip_tm = false)
+      @tm = skip_tm ? 0 : @tm
       resp = @client.tag_recent_media(tag)
       @post = resp.data.inject([]) do |a,x| 
         if x.caption and x.created_time.to_i > @tm

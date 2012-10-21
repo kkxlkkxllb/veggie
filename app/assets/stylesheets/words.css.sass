@@ -1,25 +1,27 @@
 @import "utils"
-#wrap
-	margin-bottom: 40px	
+
+.banner_wrap
+	padding: 10px 20px		
+	.banner_title
+		font-size: 20px
+		margin: 0
+#course_wrap
+	margin-bottom: 40px
+	background: url(/assets/img/subtle_stripes/subtle_stripes.png)	
 	#new_word
-		width: 300px
-		margin: 20px auto
+		text-align: center
+		@include fibre
+		padding: 20px
 		position: relative
+		form
+			margin: 0
 		input
 			margin: 0
 			padding: 5px
-			width: 280px
-	.banner_wrap
-		padding: 10px 20px
-		@include linear-gradient(45deg, #C3F83B,#f5f5f5)
-		.banner_title
-			font-size: 20px
-			margin: 0
-		
+			width: 280px		
 	#word_nav
 		padding: 10px 20px
 		background: #303335
-		border-left: 5px solid #5BF
 	#word_ground
 		padding: 10px
 		.word_item

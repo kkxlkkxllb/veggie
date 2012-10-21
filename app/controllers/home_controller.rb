@@ -8,9 +8,10 @@ class HomeController < ApplicationController
     @is_root = true
   end
   
-  def hot
-    set_seo_meta(t("hot.title"),t('hot.keywords'),t('hot.describe'))
+  def square
+    set_seo_meta(t("square.title"),t('square.keywords'),t('square.describe'))
     @users = Provider.where("user_id is null")
+    @fls = YAML.load_file(Rails.root.join("lib/cherry", "setting.yml")).fetch("friend_link")["course"]
   end
   
   def info

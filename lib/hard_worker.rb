@@ -29,7 +29,7 @@ module HardWorker
     end
   end
   
-  class UploadTumblr < Base
+  class UploadOlive < Base
     def perform(pid,content,pic)
       provider = Provider.find(pid)
       client = Weibo::Client.new(provider.token,provider.uid)

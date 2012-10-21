@@ -39,6 +39,6 @@ class ApplicationController < ActionController::Base
   end
   
   def load_course(lang="en")
-    YAML.load_file(Rails.root.join("lib", "course.yml")).fetch(lang)
+    YAML.load_file(Rails.root.join("lib/cherry", "course.yml")).fetch(lang)
   end
 end

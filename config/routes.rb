@@ -19,7 +19,7 @@ Veggie::Application.routes.draw do
     match "word" => "mhome#word"
   end
   
-  match "me" => "members#show",:as => :account
+  match "dashboard" => "members#show",:as => :account
   match "u/:id" => "members#show",:as => :member
   match "setting" => "members#edit",:as => :setting
 
@@ -27,7 +27,7 @@ Veggie::Application.routes.draw do
     post "create"
   end
   
-  match "hot" => "home#hot", :as => :hot
+  match "square" => "home#square", :as => :hot
   match "info" => "home#info", :as => :info
   match "course" => "words#index", :as => :words
   resources :words do

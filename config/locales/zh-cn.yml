@@ -13,13 +13,13 @@ zh-cn:
     keywords: "词汇，文化，地域，历史"
     describe: "17up 精心策划每周一课，教你不一样的外语噢"
   leafs:
-    title: "新葉子"
+    title: "花园"
     keywords: "资讯，微博，文萃"
-    describe: "这是一颗树苗，每天都会长新叶子哦"
-  hot:
-    title: "热榜"
-    keywords: "最热，人气，排行"
-    describe: "17up 热门排行榜"
+    describe: "这里种了好多树苗，每天都会长新叶子哦"
+  square:
+    title: "广场"
+    keywords: "友情链接,热门排行,类目"
+    describe: "这里是 17up 广场，各类活动的展示区域"
   members:
     edit: "%{name} 学员设置"
     sidenav:
