@@ -1,6 +1,6 @@
 class LeafGrow
 
-  def initialize(provider)        
+  def initialize(provider)
     @provider = provider
   end
   
@@ -15,7 +15,8 @@ class LeafGrow
     case @provider.provider
     when "weibo"
       opt.merge!(:uid => @provider.uid,:feature => "1")    
-      client = Weibo::Client.new(veggie.token,veggie.uid)      
+      client = Weibo::Client.new(veggie.token,veggie.uid)  
+      Leaf.logger.info("NOTICE: start fetch weibo #{opt.to_a.join(',')}")    
       data = client.statuses_user_timeline(opt)["statuses"]  
     when "twitter"
       client = Twitter::Client.new(
@@ -25,6 +26,10 @@ class LeafGrow
       data = client.user_timeline(@provider.uid,opt)
     end
     
+    complete(data)
+  end
+  
+  def complete(data)
     begin     
 		  data.each do |d|		  
 		    if @provider.metadata.blank?

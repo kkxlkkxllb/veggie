@@ -15,6 +15,10 @@ common: &common
     app_key: "wMLNMIkDwcoVH4cU41UY82qBhx4ZQLeiJaD3QMvVUhrebAarfx"
     app_secret: "myKcSerbXbpM1dEOxyjKM4ccI1DJkV9OKAHHmGjtiQDjxnYTk1"
     redirect_uri: "http://17up.org/members/auth/tumblr/callback"
+  instagram:
+    client_id: "47482a8ef25644cbba08bce0865ed701"
+    client_secret: "329e141044144b4b96d0b868cd95a1de"
+    redirect_uri: "http://17up.org/members/auth/instagram/callback"
 production:
   <<: *common
 
