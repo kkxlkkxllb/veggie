@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120917124005) do
+ActiveRecord::Schema.define(:version => 20121022001843) do
 
   create_table "leafs", :force => true do |t|
     t.text     "content"
     t.integer  "provider_id"
     t.string   "image_url"
     t.datetime "time_stamp"
-    t.integer  "weibo_id"
+    t.string   "weibo_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "video"

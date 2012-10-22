@@ -11,6 +11,7 @@
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  expired_at :datetime
 #
 
 class Provider < ActiveRecord::Base
@@ -50,10 +51,10 @@ class Provider < ActiveRecord::Base
   
   def get_leafs(older)
     if older
-      id = self.leafs.minimum(:weibo_id)
+      id = self.leafs.order("id ASC").first.weibo_id
       return "&max_id=#{id}"
     else
-      id = self.leafs.maximum(:weibo_id)
+      id = self.leafs.order("id DESC").first.weibo_id
       return "&since_id=#{id}"
     end
   end

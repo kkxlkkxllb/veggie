@@ -7,7 +7,7 @@
 #  provider_id :integer
 #  image_url   :string(255)
 #  time_stamp  :datetime
-#  weibo_id    :integer
+#  weibo_id    :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  video       :string(255)
