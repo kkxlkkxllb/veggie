@@ -52,7 +52,6 @@ word.init_filter = ($container) ->
 		$(this).parent('li').addClass "active"
 		selector = $(this).attr('data-filter')
 		$container.isotope({ filter: selector })
-		false
 word.init_fill_tag = ($form) ->
 	$("#tags_area").delegate "span","click", ->
 		value = $("input#tags",$form).val()

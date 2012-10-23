@@ -51,10 +51,10 @@ class Provider < ActiveRecord::Base
   
   def get_leafs(older)
     if older
-      id = self.leafs.order("id ASC").first.weibo_id
+      id = self.leafs.order("time_stamp ASC").first.weibo_id
       return "&max_id=#{id}"
     else
-      id = self.leafs.order("id DESC").first.weibo_id
+      id = self.leafs.order("time_stamp DESC").first.weibo_id
       return "&since_id=#{id}"
     end
   end

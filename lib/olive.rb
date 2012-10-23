@@ -7,6 +7,7 @@ module Olive
   class Base
     include ActionView::Helpers::SanitizeHelper
     ASSIST = 38
+    INTERVAL = 30.second
     
     def load_service
       YAML.load_file(Rails.root.join("config", "service.yml")).fetch(Rails.env)
@@ -19,7 +20,7 @@ module Olive
     # upload to weibo
     def upload(tag,skip_tm = false)     
       tagged(tag,skip_tm).each do |p|
-	      HardWorker::UploadOlive.perform_async(ASSIST,p[:caption],open(p[:photo]).path)
+	      HardWorker::UploadOlive.perform_in(INTERVAL,ASSIST,p[:caption],open(p[:photo]).path)
       end
     end
   end
