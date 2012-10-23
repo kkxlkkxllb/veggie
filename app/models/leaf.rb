@@ -53,7 +53,7 @@ class Leaf < ActiveRecord::Base
   
   def fetch_image
     if Rails.env == "production" and !self.image_url.blank?
-      FetchImage.new(self).download
+      Grape::LeafImage.new(self).download
     end
   end
   
@@ -64,7 +64,7 @@ class Leaf < ActiveRecord::Base
   # 下载所有图
   def self.fetch_all_image
     Leaf.where("image_url IS NOT NULL").each do |l|
-      FetchImage.new(l).download
+      Grape::LeafImage.new(l).download
     end
   end
 end

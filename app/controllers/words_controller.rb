@@ -6,8 +6,8 @@ class WordsController < ApplicationController
   # 按时间区间展示 1.week
   def index   
     course = load_course  
-    @ctitle = "Chapter One : "+course['chapter_1']['title']
-    @ctags = course['chapter_1']['ctags'].split(";")
+    @ctitle = "Mission One : "+course['mission_1']['title']
+    @ctags = course['mission_1']['ctags'].split(";")
     @words = Word.tagged(@ctags)
     if current_member and current_member.admin?
       @can_add_tag = true
