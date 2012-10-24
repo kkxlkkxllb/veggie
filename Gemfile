@@ -41,6 +41,7 @@ gem "omniauth-twitter"
 gem "weibo_17up"
 gem "twitter"
 gem "instagram", "~> 0.8.5"
+gem "goodreads"
 
 gem 'haml'
 gem 'rails_autolink'

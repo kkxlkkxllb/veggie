@@ -1,13 +1,8 @@
-require 'net/http'
-require 'json'
-require "open-uri"
-
 #tagged resource from [Tumblr/Instagram]
 module Olive
   class Base
     include ActionView::Helpers::SanitizeHelper
     ASSIST = 38
-    INTERVAL = 30.second
     
     def load_service
       YAML.load_file(Rails.root.join("config", "service.yml")).fetch(Rails.env)
@@ -20,7 +15,7 @@ module Olive
     # upload to weibo
     def upload(tag,skip_tm = false)     
       tagged(tag,skip_tm).each do |p|
-	      HardWorker::UploadOlive.perform_in(INTERVAL,ASSIST,p[:caption],open(p[:photo]).path)
+	      HardWorker::UploadOlive.perform_async(ASSIST,p[:caption],open(p[:photo]).path)
       end
     end
   end
@@ -84,6 +79,56 @@ module Olive
       return @post
     end
     
+  end
+  
+  class Px < Base
+    BASE_URL = 'https://api.500px.com'
+    
+    def initialize
+      px = load_service["500px"]
+      @ckey = px["app_key"]
+      @csecret = px["app_secret"]
+      @uname = px["user_name"]
+      @pwd = px["password"]      
+    end
+    
+    def photos(opt={})
+    	options = {
+				:feature => 'popular'
+			}
+			options.merge!(opt)
+			@request = "/v1/photos?"+options.to_query
+			access_token = get_access_token
+			data = MultiJson.decode(access_token.get(@request).body)["photos"]
+			@photos = data.inject([]) do |a,x| 
+				a << {
+					:name => x["name"],
+					:description => x["description"],
+					:url => x["image_url"].sub("2.jpg","4.jpg")
+				}
+			end
+
+		end
+
+		def get_access_token
+			consumer = OAuth::Consumer.new(@ckey, @csecret, {
+			:site               => BASE_URL,
+			:request_token_path => "/v1/oauth/request_token",
+			:access_token_path  => "/v1/oauth/access_token",
+			:authorize_path     => "/v1/oauth/authorize"})
+
+			request_token = consumer.get_request_token()
+			#p "Request URL: #{request_token.authorize_url}"
+			access_token = consumer.get_access_token(request_token, {}, { :x_auth_mode => 'client_auth', :x_auth_username => @uname, :x_auth_password => @pwd })
+			access_token
+		end
+
+		def user
+			access_token = get_access_token
+			p "token: #{access_token.token}" 
+			p "secret: #{access_token.secret}" 
+			p MultiJson.decode(access_token.get('/v1/users.json').body)
+		end
   end
   
 end

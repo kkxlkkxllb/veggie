@@ -1,7 +1,10 @@
-require "open-uri"
-
 # image function
 module Grape
+  class Base
+    def load_service
+      YAML.load_file(Rails.root.join("config", "service.yml")).fetch(Rails.env)
+    end
+  end
   
   class LeafImage
   
@@ -33,15 +36,24 @@ module Grape
   
   end
   
-  class WordImage
+  class WordImage < Base
     def initialize(title)
+      title = URI.encode(title)
+      @cid = load_service["bing"]["client_id"]
+      @cpw = load_service["bing"]["client_secret"]
       @base_url = "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/Image?Query='#{title}'&$format=json"
     end
-    
+
     def parse
-      resp = Net::HTTP.get_response(URI.parse(@base_url)).body
-  		data = JSON.parse(resp)
-    end
+			url = URI.parse(@base_url)
+	    req = Net::HTTP::Get.new(@base_url)
+	    req.basic_auth @cid, @cpw
+	    response = Net::HTTP.start(url.host, url.port,:use_ssl => url.scheme == 'https') do |http|
+				 http.request(req) 
+			end
+	    data = JSON.parse(response.body)["d"]["results"]
+			@pic_urls = data.inject([]){|a,x| a << x["MediaUrl"] }
+    end   
   end
   
 end

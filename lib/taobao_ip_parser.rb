@@ -1,5 +1,3 @@
-require 'net/http'
-require 'json'
 class TaobaoIpParser
 
 	API_URL = "http://ip.taobao.com/service/getIpInfo.php?ip="

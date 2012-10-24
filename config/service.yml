@@ -19,6 +19,17 @@ common: &common
     client_id: "47482a8ef25644cbba08bce0865ed701"
     client_secret: "329e141044144b4b96d0b868cd95a1de"
     redirect_uri: "http://17up.org/members/auth/instagram/callback"
+  bing:
+    client_id: "b3bf0ac2-5720-431d-a86f-36278fd283c3"
+    client_secret: "5yU9IMsoDy58AWBGaFdlumQ/OaIVObnCi8j2mry3Rew="
+  500px:
+    app_key: "Yn6OsCTsYFrjnQZHBETst8ArbvjXnjd26PBjcJKV"
+    app_secret: "vNK9mDo8YHmgcwWzMbAWKNKxJDjjPxEFl2GwwpPW"
+    user_name: "veggie89"
+    password: "fuckgcd"
+  goodreads:
+    app_key: "mhzPsbPg5I7KjFxS6vGow"
+    app_secret: "TKXwsW71uoufYrDj8JupP1BB3WEqDVd4QwtbYtp9AM"
 production:
   <<: *common
 

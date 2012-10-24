@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-require "open-uri"
-require 'nokogiri'
-
 class FetchWord
   
   def initialize(word)
