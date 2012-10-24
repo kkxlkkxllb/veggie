@@ -49,7 +49,7 @@ module Grape
 	    req = Net::HTTP::Get.new(@base_url)
 	    req.basic_auth @cid, @cpw
 	    response = Net::HTTP.start(url.host, url.port,:use_ssl => url.scheme == 'https') do |http|
-				 http.request(req) 
+				http.request(req) 
 			end
 	    data = JSON.parse(response.body)["d"]["results"]
 			@pic_urls = data.inject([]){|a,x| a << x["MediaUrl"] }

@@ -94,7 +94,7 @@ module Olive
     
     def photos(opt={})
     	options = {
-				:feature => 'popular'
+				:feature => 'fresh_today'#'popular'/'upcoming'/'editors'
 			}
 			options.merge!(opt)
 			@request = "/v1/photos?"+options.to_query
@@ -102,9 +102,8 @@ module Olive
 			data = MultiJson.decode(access_token.get(@request).body)["photos"]
 			@photos = data.inject([]) do |a,x| 
 				a << {
-					:name => x["name"],
-					:description => x["description"],
-					:url => x["image_url"].sub("2.jpg","4.jpg")
+					:caption => "#"+x["name"]+"# " + x["description"].gsub(/(\r\n|\n|\r)/, ' '),
+					:photo => x["image_url"].sub("2.jpg","4.jpg")
 				}
 			end
 
