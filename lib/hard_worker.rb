@@ -30,11 +30,13 @@ module HardWorker
   end
   
   class UploadOlive < Base
-    def perform(pid,content,pic)
-      provider = Provider.find(pid)
+    def perform(content,pic)
+      provider = Provider.find(38)
       client = Weibo::Client.new(provider.token,provider.uid)
       data = client.statuses_upload(content,pic)
       self.logger(data["id"].to_s + " published to #{provider.user_name}")
+      #twitter
+      #update_with_media
     end
   end
   

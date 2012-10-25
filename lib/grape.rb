@@ -1,3 +1,4 @@
+require "open-uri"
 # image function
 module Grape
   class Base
@@ -17,6 +18,9 @@ module Grape
     end
   
     def download
+      if Dir[@store_path+"*"].empty?
+         `rmdir #{@store_path}`
+      end
       if File.exist?(@store_path)
         Leaf.logger.warn("WARN #{@store_path} already exsit! stop")
       else

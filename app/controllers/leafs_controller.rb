@@ -1,7 +1,6 @@
 # coding: utf-8
 class LeafsController < ApplicationController
   before_filter :authenticate_member!,:except => :index
-  caches_page :index
   
   def index
     set_seo_meta(t('leafs.title'),t('leafs.keywords'),t('leafs.describe'))    

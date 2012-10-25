@@ -1,8 +1,7 @@
 #tagged resource from [Tumblr/Instagram]
 module Olive
   class Base
-    include ActionView::Helpers::SanitizeHelper
-    ASSIST = 38
+    include ActionView::Helpers::SanitizeHelper    
     
     def load_service
       YAML.load_file(Rails.root.join("config", "service.yml")).fetch(Rails.env)
@@ -13,9 +12,10 @@ module Olive
     end
     
     # upload to weibo
-    def upload(tag,skip_tm = false)     
-      tagged(tag,skip_tm).each do |p|
-	      HardWorker::UploadOlive.perform_async(ASSIST,p[:caption],open(p[:photo]).path)
+    def upload(tag = "")
+      @data = block_given? ? yield(self) : tagged(tag)
+      @data.each do |p|     
+        HardWorker::UploadOlive.perform_async(p[:caption],open(p[:photo]).path)
       end
     end
   end
@@ -81,6 +81,9 @@ module Olive
     
   end
   
+  # methods
+  # 1-photos
+  # 2-tagged(tag)
   class Px < Base
     BASE_URL = 'https://api.500px.com'
     
@@ -94,19 +97,22 @@ module Olive
     
     def photos(opt={})
     	options = {
+    	  :image_size => 4,
 				:feature => 'fresh_today'#'popular'/'upcoming'/'editors'
 			}
 			options.merge!(opt)
 			@request = "/v1/photos?"+options.to_query
-			access_token = get_access_token
-			data = MultiJson.decode(access_token.get(@request).body)["photos"]
-			@photos = data.inject([]) do |a,x| 
-				a << {
-					:caption => "#"+x["name"]+"# " + x["description"].gsub(/(\r\n|\n|\r)/, ' '),
-					:photo => x["image_url"].sub("2.jpg","4.jpg")
-				}
-			end
-
+			@photos = get_photos(@request)
+		end
+		
+		def tagged(tag,opt={})
+		  options = {
+		    :term => tag,
+		    :image_size => 4
+		  }
+		  options.merge!(opt)
+		  @request = "/v1/photos/search?"+options.to_query
+		  @photos = get_photos(@request)
 		end
 
 		def get_access_token
@@ -127,6 +133,18 @@ module Olive
 			p "token: #{access_token.token}" 
 			p "secret: #{access_token.secret}" 
 			p MultiJson.decode(access_token.get('/v1/users.json').body)
+		end
+		
+		private
+		def get_photos(request)
+		  access_token = get_access_token
+			data = MultiJson.decode(access_token.get(request).body)["photos"]
+			data.inject([]) do |a,x| 
+				a << {
+					:caption => x["name"] + " #500px# ",
+					:photo => x["image_url"]
+				}
+			end
 		end
   end
   
