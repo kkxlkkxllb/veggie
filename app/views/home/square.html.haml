@@ -6,7 +6,7 @@
 		%ul.clearfix
 			- @fls.each do |link|
 				%li
-					=link_to link[0].capitalize,link[1]
+					=link_to link[0].capitalize,link[1],:target => "blank"
 	.banner_wrap
 		%h3.banner_title.text_center
 			园丁

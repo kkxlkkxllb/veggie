@@ -30,6 +30,7 @@ Veggie::Application.routes.draw do
   match "square" => "home#square", :as => :hot
   match "info" => "home#info", :as => :info
   match "course" => "words#index", :as => :words
+  match "quotes" => "home#quote", :as => :quote
   resources :words do
     post "create"
     post "add_tag"

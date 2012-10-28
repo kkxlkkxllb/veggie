@@ -23,7 +23,7 @@ class WordsController < ApplicationController
     admin = !params[:admin].blank?
     @word = Word.where(:title => word).first
     unless @word
-      @word = FetchWord.new(word).insert
+      @word = Onion::FetchWord.new(word).insert
     end
     unless admin # 普通用户返回 u_word 对象 ，admin 返回 word
       @word = current_member.u_words.create(:word_id => @word.id)

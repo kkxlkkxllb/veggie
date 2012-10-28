@@ -1,7 +1,7 @@
 # coding: utf-8
 class HomeController < ApplicationController
   before_filter :redirect_home,:only => :index
-  caches_page :index
+  caches_page :index,:quote
   
   def index
     set_seo_meta(nil,t('keywords'),t('describe'))
@@ -18,6 +18,11 @@ class HomeController < ApplicationController
     set_seo_meta("简介",t('keywords'),t('describe'))
     @request = request.remote_ip
     @info = TaobaoIpParser.new(@request).parse
+  end
+  
+  def quote
+    set_seo_meta("Quote",t('keywords'),t('describe'))
+    @quotes = Onion::FetchQuote.new().done
   end
   
   private
