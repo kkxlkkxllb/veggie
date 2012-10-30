@@ -29,7 +29,7 @@ class Member < ActiveRecord::Base
          :rememberable, 
          :trackable, 
          :validatable,
-         :omniauthable, omniauth_providers: [:weibo,:twitter]
+         :omniauthable, omniauth_providers: [:weibo,:twitter,:github]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me

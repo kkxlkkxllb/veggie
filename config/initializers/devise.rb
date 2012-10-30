@@ -208,7 +208,7 @@ Devise.setup do |config|
   #config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :weibo, SERVICES['weibo']['app_key'], SERVICES['weibo']['app_secret'],:client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
   config.omniauth :twitter, SERVICES['twitter']['app_key'], SERVICES['twitter']['app_secret'],:client_options => {:ssl => {:ca_path => '/etc/ssl/certs'}}
-  
+  config.omniauth :github, SERVICES['github']['client_id'], SERVICES['github']['client_secret'],:scope => 'user,public_repo'
   #config.omniauth :google_oauth2, SERVICES['google']['app_id'], SERVICES['google']['app_secret'], { access_type: "offline", approval_prompt: "" }
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

@@ -11,6 +11,10 @@ common: &common
     app_key: 'jNkSGziKmcUyEVO1Ln8VNw'
     app_secret: 'jHXBVAUuigM0StpxCEISTcGj5l42uz83Ih2NViSia8'
     redirect_uri: "http://17up.org/members/auth/twitter/callback"
+  github:
+    client_id: "2c2584f70b84e62ac922"
+    client_secret: "d0c9f640da4b4bbce2137096cdff38969dae8e40"
+    redirect_uri: "http://17up.org/members/auth/github/callback"
   tumblr:
     app_key: "wMLNMIkDwcoVH4cU41UY82qBhx4ZQLeiJaD3QMvVUhrebAarfx"
     app_secret: "myKcSerbXbpM1dEOxyjKM4ccI1DJkV9OKAHHmGjtiQDjxnYTk1"

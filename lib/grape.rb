@@ -79,7 +79,7 @@ module Grape
       cmd = [
         "convert -size #{img_width}x#{img_height} xc:transparent",
         "-font #{@opts[:font_file]} -pointsize #{@opts[:font_size]}",
-        "-gravity NorthWest",
+        "-gravity SouthEast",
         "-fill \'#{@opts[:font_color]}\' -annotate 0x0+20+#{img_height-20*2} \"#{@opts[:watermark]}\"",
         "\"#{@img_path}\" +swap -composite #{@opts[:outfile]}"
       ].join(" ")
@@ -87,6 +87,19 @@ module Grape
       return @opts[:outfile]
     end
     
+  end
+  
+  class Bookmark
+    def initialize(url)
+      @url = URI.parse(url)
+    end
+    
+    def favicon
+      icon_path = @url.scheme + "://" + @url.host + "/favicon.ico"
+      if open(icon_path)
+        icon_path
+      end
+    end
   end
   
 end

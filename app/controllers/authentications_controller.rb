@@ -8,6 +8,14 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
     omniauth_process
   end
   
+  def github
+    omniauth_process
+  end
+  
+  def passthru
+    render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
+  end
+  
   protected
     def omniauth_process
       omniauth = request.env['omniauth.auth']

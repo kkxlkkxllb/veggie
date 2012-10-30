@@ -8,8 +8,8 @@ Veggie::Application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  devise_for :members, controllers: {
-    omniauth_callbacks: :authentications,
+  devise_for :members, :controllers => {
+    :omniauth_callbacks => :authentications,
     :sessions => :sessions
   }
   
