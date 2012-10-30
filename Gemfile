@@ -45,6 +45,7 @@ gem "goodreads"
 
 gem 'haml'
 gem 'rails_autolink'
+gem 'dimensions', "~> 1.2.0"
 
 group :production do
   gem 'mysql2'
