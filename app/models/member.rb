@@ -35,6 +35,7 @@ class Member < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   has_many :providers,:foreign_key => "user_id",:dependent => :destroy
   has_many :u_words
+  after_create :send_greet
   
   EDIT_SIDENAV = %w{profile provider account}
   
@@ -69,6 +70,12 @@ class Member < ActiveRecord::Base
     else
       self.generate(prefix + "v")
     end
+  end
+  
+  # sidekiq job
+  def send_greet
+    pid = self.providers.first.id
+	  HardWorker::SendGreetJob.perform_async(pid)
   end
   
 end

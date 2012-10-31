@@ -89,17 +89,4 @@ module Grape
     
   end
   
-  class Bookmark
-    def initialize(url)
-      @url = URI.parse(url)
-    end
-    
-    def favicon
-      icon_path = @url.scheme + "://" + @url.host + "/favicon.ico"
-      if open(icon_path)
-        icon_path
-      end
-    end
-  end
-  
 end

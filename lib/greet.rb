@@ -24,8 +24,12 @@ class Greet
         :oauth_token_secret => veggie.secret
       )
       data = client.update(@content)
+    when "github"
+      #to-do
     end    
-    Greet.logger(data['id'].to_s + " send greet success to #{@provider.user_name}")
+    if data
+      Greet.logger(data['id'].to_s + " send greet success to #{@provider.user_name}")
+    end
   end 
   
   def self.logger(msg)

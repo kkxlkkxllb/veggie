@@ -50,7 +50,8 @@ end
 after 'deploy:update_code' do  
     softlinks = [
       "ln -nfs #{deploy_to}shared/config/unicorn.rb #{release_path}/config/unicorn.rb",
-      "ln -nfs #{deploy_to}shared/config/database.yml #{release_path}/config/database.yml"
+      "ln -nfs #{deploy_to}shared/config/database.yml #{release_path}/config/database.yml",
+      "ln -nfs #{deploy_to}shared/config/service.yml #{release_path}/config/service.yml"
     ]
     run "#{softlinks.join(';')}"
  

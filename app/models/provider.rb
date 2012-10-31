@@ -25,7 +25,7 @@ class Provider < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :tags
   
-  PROVIDERS = %w{twitter weibo}
+  PROVIDERS = %w{twitter weibo github}
   
   def avatar(style = :mudium )
     case style
@@ -81,10 +81,9 @@ class Provider < ActiveRecord::Base
     )
   end
   
-  # sidekiq job
   def send_greet
-    if !self.user_id.blank?
-	    HardWorker::SendGreetJob.perform_async(self.id)
+    if self.member.providers.length > 1
+      #send bind success greet
     end
   end
 

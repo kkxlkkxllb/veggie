@@ -4,20 +4,10 @@ module Onion
   class FetchWord  
     def initialize(word)
       url = $dict_source[:english]+word
-      frame = Nokogiri::HTML(open(url),nil)
-      if frame
-        begin
-          body = frame.css("#panel_com")
-          if body.blank?
-            body = frame.css("#panel_comment")
-          end
-          @comment = body[0].content.split("<br>")[0..2].join(" ")
-        
-          @word = word
-        rescue
-          nil
-        end
-      end
+      page = Mechanize.new.get(url)
+      target = page.parser.xpath("//div[@class='simple_content']")
+      @word = word
+      @comment = target.text.gsub("\r\n","").strip      
     end
   
     def insert    
@@ -35,10 +25,8 @@ module Onion
       @base_url = "http://www.goodreads.com"
       if opt[:author_id]
         @url = @base_url + "/author/quotes/" + spell_author(opt[:author_id])
-        @author_url = @base_url + "/author/show/" + spell_author(opt[:author_id])
       elsif opt[:author]
         @url = @base_url + "/author/quotes/" + opt[:author]
-        @author_url = @base_url + "/author/show/" + opt[:author]
       elsif opt[:tag]
         @url = @base_url + "/quotes/tag/" + opt[:tag]
       else
@@ -50,9 +38,10 @@ module Onion
       frame = Nokogiri::HTML(open(@url),nil)
       if frame
         @quotes = frame.css(".quoteText").inject([]) do |a,x|  
-          new_author_url = @author_url ? @author_url : @base_url + x.css("a").attr("href").value
-          x.css("a")[0]["href"] =  new_author_url    
-          x.css("a")[0]["target"] = "blank"    
+          x.css("a").each do |link|
+            link["href"] = @base_url + link["href"]
+            link["target"] = "blank" 
+          end  
           a << x.to_html
         end
       end
