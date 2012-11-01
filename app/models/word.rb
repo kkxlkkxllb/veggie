@@ -43,4 +43,13 @@ class Word < ActiveRecord::Base
     self.ctags.map{|t| "#"+t.name+" " }.join
   end  
   
+  def image
+    url = Grape::WordImage::STORE_FOLDER + self.title + ".jpg"
+    if File.exist?(url)
+      return url
+    else
+      Grape::WordImage.new(self.title).make
+    end
+  end
+  
 end

@@ -5,6 +5,17 @@ module Grape
     def load_service
       YAML.load_file(Rails.root.join("config", "service.yml")).fetch(Rails.env)
     end
+    
+    def img_save(url,output,success,error)
+      begin
+        data = open(url){|f|f.read}
+		    file = File.open(output,"wb") << data
+        file.close
+        success.call
+      rescue
+        error.call
+      end
+    end
   end
   
   class LeafImage
@@ -26,14 +37,10 @@ module Grape
       else
         `mkdir -p #{@store_path}`
         @image_urls.each do |k,v|
-          begin
-            filename = "#{k.to_s}.#{v.split('.')[-1]}"
-    		    data = open(v){|f|f.read}
-      		  file = File.open(@store_path+filename,"wb") << data
-            file.close
-          rescue
-            Leaf.logger.error("ERROR #{v} not found! skip")
-          end
+          filename = "#{k.to_s}.#{v.split('.')[-1]}"
+          error = -> { Leaf.logger.error("ERROR #{v} not found! skip") }
+          success = -> { }
+          img_save(v,@store_path+filename,success,error)
         end
       end
     end
@@ -41,7 +48,10 @@ module Grape
   end
   
   class WordImage < Base
+    STORE_FOLDER = "#{Rails.root}/public/system/images/word/"
+    
     def initialize(title)
+      @title = title
       title = URI.encode(title)
       @cid = load_service["bing"]["client_id"]
       @cpw = load_service["bing"]["client_secret"]
@@ -56,34 +66,59 @@ module Grape
 				http.request(req) 
 			end
 	    data = JSON.parse(response.body)["d"]["results"]
-			@pic_urls = data.inject([]){|a,x| a << x["MediaUrl"] }
+			data.inject([]){|a,x| a << x["MediaUrl"] }
     end   
+    
+    def make
+      @images = parse
+      path = STORE_FOLDER + @title.parameterize.underscore + ".jpg"
+      unless File.exist?(STORE_FOLDER)
+        `mkdir -p #{STORE_FOLDER}`
+      end
+      error = -> { puts "#{@images[0]} catch failed" }
+      success = -> { ImageConvert.new(path).draw(20,20,@title)  }
+      img_save(@images[0],path,success,error)
+    end
   end
   
   class ImageConvert
-    def initialize(quote,img_path,opts={})
+    def initialize(img_path,opts={})
       @opts = {
         :font_color  => '#eee', 
-        :font_size   => 20, 
-        :font_file   => File.join(Rails.root, "public/font/Tallys", "Tallys.ttf"), 
-        :outfile     => "public/quote.jpg",#Tempfile.new("quote_image").path, 
+        :font_size   => 24, 
+        :font_file   => "public/font/Tallys/Tallys.ttf", 
+        :outfile     => img_path,#Tempfile.new("quote_image").path, 
         :watermark   => "17up.org"  # 水印
       }.update(opts)
-      @quote = quote
-      @img_path = img_path
+
+      @img=Magick::Image.read(img_path).first
+      @img_width = @img.columns
+      @img_height = @img.rows
     end
     
-    def done
-      img_width = Dimensions.width(@img_path)
-      img_height = Dimensions.height(@img_path)
-      cmd = [
-        "convert -size #{img_width}x#{img_height} xc:transparent",
-        "-font #{@opts[:font_file]} -pointsize #{@opts[:font_size]}",
-        "-gravity SouthEast",
-        "-fill \'#{@opts[:font_color]}\' -annotate 0x0+20+#{img_height-20*2} \"#{@opts[:watermark]}\"",
-        "\"#{@img_path}\" +swap -composite #{@opts[:outfile]}"
-      ].join(" ")
-      `#{cmd}`
+    def add_watermark
+      gc = Magick::Draw.new 
+      gc.pointsize(@opts[:font_size])
+      gc.fill(@opts[:font_color])
+      gc.stroke('transparent')
+      gc.font(@opts[:font_file])
+      gc.text(@img_width - 100,@img_height - 20,@opts[:watermark])
+      gc.draw(@img)
+    end
+    
+    def draw(x,y,text)
+      add_watermark
+      gc = Magick::Draw.new 
+      gc.pointsize(@opts[:font_size])
+      gc.fill(@opts[:font_color])
+      gc.stroke('transparent')
+      gc.font_weight('bold')
+      gc.font("public/font/Lobster/Lobster.ttf")
+      gc.text(x,y,text)
+      gc.draw(@img)  
+      #@img.transparent_color = 'white'
+      #@img.transparent('white')
+      @img.write(@opts[:outfile])
       return @opts[:outfile]
     end
     

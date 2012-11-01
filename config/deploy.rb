@@ -28,11 +28,11 @@ set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 namespace :deploy do
   desc "Reload unicorn"
   task :restart, :roles => :app, :except => { :no_release => true } do   
-    run "cat #{unicorn_pid};touch #{current_path}/tmp/restart.txt;kill -USR2 `cat #{unicorn_pid}`"
+    #run "cat #{unicorn_pid};touch #{current_path}/tmp/restart.txt;kill -USR2 `cat #{unicorn_pid}`"
 		  
     # run "kill -QUIT `cat #{unicorn_pid}`" 
     # sleep(10)
-    # run "cd #{current_path} && bundle exec unicorn_rails -c config/unicorn.rb -E production -D"
+     run "cd #{current_path} && bundle exec unicorn_rails -c config/unicorn.rb -E production -D"
   end
 
   desc "migrate"
