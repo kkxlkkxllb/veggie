@@ -1,4 +1,3 @@
-require "open-uri"
 # image function
 module Grape
   class Base
@@ -18,7 +17,7 @@ module Grape
     end
   end
   
-  class LeafImage
+  class LeafImage < Base
   
     def initialize(leaf)
       @leaf = leaf     
@@ -29,10 +28,7 @@ module Grape
     end
   
     def download
-      if Dir[@store_path+"*"].empty?
-         `rmdir #{@store_path}`
-      end
-      if File.exist?(@store_path)
+      if File.exist?(@store_path) and !Dir[@store_path+"*"].empty?
         Leaf.logger.warn("WARN #{@store_path} already exsit! stop")
       else
         `mkdir -p #{@store_path}`
@@ -71,13 +67,14 @@ module Grape
     
     def make
       @images = parse
-      path = STORE_FOLDER + @title.parameterize.underscore + ".jpg"
-      unless File.exist?(STORE_FOLDER)
-        `mkdir -p #{STORE_FOLDER}`
+      folder = STORE_FOLDER + @title.parameterize.underscore + "/"
+      file = "#{folder}orignal.jpg"
+      unless File.exist?(folder)
+        `mkdir -p #{folder}`
       end
       error = -> { puts "#{@images[0]} catch failed" }
-      success = -> { ImageConvert.new(path).draw(20,20,@title)  }
-      img_save(@images[0],path,success,error)
+      success = -> { ImageConvert.new(file,:outfile => "#{folder}17up.jpg").draw(20,30,@title)  }
+      img_save(@images[0],file,success,error)
     end
   end
   
@@ -85,39 +82,41 @@ module Grape
     def initialize(img_path,opts={})
       @opts = {
         :font_color  => '#eee', 
-        :font_size   => 24, 
+        :font_size   => '24', 
         :font_file   => "public/font/Tallys/Tallys.ttf", 
         :outfile     => img_path,#Tempfile.new("quote_image").path, 
-        :watermark   => "17up.org"  # 水印
+        :watermark   => "17up.org",  # 水印
+        :size => "280"
       }.update(opts)
 
-      @img=Magick::Image.read(img_path).first
-      @img_width = @img.columns
-      @img_height = @img.rows
+      @img = MiniMagick::Image.open(img_path)
+      @img_width = @img[:width]
+      @img_height = @img[:height]
     end
     
     def add_watermark
-      gc = Magick::Draw.new 
-      gc.pointsize(@opts[:font_size])
-      gc.fill(@opts[:font_color])
-      gc.stroke('transparent')
-      gc.font(@opts[:font_file])
-      gc.text(@img_width - 100,@img_height - 20,@opts[:watermark])
-      gc.draw(@img)
+      @img.combine_options do |gc|
+        gc.pointsize(@opts[:font_size])
+        gc.fill(@opts[:font_color])
+        gc.stroke('transparent')
+        gc.font(@opts[:font_file])
+        gc.draw("text #{@img_width - 80},#{@img_height - 10} '#{@opts[:watermark]}'")
+      end
     end
     
     def draw(x,y,text)
+      @img.resize @opts[:size]
       add_watermark
-      gc = Magick::Draw.new 
-      gc.pointsize(@opts[:font_size])
-      gc.fill(@opts[:font_color])
-      gc.stroke('transparent')
-      gc.font_weight('bold')
-      gc.font("public/font/Lobster/Lobster.ttf")
-      gc.text(x,y,text)
-      gc.draw(@img)  
-      #@img.transparent_color = 'white'
-      #@img.transparent('white')
+      @img.combine_options do |gc|
+        gc.pointsize(@opts[:font_size])
+        gc.fill(@opts[:font_color])
+        gc.stroke('transparent')
+        gc.weight('bold')
+        gc.font("public/font/Lobster/Lobster.ttf")
+        gc.draw("text #{x},#{y} '#{text}'")
+        #@img.transparent_color = 'white'
+        #@img.transparent('white')
+      end     
       @img.write(@opts[:outfile])
       return @opts[:outfile]
     end

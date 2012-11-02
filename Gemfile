@@ -47,7 +47,7 @@ gem "goodreads"
 
 gem 'haml'
 gem 'rails_autolink'
-gem 'rmagick'
+gem "mini_magick"
 
 group :production do
   gem 'mysql2'
