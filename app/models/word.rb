@@ -44,7 +44,7 @@ class Word < ActiveRecord::Base
   end  
   
   def image
-    url = Grape::WordImage::STORE_FOLDER + self.title + ".jpg"
+    url = Grape::WordImage::STORE_FOLDER + self.title + "/orignal.jpg"
     if File.exist?(url)
       return url
     else
