@@ -27,5 +27,6 @@ zh-cn:
       provider: "第三方帐号"
       account: "帐户"
   greet:
-    new_user: "欢迎入住 17up 外语学院 Alpha 班，成为第 %{num} 位学员。［%{motto}］"
-    new_leafs: "2012年的初秋，veggie 种下了一颗树，今天又长了 %{num} 片新叶子啦，快来看看吧：http://17up.org/t"
+    new_user: "[撒花] @%{name} 欢迎入住 17up 外语学院 Alpha 班，成为第 %{num} 位学员。［%{motto}］"
+    new_leafs: "2012的光棍节要来了，兄弟们姐妹们和我一起祈祷奇迹吧，今天只长了 %{num} 片新叶子，还是瞧瞧：http://17up.org/t"
+    bind_provider: "[笑哈哈] @%{name} 交个朋友吧,［%{motto}］"

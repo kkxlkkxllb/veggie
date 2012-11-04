@@ -83,7 +83,7 @@ class Provider < ActiveRecord::Base
   
   def send_greet
     if self.member.providers.length > 1
-      #send bind success greet
+      HardWorker::SendGreetJob.perform_async(self.id,:bind => true)
     end
   end
 

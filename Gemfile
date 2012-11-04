@@ -44,6 +44,7 @@ gem "weibo_17up"
 gem "twitter"
 gem "instagram", "~> 0.8.5"
 gem "goodreads"
+gem "github_api"
 
 gem 'haml'
 gem 'rails_autolink'

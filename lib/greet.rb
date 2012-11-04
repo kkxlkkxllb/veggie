@@ -8,7 +8,11 @@ class Greet
       greet = YAML.load_file(Rails.root.join("lib/cherry", "greet.yml")).fetch("greet")   
       @provider = Provider.find(pid)
       @motto = greet[rand(greet.length)]
-      @content = "Hi,@#{@provider.user_name} " + I18n.t('greet.new_user',:num => @provider.member.id,:motto => @motto)
+      if opts[:bind]
+        @content = I18n.t('greet.bind_provider',:name =>@provider.user_name,:motto => @motto)
+      else
+        @content = I18n.t('greet.new_user',:name =>@provider.user_name,:num => @provider.member.id,:motto => @motto)
+      end
     end
   end
   
@@ -25,7 +29,8 @@ class Greet
       )
       data = client.update(@content)
     when "github"
-      #to-do
+      github = Github.new oauth_token: veggie.token
+      github.users.followers.follow @provider.user_name
     end    
     if data
       Greet.logger(data['id'].to_s + " send greet success to #{@provider.user_name}")

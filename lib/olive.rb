@@ -1,4 +1,4 @@
-#tagged resource from [Tumblr/Instagram]
+# Fetch Pics Then Upload to SNS
 module Olive
   class Base
     include ActionView::Helpers::SanitizeHelper    
@@ -9,6 +9,22 @@ module Olive
     
     def logger(msg)
       Logger.new(File.join(Rails.root,"log","olive.log")).info("[#{Time.now.to_s}]" + msg.to_s)
+    end
+    
+    # google map place search by text,get lat&lng
+    def location(query)
+      key = load_service["google"]["api_key"]
+      request_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{query}&key=#{key}&sensor=true"
+      url = URI.parse(request_url)
+	    response = Net::HTTP.start(url.host, url.port,:use_ssl => url.scheme == 'https') do |http|
+				http.request(Net::HTTP::Get.new(request_url)) 
+			end
+			data = JSON.parse(response.body)["results"][0]
+			{
+			  :address => data["formatted_address"],
+			  :lat => data["geometry"]["location"]["lat"],
+			  :lng => data["geometry"]["location"]["lng"]
+			}
     end
     
     # upload to weibo
@@ -65,8 +81,30 @@ module Olive
     def tagged(tag,skip_tm = false)
       @tm = skip_tm ? 0 : @tm
       resp = @client.tag_recent_media(tag)
-      @post = resp.data.inject([]) do |a,x| 
-        if x.caption and x.created_time.to_i > @tm
+      @post = get_post(resp.data,@tm)
+      logger("From Instagram -- Time: #{@tm}; Num: #{@post.length}; Tag: #{tag}")
+      
+      return @post
+    end
+    
+    def popular
+      resp = @client.media_popular
+      @post = get_post(resp)
+    end
+    
+    def around(query)
+      location = location(query)
+      resp = @client.media_search(location[:lat].to_s,location[:lng].to_s)
+      @post = get_post(resp.data)
+      logger("From Instagram --  Num: #{@post.length}; location: #{location[:address]}")
+      
+      return @post
+    end
+    
+    private
+    def get_post(data,tm = 0)
+      data.inject([]) do |a,x| 
+        if x.caption and x.created_time.to_i > tm
           a<<{
             :photo => x.images.standard_resolution.url,
             :caption => x.caption.text
@@ -74,9 +112,6 @@ module Olive
         end
         a
       end
-      logger("From Instagram -- Time: #{@tm}; Num: #{@post.length}; Tag: #{tag}")
-      
-      return @post
     end
     
   end
