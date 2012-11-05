@@ -17,6 +17,11 @@
 					%li
 						%a{:href => "#"+t,:"data-filter" => "."+t}
 							= t.capitalize
+			%span.btn-group
+				%span.btn.btn-info.active
+					%i.icon-th-large
+				%span.btn.btn-info
+					%i.icon-picture
 		#word_ground
 			- @words.each do |w|
 				= render 'word',:w => w

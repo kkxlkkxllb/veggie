@@ -45,6 +45,7 @@ gem "twitter"
 gem "instagram", "~> 0.8.5"
 gem "goodreads"
 gem "github_api"
+gem "amazon-ecs"
 
 gem 'haml'
 gem 'rails_autolink'

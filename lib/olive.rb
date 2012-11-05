@@ -101,6 +101,22 @@ module Olive
       return @post
     end
     
+    # return lat/lng/id/name
+    def location_search(query,opts={})
+      if query
+        location = location(query)
+        data = @client.location_search(location[:lat].to_s,location[:lng].to_s)
+      else
+        data = @client.location_search(opts[:lat].to_s,opts[:lng].to_s)
+      end
+      data.to_json
+    end
+    
+    def location_recent_media(id)
+      resp = @client.location_recent_media(id.to_i)
+      @post = get_post(resp.data)
+    end
+    
     private
     def get_post(data,tm = 0)
       data.inject([]) do |a,x| 

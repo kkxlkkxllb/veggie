@@ -65,16 +65,16 @@ module Grape
 			data.inject([]){|a,x| a << x["MediaUrl"] }
     end   
     
-    def make
-      @images = parse
+    def make(url=nil)
+      @image = url ? url : parse[0]
       folder = STORE_FOLDER + @title.parameterize.underscore + "/"
       file = "#{folder}orignal.jpg"
       unless File.exist?(folder)
         `mkdir -p #{folder}`
       end
-      error = -> { puts "#{@images[0]} catch failed" }
+      error = -> { puts "#{@image} catch failed" }
       success = -> { ImageConvert.new(file,:outfile => "#{folder}17up.jpg").draw(20,30,@title)  }
-      img_save(@images[0],file,success,error)
+      img_save(@image,file,success,error)
     end
   end
   

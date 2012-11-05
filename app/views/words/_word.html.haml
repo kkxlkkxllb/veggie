@@ -5,8 +5,6 @@
 	- if @can_add_tag
 		%a.itag(href="#")
 			%i.icon-plus
-	%a{:href => $pic_search + w.title }(target = "blank")
-		%i.icon-picture(title="图解" rel="tooltip")
 	%a.audio(href="#")
 		%i.icon-headphones(title="发音" rel="tooltip")
 		%audio{:src => w.source_voice}
@@ -18,3 +16,5 @@
 		= w.content
 	%span.ctags
 		= w.hash_tags
+	.pic
+		= ""

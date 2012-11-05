@@ -35,6 +35,8 @@ Veggie::Application.routes.draw do
     post "create"
     post "add_tag"
     post "clone"
+    post "make_pic"
+    post "pics"
   end
   
   match "t" => "leafs#index", :as => :leafs
