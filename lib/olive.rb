@@ -1,5 +1,6 @@
 # Fetch Pics Then Upload to SNS
 module Olive
+  
   class Base
     include ActionView::Helpers::SanitizeHelper    
     

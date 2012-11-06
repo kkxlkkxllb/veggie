@@ -4,6 +4,15 @@ module Utils
     include ActionView::Helpers
   end
   
+  def self.parse_ip(ip)
+    api_url = "http://ip.taobao.com/service/getIpInfo.php?ip="
+    resp = Net::HTTP.get_response(URI.parse(api_url+ip)).body
+		data = JSON.parse(resp)
+		if data["code"] == 0
+			return data["data"]["country"] + data["data"]["region"] + data["data"]["city"] + data["data"]["isp"]
+		end
+  end
+  
   def self.rand_passwd(size=6, opts = {})
     passwd = []
     # 全部使用字母
@@ -36,5 +45,41 @@ module Utils
       `curl #{form} '#{url}' 2>/dev/null`
     end
   end
+  
+  module Cloud
+    class Base
+      def initialize(login={})
+      	login = {
+  				:name => "kkxlkkxllb@gmail.com",
+  				:passwd => ""
+  			}.update(login)
+  			@session = GoogleDrive.login(login[:name], login[:passwd])
+  		end
+
+  		def list
+  			@session.files.inject([]){|a,x| a << x.title}
+  		end
+
+  		def upload(file_path,file_name)
+  			@session.upload_from_file(file_path, file_name, :convert => false)
+  		end
+
+  		def download(file_name,save_path)
+  			file = @session.file_by_title(file_name)
+  			if file
+  				file.download_to_file(save_path)
+  			end
+  		end
+  		
+    end
+    
+    class Backup < Base
+      def word_image
+        folder = "public/system/images/word"
+      end
+      
+    end
+    
+  end 
   
 end

@@ -44,7 +44,6 @@ module Grape
   end
   
   class WordImage < Base
-    STORE_FOLDER = "#{Rails.root}/public/system/images/word/"
     
     def initialize(title)
       @title = title
@@ -67,7 +66,7 @@ module Grape
     
     def make(url=nil)
       @image = url ? url : parse[0]
-      folder = STORE_FOLDER + @title.parameterize.underscore + "/"
+      folder = Word::IMAGE_PATH + @title.parameterize.underscore + "/"
       file = "#{folder}orignal.jpg"
       unless File.exist?(folder)
         `mkdir -p #{folder}`

@@ -17,7 +17,7 @@ class HomeController < ApplicationController
   def info
     set_seo_meta("简介",t('keywords'),t('describe'))
     @request = request.remote_ip
-    @info = TaobaoIpParser.new(@request).parse
+    @info = Utils.parse_ip(@request)
   end
   
   def quote

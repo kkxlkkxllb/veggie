@@ -17,6 +17,8 @@ class Word < ActiveRecord::Base
   validates :title, :presence => true, :uniqueness => true
   # 有ctag的words
   scope :vall, joins(:ctags).group("words.id")
+  IMAGE_URL = "/system/images/word/"
+  IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
   
   acts_as_taggable
   acts_as_taggable_on :ctags
@@ -43,13 +45,10 @@ class Word < ActiveRecord::Base
     self.ctags.map{|t| "#"+t.name+" " }.join
   end  
   
-  def image
-    url = Grape::WordImage::STORE_FOLDER + self.title + "/orignal.jpg"
-    if File.exist?(url)
-      return url
-    else
-      Grape::WordImage.new(self.title).make
-    end
+  def image(style="orignal")
+    url = IMAGE_URL + self.title + "/#{style}.jpg"
+    path = IMAGE_PATH + self.title + "/#{style}.jpg"
+    return File.exist?(path) ? url : "/assets/icon/jiong.png"
   end
   
 end
