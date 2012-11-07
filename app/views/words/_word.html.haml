@@ -1,20 +1,23 @@
 .word_item{:class => w.ctags, :wid => w.id}
-	- if current_member and !current_member.has_u_word(w)
-		%a.fetch(href="#")
-			%i.icon-share(title="收录" rel="tooltip")
-	- if @can_add_tag
-		%a.itag(href="#")
-			%i.icon-plus
-	%a.audio(href="#")
-		%i.icon-headphones(title="发音" rel="tooltip")
-		%audio{:src => w.source_voice}
-	%a{:href => w.source_link }(target = "blank")
-		%i.icon-info-sign(title = "详情" rel="tooltip")	
-	%span.title
-		= w.title		
-	%span.content
-		= w.content
-	%span.ctags
-		= w.hash_tags
-	.pic
+	.wd
+		- if current_member and !current_member.has_u_word(w)
+			%a.fetch(href="#")
+				%i.icon-share(title="收录" rel="tooltip")
+		- if @can_add_tag
+			%a.itag(href="#")
+				%i.icon-plus
+		%a.audio(href="#")
+			%i.icon-headphones(title="发音" rel="tooltip")
+			%audio{:src => w.source_voice}
+		%a{:href => w.source_link }(target = "blank")
+			%i.icon-info-sign(title = "详情" rel="tooltip")	
+		%span.title
+			= w.title		
+		%span.content
+			= w.content
+		%span.ctags
+			= w.hash_tags
+	.pic.hide
 		= image_tag(w.image)
+		%span.change_btn
+			%i.icon-refresh

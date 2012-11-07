@@ -16,6 +16,7 @@ word.init_words_ground = ($container,item,$form) ->
 	init_filter($container)
 	form_submit($("#new_word form"))
 	init_fetch_word($container)
+	init_word_viewport($("#word_nav span.btn-group"),$container)
 word.form_submit = (ele) ->
 	ele.bind 'ajax:beforeSend', ->
 		$("input",ele).addClass "disable_event"
@@ -63,3 +64,10 @@ word.init_fetch_word = ($container) ->
 		$.post "/words/clone",{id:wid},(data) ->
 			if data.status is 0
 				ele.hide()
+word.init_word_viewport = ($wrap,$container) ->
+	$wrap.delegate "span.btn","click", ->
+		ele = $(this)
+		rel = ele.attr("rel")
+		ele.addClass("active").siblings().removeClass('active')
+		$("."+rel,$container).show().siblings().hide()
+		$container.isotope()
