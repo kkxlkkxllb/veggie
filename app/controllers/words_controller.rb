@@ -1,6 +1,6 @@
 # coding: utf-8
 class WordsController < ApplicationController
-  before_filter :authenticate_member!,:except => [:index,:pics]
+  before_filter :authenticate_member!,:except => [:index]
   
   # 外语教室
   # 按时间区间展示 1.week
@@ -53,14 +53,14 @@ class WordsController < ApplicationController
     end
   end
   
-  def pics
-    @pics = Grape::WordImage.new(params[:title]).parse
-    render_json(0,"ok",{:pics => @pics.to_json})
-  end
-  
-  def make_pic
-    Grape::WordImage.new(params[:title]).make(params[:url])
-    render_json(0,"ok")
+  def make_pic   
+    @word = Word.find(params[:id])
+    @pics = Rails.cache.fetch("word/#{@word.id}/imgs") do
+        Grape::WordImage.new(@word.title).parse
+      end
+    img = @pics[rand(10)]
+    Grape::WordImage.new(@word.title).make(img)
+    render_json(0,"ok",{:pic => @word.image+"?#{Time.now.to_i}"})
   end
   
   # TO-DO destroy u_word

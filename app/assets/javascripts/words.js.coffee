@@ -17,6 +17,7 @@ word.init_words_ground = ($container,item,$form) ->
 	form_submit($("#new_word form"))
 	init_fetch_word($container)
 	init_word_viewport($("#word_nav span.btn-group"),$container)
+	init_img_change($container)
 word.form_submit = (ele) ->
 	ele.bind 'ajax:beforeSend', ->
 		$("input",ele).addClass "disable_event"
@@ -71,3 +72,9 @@ word.init_word_viewport = ($wrap,$container) ->
 		ele.addClass("active").siblings().removeClass('active')
 		$("."+rel,$container).show().siblings().hide()
 		$container.isotope()
+word.init_img_change = ($container) ->
+	$container.delegate "span.change_btn","click", ->
+		$wrap = $(this).closest('.word_item')
+		$.post "/words/make_pic",{id:$wrap.attr("wid")},(data) ->
+			if data.status is 0
+				$('.pic img',$wrap).attr("src",data.data.pic)

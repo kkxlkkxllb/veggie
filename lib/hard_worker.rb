@@ -29,6 +29,12 @@ module HardWorker
     end
   end
   
+  class WordPicJob < Base
+    def perform(title)
+      Grape::WordImage.new(title).make
+    end   
+  end
+  
   class UploadOlive < Base
     def perform(content,pic)
       provider = Provider.find(38)

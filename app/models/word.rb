@@ -22,6 +22,7 @@ class Word < ActiveRecord::Base
   
   acts_as_taggable
   acts_as_taggable_on :ctags
+  after_create :make_pic
   
   class << self
     def parse_tag(str)
@@ -49,6 +50,10 @@ class Word < ActiveRecord::Base
     url = IMAGE_URL + self.title + "/#{style}.jpg"
     path = IMAGE_PATH + self.title + "/#{style}.jpg"
     return File.exist?(path) ? url : "/assets/icon/jiong.png"
+  end
+  
+  def make_pic
+    HardWorker::WordPicJob.perform_async(self.title)
   end
   
 end
