@@ -71,8 +71,21 @@ module Grape
       unless File.exist?(folder)
         `mkdir -p #{folder}`
       end
+      unless File.exist?("#{folder}w.png")
+        opts = {
+          :text => @title,
+          :type => 2,
+          :word_path => "#{folder}w.png"
+        }
+        ImageConvert.draw_word(opts)
+      end
       error = -> { puts "#{@image} catch failed" }
-      success = -> { ImageConvert.new(file,:outfile => "#{folder}17up.jpg").draw(20,30,@title)  }
+      opts = {
+        :outfile => "#{folder}17up.jpg"
+      }
+      success = -> {        
+        ImageConvert.new(file,opts).draw("#{folder}w.png")  
+      }
       img_save(@image,file,success,error)
     end
   end
@@ -80,41 +93,57 @@ module Grape
   class ImageConvert
     def initialize(img_path,opts={})
       @opts = {
-        :font_color  => '#eee', 
-        :font_size   => '24', 
-        :font_file   => "public/font/Tallys/Tallys.ttf", 
-        :outfile     => img_path,#Tempfile.new("quote_image").path, 
-        :watermark   => "17up.org",  # 水印
+        :outfile => img_path,#Tempfile.new("quote_image").path, 
         :size => "280"
       }.update(opts)
 
       @img = MiniMagick::Image.open(img_path)
     end
     
-    def add_watermark(x,y)
-      @img.combine_options do |gc|
-        gc.pointsize(@opts[:font_size])
-        gc.fill(@opts[:font_color])
-        gc.stroke('transparent')
-        gc.font(@opts[:font_file])
-        gc.draw("text #{x},#{y} '#{@opts[:watermark]}'")
+    # 水印，暂时不用
+    def add_watermark(img)
+      unless File.exist?("public/water_mark.png")
+        opts = {
+          :font => "public/font/Tallys/Tallys.ttf",
+          :word_path => "public/water_mark.png"
+        }
+        ImageConvert.draw_word(opts)
+      end
+      return img.composite(MiniMagick::Image.open("public/water_mark.png")) do |c|
+        c.gravity "NorthWest"
       end
     end
     
-    def draw(x,y,text)
+    def self.draw_word(opts = {})
+      opts = {
+        :text => "17up",
+        :font_size => 30,
+        :type => 1,
+        :word_path => "public/w.png",
+        :font => "public/font/Lobster/Lobster.ttf"
+      }.update(opts)
+      case opts[:type]
+      when 1
+      `montage -background none -fill white -font '#{opts[:font]}' \
+                 -pointsize #{opts[:font_size]} label:'#{opts[:text]}' +set label \
+                 -shadow  xc:transparent -geometry +5+5 \
+                 #{opts[:word_path]}`
+      when 2
+        `convert -size 100x50 xc:transparent -font '#{opts[:font]}' -pointsize #{opts[:font_size]} \
+                   -fill black        -annotate +12+32 '#{opts[:text]}' \
+                   -fill white       -annotate +13+33 '#{opts[:text]}' \
+                   -fill transparent  -annotate +12.5+32.5 '#{opts[:text]}' \
+                   #{opts[:word_path]}`
+                   
+      end
+    end
+    
+    def draw(word_path)
       @img.resize @opts[:size]
-      add_watermark(@img[:width] - 80,@img[:height] - 10)
-      @img.combine_options do |gc|
-        gc.pointsize(@opts[:font_size])
-        gc.fill(@opts[:font_color])
-        gc.stroke('transparent')
-        gc.weight('bold')
-        gc.font("public/font/Lobster/Lobster.ttf")
-        gc.draw("text #{x},#{y} '#{text}'")
-        #@img.transparent_color = 'white'
-        #@img.transparent('white')
-      end     
-      @img.write(@opts[:outfile])
+      result = @img.composite(MiniMagick::Image.open(word_path)) do |c|
+        c.gravity "center"
+      end
+      result.write(@opts[:outfile])
       return @opts[:outfile]
     end
     
