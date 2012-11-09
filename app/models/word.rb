@@ -46,7 +46,7 @@ class Word < ActiveRecord::Base
     self.ctags.map{|t| "#"+t.name+" " }.join
   end  
   
-  def image(style="orignal")
+  def image(style="17up")
     url = IMAGE_URL + self.title + "/#{style}.jpg"
     path = IMAGE_PATH + self.title + "/#{style}.jpg"
     return File.exist?(path) ? url : "/assets/icon/jiong.png"

@@ -89,23 +89,21 @@ module Grape
       }.update(opts)
 
       @img = MiniMagick::Image.open(img_path)
-      @img_width = @img[:width]
-      @img_height = @img[:height]
     end
     
-    def add_watermark
+    def add_watermark(x,y)
       @img.combine_options do |gc|
         gc.pointsize(@opts[:font_size])
         gc.fill(@opts[:font_color])
         gc.stroke('transparent')
         gc.font(@opts[:font_file])
-        gc.draw("text #{@img_width - 80},#{@img_height - 10} '#{@opts[:watermark]}'")
+        gc.draw("text #{x},#{y} '#{@opts[:watermark]}'")
       end
     end
     
     def draw(x,y,text)
       @img.resize @opts[:size]
-      add_watermark
+      add_watermark(@img[:width] - 80,@img[:height] - 10)
       @img.combine_options do |gc|
         gc.pointsize(@opts[:font_size])
         gc.fill(@opts[:font_color])
