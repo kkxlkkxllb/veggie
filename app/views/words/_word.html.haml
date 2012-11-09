@@ -19,5 +19,6 @@
 			= w.hash_tags
 	.pic.hide
 		= image_tag(w.image)
-		%span.change_btn
-			%i.icon-refresh
+		- if @can_add_tag
+			%span.change_btn
+				%i.icon-refresh

@@ -18,9 +18,9 @@
 						%a{:href => "#"+t,:"data-filter" => "."+t}
 							= t.capitalize
 			%span.btn-group
-				%span.btn.btn-info.active(rel="wd")
+				%span.btn.btn-inverse.active(rel="wd")
 					%i.icon-th-large
-				%span.btn.btn-info(rel="pic")
+				%span.btn.btn-inverse(rel="pic")
 					%i.icon-picture
 		#word_ground
 			- @words.each do |w|

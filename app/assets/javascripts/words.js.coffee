@@ -74,7 +74,16 @@ word.init_word_viewport = ($wrap,$container) ->
 		$container.isotope()
 word.init_img_change = ($container) ->
 	$container.delegate "span.change_btn","click", ->
-		$wrap = $(this).closest('.word_item')
+		ele = $(this)
+		ele.hide()
+		$wrap = ele.closest('.word_item')
+		$('.pic img',$wrap).queue (next) ->
+			$(this).animate({opacity: 0.2},800).animate({opacity: 1},800)
+			$(this).queue(arguments.callee)
+			next()
 		$.post "/words/make_pic",{id:$wrap.attr("wid")},(data) ->
 			if data.status is 0
-				$('.pic img',$wrap).attr("src",data.data.pic)
+				$('.pic img',$wrap).attr("src",data.data.pic).load ->
+					$container.isotope()
+					$(this).stop(true).css "opacity",1
+					ele.show()
