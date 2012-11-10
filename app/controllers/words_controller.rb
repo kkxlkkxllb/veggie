@@ -56,10 +56,10 @@ class WordsController < ApplicationController
   def make_pic   
     @word = Word.find(params[:id])
     @pics = Rails.cache.fetch("word/#{@word.id}/imgs") do
-        Grape::WordImage.new(@word.title).parse
+        Grape::WordImage.new(@word.title).parse(@word.ctag_list.join(" "))
       end
     img = @pics[rand(@pics.length)]
-    Grape::WordImage.new(@word.title,@word.ctag_list.join(" ")).make(img)
+    Grape::WordImage.new(@word.title).make(img)
     render_json(0,"ok",{:pic => @word.image+"?#{Time.now.to_i}"})
   end
   

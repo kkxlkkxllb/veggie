@@ -1,7 +1,17 @@
 # coding: utf-8
 class HomeController < ApplicationController
-  before_filter :redirect_home,:only => :index
   caches_page :index,:quote
+  
+  def door
+    agent = request.user_agent.downcase
+    if current_member
+      redirect_to account_path
+    elsif agent.include?("iphone") or agent.include?("android")
+      redirect_to $config[:mobile_host]
+    else
+      redirect_to welcome_path
+    end
+  end
   
   def index
     set_seo_meta(nil,t('keywords'),t('describe'))
@@ -25,14 +35,4 @@ class HomeController < ApplicationController
     @quotes = Onion::FetchQuote.new().done
   end
   
-  private
-  
-  def redirect_home
-    agent = request.user_agent.downcase
-    if current_member
-      redirect_to account_path
-    elsif agent.include?("iphone") or agent.include?("android")
-      redirect_to $config[:mobile_host]
-    end
-  end
 end

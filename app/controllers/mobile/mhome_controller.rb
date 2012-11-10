@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 class Mobile::MhomeController < ApplicationController
   layout 'mobile/application'
+  caches_page :index
+  
   def index
     set_seo_meta("手机版",t('keywords'),t('describe'))
   end
@@ -25,7 +27,7 @@ class Mobile::MhomeController < ApplicationController
   end
   
   def word
-    @ctags = load_course["chapter_1"]["ctags"].split(";")
+    @ctags = load_course["mission_1"]["ctags"].split(";")
     @tag = params[:ctag].blank? ? @ctags[0] : params[:ctag]
     RWord.build(@tag)
     @words = RWord.all(@tag)

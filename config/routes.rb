@@ -27,6 +27,7 @@ Veggie::Application.routes.draw do
     post "create"
   end
   
+  match "welcome" => "home#index", :as => :welcome
   match "square" => "home#square", :as => :hot
   match "info" => "home#info", :as => :info
   match "course" => "words#index", :as => :words
@@ -43,7 +44,7 @@ Veggie::Application.routes.draw do
     post "destroy"
   end
  
-  root :to => 'home#index'
+  root :to => 'home#door'
 
   # See how all your routes lay out with "rake routes"
 
