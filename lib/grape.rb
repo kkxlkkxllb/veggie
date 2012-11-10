@@ -129,11 +129,11 @@ module Grape
                  -shadow  xc:transparent -geometry +5+5 \
                  #{opts[:word_path]}`
       when 2
-        `convert -size 100x50 xc:transparent -font '#{opts[:font]}' -pointsize #{opts[:font_size]} \
+        `convert -size 280x50 xc:transparent -font '#{opts[:font]}' -pointsize #{opts[:font_size]} \
                    -fill black        -annotate +12+32 '#{opts[:text]}' \
                    -fill white       -annotate +13+33 '#{opts[:text]}' \
                    -fill transparent  -annotate +12.5+32.5 '#{opts[:text]}' \
-                   #{opts[:word_path]}`
+                  -trim #{opts[:word_path]}`
                    
       end
     end

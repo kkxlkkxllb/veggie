@@ -55,7 +55,7 @@ after 'deploy:update_code' do
     ]
     run "#{softlinks.join(';')}"
  
-    run "cd #{release_path} && bundle exec rake RAILS_ENV=production RAILS_GROUPS=assets assets:precompile"  
+    run "cd #{release_path} && bundle exec rake RAILS_ENV=production RAILS_GROUPS=assets assets:clean assets:precompile"  
     #run "RAILS_ENV=production resque-web #{current_path}/config/initializers/resque.rb"      
 end
 # if you want to clean up old releases on each deploy uncomment this:
