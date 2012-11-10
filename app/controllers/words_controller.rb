@@ -59,7 +59,7 @@ class WordsController < ApplicationController
         Grape::WordImage.new(@word.title).parse
       end
     img = @pics[rand(@pics.length)]
-    Grape::WordImage.new(@word.title).make(img)
+    Grape::WordImage.new(@word.title,@word.ctag_list.join(" ")).make(img)
     render_json(0,"ok",{:pic => @word.image+"?#{Time.now.to_i}"})
   end
   

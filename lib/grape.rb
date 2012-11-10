@@ -45,9 +45,9 @@ module Grape
   
   class WordImage < Base
     
-    def initialize(title)
+    def initialize(title,info="")
       @title = title
-      title = URI.encode(title)
+      title = URI.encode("#{title} #{info}")
       @cid = load_service["bing"]["client_id"]
       @cpw = load_service["bing"]["client_secret"]
       @base_url = "https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/Image?Query='#{title}'&$format=json"
