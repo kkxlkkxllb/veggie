@@ -3,7 +3,7 @@ class Greet
   def initialize(pid, opts={})
     if pid.blank?
       @provider = Member.first.providers.where(:provider => opts[:provider]).first
-      @content = I18n.t('greet.new_leafs',:num => opts[:new_leaf_count])
+      @content = I18n.t('greet.new_leafs',:num => opts[:new_leaf_count],:cast => Utils.check_weather)
     else
       greet = YAML.load_file(Rails.root.join("lib/cherry", "greet.yml")).fetch("greet")   
       @provider = Provider.find(pid)

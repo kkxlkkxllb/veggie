@@ -20,6 +20,10 @@ zh-cn:
     title: "广场"
     keywords: "友情链接,热门排行,类目"
     describe: "这里是 17up 广场，各类活动的展示区域"
+  quote:
+    title: "咖啡馆"
+    keywords: "引用,名言"
+    describe: "广场和咖啡馆现在只有一个街区的距离了哟"
   members:
     edit: "%{name} 学员设置"
     sidenav:
@@ -28,5 +32,5 @@ zh-cn:
       account: "帐户"
   greet:
     new_user: "[撒花] @%{name} 欢迎入住 17up 外语学院 Alpha 班，成为第 %{num} 位学员。［%{motto}］"
-    new_leafs: "2012的光棍节要来了，兄弟们姐妹们和我一起祈祷奇迹吧，今天只长了 %{num} 片新叶子，还是瞧瞧：http://17up.org/t"
+    new_leafs: "坚持一下，太阳就要出来啦，今天%{cast}度，%{num} 片新叶长成，快瞧瞧：http://17up.org/t"
     bind_provider: "[笑哈哈] @%{name} 交个朋友吧,［%{motto}］"

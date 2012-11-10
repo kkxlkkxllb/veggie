@@ -21,7 +21,7 @@ class HomeController < ApplicationController
   end
   
   def quote
-    set_seo_meta("Quote",t('keywords'),t('describe'))
+    set_seo_meta(t("quote.title"),t('quote.keywords'),t('quote.describe'))
     @quotes = Onion::FetchQuote.new().done
   end
   

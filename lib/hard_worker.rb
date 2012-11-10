@@ -16,7 +16,7 @@ module HardWorker
   end
   
   class SendNewLeafReport < Base
-    def perform(nlc)
+    def perform(nlc)  
       %w(weibo twitter).each do |p|
         Greet.new(nil,{:new_leaf_count => nlc,:provider => p}).deliver
       end
@@ -27,12 +27,6 @@ module HardWorker
     def perform(pid, opts={})
       LeafGrow.new(Provider.find(pid)).grow
     end
-  end
-  
-  class WordPicJob < Base
-    def perform(title)
-      Grape::WordImage.new(title).make
-    end   
   end
   
   class UploadOlive < Base

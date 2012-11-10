@@ -13,6 +13,17 @@ module Utils
 		end
   end
   
+  # forecast
+  def self.check_weather(city="杭州")
+    api_url = "http://sou.qq.com/online/get_weather.php?callback=Weather&city="
+    request_url = URI.encode(api_url+city)
+    resp = Net::HTTP.get_response(URI.parse(request_url)).body
+		data = JSON.parse(resp.scan(/Weather\((\S+)\)/).flatten[0])
+		if data["real"]
+		  data["future"]["name"] + data["future"]["wea_0"] + data["real"]["temperature"] 
+	  end
+  end
+  
   def self.rand_passwd(size=6, opts = {})
     passwd = []
     # 全部使用字母

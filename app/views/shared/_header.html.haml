@@ -23,8 +23,12 @@
 							= t("words.title")
 					%li{:class => ("active" if @users)}
 						= link_to hot_path do
-							%i.icon-fire
+							%i.icon-flag
 							= t("square.title")
+					%li{:class => ("active" if @quotes)}
+						= link_to quote_path do
+							%i.icon-comments-alt
+							= t("quote.title")
 				- if current_member
 					%ul.nav.pull-right
 						%li{:class => ("active" if @user == current_member)}
