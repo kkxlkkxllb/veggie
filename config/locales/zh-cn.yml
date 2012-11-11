@@ -1,7 +1,13 @@
 zh-cn:
+  mobile:
+    title: 移动智能终端版
+  love:
+    title: 爱之试炼
+    keywords: "爱情测试，寻找另一半"
+    describe: "茫茫人海，怎么找，17up倾力打造爱之试炼，帮你轻松找到那个人"
   title: 17UP
-  keywords: "自助,快乐学习,高校,校园,青春,university"
-  describe: "仅仅为了使你体验到获取知识的快乐感觉，一起up"
+  keywords: "自助,快乐学习,高校,校园,青春,university,education"
+  describe: "仅仅为了使你体验到获取知识的快乐感觉，一起up,在线学习型社区平台"
   door: "校门口"
   flash:
     notice:

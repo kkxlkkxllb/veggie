@@ -18,7 +18,7 @@
 		%span.ctags
 			= w.hash_tags
 	.pic.hide
-		= image_tag(w.image)
+		= image_tag(w.image,:title => w.title)
 		- if @can_add_tag
 			%span.change_btn
 				%i.icon-refresh

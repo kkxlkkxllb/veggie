@@ -21,5 +21,6 @@ $config = {}
 $config[:domain] = "17up.org"
 $config[:host] = "http://#{$config[:domain]}"
 $config[:mobile_host] = "http://m.#{$config[:domain]}"
+$config[:love_host] = "http://love.#{$config[:domain]}"
 $config[:blog_host] = "http://blog.#{$config[:domain]}"
 

@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 class Mobile::MhomeController < ApplicationController
   layout 'mobile/application'
   caches_page :index
   
   def index
-    set_seo_meta("手机版",t('keywords'),t('describe'))
+    set_seo_meta(t('mobile.title'),t('keywords'),t('describe'))
   end
   
   def weibo

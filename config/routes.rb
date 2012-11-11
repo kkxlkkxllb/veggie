@@ -19,6 +19,10 @@ Veggie::Application.routes.draw do
     match "word" => "mhome#word"
   end
   
+  namespace :love do
+    match '/' => "lhome#index"
+  end
+  
   match "dashboard" => "members#show",:as => :account
   match "u/:id" => "members#show",:as => :member
   match "setting" => "members#edit",:as => :setting
