@@ -1,5 +1,6 @@
 # Fetch Pics Then Upload to SNS
 module Olive
+  SIDENAV = %w{tumblr instagram 500px}
   
   class Base
     include ActionView::Helpers::SanitizeHelper    

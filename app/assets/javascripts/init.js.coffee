@@ -14,3 +14,4 @@ $ ->
 	$("i[rel='tooltip'],a[rel='tooltip']").tooltip()
 	if $("#top_nav").length is 0
 		$("html").addClass("home")
+	init_olive()

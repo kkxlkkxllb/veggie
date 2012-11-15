@@ -44,9 +44,11 @@ Veggie::Application.routes.draw do
   end
   
   match "t" => "leafs#index", :as => :leafs
-  resources :leafs do
-    post "destroy"
-  end
+  match "leafs/destroy" => "leafs#destroy"
+  
+  match "olive" => "olive#index"
+  match "olive/sync" => "olive#sync"
+  match "olive/publish" => "olive#publish"
  
   root :to => 'home#door'
 
