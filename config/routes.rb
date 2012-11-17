@@ -36,12 +36,11 @@ Veggie::Application.routes.draw do
   match "info" => "home#info", :as => :info
   match "course" => "words#index", :as => :words
   match "quotes" => "home#quote", :as => :quote
-  resources :words do
-    post "create"
-    post "add_tag"
-    post "clone"
-    post "make_pic"
-  end
+  
+  post "words/create"
+  match "words/add_tag" => "words#add_tag"
+  post "words/clone"
+  post "words/make_pic"
   
   match "t" => "leafs#index", :as => :leafs
   match "leafs/destroy" => "leafs#destroy"

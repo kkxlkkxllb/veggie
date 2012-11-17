@@ -1,13 +1,11 @@
-#olive.container
-	.row
-		.span3.bs-docs-sidebar
-			%ul.nav.nav-list.bs-docs-sidenav(data-spy="affix" data-offset-top="200")
-				- Olive::SIDENAV.each do |n|
-					%li
-						= link_to "##{n}" do
-							= n.capitalize
-							%i.icon-chevron-right
-		.span9
-			- Olive::SIDENAV.each do |s|
-				%section{:id => s}
-					= render "olive/o_#{s}",:s => s
+#olive.container.tabbable.tabs-left
+	%ul.nav.nav-tabs
+		- Olive::SIDENAV.each_with_index do |n,i|
+			%li{:class => ("active" if i == 0)}
+				= link_to "##{n}",:"data-toggle" => "tab" do
+					= n.capitalize
+					%i.icon-chevron-right
+	.tab-content
+		- Olive::SIDENAV.each_with_index do |s,i|
+			.tab-pane{:id => s,:class => ("active" if i == 0)}
+				= render "olive/o_#{s}",:s => s

@@ -1,13 +1,11 @@
-#user_setting.container
-	.row
-		.span3.bs-docs-sidebar
-			%ul.nav.nav-list.bs-docs-sidenav(data-spy="affix" data-offset-top="200")
-				- Member::EDIT_SIDENAV.each do |n|
-					%li
-						= link_to "##{n}" do
-							= t("members.sidenav.#{n}")
-							%i.icon-chevron-right
-		.span9
-			- Member::EDIT_SIDENAV.each do |s|
-				%section{:id => s}
-					= render "members/sidenav_section/#{s}",:s => s
+#user_setting.container.tabbable.tabs-left
+	%ul.nav.nav-tabs
+		- Member::EDIT_SIDENAV.each_with_index do |n,i|
+			%li{:class => ("active" if i == 0)}
+				= link_to "##{n}",:"data-toggle" => "tab" do
+					= t("members.sidenav.#{n}")
+					%i.icon-chevron-right
+	.tab-content
+		- Member::EDIT_SIDENAV.each_with_index do |s,i|
+			.tab-pane{:id => s,:class => ("active" if i == 0)}
+				= render "members/sidenav_section/#{s}",:s => s
