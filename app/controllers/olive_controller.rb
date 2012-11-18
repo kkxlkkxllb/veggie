@@ -41,7 +41,7 @@ class OliveController < ApplicationController
       caption = JSON.parse(p)["caption"]
       HardWorker::UploadOlive.perform_async(caption,open(photo).path)
     end
-    render_json(0,"ok")
+    render_json(0,"ok",:num => data.length)
   end
   
   private

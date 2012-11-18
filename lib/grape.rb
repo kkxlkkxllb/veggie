@@ -144,6 +144,7 @@ module Grape
         c.gravity "center"
       end
       result.write(@opts[:outfile])
+      `chmod 777 #{@opts[:outfile]}`
       return @opts[:outfile]
     end
     

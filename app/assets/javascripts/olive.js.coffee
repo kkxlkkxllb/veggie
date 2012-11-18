@@ -35,3 +35,6 @@ class olive.Olive
 					'caption':$(img).attr("data-original-title")
 			$.post "/olive/publish"
 				data: data
+				(data) ->
+					if data.status is 0
+						Utils.flash "(o_o) 成功执行#{data.data.num}个任务"

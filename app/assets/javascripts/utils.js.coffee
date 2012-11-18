@@ -7,6 +7,10 @@ class utils.Utils
 			next()
 	@loaded: ($item) ->
 		$item.stop(true).css "opacity",1
+	@flash: (msg) ->
+		$alert = $("#flash_message .alert")
+		$("strong",$alert).text(msg)
+		$alert.fadeIn()
 	@infinitescroll: ($wrap) ->
 		$wrap.infinitescroll
 	    navSelector  : "nav.pagination",

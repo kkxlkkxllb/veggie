@@ -29,13 +29,17 @@ class WordsController < ApplicationController
       @word = current_member.u_words.create(:word_id => @word.id)
     end
     @can_add_tag = true
-    html = render_to_string(
+    if @word
+      html = render_to_string(
             :formats => :html,
             :handlers => :haml,
 		        :partial => "word",
 		        :locals => {:w => @word}
 		        )
-		render_json(0,"ok",{:html => html})
+		  render_json(0,"ok",{:html => html})
+	  else
+	    render_json(-1,"fail")
+    end
   end
   
   # 克隆已有词汇到 u_words
@@ -56,7 +60,7 @@ class WordsController < ApplicationController
   def make_pic   
     @word = Word.find(params[:id])
     @pics = Rails.cache.fetch("word/#{@word.id}/imgs") do
-        Grape::WordImage.new(@word.title).parse(@word.ctag_list.join(" "))
+        Grape::WordImage.new(@word.title).parse(@word.ctag_list.join(" "))[0..17]
       end
     img = @pics[rand(@pics.length)]
     Grape::WordImage.new(@word.title).make(img)

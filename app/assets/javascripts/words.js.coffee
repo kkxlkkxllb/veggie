@@ -20,11 +20,15 @@ class word.Word
 	after_create: ($form,$container = @$container) ->
 		$form.bind 'ajax:beforeSend', ->
 			$("input",$form).addClass "disable_event"
+			Utils.loading $form
 		$form.bind 'ajax:success', (d,data) ->
 			if data.status is 0
 				$container.isotope('insert',$(data.data.html))
 				$("#new_word input").val("").focus()
-				$("input",$form).removeClass("disable_event")
+			else
+				Utils.flash("o_O 呃，失败了，单词没查到")
+			$("input",$form).removeClass("disable_event")
+			Utils.loaded $form
 	audio_play: =>
 		@$container.delegate "a.audio","click", ->
 			$("audio",$(@))[0].play()
