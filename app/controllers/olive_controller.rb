@@ -36,8 +36,10 @@ class OliveController < ApplicationController
   
   def publish
     data = params[:data]
-    data.each do |p|     
-      HardWorker::UploadOlive.perform_async(p[:caption],open(p[:photo]).path)
+    data.each do |p|  
+      photo = JSON.parse(p)["photo"]
+      caption = JSON.parse(p)["caption"]
+      HardWorker::UploadOlive.perform_async(caption,open(photo).path)
     end
     render_json(0,"ok")
   end

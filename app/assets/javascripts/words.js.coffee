@@ -78,5 +78,5 @@ class word.Word
 					if data.status is 0
 						$('.pic img',$wrap).attr("src",data.data.pic).load ->
 							$container.isotope()
-							$(@).stop(true).css "opacity",1
+							Utils.loaded $(@)
 							ele.show()

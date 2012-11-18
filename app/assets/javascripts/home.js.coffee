@@ -2,20 +2,12 @@ home = exports ? this
 class home.Home
 	@init: ->
 		home = new Home()
-		home.reload_tree()
 		home.destroy_leaf()
 		home.add_provider_view $("#new_provider_modal"),$("form#new_provider_form")
 		home.info($("#impress"))
 	constructor: (@$wrap = $("#home")) ->
 		$("div.leaf").live 'hover',->
 			$("span.action",$(@)).toggle()
-	reload_tree: ($wrap = @$wrap) ->
-		$.post "/home/index",(data) ->
-			if data.status is 0
-				$wrap.html(data.data.html)
-				$wrap.imagesLoaded ->
-					$wrap.masonry('reload')
-		,"json"
 	destroy_leaf: ($wrap = @$wrap) ->
 		$(".leaf span.destroy").live "click", ->
 			ele = $(@)

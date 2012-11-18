@@ -5,6 +5,8 @@ class utils.Utils
 			$(@).animate({opacity: 0.2},800).animate({opacity: 1},800)
 			$(@).queue(arguments.callee)
 			next()
+	@loaded: ($item) ->
+		$item.stop(true).css "opacity",1
 	@infinitescroll: ($wrap) ->
 		$wrap.infinitescroll
 	    navSelector  : "nav.pagination",

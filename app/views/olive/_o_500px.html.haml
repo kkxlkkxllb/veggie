@@ -1,5 +1,8 @@
 .cpanel
-	%input{:rel => s}(type="text" placeholder="请输入标签" name="tag")
-	%span.btn.tag
+	%span.btn.btn-danger.publish
+		%i.icon-share
+		发布
+	%input(type="text" placeholder="请输入标签" name="tag")
+	%span.btn.btn-success(rel="tag")
 		提交
 .result-container.clearfix
