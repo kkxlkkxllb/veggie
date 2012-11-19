@@ -26,12 +26,16 @@ class OliveController < ApplicationController
         @result = Olive::Px.new.photos(:feature => params[:feature])
       end
     end
-    html = render_to_string(
+    if @result and @result.length > 0
+      html = render_to_string(
             :formats => :html,
             :handlers => :haml,
 		        :partial => "items"
 		        )
-    render_json(0,"ok",:html => html)
+      render_json(0,"ok",:html => html)
+    else
+      render_json(-1,"fail")
+    end
   end
   
   def publish

@@ -11,6 +11,8 @@ class utils.Utils
 		$alert = $("#flash_message .alert")
 		$("strong",$alert).text(msg)
 		$alert.fadeIn()
+		fuc = -> $alert.fadeOut()
+		setTimeout fuc,5000
 	@infinitescroll: ($wrap) ->
 		$wrap.infinitescroll
 	    navSelector  : "nav.pagination",

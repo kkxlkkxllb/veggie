@@ -18,13 +18,17 @@ class olive.Olive
 			arg = {}
 			if $input.length is 1
 				arg[param] = $input.val()
+			if ele.parents(".btn-group").length is 1
+				arg["feature"] = ele.attr("rel")
 			arg["provider"] = cp.attr("id")
 			$.post "/olive/sync",arg,(data) ->
-					if data.status is 0
-						$(".result-container",ele.closest(".tab-pane")).html(data.data.html)
-						$(".item img").tooltip()
-						ele.removeClass "disabled"
-						Utils.loaded cp
+				if data.status is 0
+					$(".result-container",ele.closest(".tab-pane")).html(data.data.html)
+					$(".item img").tooltip()
+				else
+					Utils.flash("o_O 呃，失败了，没搜索到相关内容")
+				ele.removeClass "disabled"
+				Utils.loaded cp
 	publish: ($btn) ->
 		$btn.click ->
 			$wrap = $(@).closest(".tab-pane")
