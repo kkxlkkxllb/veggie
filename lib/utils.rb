@@ -13,9 +13,8 @@ module Utils
 			  return data["data"]["country"] + data["data"]["region"] + data["data"]["city"] + data["data"]["isp"]
 		  end
 		else
-		#weibo
-		  api_url = "https://api.weibo.com/2/location/geo/ip_to_geo.json?source=83541187&ip=#{ip}"
-      result = `curl '#{api_url}' 2>/dev/null`
+		  api_url = "https://api.weibo.com/2/location/geo/ip_to_geo.json"
+      result = Curl.get(api_url,{:source => "83541187",:ip => ip})
       data = JSON.parse(result)["geos"][0]
       if opts[:lng]
         return [data["longitude"],data["latitude"]]
