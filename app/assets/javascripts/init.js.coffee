@@ -8,4 +8,5 @@ $ ->
 	Word.init()
 	Olive.init()
 	Home.init()
+	Member.init()
 	mixpanel.track("new visitor")

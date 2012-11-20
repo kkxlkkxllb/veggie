@@ -191,7 +191,7 @@ module Olive
 			data = MultiJson.decode(access_token.get(request).body)["photos"]
 			data.inject([]) do |a,x| 
 				a << {
-					:caption => x["name"] + " #500px# ",
+					:caption => x["name"],
 					:photo => x["image_url"]
 				}
 			end

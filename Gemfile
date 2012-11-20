@@ -40,6 +40,8 @@ gem "devise"
 gem "omniauth-weibo-oauth2", '~> 0.2.0'
 gem "omniauth-twitter"
 gem "omniauth-github"
+gem 'omniauth-tumblr'
+gem 'omniauth-instagram'
 gem "weibo_17up"
 gem "twitter"
 gem "instagram", "~> 0.8.5"

@@ -1,8 +1,12 @@
 %h3
-	绑定
-%p
-	- Provider::PROVIDERS.each do |p|
+	已完成绑定 
+	= current_member.providers.length
+	个
+.providers.clearfix
+	- Provider::PROVIDERS.each do |p|	
 		- if current_member.has_provider?(p)
-			= image_tag("icon/#{p}_big.png")
+			.item.left.binded
+				= image_tag("icon/#{p}_big.png",:title => p)
 		- else
-			= link_to image_tag("icon/#{p}_big.png"),member_omniauth_authorize_path(p)
+			.item.left
+				= link_to image_tag("icon/#{p}_big.png",:title => p),member_omniauth_authorize_path(p)

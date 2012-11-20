@@ -45,10 +45,17 @@ class Word < ActiveRecord::Base
     self.ctags.map{|t| "#"+t.name+" " }.join
   end  
   
-  def image(style="17up")
-    url = IMAGE_URL + self.title + "/#{style}.jpg"
-    path = IMAGE_PATH + self.title + "/#{style}.jpg"
-    return File.exist?(path) ? url : "/assets/icon/jiong.png"
+  # style: 17up/original
+  def image_path(style="17up")
+    IMAGE_PATH + self.title.parameterize.underscore + "/#{style}.jpg" 
+  end
+
+  def image_url(style="17up")
+    IMAGE_URL + self.title.parameterize.underscore + "/#{style}.jpg" 
+  end
+
+  def image
+    return File.exist?(self.image_path) ? self.image_url : "/assets/icon/jiong.png"
   end
   
 end

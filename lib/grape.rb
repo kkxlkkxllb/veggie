@@ -47,6 +47,10 @@ module Grape
     
     def initialize(title)
       @title = title
+      @dir = Word::IMAGE_PATH + title.parameterize.underscore + "/"
+      @original = @dir + "original.jpg"
+      @w = @dir + "w.png"
+      @new_image = @dir + "17up.jpg"
     end
 
     def parse(info="")
@@ -66,27 +70,25 @@ module Grape
     
     def make(url=nil)
       @image = url ? url : parse[0]
-      folder = Word::IMAGE_PATH + @title.parameterize.underscore + "/"
-      file = "#{folder}orignal.jpg"
-      unless File.exist?(folder)
-        `mkdir -p #{folder}`
+      unless File.exist?(@dir)
+        `mkdir -p #{@dir}`
       end
-      unless File.exist?("#{folder}w.png")
+      unless File.exist?(@w)
         opts = {
           :text => @title,
           :type => 2,
-          :word_path => "#{folder}w.png"
+          :word_path => @w
         }
         ImageConvert.draw_word(opts)
       end
       error = -> { puts "#{@image} catch failed" }
       opts = {
-        :outfile => "#{folder}17up.jpg"
+        :outfile =>  @new_image
       }
       success = -> {        
-        ImageConvert.new(file,opts).draw("#{folder}w.png")  
+        ImageConvert.new(@original,opts).draw(@w)  
       }
-      img_save(@image,file,success,error)
+      img_save(@image,@original,success,error)
     end
   end
   

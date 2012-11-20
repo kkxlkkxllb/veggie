@@ -20,4 +20,5 @@
 //= require home
 //= require words
 //= require olive
+//= require members
 //= require init

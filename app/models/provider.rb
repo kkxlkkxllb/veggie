@@ -25,7 +25,7 @@ class Provider < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :tags
   
-  PROVIDERS = %w{twitter weibo github}
+  PROVIDERS = %w{twitter weibo github tumblr instagram}
   
   def avatar(style = :mudium )
     case style
