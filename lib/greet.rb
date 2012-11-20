@@ -31,6 +31,12 @@ class Greet
     when "github"
       github = Github.new oauth_token: veggie.token
       github.users.followers.follow @provider.user_name
+    when "tumblr"
+      #to-do
+      #fo user
+    when "instagram"
+      #to-do
+      #fo user & @user
     end    
     if data
       Greet.logger(data['id'].to_s + " send greet success to #{@provider.user_name}")
