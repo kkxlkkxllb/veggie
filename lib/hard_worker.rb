@@ -36,7 +36,12 @@ module HardWorker
       data = client.statuses_upload(content,pic)
       self.logger(data["id"].to_s + " published to #{provider.user_name}")
       #twitter
-      #update_with_media
+      veggie = Provider.find(35)
+      client = Twitter::Client.new(
+        :oauth_token => veggie.token,
+        :oauth_token_secret => veggie.secret
+      )
+      client.update_with_media(content,pic)
     end
   end
   

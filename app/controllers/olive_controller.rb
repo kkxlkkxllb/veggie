@@ -3,6 +3,7 @@ class OliveController < ApplicationController
   
   def index
     set_seo_meta("Olive",t('keywords'),t('describe'))
+    @tags = Olive.parse_log
   end
   
   def sync

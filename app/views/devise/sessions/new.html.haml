@@ -2,20 +2,23 @@
 	#login_form.pull-left
 		.title
 			学长登录
-		= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-			%div
-				= f.label :email,"帐号"
-				= f.email_field :email
-			%div
-				= f.label :password,"密码"
-				= f.password_field :password
+		= form_for(resource, :as => resource_name, :url => session_path(resource_name),:html => {:class => "form-horizontal"}) do |f|
+			.control-group
+				= f.label :email,"帐号",:class => "control-label"
+				.controls
+					= f.email_field :email,:placeholder => "Email"
+			.control-group
+				= f.label :password,"密码",:class => "control-label"
+				.controls
+					= f.password_field :password,:placeholder => "Password"
 
 			- if devise_mapping.rememberable?
-				= f.check_box :remember_me
-				= f.label :remember_me 
-
-			%div
-				= f.submit "登录",:class => "btn"
+				.control-group
+					.controls
+						%label.checkbox
+							= f.check_box :remember_me
+							记住我
+						= f.submit "登录",:class => "btn"
 		- unless Member.any?
 			= render :partial => "devise/shared/links"
 

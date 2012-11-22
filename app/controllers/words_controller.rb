@@ -71,7 +71,7 @@ class WordsController < ApplicationController
   # &image &id
   def upload_pic
     word = Word.find(params[:id])
-    Grape::WordImage.new(word.title).make(params[:image].tempfile.read)
+    Grape::WordImage.new(word.title).make(params[:image].tempfile.path)
   end
   
   # TO-DO destroy u_word

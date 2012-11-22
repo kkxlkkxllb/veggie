@@ -9,3 +9,9 @@
 		- Olive::SIDENAV.each_with_index do |s,i|
 			.tab-pane{:id => s,:class => ("active" if i == 0)}
 				= render "olive/o_#{s}",:s => s
+	.tags
+		- @tags.each do |tag|
+			.tag
+				%span.label.label-info
+					= tag[0]
+					= tag[1]

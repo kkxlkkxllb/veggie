@@ -5,8 +5,8 @@
 .providers.clearfix
 	- Provider::PROVIDERS.each do |p|	
 		- if current_member.has_provider?(p)
-			.item.left.binded
+			.item.pull-left.binded
 				= image_tag("icon/#{p}_big.png",:title => p)
 		- else
-			.item.left
+			.item.pull-left
 				= link_to image_tag("icon/#{p}_big.png",:title => p),member_omniauth_authorize_path(p)

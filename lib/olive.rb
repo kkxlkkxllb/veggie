@@ -15,6 +15,7 @@ module Olive
     
     # google map place search by text,get lat&lng
     def location(query)
+      query = URI.encode query
       key = load_service["google"]["api_key"]
       request_url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{query}&key=#{key}&sensor=true"
       url = URI.parse(request_url)
@@ -41,28 +42,28 @@ module Olive
   class Tumblr < Base
 
     def initialize      
-      @api_key = load_service["tumblr"]["app_key"]
+      veggie = Provider.where(:provider => "tumblr").first
+      @client = ::Tumblr.new(
+        :oauth_token => veggie.token,
+        :oauth_token_secret => veggie.secret
+      )
     end
 
     def tagged(tag)
       tag = URI.encode tag
-      url = "http://api.tumblr.com/v2/tagged?tag=#{tag}&api_key=#{@api_key}"
-      resp = Net::HTTP.get_response(URI.parse(url)).body
-  		data = JSON.parse(resp)
-  		if data["meta"]["status"] == 200 		  
-  		  @post = data["response"].inject([]) do |a,t|
-  	      if t["type"] == "photo" and t["caption"] != ""
-  	        a<<{
-  	          :photo => t["photos"][0]["original_size"]["url"],
-  	          :caption => CGI::unescapeHTML(strip_tags(t["caption"])).split("\n")[0]
-            }
-  	      end
-  	      a
-  	    end
-  	    logger("From Tumblr --  Num: #{@post.length}; Tag: #{tag}")
+      data = @client.tagged tag		  
+		  @post = data.inject([]) do |a,t|
+	      if t["type"] == "photo" and t["caption"] != ""
+	        a<<{
+	          :photo => t["photos"][0]["original_size"]["url"],
+	          :caption => CGI::unescapeHTML(strip_tags(t["caption"])).split("\n")[0]
+          }
+	      end
+	      a
+	    end
+	    logger("From Tumblr --  Num: #{@post.length}; Tag: #{tag}")
 
-  	    return @post
-  	  end
+	    return @post
     end
   
   end
@@ -196,6 +197,19 @@ module Olive
 				}
 			end
 		end
+  end
+  
+  # 根据 olive 日志信息得到 最近100次搜索的 tag,按照次数降序返回结果
+  def self.parse_log
+    log = "#{Rails.root}/log/olive.log"
+    if File.exist? log
+      tags = File.open(log,"r") do |f|		
+    		f.readlines[-100..-1].map {|l| l.scan(/Tag\: (\S+)/).map{|x| $1}[0]	}		
+    	end.compact
+    	tags.uniq.map{ |x| 
+    		[x,tags.grep(x).length]
+    	}.sort!{|a,b| b[1] <=> a[1]}
+  	end
   end
   
 end

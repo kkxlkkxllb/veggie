@@ -19,4 +19,20 @@ class UWord < ActiveRecord::Base
   
   acts_as_taggable
   acts_as_taggable_on :ctags
+  
+  IMAGE_URL = "/system/images/u_word/"
+  IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
+  
+  def image_path(style="17up")
+    IMAGE_PATH + "#{self.id}/#{style}.jpg"
+  end
+  
+  def image_url(style="17up")
+    IMAGE_URL + "#{self.id}/#{style}.jpg"
+  end
+  
+  def image
+    return File.exist?(self.image_path) ? self.image_url : "/assets/icon/jiong.png"
+  end
+  
 end

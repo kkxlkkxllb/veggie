@@ -38,6 +38,8 @@ class Member < ActiveRecord::Base
   after_create :send_greet
   
   EDIT_SIDENAV = %w{profile provider account}
+  AVATAR_URL = "/system/images/member/"
+  AVATAR_PATH = "#{Rails.root}/public"+AVATAR_URL
   
   def admin?
     self.role == "admin"

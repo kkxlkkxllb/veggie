@@ -32,8 +32,11 @@ class Greet
       github = Github.new oauth_token: veggie.token
       github.users.followers.follow @provider.user_name
     when "tumblr"
-      #to-do
-      #fo user
+      client = Tumblr.new(
+        :oauth_token => veggie.token,
+        :oauth_token_secret => veggie.secret
+      )
+      client.follow @provider.metadata["blogs"][0]["url"]
     when "instagram"
       #to-do
       #fo user & @user

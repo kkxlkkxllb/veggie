@@ -226,3 +226,8 @@ Twitter.configure do |config|
   config.consumer_key = SERVICES['twitter']['app_key']
   config.consumer_secret = SERVICES['twitter']['app_secret']
 end
+
+Tumblr.configure do |config|
+  config.consumer_key = SERVICES['tumblr']['app_key']
+  config.consumer_secret = SERVICES['tumblr']['app_secret']
+end

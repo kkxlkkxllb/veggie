@@ -37,6 +37,8 @@ class Provider < ActiveRecord::Base
         self.metadata[:image].gsub("/50/","/180/")
       when "twitter"
         self.metadata[:image].gsub("_normal","")
+      else
+        self.metadata[:image]
       end
     end
   end

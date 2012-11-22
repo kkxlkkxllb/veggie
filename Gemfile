@@ -10,7 +10,8 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer','>= 0.11.0beta8', :require => 'v8'
-  gem "twitter-bootstrap-rails", '2.1.2'
+  gem "twitter-bootstrap-rails", '>= 2.1.2'
+  gem "less-rails"
   gem 'uglifier', '>= 1.0.3'
   gem 'bourbon'
 end
@@ -44,6 +45,7 @@ gem 'omniauth-tumblr'
 gem 'omniauth-instagram'
 gem "weibo_17up"
 gem "twitter"
+gem "tumblr_client", ">= 0.6.7"
 gem "instagram", "~> 0.8.5"
 gem "goodreads"
 gem "github_api"
