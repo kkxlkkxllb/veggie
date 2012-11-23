@@ -28,7 +28,7 @@ gem 'jquery-rails'
 
 
 # Deploy with Capistrano
-gem 'capistrano'
+gem 'capistrano','2.13.4'
 
 gem 'acts-as-taggable-on'
 gem 'nokogiri', '~>1.5.0'

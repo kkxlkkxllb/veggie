@@ -44,7 +44,7 @@ GEM
       sass (>= 3.2)
       thor
     builder (3.0.4)
-    capistrano (2.13.5)
+    capistrano (2.13.4)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -358,7 +358,7 @@ DEPENDENCIES
   amazon-ecs
   annotate (>= 2.5.0)
   bourbon
-  capistrano
+  capistrano (= 2.13.4)
   coffee-rails (~> 3.2.1)
   devise
   factory_girl_rails

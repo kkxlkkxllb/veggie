@@ -41,7 +41,7 @@ module HardWorker
         :oauth_token => veggie.token,
         :oauth_token_secret => veggie.secret
       )
-      client.update_with_media(content,pic)
+      client.update_with_media(content,File.open(pic))
     end
   end
   
