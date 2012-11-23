@@ -16,7 +16,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  role                   :string(255)
-#  login                  :string(255)
+#  uid                    :string(255)
 #
 
 class Member < ActiveRecord::Base
@@ -46,10 +46,15 @@ class Member < ActiveRecord::Base
   end
   
   def avatar
-    p = self.providers.first
-    p ? p.avatar : "icon/avatar.png"
+		File.exist?(AVATAR_PATH + avatar_name) ? (AVATAR_URL + avatar_name) : "icon/avatar.png"
   end
+
+	def avatar_name
+		"#{self.id}/#{self.created_at.to_i}.jpg"
+	end
   
+	# to-do
+  # add profile
   def name
     p = self.providers.first
     p ? p.user_name : "veggie"
@@ -76,8 +81,25 @@ class Member < ActiveRecord::Base
   
   # sidekiq job
   def send_greet
-    pid = self.providers.first.id
-	  HardWorker::SendGreetJob.perform_async(pid)
+		provider = self.providers.first
+		# download sns avatar
+		`mkdir -p #{AVATAR_PATH + self.id.to_s}`
+		data = open(provider.avatar(:large)){|f|f.read}
+		file = File.open(AVATAR_PATH + avatar_name,"wb") << data
+    file.close
+		# greet
+	  HardWorker::SendGreetJob.perform_async(provider.id)
   end
+
+	def self.down_avatars
+		Member.all.each do |m|
+			provider = m.providers.first
+			# download sns avatar
+			`mkdir -p #{AVATAR_PATH + self.id.to_s}`
+			data = open(provider.avatar(:large)){|f|f.read}
+			file = File.open(AVATAR_PATH + avatar_name,"wb") << data
+		  file.close
+		end
+	end
   
 end
