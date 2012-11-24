@@ -5,14 +5,18 @@ module Grape
       YAML.load_file(Rails.root.join("config", "service.yml")).fetch(Rails.env)
     end
     
-    def img_save(url,output,success,error)
+    def img_save(url,output,success = -> { },&error)
       begin
         data = open(url){|f|f.read}
 		    file = File.open(output,"wb") << data
         file.close
         success.call
       rescue
-        error.call
+				if block_given?
+        	error.call
+				else
+					p "#{url} save fail!"
+				end
       end
     end
   end
@@ -34,9 +38,7 @@ module Grape
         `mkdir -p #{@store_path}`
         @image_urls.each do |k,v|
           filename = "#{k.to_s}.#{v.split('.')[-1]}"
-          error = -> { Leaf.logger.error("ERROR #{v} not found! skip") }
-          success = -> { }
-          img_save(v,@store_path+filename,success,error)
+          img_save(v,@store_path+filename){ Leaf.logger.error("ERROR #{v} not found! skip") }
         end
       end
     end
@@ -81,14 +83,10 @@ module Grape
         }
         ImageConvert.draw_word(opts)
       end
-      error = -> { puts "#{@image} catch failed" }
-      opts = {
-        :outfile =>  @new_image
-      }
       success = -> {        
-        ImageConvert.new(@original,opts).draw(@w)  
+        ImageConvert.new(@original,:outfile => @new_image).draw(@w)  
       }
-      img_save(@image,@original,success,error)
+      img_save(@image,@original,success)
     end
   end
   
@@ -140,6 +138,7 @@ module Grape
       end
     end
     
+		# 合成单张
     def draw(word_path)
       @img.resize @opts[:size]
       result = @img.composite(MiniMagick::Image.open(word_path)) do |c|
@@ -149,6 +148,11 @@ module Grape
       `chmod 777 #{@opts[:outfile]}`
       return @opts[:outfile]
     end
+
+		# 多张合成gif
+		def make_gif(path)
+			
+		end
     
   end
   

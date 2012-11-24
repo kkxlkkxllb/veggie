@@ -72,7 +72,7 @@ module Utils
     class Base
       def initialize(login={})
       	login = {
-  				:name => "kkxlkkxllb@gmail.com",
+  				:name => "heartme.hero@gmail.com",
   				:passwd => ""
   			}.update(login)
   			@session = GoogleDrive.login(login[:name], login[:passwd])
