@@ -35,7 +35,8 @@ module HardWorker
         provider = Provider.find(38)
         client = Weibo::Client.new(provider.token,provider.uid)
         data = client.statuses_upload(content,pic)
-        self.logger(data.to_s)
+				msg = data["error_code"] ? data.to_s : "#{data["id"]} published"
+				self.logger msg
       rescue => ex
         self.logger("#{content} [#{pic}] fail msg: #{ex.to_s}")
       end
