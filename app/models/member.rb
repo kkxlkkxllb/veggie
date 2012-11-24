@@ -95,9 +95,9 @@ class Member < ActiveRecord::Base
 		Member.all.each do |m|
 			provider = m.providers.first
 			# download sns avatar
-			`mkdir -p #{AVATAR_PATH + self.id.to_s}`
+			`mkdir -p #{AVATAR_PATH + m.id.to_s}`
 			data = open(provider.avatar(:large)){|f|f.read}
-			file = File.open(AVATAR_PATH + avatar_name,"wb") << data
+			file = File.open(AVATAR_PATH + m.avatar_name,"wb") << data
 		  file.close
 		end
 	end
