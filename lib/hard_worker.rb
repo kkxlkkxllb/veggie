@@ -31,10 +31,14 @@ module HardWorker
   
   class UploadOlive < Base
     def perform(content,pic)
-      provider = Provider.find(38)
-      client = Weibo::Client.new(provider.token,provider.uid)
-      data = client.statuses_upload(content,pic)
-      self.logger(data["id"].to_s + " published to #{provider.user_name}")
+      begin
+        provider = Provider.find(38)
+        client = Weibo::Client.new(provider.token,provider.uid)
+        data = client.statuses_upload(content,pic)
+        self.logger(data.to_s)
+      rescue => ex
+        self.logger("#{content} [#{pic}] fail msg: #{ex.to_s}")
+      end
       #twitter
       veggie = Provider.find(35)
       client = Twitter::Client.new(
