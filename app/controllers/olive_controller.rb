@@ -14,11 +14,11 @@ class OliveController < ApplicationController
       end
     when "instagram"
       if params[:tag]
-        @result = Olive::InstagramVeg.new.tagged(params[:tag])
+        @result = Olive::Instagram.new.tagged(params[:tag])
       elsif params[:location]
-        @result = Olive::InstagramVeg.new.around(params[:location])
+        @result = Olive::Instagram.new.around(params[:location])
       else
-        @result = Olive::InstagramVeg.new.popular
+        @result = Olive::Instagram.new.popular
       end
     when "500px"
       if params[:tag]

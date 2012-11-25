@@ -35,10 +35,13 @@ class Leaf < ActiveRecord::Base
       end
     else# 本地图片
       if self.image_url
-        ext = self.image_url.split('.')[-1]
-        IMAGE_URL + "#{self.id}/#{style}.#{ext}"
-      else
-        nil
+				case style
+				when :large
+        	self.image_url
+				else
+        	ext = self.image_url.split('.')[-1]
+        	IMAGE_URL + "#{self.id}/#{style}.#{ext}"
+				end
       end
     end
   end
