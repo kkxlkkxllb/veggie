@@ -46,7 +46,8 @@ class Provider < ActiveRecord::Base
   end
   
   def user_name
-    self.metadata[:name]
+    name = self.metadata[:name]
+    return name ? name : self.metadata[:nickname]
   end
   
   def weibo

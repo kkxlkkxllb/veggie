@@ -40,6 +40,8 @@ class Greet
     when "instagram"
       client = Instagram.client(:access_token => veggie.token)
 			client.follow_user(@provider.uid)
+		when "youtube"
+		  
     end    
     if data
       Greet.logger(data['id'].to_s + " send greet success to #{@provider.user_name}")

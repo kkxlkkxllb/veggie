@@ -84,7 +84,7 @@ RailsAdmin.config do |config|
       field :metadata do
         label "Info"
         pretty_value do
-          value[:name]
+          value[:name] ? value[:name] : value[:nickname]
         end
       end
     end

@@ -11,11 +11,11 @@
 		#word_nav
 			%ul#filter_nav.clearfix.dark_nav	
 				%li.active
-					%a(href="#all" data-filter="*")
+					%a(href="javascript:void(0)" data-filter="*")
 						All
 				- @ctags.each do |t|
 					%li
-						%a{:href => "#"+t,:"data-filter" => "."+t}
+						%a{:"data-filter" => "."+t}(href="javascript:void(0)")
 							= t.capitalize
 			%span.btn-group
 				%span.btn.btn-inverse.active(rel="wd")
