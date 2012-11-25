@@ -38,8 +38,8 @@ class Greet
       )
       client.follow @provider.metadata["blogs"][0]["url"]
     when "instagram"
-      #to-do
-      #fo user & @user
+      client = Instagram.client(:access_token => veggie.token)
+			client.follow_user(@provider.uid)
     end    
     if data
       Greet.logger(data['id'].to_s + " send greet success to #{@provider.user_name}")

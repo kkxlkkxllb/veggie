@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20121022001843) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "role"
-    t.string   "login"
+    t.string   "uid"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true

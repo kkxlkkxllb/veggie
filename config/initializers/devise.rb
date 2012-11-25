@@ -231,3 +231,8 @@ Tumblr.configure do |config|
   config.consumer_key = SERVICES['tumblr']['app_key']
   config.consumer_secret = SERVICES['tumblr']['app_secret']
 end
+
+Instagram.configure do |config|
+  config.client_id = SERVICES['instagram']['client_id']
+  config.client_secret = SERVICES['instagram']['client_secret']
+end

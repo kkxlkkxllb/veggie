@@ -68,15 +68,11 @@ module Olive
   
   end
   
-  class InstagramVeg < Base
+  class Instagram < Base
     
-    def initialize
-      insta = load_service['instagram']
-      opt = {
-        :client_id => insta["client_id"],
-        :client_secrect => insta["client_secrect"]
-      }
-      @client = Instagram::Client.new(opt)
+    def initialize(opts={})
+			# :access_token
+      @client = ::Instagram.client(opts)
     end
     
     def tagged(tag)
@@ -116,18 +112,23 @@ module Olive
       resp = @client.location_recent_media(id.to_i)
       @post = get_post(resp.data)
     end
+
+		def user_media_feed
+			resp = @client.user_media_feed
+			@post = get_post(resp)
+		end
     
     private
     def get_post(data)
-      data.inject([]) do |a,x| 
-        if x.caption
-          a<<{
-            :photo => x.images.standard_resolution.url,
-            :caption => x.caption.text
-          }
-        end
-        a
-      end
+			if data.is_a?(Array)
+		    data.map do |x|    
+					caption = x.caption ? x.caption.text : ""
+		      {
+		        :photo => x.images.standard_resolution.url,
+		        :caption => caption
+		      }
+		    end
+			end
     end
     
   end
