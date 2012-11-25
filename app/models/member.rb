@@ -29,7 +29,7 @@ class Member < ActiveRecord::Base
          :rememberable, 
          :trackable, 
          :validatable,
-         :omniauthable, omniauth_providers: [:weibo,:twitter,:github,:tumblr,:instagram]
+         :omniauthable, omniauth_providers: [:weibo,:twitter,:github,:tumblr,:instagram,:youtube]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
@@ -71,7 +71,11 @@ class Member < ActiveRecord::Base
   def self.generate(prefix = Time.now.to_f.to_s.split(".")[1])
     email = prefix + "@17up.org"
     passwd = "veggie"
-    user = Member.new(:email => email,:password => passwd,:password_confirmation => passwd)
+    user = Member.new(
+      :email => email,
+      :password => passwd,
+      :password_confirmation => passwd,
+      :role => "u")
     if user.save!
       user
     else

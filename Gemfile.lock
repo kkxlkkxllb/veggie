@@ -193,6 +193,8 @@ GEM
     omniauth-weibo-oauth2 (0.2.0)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
+    omniauth-youtube (2.1)
+      omniauth-oauth2 (~> 1.0)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
     puma (1.6.3)
@@ -380,6 +382,7 @@ DEPENDENCIES
   omniauth-tumblr
   omniauth-twitter
   omniauth-weibo-oauth2 (~> 0.2.0)
+  omniauth-youtube
   puma
   quiet_assets
   rails (= 3.2.8)

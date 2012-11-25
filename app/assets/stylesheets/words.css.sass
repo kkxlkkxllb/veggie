@@ -3,8 +3,9 @@
 .banner_wrap
 	padding: 10px 20px		
 	.banner_title
-		font-size: 20px
+		font-size: 24px
 		margin: 0
+		text-align: center
 #course_wrap
 	margin-bottom: 40px
 	background: url(/assets/img/subtle_stripes/subtle_stripes.png)	
@@ -32,42 +33,38 @@
 		.word_item
 			margin: 5px
 			width: 188px
-			background: #666
-			@include text-shadow-content-white
-			border: 1px solid #f5f5f5
+			background: #eee
+			@include text-shadow-inverse(#333)
+			border: 4px solid #f5f5f5
 			position: relative
 			opacity: 0
 			@include shadow(0,1px,3px,rgba(0,0,0,.3))
 			a
-				color: #999
-				&:hover
-					color: #fff
-			i
+				color: #888
 				position: absolute
+				&:hover
+					color: #1d1d1d				
+			a.audio
+				left: 6px
 				top: 3px
-			i.icon-info-sign				
-				right: 5px				
-			i.icon-headphones
-				right: 20px
-			i.icon-share
-				right: 38px
+			a.fetch
+				right: 6px
+				top: 3px
 			a.itag
 				color: #eee
-				position: absolute
-				right: 16px
-				bottom: 25px
-				&:hover
-					color: #fff
+				right: 6px
+				bottom: 0px
 			span
 				padding: 3px 10px
 				display: block
-			span.title								
-				border-bottom: 1px solid #333
+			span.title	
+				padding-left: 24px
+				border-bottom: 2px solid #f5f5f5
 			span.content
-				border-top: 1px solid #999
+				border-top: 1px solid #ccc
 			span.ctags
 				height: 20px
-				border-top: 1px solid #444
+				@include text-shadow-content-white
 				background-color: #5BF
 				font-weight: bold
 				font-family: serif

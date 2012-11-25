@@ -20,6 +20,10 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
     omniauth_process
   end
   
+  def youtube
+    omniauth_process
+  end
+  
   def passthru
     render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
   end

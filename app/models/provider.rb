@@ -25,7 +25,7 @@ class Provider < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :tags
   
-  PROVIDERS = %w{twitter weibo github tumblr instagram}
+  PROVIDERS = %w{twitter weibo github tumblr instagram youtube}
   
   def avatar(style = :mudium )
     case style
@@ -37,6 +37,8 @@ class Provider < ActiveRecord::Base
         self.metadata[:image].gsub("/50/","/180/")
       when "twitter"
         self.metadata[:image].gsub("_normal","")
+      when "tumblr"
+        self.metadata[:avatar]
       else
         self.metadata[:image]
       end

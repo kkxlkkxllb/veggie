@@ -34,7 +34,7 @@ zh-cn:
     keywords: "引用,名言"
     describe: "广场和咖啡馆现在只有一个街区的距离了哟"
   members:
-    edit: "%{name} 学员设置"
+    edit: "%{name} 档案"
     sidenav:
       profile: "个人资料"
       provider: "第三方帐号"
