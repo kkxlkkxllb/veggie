@@ -26,7 +26,7 @@ class Mobile::MhomeController < ApplicationController
   end
   
   def word
-    @ctags = load_course["mission_1"]["ctags"].split(";")
+    @ctags = load_course["c1"]["ctags"].split(";")
     @tag = params[:ctag].blank? ? @ctags[0] : params[:ctag]
     RWord.build(@tag)
     @words = RWord.all(@tag)
