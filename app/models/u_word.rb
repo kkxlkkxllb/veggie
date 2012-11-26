@@ -11,7 +11,6 @@
 #
 
 class UWord < ActiveRecord::Base
-  # attr_accessible :title, :body
   belongs_to :member
   belongs_to :word
   
@@ -22,6 +21,14 @@ class UWord < ActiveRecord::Base
   
   IMAGE_URL = "/system/images/u_word/"
   IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
+  
+  def title
+    self.word.title
+  end
+  
+  def content
+    self.word.content
+  end
   
   def image_path(style="17up")
     IMAGE_PATH + "#{self.id}/#{style}.jpg"

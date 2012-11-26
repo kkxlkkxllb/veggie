@@ -4,6 +4,7 @@ class MembersController < ApplicationController
   def show
     @user = params[:id] ? Member.find(params[:id]) : current_member
     set_seo_meta(@user.name)
+    @u_words = current_member.u_words
   end
   
   def edit

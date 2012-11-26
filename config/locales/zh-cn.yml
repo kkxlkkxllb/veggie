@@ -18,7 +18,7 @@ zh-cn:
       login: "学习，任何时候开始都不晚，欢迎回来！"
       bind: "绑定成功啦!"
   words:
-    title: "大学堂"
+    title: "图书馆"
     keywords: "词汇，文化，地域，历史"
     describe: "17up 精心策划每周一课，教你不一样的外语噢"
   leafs:
@@ -41,5 +41,5 @@ zh-cn:
       account: "帐户"
   greet:
     new_user: "[撒花] @%{name} 欢迎入住 17up 外语学院 Alpha 班，成为第 %{num} 位学员。［%{motto}］"
-    new_leafs: "坚持一下，太阳就要出来啦，今天%{cast}度，%{num} 片新叶长成，快瞧瞧：http://17up.org/t"
+    new_leafs: "单词啊，快到脑子里来，今天%{cast}度，%{num} 片新叶长成，快瞧瞧：http://17up.org/t"
     bind_provider: "[笑哈哈] @%{name} 交个朋友吧,［%{motto}］"

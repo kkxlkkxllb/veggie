@@ -1,6 +1,5 @@
 #user_home
-	.greet
-		%span
-			校舍在建中...
-
-	= render 'errors/monster'
+	.ground
+		- @u_words.each do |w|
+			.word.button.glossy.pink.skew(data-icon="✿")
+				= w.title 
