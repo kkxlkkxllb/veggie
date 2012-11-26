@@ -44,10 +44,16 @@ class WordsController < ApplicationController
   
   # 克隆已有词汇到 u_words
   def clone
-    @word = Word.find(params[:id])
-    current_member.u_words.create(:word_id => @word.id)
-    render_json(0,"ok")
+		@word = Word.find(params[:id])
+		if uw = current_member.has_u_word(@word)
+			uw.destroy
+			render_json(1,"canceled")
+		else
+		  current_member.u_words.create(:word_id => @word.id)
+    	render_json(0,"saved")
+		end
   end
+
   
   def add_tag
     @word = Word.find(params[:id])

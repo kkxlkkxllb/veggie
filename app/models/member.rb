@@ -86,13 +86,15 @@ class Member < ActiveRecord::Base
   # sidekiq job
   def send_greet
 		provider = self.providers.first
-		# download sns avatar
-		`mkdir -p #{AVATAR_PATH + self.id.to_s}`
-		data = open(provider.avatar(:large)){|f|f.read}
-		file = File.open(AVATAR_PATH + avatar_name,"wb") << data
-    file.close
-		# greet
-	  HardWorker::SendGreetJob.perform_async(provider.id)
+		if provider
+			# download sns avatar
+			`mkdir -p #{AVATAR_PATH + self.id.to_s}`
+			data = open(provider.avatar(:large)){|f|f.read}
+			file = File.open(AVATAR_PATH + avatar_name,"wb") << data
+		  file.close
+			# greet
+			HardWorker::SendGreetJob.perform_async(provider.id)
+		end
   end
   
 end

@@ -60,10 +60,12 @@ class word.Word
 		@$container.delegate "a.fetch","click", ->
 			ele = $(@)
 			$.post "/words/clone"
-				id: ele.parent('.word_item').attr("wid")
+				id: ele.parents('.word_item').attr("wid")
 				(data) ->
 					if data.status is 0
-						ele.hide()
+						ele.addClass "cancel"
+					else if data.status is 1
+						ele.removeClass "cancel"
 	viewport: ($container = @$container) ->		
 		$("#word_nav span.btn-group").delegate "span.btn","click", ->
 			rel = $(@).attr("rel")

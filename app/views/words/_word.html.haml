@@ -1,13 +1,13 @@
 .word_item{:class => w.ctags, :wid => w.id}
 	.wd
-		- if current_member and !current_member.has_u_word(w)
-			%a.fetch(href="javascript:void(0)")
-				%i.icon-share(title="收录" rel="tooltip")
+		- if current_member
+			%a.fetch(href="javascript:void(0)"){:class => ("cancel" if current_member.has_u_word(w))}
+				%i.icon-star-empty(title="收录")
 		- if @can_add_tag
 			%a.itag(href="javascript:void(0)")
 				%i.icon-plus
 		%a.audio(href="javascript:void(0)")
-			%i.icon-headphones(title="发音" rel="tooltip")
+			%i.icon-headphones(title="发音")
 			%audio{:src => w.source_voice}
 		%span.title
 			= w.title		
