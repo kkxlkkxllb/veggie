@@ -1,7 +1,8 @@
+#require "rvm/capistrano" 
+#require "bundler/capistrano"
+require 'sidekiq/capistrano'
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
-require 'sidekiq/capistrano'
-#require "rvm/capistrano" 
 set :application, "veggie"
 set :repository,  "git@github.com:kkxlkkxllb/veggie.git"
 
