@@ -22,8 +22,14 @@
 			width: 280px		
 	#word_nav
 		padding: 10px 20px
-		background: #333
+		background: hsl(0, 0%, 75%) url(/assets/img/noise.png)	
 		position: relative
+		@include inset-shadow(0,2px,5px,#999)
+		ul
+			list-style: none
+			margin: 0
+			li
+				float: left
 		span.btn-group
 			position: absolute
 			right: 20px
@@ -69,7 +75,7 @@
 			span.ctags
 				height: 20px
 				@include text-shadow-content-white
-				background-color: #5BF
+				background: #5BF 
 				font-weight: bold
 				font-family: serif
 			.pic

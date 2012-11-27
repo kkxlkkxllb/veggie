@@ -9,18 +9,18 @@
 			= @ctitle
 	.words_container
 		#word_nav
-			%ul#filter_nav.clearfix.dark_nav	
+			%ul#filter_nav.clearfix	
 				%li.active
-					%a(href="javascript:void(0)" data-filter="*")
+					%a.button.glossy.xs.pink.skew(href="javascript:void(0)" data-filter="*" data-icon=" ")
 						All
 				- @ctags.each do |t|
 					%li
-						%a{:"data-filter" => "."+t}(href="javascript:void(0)")
+						%a.button.glossy.xs.green.skew{:"data-filter" => "."+t}(href="javascript:void(0)" data-icon=" ")
 							= t.capitalize
 			%span.btn-group
-				%span.btn.btn-inverse.active(rel="wd")
+				%span.btn.btn-info.active(rel="wd")
 					%i.icon-th-large
-				%span.btn.btn-inverse(rel="pic")
+				%span.btn.btn-info(rel="pic")
 					%i.icon-picture
 		#word_ground
 			- @words.each do |w|
