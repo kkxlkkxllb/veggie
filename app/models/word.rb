@@ -59,5 +59,11 @@ class Word < ActiveRecord::Base
     return File.exist?(self.image_path) ? self.image_url : "/assets/icon/jiong.png"
   end
 
-  
+  def as_json
+		{
+			:t => self.class.to_s,
+			:title => self.title,
+			:id => self.id
+		}
+	end
 end

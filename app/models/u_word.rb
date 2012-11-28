@@ -21,6 +21,7 @@ class UWord < ActiveRecord::Base
   
   IMAGE_URL = "/system/images/u_word/"
   IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
+	IMAGE_SIZE_LIMIT = 700*1000 #700kb
 
 	class << self   
     def tagged(tags)
@@ -48,9 +49,21 @@ class UWord < ActiveRecord::Base
     return File.exist?(self.image_path) ? self.image_url : "/assets/icon/jiong.png"
   end
 
+	def hash_tags
+    self.ctags.map{|t| "#"+t.name+" " }.join
+  end
+
 	def untagged(user)
 		words = user.u_words
 		words - words.joins(:ctags).group("u_words.id")
+	end
+
+	def as_json
+		{	
+			:t => self.class.to_s,
+			:title => self.title,
+			:id => self.id
+		}
 	end
   
 end

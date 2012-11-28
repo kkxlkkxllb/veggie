@@ -10,6 +10,7 @@
 	.modal-body
 		= form_tag "/words/add_tag",:remote => true,:id => "new_word_tag_form" do
 			= hidden_field_tag :id,""
+			= hidden_field_tag :et,""
 			= text_field_tag :tags,"",:placeholder => "enter tags split by #",:required => "required"
 			= submit_tag "添加",:class => "btn-primary btn"
 		#tags_area

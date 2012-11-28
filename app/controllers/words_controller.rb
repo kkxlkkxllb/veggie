@@ -30,13 +30,13 @@ class WordsController < ApplicationController
     end
     @can_add_tag = true
     if @word
-      html = render_to_string(
-            :formats => :html,
-            :handlers => :haml,
-		        :partial => "word",
-		        :locals => {:w => @word}
-		        )
-		  render_json(0,"ok",{:html => html})
+#      html = render_to_string(
+#            :formats => :html,
+#            :handlers => :haml,
+#		        :partial => "word",
+#		        :locals => {:w => @word}
+#		        )
+		  render_json(0,"ok",@word.as_json)
 	  else
 	    render_json(-1,"fail")
     end
@@ -56,11 +56,20 @@ class WordsController < ApplicationController
 
   
   def add_tag
-    @word = Word.find(params[:id])
-    @word.ctag_list = Word.parse_tag(params[:tags]).join(",")
-    if @word.save!
-      render_json(0,"ok",{:title => @word.hash_tags})
-    end
+		case params[:et]
+		when "Word"
+		  @_word = Word
+		when "UWord"
+			@_word = current_member.u_words
+		end	
+		if @_word && @word = @_word.where(:id => params[:id]).first
+			@word.ctag_list = Word.parse_tag(params[:tags]).join(",")
+			if @word.save!
+			  render_json(0,"ok",{:title => @word.hash_tags})
+			end
+		else
+			render_json(-1,"error")
+		end
   end
   
   # quick img make
@@ -77,7 +86,13 @@ class WordsController < ApplicationController
   # &image &id
   def upload_pic
     word = Word.find(params[:id])
-    Grape::WordImage.new(word.title).make(params[:image].tempfile.path)
+		file = params[:image].tempfile.path
+		if File.size(file) < UWord::IMAGE_SIZE_LIMIT
+    	Grape::WordImage.new(word.title).make(file)
+			render_json(0,"ok")
+		else
+			render_json(-1,"image too big,please resize it")
+		end
   end
   
   # TO-DO destroy u_word
