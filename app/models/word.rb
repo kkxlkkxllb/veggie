@@ -16,7 +16,7 @@ class Word < ActiveRecord::Base
   
   validates :title, :presence => true, :uniqueness => true
   # 有ctag的words
-  scope :vall, joins(:ctags).group("words.id")
+  scope :has_tag, joins(:ctags).group("words.id")
   IMAGE_URL = "/system/images/word/"
   IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
   
@@ -31,6 +31,7 @@ class Word < ActiveRecord::Base
     def tagged(tags)
       Word.tagged_with(tags,:any => true).all.uniq
     end
+
   end
   
   def source_link
@@ -57,5 +58,6 @@ class Word < ActiveRecord::Base
   def image
     return File.exist?(self.image_path) ? self.image_url : "/assets/icon/jiong.png"
   end
+
   
 end

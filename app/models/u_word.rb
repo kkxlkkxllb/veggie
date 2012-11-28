@@ -21,6 +21,12 @@ class UWord < ActiveRecord::Base
   
   IMAGE_URL = "/system/images/u_word/"
   IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
+
+	class << self   
+    def tagged(tags)
+      UWord.tagged_with(tags,:any => true).all.uniq
+    end
+  end
   
   def title
     self.word.title
@@ -41,5 +47,10 @@ class UWord < ActiveRecord::Base
   def image
     return File.exist?(self.image_path) ? self.image_url : "/assets/icon/jiong.png"
   end
+
+	def untagged(user)
+		words = user.u_words
+		words - words.joins(:ctags).group("u_words.id")
+	end
   
 end
