@@ -5,7 +5,7 @@ class word.Word
 		word.after_create $("#new_word form"),$("#new_word_tag_modal")
 		word.audio_play()
 		word.insert_tags $("form#new_word_tag_form"),$("#new_word_tag_modal")
-		word.filter_word()
+		word.filter_word($("#word_nav"))
 		word.clone_word()
 		word.viewport()
 		word.img_change()
@@ -56,10 +56,13 @@ class word.Word
 			if data.status is 0
 				$modal.modal('hide')
 				$("span.ctags",$item).text(data.data.title)
-	filter_word: ($container = @$container) ->
-		$('#filter_nav a').click ->
+	filter_word: ($wrap,$container = @$container) ->
+		$('ul',$wrap).find("a").click ->
+			if $(@).parent('li').hasClass "active"
+				false
 			$(@).parent('li').addClass("active").siblings().removeClass "active"
-			$container.isotope({ filter: $(@).attr('data-filter') })
+			$container.isotope({ filter: $(@).attr('ctag') })
+			false
 	clone_word: =>
 		@$container.delegate "a.fetch","click", ->
 			ele = $(@)
