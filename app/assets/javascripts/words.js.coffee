@@ -2,32 +2,35 @@ word = exports ? this
 class word.Word
 	@init: ->
 		word = new Word($("#word_ground"),".word_item")
-		word.after_create $("#new_word form"),$("#new_word_tag_modal")
+		word.after_create $("#new_word form"),$("#new_word_tag_modal"),$("form#new_word_tag_form")
 		word.audio_play()
-		word.insert_tags $("form#new_word_tag_form"),$("#new_word_tag_modal")
-		word.filter_word()
+		word.insert_tags $("form#new_word_tag_form"),$("#new_word_tag_modal"),"Word"
+		word.filter_word($("#word_nav"))
 		word.clone_word()
 		word.viewport()
 		word.img_change()
+	@tag_modal: ($modal,$form,title,id,et,tags) ->
+		$("span.wtitle",$modal).text(title)
+		$("input#id",$form).val(id)
+		$("input#et",$form).val(et)
+		$("input#tags",$form).val(tags)	
+		$modal.modal()
 	constructor: (@$container,item) ->
+		$(item,@$container).animate opacity:1
 		@$container.isotope
 			itemSelector: item
 			layoutMode : 'masonry'
 			getSortData :
 				title : ( $elem ) ->
 					$elem.find('span.title').text()
-	after_create: ($form,$modal) ->
+	after_create: ($form,$modal,$tag_form) ->
 		$form.bind 'ajax:beforeSend', ->
 			$("input",$form).addClass "disable_event"
 			Utils.loading $form
 		$form.bind 'ajax:success', (d,data) ->
-			if data.status is 0
-				$("#new_word input").val("").focus()
-				$("span.wtitle",$modal).text(data.data.title)
-				$("input#id",$form).val(data.data.id)
-				$("input#et",$form).val(data.data.t)
-				$("input#tags",$form).val("")
-				$modal.modal()
+			if data.status is 0				
+				$("#new_word input").val("")
+				Word.tag_modal($modal,$tag_form,data.data.title,data.data.id,data.data.t,"")
 			else
 				Utils.flash("o_O 呃，失败了，单词没查到")
 			$("input",$form).removeClass("disable_event")
@@ -35,17 +38,14 @@ class word.Word
 	audio_play: =>
 		@$container.delegate "a.audio","click", ->
 			$("audio",$(@))[0].play()
-	insert_tags: ($form,$modal) =>
+	insert_tags: ($form,$modal,et) =>
 		@$container.delegate "a.itag","click", ->
 			if $modal.length is 1
 				$item = $(@).closest('.word_item')
 				wid = $item.attr("wid")
 				wtitle = $("span.title",$item).text()
 				hash_tags = $("span.ctags",$item).text()
-				$("span.wtitle",$modal).text(wtitle)
-				$("input#tags",$form).val(hash_tags)
-				$("input#id",$form).val(wid)
-				$modal.modal()					
+				Word.tag_modal($modal,$form,wtitle,wid,et,hash_tags)					
 		$("button.btn",$form).click ->
 			$form.submit()
 		$("#tags_area").delegate "span","click", ->
@@ -54,19 +54,13 @@ class word.Word
 		$form.bind 'ajax:success', (d,data) ->
 			if data.status is 0
 				$modal.modal('hide')
-				$("span.ctags",$item).text(data.data.title)
-	filter_word: ($container = @$container) ->
-		$('#filter_nav li:first-child').addClass "active"
-		$('#filter_nav a').click ->
+	filter_word: ($wrap,$container = @$container) ->
+		$('ul',$wrap).find("a").click ->
+			if $(@).parent('li').hasClass "active"
+				false
 			$(@).parent('li').addClass("active").siblings().removeClass "active"
-			tag = $(@).attr "rel"
-			$.post "/course"
-				ctag:tag
-				(data) ->
-					if data.status is 0
-						$container.html data.data.html
-						$container.isotope()
-				"json"
+			$container.isotope({ filter: $(@).attr('ctag') })
+			false
 	clone_word: =>
 		@$container.delegate "a.fetch","click", ->
 			ele = $(@)

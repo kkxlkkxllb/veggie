@@ -41,5 +41,5 @@ zh-cn:
       account: "帐户"
   greet:
     new_user: "[撒花] @%{name} 欢迎入住 17up 外语学院 Alpha 班，成为第 %{num} 位学员。［%{motto}］"
-    new_leafs: "单词啊，快到脑子里来，今天%{cast}度，%{num} 片新叶长成，快瞧瞧：http://17up.org/t"
+    new_leafs: "单词啊，快到脑子里来，今天%{cast}度，%{num} 片新叶长成，快瞧瞧：http://17up.org"
     bind_provider: "[笑哈哈] @%{name} 交个朋友吧,［%{motto}］"

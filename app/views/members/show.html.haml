@@ -1,4 +1,8 @@
 #user_home
+	- if @can_add_tag
+		#new_word
+			= form_tag '/words/create',:remote => true do
+				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
 	.ground
 		- @u_words.each do |w|
 			.word.button.glossy.pink.oval(data-icon=" ")

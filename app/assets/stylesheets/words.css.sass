@@ -6,20 +6,20 @@
 		font-size: 24px
 		margin: 0
 		text-align: center
+#new_word
+	text-align: center
+	@include fibre
+	padding: 20px
+	position: relative
+	form
+		margin: 0
+	input
+		margin: 0
+		padding: 5px
+		width: 280px
 #course_wrap
 	margin-bottom: 40px
-	background: url(/assets/img/subtle_stripes/subtle_stripes.png)	
-	#new_word
-		text-align: center
-		@include fibre
-		padding: 20px
-		position: relative
-		form
-			margin: 0
-		input
-			margin: 0
-			padding: 5px
-			width: 280px		
+	background: url(/assets/img/subtle_stripes/subtle_stripes.png)			
 	#word_nav
 		padding: 10px 20px
 		background: hsl(0, 0%, 75%) url(/assets/img/noise.png)	
@@ -37,6 +37,7 @@
 	#word_ground
 		padding: 10px
 		.word_item
+			opacity: 0
 			margin: 5px
 			width: 188px
 			background: #eee
