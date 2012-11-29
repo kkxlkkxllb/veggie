@@ -10,12 +10,9 @@
 	.words_container
 		#word_nav
 			%ul#filter_nav.clearfix	
-				%li.active
-					%a.button.glossy.xs.pink.skew(href="javascript:void(0)" data-filter="*" data-icon=" ")
-						All
 				- @ctags.each do |t|
 					%li
-						%a.button.glossy.xs.green.skew{:"data-filter" => "."+t}(href="javascript:void(0)" data-icon=" ")
+						%a.button.glossy.xs.green.skew{:rel => t}(href="javascript:void(0)" data-icon=" ")
 							= t.capitalize
 			%span.btn-group
 				%span.btn.btn-info.active(rel="wd")
@@ -23,5 +20,4 @@
 				%span.btn.btn-info(rel="pic")
 					%i.icon-picture
 		#word_ground
-			- @words.each do |w|
-				= render 'word',:w => w
+			= render "word"

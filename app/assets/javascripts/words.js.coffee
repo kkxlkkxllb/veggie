@@ -10,7 +10,6 @@ class word.Word
 		word.viewport()
 		word.img_change()
 	constructor: (@$container,item) ->
-		$(item,@$container).animate opacity:1
 		@$container.isotope
 			itemSelector: item
 			layoutMode : 'masonry'
@@ -57,9 +56,17 @@ class word.Word
 				$modal.modal('hide')
 				$("span.ctags",$item).text(data.data.title)
 	filter_word: ($container = @$container) ->
+		$('#filter_nav li:first-child').addClass "active"
 		$('#filter_nav a').click ->
 			$(@).parent('li').addClass("active").siblings().removeClass "active"
-			$container.isotope({ filter: $(@).attr('data-filter') })
+			tag = $(@).attr "rel"
+			$.post "/course"
+				ctag:tag
+				(data) ->
+					if data.status is 0
+						$container.html data.data.html
+						$container.isotope()
+				"json"
 	clone_word: =>
 		@$container.delegate "a.fetch","click", ->
 			ele = $(@)

@@ -8,11 +8,23 @@ class WordsController < ApplicationController
     course = load_course  
     @ctitle = "※ " + course['c1']['title'] + " ※"
     @ctags = course['c1']['ctags'].split(";")
-    @words = Word.tagged(@ctags)
+    tag = params[:ctag] ? params[:ctag] : @ctags[0]
+    @words = Word.tagged(tag)
     if current_member and current_member.admin?
       @can_add_tag = true
     end
     set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))
+    respond_to do |format|
+      format.html
+			format.json{
+        html = render_to_string(
+                :formats => :html,
+                :handlers => :haml,
+  		          :partial => "word"
+  		        )
+    		render_json(0,"ok",{:html => html})
+      }
+    end
   end
   
   # 新建词汇
