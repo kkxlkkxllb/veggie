@@ -10,7 +10,7 @@
  *
  *= require_self
  *= require bootstrap_and_overrides
-　*= require_tree ./lib
+ *= require_tree ./lib
  *= require base
  *= require home
  *= require info

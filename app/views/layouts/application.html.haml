@@ -15,7 +15,7 @@
     = render "shared/track"
     %link(href="/favicon.png" rel="apple-touch-icon-precomposed")
     %link(href="/favicon.png" rel="shortcut icon")
-  %body
+  %body{:"data-js" => controller_name}
     - unless @is_root
       = render "shared/header"
     #main

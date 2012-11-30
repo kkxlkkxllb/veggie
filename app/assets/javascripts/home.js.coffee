@@ -2,21 +2,12 @@ home = exports ? this
 class home.Home
 	@init: ->
 		home = new Home()
-		home.destroy_leaf()
 		home.add_provider_view $("#new_provider_modal"),$("form#new_provider_form")
 		home.info($("#impress"))
-	constructor: (@$wrap = $("#home")) ->
-		$("div.leaf").live 'hover',->
-			$("span.action",$(@)).toggle()
-	destroy_leaf: ($wrap = @$wrap) ->
-		$(".leaf span.destroy").live "click", ->
-			ele = $(@)
-			$.post "/leafs/destroy"
-				id: ele.attr("lid")
-				(data) ->
-					if data.status is 0
-						ele.closest('.leaf').remove()
-						$wrap.masonry('reload')
+		if $("#top_nav").length is 0
+			$("html").addClass("home")
+	constructor: ->
+		Utils.masonry($("#user_list"),'.user_item')
 	add_provider_view: ($modal,$form) ->
 		$("#add_new_btn").click ->
 			$modal.modal()

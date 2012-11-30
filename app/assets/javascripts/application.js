@@ -16,9 +16,4 @@
 
 //= require_tree ./lib
 //= require_tree ./zlib
-//= require utils
-//= require home
-//= require words
-//= require olive
-//= require members
-//= require init
+//= require_tree .
