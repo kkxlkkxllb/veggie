@@ -20,7 +20,8 @@ class Mobile::MhomeController < ApplicationController
                 :handlers => :haml,
   			        :file => "mobile/mhome/weibo"
   			        )
-			  render_json(0,"ok",{:html => html})
+  			cnt = @users ? @users.length : 0
+			  render_json(0,"ok",{:html => html,:cnt => cnt})
 			}			
 		end		
   end

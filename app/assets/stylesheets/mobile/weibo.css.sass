@@ -6,13 +6,12 @@
 .leaf
 	width: 300px
 	margin: 5px auto
-	border: 1px solid #2F96D1
-	background: #3DACE0
+	background: white
 	@include shadow(0,1px,3px,rgba(0,0,0,.3))
 	.info
 		padding: 3px
-		background: #4AC0EE
-		border-bottom: 1px solid #2F96D1	
+		background: #f5f5f5
+		border-bottom: 1px solid #ccc	
 		span
 			display: inline-block
 			&.avatar
@@ -24,17 +23,16 @@
 				text-shadow: 0 -1px 0 #288AC9
 				line-height: 25px
 				a
-					color: #f5f5f5
+					@include text-shadow-inverse
 			&.time
-				color: #2F96D1
+				color: #999
 				font-size: 12px
 				line-height: 25px
 	.content
-		border-top: 1px solid #81C9EB
-		text-shadow: 0 -1px 0 #288AC9
-		color: white
+		border-top: 1px solid #f5f5f5
+		@include text-shadow-inverse(#444)
 		padding: 3px 5px
-		a		
+		a
 			text-shadow: none
 	.img
 		padding: 3px
@@ -50,7 +48,7 @@
 		width: 80px
 		margin: 5px
 		display: inline-block
-		border: 1px solid #2F96D1		
+		border: 1px solid #f5f5f5		
 		background: #3DACE0
 		@include shadow(2px,2px,4px,rgba(0,0,0,.3))
 		position: relative

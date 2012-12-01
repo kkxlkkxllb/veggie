@@ -16,7 +16,7 @@ class word.Word
 			if $answer is $key
 				$(@).addClass "good"
 			else
-				Home.flash($answer)
+				Mhome.flash($answer)
 	reset: ($rwrap,$wwrap) ->
 		$("span.reset_btn",$rwrap).live "click",->		
 			$(".field",$wwrap).removeClass("good")

@@ -2,7 +2,7 @@ weibo = exports ? this
 class weibo.Weibo
 	@init: ->
 		weibo = new Weibo($("#home"))
-		weibo.filter_provider($("#user_list"))
+		weibo.filter_provider()
 	constructor: (@$wrap) ->
 		$wrap = @$wrap
 		$.get("/mobile/t",(data) ->
@@ -21,12 +21,11 @@ class weibo.Weibo
 	     	,
 				(newElements) ->
 					$wrap.append(newElements)
-	filter_provider: ($ulist,$wrap = @$wrap) ->
+	filter_provider: ($wrap = @$wrap) ->
 		$("a.l2p",$wrap).live "click",->
 			pid = $(@).attr("pid")
 			$.post("/mobile/t",{pid:pid},(data) ->
 				if data.status is 0
 					$wrap.html(data.data.html)
-			,"json").complete ->
-				width = $(".user_item",$ulist).length * 96
-				$ulist.css "width":width
+					$("#user_list").css "width":data.data.cnt*96
+			,"json")

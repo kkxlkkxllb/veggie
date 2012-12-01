@@ -1,6 +1,6 @@
 - if @users
 	#user_list_wrap
-		#user_list.clearfix
+		#user_list.clearfix{:cnt => @users.length }
 			- @users.each do |u|
 				%a.l2p{:pid => u.id }(href="#")
 					.user_item
