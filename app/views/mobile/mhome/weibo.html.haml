@@ -2,7 +2,7 @@
 	#user_list_wrap
 		#user_list.clearfix
 			- @users.each do |u|
-				%a{:onclick => "get_provider(#{u.id});return false;"}(href="#")
+				%a.l2p{:pid => u.id }(href="#")
 					.user_item
 						.avatar
 							= image_tag(u.avatar(:large))
@@ -12,10 +12,10 @@
 	- @leafs.each do |leaf|
 		.leaf
 			.info.clearfix
-				%span.avatar.left{:onclick => "get_provider(#{leaf.provider.id});return false;"}
+				%span.avatar.left
 					= image_tag(leaf.provider.avatar)
 				%span.name.left
-					%a{:onclick => "get_provider(#{leaf.provider.id});return false;"}(href="#")
+					%a.l2p{:pid => leaf.provider.id }(href="#")
 						= leaf.provider.user_name
 				%span.time.right
 					= time_stamp(leaf.time_stamp)

@@ -1,22 +1,31 @@
 word = exports ? this
-word.is_correct = (ele) ->
-	$answer = ele.attr('rel')
-	$key = $(".title",ele.closest('.word')).attr("rel")
-	if $answer is $key
-		ele.addClass "good"
-	else
-		$("#m_flash").text($answer).fadeIn()
-		setTimeout("hide_flash()",5000)
-word.reset_test = ->
-	$(".field").removeClass("good")
-	$("body").animate({scrollTop: 0},1000)
-word.hide_flash = ->
-	$("#m_flash").fadeOut()
-word.load_ctag = (tag) ->
-	$wrap = $("#words_wrap")
-	$.post("/mobile/word",ctag:tag,(data) ->
-		if data.status is 0
-			$wrap.html(data.data.html)
-	,"json").complete ->
-		$("body").animate({scrollTop: 0},1000)
+class word.Word
+	@init: ->
+		word = new Word($("#home"))
+		word.correct_it($("#words_wrap"))
+		word.reset($("#reset"),$("#words_wrap"))
+	constructor: (@$wrap) ->
+		$.get("/mobile/word",(data) ->
+			if data.status is 0
+				@$wrap.append(data.data.html)
+		,"json")
+	correct_it: ($wwrap) ->
+		$(".field",$wwrap).live "click",->
+			$answer = $(@).attr('rel')
+			$key = $(".title",$(@).closest('.word')).attr("rel")
+			if $answer is $key
+				$(@).addClass "good"
+			else
+				Home.flash($answer)
+	reset: ($rwrap,$wwrap) ->
+		$("span.reset_btn",$rwrap).live "click",->		
+			$(".field",$wwrap).removeClass("good")
+			$("body").animate({scrollTop: 0},1000)
+		$("span.tag_btn",$rwrap).live "click",->
+			tag = $(@).attr 'rel'
+			$.post("/mobile/word",ctag:tag,(data) ->
+				if data.status is 0
+					$wwrap.html(data.data.html)
+			,"json").complete ->
+				$("body").animate({scrollTop: 0},1000)
 			
