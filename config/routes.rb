@@ -27,9 +27,7 @@ Veggie::Application.routes.draw do
   match "u/:id" => "members#show",:as => :member
   match "setting" => "members#edit",:as => :setting
 
-  resource :provider do
-    post "create"
-  end
+	post "provider/create"
   
   match "welcome" => "home#index", :as => :welcome
   match "square" => "home#square", :as => :hot

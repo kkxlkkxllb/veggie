@@ -1,5 +1,5 @@
-home = exports ? this
-class home.Home
+mhome = exports ? this
+class mhome.Mhome
 	@flash: (msg)->
 		$alert = $("#m_flash")
 		$alert.text(msg).fadeIn()

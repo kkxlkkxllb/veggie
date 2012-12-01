@@ -87,7 +87,7 @@ class Provider < ActiveRecord::Base
   end
   
   def send_greet
-    if self.member.providers.length > 1
+    if self.member and self.member.providers.length > 1
       HardWorker::SendGreetJob.perform_async(self.id,:bind => true)
     end
   end
