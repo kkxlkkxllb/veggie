@@ -4,11 +4,12 @@ class weibo.Weibo
 		weibo = new Weibo($("#home"))
 		weibo.filter_provider($("#user_list"))
 	constructor: (@$wrap) ->
+		$wrap = @$wrap
 		$.get("/mobile/t",(data) ->
 			if data.status is 0
-				@$wrap.append(data.data.html)
+				$wrap.append(data.data.html)
 		,"json").complete ->
-			@$wrap.infinitescroll
+			$wrap.infinitescroll
 				navSelector  : "nav.pagination",
 				nextSelector : "nav.pagination a",
 				itemSelector : ".leaf",
@@ -19,7 +20,7 @@ class weibo.Weibo
 					img: 'http://i.imgur.com/6RMhx.gif'
 	     	,
 				(newElements) ->
-					@$wrap.append(newElements)
+					$wrap.append(newElements)
 	filter_provider: ($ulist,$wrap = @$wrap) ->
 		$("a.l2p",$wrap).live "click",->
 			pid = $(@).attr("pid")

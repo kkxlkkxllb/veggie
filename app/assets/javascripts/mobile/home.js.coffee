@@ -5,7 +5,7 @@ class mhome.Mhome
 		$alert.text(msg).fadeIn()
 		fuc =-> $alert.fadeOut()
 		setTimeout fuc,5000
-	constructor: (@$wrap) ->
+	constructor: ($wrap) ->
 		$("#m_nav .menu").click ->
 			page = $(@).attr "rel"		
 			$("#m_nav_back").show()
@@ -13,6 +13,6 @@ class mhome.Mhome
 			window[$.string(page).capitalize().str].init()
 		$("#m_nav_back").click ->
 			$(@).hide()
-			@$wrap.infinitescroll("destroy").html("")
+			$wrap.infinitescroll("destroy").html("")
 			$("#m_nav").show()
 	

@@ -4,10 +4,10 @@ class word.Word
 		word = new Word($("#home"))
 		word.correct_it($("#words_wrap"))
 		word.reset($("#reset"),$("#words_wrap"))
-	constructor: (@$wrap) ->
+	constructor: ($wrap) ->
 		$.get("/mobile/word",(data) ->
 			if data.status is 0
-				@$wrap.append(data.data.html)
+				$wrap.append(data.data.html)
 		,"json")
 	correct_it: ($wwrap) ->
 		$(".field",$wwrap).live "click",->
