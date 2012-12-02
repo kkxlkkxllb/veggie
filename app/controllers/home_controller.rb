@@ -25,7 +25,7 @@ class HomeController < ApplicationController
   end
   
   def info
-    set_seo_meta("简介",t('keywords'),t('describe'))
+    set_seo_meta(nil,t('keywords'),t('describe'))
     @request = request.remote_ip
     @info = Utils.parse_ip(@request)
   end

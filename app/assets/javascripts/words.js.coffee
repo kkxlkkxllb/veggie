@@ -30,7 +30,7 @@ class word.Words
 		$form.bind 'ajax:success', (d,data) ->
 			if data.status is 0				
 				$("#new_word input").val("")
-				Word.tag_modal($modal,$tag_form,data.data.title,data.data.id,data.data.t,"")
+				Words.tag_modal($modal,$tag_form,data.data.title,data.data.id,data.data.t,"")
 			else
 				Utils.flash("o_O 呃，失败了，单词没查到")
 			$("input",$form).removeClass("disable_event")
@@ -45,7 +45,7 @@ class word.Words
 				wid = $item.attr("wid")
 				wtitle = $("span.title",$item).text()
 				hash_tags = $("span.ctags",$item).text()
-				Word.tag_modal($modal,$form,wtitle,wid,et,hash_tags)					
+				Words.tag_modal($modal,$form,wtitle,wid,et,hash_tags)					
 		$("button.btn",$form).click ->
 			$form.submit()
 		$("#tags_area").delegate "span","click", ->
