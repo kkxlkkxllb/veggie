@@ -1,4 +1,4 @@
-### 17up.org
+### 17up.org ☮
 ---------------
 
-> ☮
+> A city of wisdom
