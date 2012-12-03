@@ -15,6 +15,6 @@ class game.Allen
 			r1 = $("#rand_1").text()
 			r2 = $("#rand_2").text()
 			if w is r1 or w is r2 or r1 is r2
-				console.log("bingo")
+				Utils.flash("bingo!")
 	
 		

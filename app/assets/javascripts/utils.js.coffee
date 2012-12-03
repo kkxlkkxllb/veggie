@@ -10,8 +10,8 @@ class utils.Utils
 	@flash: (msg) ->
 		$alert = $("#flash_message .alert")
 		$("strong",$alert).text(msg)
-		$alert.fadeIn()
-		fuc = -> $alert.fadeOut()
+		$alert.slideDown()
+		fuc = -> $alert.slideUp()
 		setTimeout fuc,5000
 	@infinitescroll: ($wrap) ->
 		$wrap.infinitescroll
