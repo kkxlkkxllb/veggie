@@ -35,11 +35,11 @@ class Word < ActiveRecord::Base
   end
   
   def source_link
-    $dict_source[:english] + self.title
+    $dict_source[:english] + URI.encode(self.title)
   end
   
   def source_voice
-    $dict_source[:english_v] + self.title
+    $dict_source[:english_v] + URI.encode(self.title)
   end
   
   def hash_tags

@@ -11,12 +11,14 @@ module Grape
 		    file = File.open(output,"wb") << data
         file.close
         success.call
+				return 0
       rescue
 				if block_given?
         	error.call
 				else
 					p "#{url} save fail!"
 				end
+				return -1
       end
     end
   end

@@ -83,7 +83,7 @@ class word.Words
 			ele.hide()
 			$wrap = ele.closest('.word_item')
 			Utils.loading $('.pic img',$wrap)
-			$.post "/words/make_pic"
+			$.post "/words/fetch_img"
 				id: $wrap.attr("wid")
 				(data) ->
 					if data.status is 0

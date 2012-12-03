@@ -1,5 +1,5 @@
 class OliveController < ApplicationController
-  before_filter :authenticate_admin
+  before_filter :authenticate_admin,:except => :fetch
   
   def index
     set_seo_meta("Olive",t('keywords'),t('describe'))
@@ -50,6 +50,20 @@ class OliveController < ApplicationController
     end
     render_json(0,"ok",:num => data.length)
   end
+
+	# input :title
+	# cached
+	def fetch
+		title = params[:title]
+		result = Rails.cache.fetch("olive/#{title}",:expires_in => 5.hours) do
+			{
+				:_tumblr => photos(Olive::Tumblr,title),
+				:_instagram => photos(Olive::Instagram,title),
+				:_500px => photos(Olive::Px,title)
+			}
+		end
+		render_json(0,result)
+	end
   
   private
   def authenticate_admin
@@ -57,4 +71,8 @@ class OliveController < ApplicationController
       redirect_to root_path
     end
   end
+
+	def photos(provider,title)
+		provider.new.tagged(title).map{|x| x[:photo] }
+	end
 end

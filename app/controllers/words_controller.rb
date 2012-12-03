@@ -72,10 +72,11 @@ class WordsController < ApplicationController
 		end
   end
   
+	# Editor
   # quick img make
-  def make_pic   
+  def fetch_img   
     @word = Word.find(params[:id])
-    @pics = Rails.cache.fetch("word/#{@word.id}/imgs") do
+    @pics = Rails.cache.fetch("word/#{@word.id}/imgs",:expires_in => 1.weeks) do
         Grape::WordImage.new(@word.title).parse(@word.ctag_list.join(" "))[0..17]
       end
     img = @pics[rand(@pics.length)]
@@ -83,17 +84,27 @@ class WordsController < ApplicationController
     render_json(0,"ok",{:pic => @word.image+"?#{Time.now.to_i}"})
   end
   
-  # &image &id
-  def upload_pic
-    word = Word.find(params[:id])
+	# User
+  # upload &image &id
+  def upload_img
+    @word = Word.find(params[:id])
 		file = params[:image].tempfile.path
 		if File.size(file) < UWord::IMAGE_SIZE_LIMIT
-    	Grape::WordImage.new(word.title).make(file)
+    	Grape::WordImage.new(@word.title).make(file)
 			render_json(0,"ok")
 		else
 			render_json(-1,"image too big,please resize it")
 		end
   end
+
+	# User
+	# input: img_url & id
+	def select_img
+		@word = Word.find(params[:id])
+		@status = Grape::WordImage.new(@word.title).make(params[:img_url])
+		msg = @status < 0 ? "error img url" : "ok"
+		render_json(@status,msg)
+	end
   
   # TO-DO destroy u_word
   def destroy  

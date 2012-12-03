@@ -35,10 +35,13 @@ Veggie::Application.routes.draw do
   match "course" => "words#index", :as => :words
   match "quotes" => "home#quote", :as => :quote
   
+	# words
   post "words/create"
-  match "words/add_tag" => "words#add_tag"
+  post "words/add_tag"
   post "words/clone"
-  post "words/make_pic"
+  post "words/fetch_img"
+	post "words/upload_img"
+	post "words/select_img"
   
   match "t" => "leafs#index", :as => :leafs
   match "leafs/destroy" => "leafs#destroy"
@@ -46,6 +49,7 @@ Veggie::Application.routes.draw do
   match "olive" => "olive#index"
   match "olive/sync" => "olive#sync"
   match "olive/publish" => "olive#publish"
+	get "olive/fetch"
  
   root :to => 'home#door'
 
