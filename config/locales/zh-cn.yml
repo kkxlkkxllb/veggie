@@ -6,15 +6,15 @@ zh-cn:
     title: 迷你版
   love:
     title: 爱の试炼
-    keywords: "爱情测试，寻找另一半"
-    describe: "茫茫人海，怎么找，17up倾力打造爱之试炼，帮你轻松找到那个人"
+    keywords: "爱情;feeling"
+    describe: "为爱寻找一个理由"
   title: 17up
   keywords: "city,knowledge,peace,future,university,education"
-  describe: "这是一座城，知识是这座城里的唯一财富，任何好学的你我都是这座城里的居民，放下烦恼，拥抱希望"
-  door: "城门"
+  describe: "这是一座天空之城，知识是这座城里的唯一财富，任何好学的你我都是这座城里的居民，放下烦恼，静静地仰望天空吧"
+  door: "入口"
   flash:
     notice:
-      register: "欢迎进入 17up ，先逛逛这座城市吧!"
+      register: "欢迎进入 17up ，先逛逛吧!"
       login: "学习，任何时候开始都不晚，欢迎回来！"
       bind: "绑定成功啦!"
   words:
@@ -40,6 +40,6 @@ zh-cn:
       provider: "第三方帐号"
       account: "帐户"
   greet:
-    new_user: "[撒花] @%{name} 欢迎入住 17up 这座城市， 成为第 %{num} 位公民。［%{motto}］"
-    new_leafs: "Looking for peace，今天%{cast}度，%{num} 片新叶长成：http://17up.org"
+    new_user: "[撒花] @%{name} 欢迎入住 17up 天空之城， 成为第 %{num} 位公民。［%{motto}］"
+    new_leafs: "%{motto}，今天%{cast}度，%{num} 片新叶长成：http://17up.org"
     bind_provider: "[笑哈哈] @%{name} 交个朋友吧,［%{motto}］"

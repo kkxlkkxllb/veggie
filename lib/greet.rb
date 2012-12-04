@@ -1,13 +1,13 @@
 class Greet
 
   def initialize(pid, opts={})
+    greet = YAML.load_file(Rails.root.join("lib/cherry", "greet.yml")).fetch("greet") 
+    @motto = greet[rand(greet.length)]
     if pid.blank?
       @provider = Member.first.providers.where(:provider => opts[:provider]).first
-      @content = I18n.t('greet.new_leafs',:num => opts[:new_leaf_count],:cast => Utils.check_weather)
-    else
-      greet = YAML.load_file(Rails.root.join("lib/cherry", "greet.yml")).fetch("greet")   
-      @provider = Provider.find(pid)
-      @motto = greet[rand(greet.length)]
+      @content = I18n.t('greet.new_leafs',:num => opts[:new_leaf_count],:cast => Utils.check_weather,:motto => @motto)
+    else       
+      @provider = Provider.find(pid)      
       if opts[:bind]
         @content = I18n.t('greet.bind_provider',:name =>@provider.user_name,:motto => @motto)
       else
