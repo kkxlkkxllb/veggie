@@ -84,3 +84,5 @@ gem 'whenever', :require => false
 gem 'sinatra', :require => nil
 gem 'slim'
 gem 'sidekiq'
+
+gem "parallel"

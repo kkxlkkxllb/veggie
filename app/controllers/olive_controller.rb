@@ -55,15 +55,18 @@ class OliveController < ApplicationController
 	# cached
 	def fetch
 		title = params[:title]
-		now = Time.now
+
 		result = Rails.cache.fetch("olive/#{title}",:expires_in => 5.hours) do
+			results = Parallel.map([Olive::Tumblr,Olive::Instagram,Olive::Px]) do |p|
+				photos(p,title)
+			end
 			{
-				:_tumblr => photos(Olive::Tumblr,title),
-				:_instagram => photos(Olive::Instagram,title),
-				:_500px => photos(Olive::Px,title)
+				:_tumblr => results[0],
+				:_instagram => results[1],
+				:_500px => results[2]
 			}
 		end
-		p Time.now - now
+
 		render_json(0,"ok",result)
 	end
   
