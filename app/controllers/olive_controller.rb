@@ -55,6 +55,7 @@ class OliveController < ApplicationController
 	# cached
 	def fetch
 		title = params[:title]
+		now = Time.now
 		result = Rails.cache.fetch("olive/#{title}",:expires_in => 5.hours) do
 			{
 				:_tumblr => photos(Olive::Tumblr,title),
@@ -62,7 +63,8 @@ class OliveController < ApplicationController
 				:_500px => photos(Olive::Px,title)
 			}
 		end
-		render_json(0,result)
+		p Time.now - now
+		render_json(0,"ok",result)
 	end
   
   private
