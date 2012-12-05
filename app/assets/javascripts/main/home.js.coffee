@@ -1,5 +1,4 @@
-home = exports ? this
-class home.Home
+class window.Home
 	@init: ->
 		home = new Home()
 		home.add_provider_view $("#new_provider_modal"),$("form#new_provider_form")

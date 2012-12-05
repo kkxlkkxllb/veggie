@@ -1,5 +1,4 @@
-leaf = exports ? this
-class leaf.Leafs
+class window.Leafs
 	@init: ->
 		leaf = new Leafs()
 		leaf.destroy_leaf()

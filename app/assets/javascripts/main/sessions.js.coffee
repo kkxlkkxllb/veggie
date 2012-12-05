@@ -1,5 +1,4 @@
-session = exports ? this
-class session.Sessions
+class window.Sessions
 	@init: ->
 		session = new Sessions()
 	constructor: ->

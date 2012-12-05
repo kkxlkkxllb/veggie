@@ -1,5 +1,4 @@
-member = exports ? this
-class member.Members
+class window.Members
 	@init: ->
 		member = new Members()
 		member.setting($("#user_setting"))

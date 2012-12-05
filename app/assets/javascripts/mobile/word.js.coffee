@@ -1,5 +1,4 @@
-word = exports ? this
-class word.Word
+class window.Word
 	@init: ->
 		word = new Word($("#home"))
 		word.correct_it($("#words_wrap"))

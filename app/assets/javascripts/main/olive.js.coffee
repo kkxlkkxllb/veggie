@@ -1,5 +1,4 @@
-olive = exports ? this
-class olive.Olive
+class window.Olive
 	@init: ->
 		olive = new Olive($("#olive"))
 		olive.render_view()

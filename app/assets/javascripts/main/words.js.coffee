@@ -1,5 +1,4 @@
-word = exports ? this
-class word.Words
+class window.Words
 	@init: ->
 		word = new Words($("#word_ground"),".word_item")
 		word.after_create $("#new_word form"),$("#new_word_tag_modal"),$("form#new_word_tag_form")

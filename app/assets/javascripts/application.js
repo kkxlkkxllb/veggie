@@ -16,4 +16,4 @@
 
 //= require_tree ./lib
 //= require_tree ./zlib
-//= require_tree .
+//= require_tree ./main

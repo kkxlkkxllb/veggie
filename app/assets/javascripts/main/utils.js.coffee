@@ -1,5 +1,4 @@
-utils = exports ? this
-class utils.Utils
+class window.Utils
 	@loading: ($item) ->
 		$item.queue (next) ->
 			$(@).animate({opacity: 0.2},800).animate({opacity: 1},800)

@@ -1,5 +1,4 @@
-weibo = exports ? this
-class weibo.Weibo
+class window.Weibo
 	@init: ->
 		weibo = new Weibo($("#home"))
 		weibo.filter_provider()
