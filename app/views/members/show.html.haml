@@ -1,6 +1,6 @@
 #user_home
 	- if @can_add_tag
-		#new_word
+		#new_word.hide
 			= form_tag '/words/create',:remote => true do
 				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
 		= render "games/allen"

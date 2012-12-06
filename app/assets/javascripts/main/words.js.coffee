@@ -37,6 +37,7 @@ class window.Words
 	audio_play: =>
 		@$container.delegate "a.audio","click", ->
 			$("audio",$(@))[0].play()
+			false
 	insert_tags: ($form,$modal,et) =>
 		@$container.delegate "a.itag","click", ->
 			if $modal.length is 1
@@ -44,7 +45,8 @@ class window.Words
 				wid = $item.attr("wid")
 				wtitle = $("span.title",$item).text()
 				hash_tags = $("span.ctags",$item).text()
-				Words.tag_modal($modal,$form,wtitle,wid,et,hash_tags)					
+				Words.tag_modal($modal,$form,wtitle,wid,et,hash_tags)
+			false				
 		$("button.btn",$form).click ->
 			$form.submit()
 		$("#tags_area").delegate "span","click", ->
@@ -70,6 +72,7 @@ class window.Words
 						ele.addClass "cancel"
 					else if data.status is 1
 						ele.removeClass "cancel"
+			false
 	viewport: ($container = @$container) ->		
 		$("#word_nav span.btn-group").delegate "span.btn","click", ->
 			rel = $(@).attr("rel")
