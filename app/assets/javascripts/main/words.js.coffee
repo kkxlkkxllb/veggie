@@ -6,7 +6,6 @@ class window.Words
 		word.insert_tags $("form#new_word_tag_form"),$("#new_word_tag_modal")
 		word.filter_word($("#word_nav"))
 		word.clone_word()
-		word.viewport()
 		word.img_change()
 	@tag_modal: ($modal,$form,title,id,tags) ->
 		$("span.wtitle",$modal).text(title)
@@ -14,13 +13,12 @@ class window.Words
 		$("input#tags",$form).val(tags)	
 		$modal.modal()
 	constructor: (@$container,item) ->
-		$(item,@$container).animate opacity:1
-		@$container.isotope
-			itemSelector: item
-			layoutMode : 'masonry'
-			getSortData :
-				title : ( $elem ) ->
-					$elem.find('span.title').text()
+		$container = @$container
+		$container.imagesLoaded ->
+			$(item,$container).animate opacity:1
+			$container.isotope
+				itemSelector: item
+				layoutMode : 'masonry'
 	after_create: ($form,$modal,$tag_form) ->
 		$form.bind 'ajax:beforeSend', ->
 			$("input",$form).addClass "disable_event"
@@ -37,14 +35,14 @@ class window.Words
 		@$container.delegate "a.audio","click", ->
 			$("audio",$(@))[0].play()
 			false
-	insert_tags: ($form,$modal,et) =>
+	insert_tags: ($form,$modal) =>
 		@$container.delegate "a.itag","click", ->
 			if $modal.length is 1
 				$item = $(@).closest('.word_item')
 				wid = $item.attr("wid")
 				wtitle = $("span.title",$item).text()
 				hash_tags = $("span.ctags",$item).text()
-				Words.tag_modal($modal,$form,wtitle,wid,et,hash_tags)
+				Words.tag_modal($modal,$form,wtitle,wid,hash_tags)
 			false
 		$("button.btn",$form).click ->
 			$form.submit()
@@ -72,12 +70,6 @@ class window.Words
 					else if data.status is 1
 						ele.removeClass "cancel"
 			false
-	viewport: ($container = @$container) ->		
-		$("#word_nav span.btn-group").delegate "span.btn","click", ->
-			rel = $(@).attr("rel")
-			$(@).addClass("active").siblings().removeClass('active')
-			$(".#{rel}",$container).show().siblings().hide()
-			$container.isotope()
 	img_change: ($container = @$container) ->
 		$container.delegate "span.change_btn","click", ->
 			ele = $(@)

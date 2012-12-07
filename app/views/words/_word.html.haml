@@ -3,20 +3,20 @@
 		- if current_member
 			%a.fetch(href="#copy"){:class => ("cancel" if current_member.has_u_word(w))}
 				%i.icon-star-empty(title="收录")
-		- if @admin
-			%a.itag(href="#tag")
-				%i.icon-tag(title="分类")
 		%a.audio(href="#voice")
 			%i.icon-headphones(title="发音")
 			%audio{:src => w.source_voice}
 		%span.title
 			= w.title		
 		%span.content
-			= w.content
-		%span.ctags
-			= w.hash_tags
-	.pic.hide
+			= w.content		
+	.pic
 		= image_tag(w.image,:title => w.title)
 		- if @admin
 			%span.change_btn
 				%i.icon-refresh
+	%span.ctags
+		= w.hash_tags
+		- if @admin
+			%a.itag(href="#tag")
+				%i.icon-tag(title="分类")
