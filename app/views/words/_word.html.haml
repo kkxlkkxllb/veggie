@@ -3,7 +3,7 @@
 		- if current_member
 			%a.fetch(href="#copy"){:class => ("cancel" if current_member.has_u_word(w))}
 				%i.icon-star-empty(title="收录")
-		- if @can_add_tag
+		- if @admin
 			%a.itag(href="#tag")
 				%i.icon-tag(title="分类")
 		%a.audio(href="#voice")
@@ -17,6 +17,6 @@
 			= w.hash_tags
 	.pic.hide
 		= image_tag(w.image,:title => w.title)
-		- if @can_add_tag
+		- if @admin
 			%span.change_btn
 				%i.icon-refresh

@@ -1,5 +1,5 @@
 #course_wrap
-	- if @can_add_tag
+	- if @admin
 		#new_word
 			= form_tag '/words/create?admin=true',:remote => true do
 				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )

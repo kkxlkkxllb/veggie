@@ -6,7 +6,7 @@ class MembersController < ApplicationController
     set_seo_meta(@user.name)
     @u_words = @user.u_words
     if @user == current_member
-      @can_add_tag = true
+      @owner = true
     end
   end
   

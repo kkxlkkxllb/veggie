@@ -5,11 +5,12 @@ class WordsController < ApplicationController
   # 词汇
   def index   
     course = load_course  
-    @ctitle = "※ " + course['c1']['title'] + " ※"
-    @ctags = course['c1']['ctags'].split(";")
+		cindex = params[:cid] ? "c#{params[:cid]}" : 'c1'
+    @ctitle = "※ " + course[cindex]['title'] + " ※"
+    @ctags = course[cindex]['ctags'].split(";")
     @words = Word.tagged(@ctags)
     if current_member and current_member.admin?
-      @can_add_tag = true
+      @admin = true
     end
     set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))
   end
