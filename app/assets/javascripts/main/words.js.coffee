@@ -3,15 +3,14 @@ class window.Words
 		word = new Words($("#word_ground"),".word_item")
 		word.after_create $("#new_word form"),$("#new_word_tag_modal"),$("form#new_word_tag_form")
 		word.audio_play()
-		word.insert_tags $("form#new_word_tag_form"),$("#new_word_tag_modal"),"Word"
+		word.insert_tags $("form#new_word_tag_form"),$("#new_word_tag_modal")
 		word.filter_word($("#word_nav"))
 		word.clone_word()
 		word.viewport()
 		word.img_change()
-	@tag_modal: ($modal,$form,title,id,et,tags) ->
+	@tag_modal: ($modal,$form,title,id,tags) ->
 		$("span.wtitle",$modal).text(title)
 		$("input#id",$form).val(id)
-		$("input#et",$form).val(et)
 		$("input#tags",$form).val(tags)	
 		$modal.modal()
 	constructor: (@$container,item) ->
@@ -29,7 +28,7 @@ class window.Words
 		$form.bind 'ajax:success', (d,data) ->
 			if data.status is 0				
 				$("#new_word input").val("")
-				Words.tag_modal($modal,$tag_form,data.data.title,data.data.id,data.data.t,"")
+				Words.tag_modal($modal,$tag_form,data.data.title,data.data.id,"")
 			else
 				Utils.flash("o_O 呃，失败了，单词没查到")
 			$("input",$form).removeClass("disable_event")
@@ -37,14 +36,14 @@ class window.Words
 	audio_play: =>
 		@$container.delegate "a.audio","click", ->
 			$("audio",$(@))[0].play()
-	insert_tags: ($form,$modal,et) =>
+	insert_tags: ($form,$modal) =>
 		@$container.delegate "a.itag","click", ->
 			if $modal.length is 1
 				$item = $(@).closest('.word_item')
 				wid = $item.attr("wid")
 				wtitle = $("span.title",$item).text()
 				hash_tags = $("span.ctags",$item).text()
-				Words.tag_modal($modal,$form,wtitle,wid,et,hash_tags)					
+				Words.tag_modal($modal,$form,wtitle,wid,hash_tags)					
 		$("button.btn",$form).click ->
 			$form.submit()
 		$("#tags_area").delegate "span","click", ->

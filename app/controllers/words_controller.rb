@@ -2,8 +2,7 @@
 class WordsController < ApplicationController
   before_filter :authenticate_member!,:except => [:index]
   
-  # 外语教室
-  # 按时间区间展示 1.week
+  # 词汇
   def index   
     course = load_course  
     @ctitle = "※ " + course['c1']['title'] + " ※"
@@ -28,7 +27,7 @@ class WordsController < ApplicationController
     unless admin # 普通用户返回 u_word 对象 ，admin 返回 word
       @word = current_member.u_words.create(:word_id => @word.id)
     end
-    @can_add_tag = true
+
     if @word
 #      html = render_to_string(
 #            :formats => :html,
@@ -54,19 +53,13 @@ class WordsController < ApplicationController
 		end
   end
 
-  
+	# Editor
+  # Word ctag
   def add_tag
-		case params[:et]
-		when "Word"
-		  @_word = Word
-		when "UWord"
-			@_word = current_member.u_words
-		end	
-		if @_word && @word = @_word.where(:id => params[:id]).first
-			@word.ctag_list = Word.parse_tag(params[:tags]).join(",")
-			if @word.save!
-			  render_json(0,"ok",{:title => @word.hash_tags})
-			end
+		@word = Word.find(params[:id])
+		@word.ctag_list = Word.parse_tag(params[:tags]).join(",")
+		if @word.save!
+			render_json(0,"ok",{:title => @word.hash_tags})
 		else
 			render_json(-1,"error")
 		end

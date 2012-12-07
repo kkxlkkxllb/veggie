@@ -61,7 +61,6 @@ class Word < ActiveRecord::Base
 
   def as_json
 		{
-			:t => self.class.to_s,
 			:title => self.title,
 			:id => self.id
 		}
