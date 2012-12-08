@@ -19,14 +19,8 @@ class WordsController < ApplicationController
   # 1. 通过输入框传入单词
   # 2. 在文本区选择单词摘录
   def create
-    word = params[:word].downcase
-    admin = !params[:admin].blank?
-    @word = Word.where(:title => word).first
-    unless @word
+    unless @word = Word.where(:title => params[:word].downcase).first
       @word = Onion::FetchWord.new(word).insert
-    end
-    unless admin # 普通用户返回 u_word 对象 ，admin 返回 word
-      @word = current_member.u_words.create(:word_id => @word.id)
     end
 
     if @word
@@ -36,9 +30,21 @@ class WordsController < ApplicationController
 #		        :partial => "word",
 #		        :locals => {:w => @word}
 #		        )
-		  render_json(0,"ok",@word.as_json)
+		  render_json(0,"ok",@word.as_json.merge!(:tags => @word.hash_tags))
 	  else
 	    render_json(-1,"fail")
+    end
+  end
+  
+  def u_create
+    unless @word = Word.where(:title => params[:word].downcase).first
+      @word = Onion::FetchWord.new(word).insert
+    end
+    if @word
+      @u_word = current_member.u_words.create(:word_id => @word.id)
+      render_json(0,"ok",@u_word.as_json)
+    else
+      render_json(-1,"fail")
     end
   end
   
@@ -60,7 +66,7 @@ class WordsController < ApplicationController
 		@word = Word.find(params[:id])
 		@word.ctag_list = Word.parse_tag(params[:tags]).join(",")
 		if @word.save!
-			render_json(0,"ok",{:title => @word.hash_tags})
+			render_json(0,"ok",{:tags => @word.hash_tags})
 		else
 			render_json(-1,"error")
 		end

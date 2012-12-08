@@ -37,6 +37,7 @@ Veggie::Application.routes.draw do
   
 	# words
   post "words/create"
+  post "words/u_create"
   post "words/add_tag"
   post "words/clone"
   post "words/fetch_img"
