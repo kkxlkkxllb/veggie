@@ -137,7 +137,7 @@ module Olive
   # 1-photos
   # 2-tagged(tag)
   class Px < Base
-		require 'openssl'
+		#require 'openssl'
     BASE_URL = 'https://api.500px.com'
 
     def initialize
