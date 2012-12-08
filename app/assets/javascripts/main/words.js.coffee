@@ -26,7 +26,7 @@ class window.Words
 		$form.bind 'ajax:success', (d,data) ->
 			if data.status is 0				
 				$("#new_word input").val("")
-				Words.tag_modal($modal,$tag_form,data.data.title,data.data.id,"")
+				Words.tag_modal($modal,$tag_form,data.data.title,data.data.id,data.data.tags)
 			else
 				Utils.flash("o_O 呃，失败了，单词没查到")
 			$("input",$form).removeClass("disable_event")
@@ -46,12 +46,15 @@ class window.Words
 			false
 		$("button.btn",$form).click ->
 			$form.submit()
+		$("span.btn-danger",$form).click ->
+			$("input#tags",$form).val("")
 		$("#tags_area").delegate "span","click", ->
 			value = $("input#tags",$form).val()
 			$("input#tags",$form).val("#{value}#" + $(@).text() + " ")
 		$form.bind 'ajax:success', (d,data) ->
 			if data.status is 0
 				$modal.modal('hide')
+				Utils.flash(data.data.tags)
 	filter_word: ($wrap,$container = @$container) ->
 		$('ul',$wrap).find("a").click ->
 			if $(@).parent('li').hasClass "active"

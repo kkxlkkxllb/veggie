@@ -1,7 +1,7 @@
 #course_wrap
 	- if @admin
 		#new_word
-			= form_tag '/words/create?admin=true',:remote => true do
+			= form_tag '/words/create',:remote => true do
 				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
 		= render 'modal/new_word_tag'
 	.banner_wrap
