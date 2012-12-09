@@ -39,6 +39,10 @@ class UWord < ActiveRecord::Base
   def image
     return File.exist?(self.image_path) ? self.image_url : "/assets/icon/default.png"
   end
+  
+  def has_image
+    return File.exist?(self.image_path)
+  end
 
 	def as_json
 		{	

@@ -1,11 +1,21 @@
+= render "modal/magic_images"
 #user_home
 	- if @owner
 		#new_word.hide
 			= form_tag '/words/u_create',:remote => true do
 				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
-		= render "games/allen"
+		=# render "games/allen"
 	#ground
 		- @u_words.each do |w|
-			.word_item
-				%span.word.button.glossy.pink.oval(data-icon=" ")
-					= w.title 
+			.word_item.active
+				%span.word.button.pink(data-icon=" ")
+					- if w.has_image
+						= image_tag(w.image)
+					- else
+						= w.title
+				- if @owner and !w.has_image
+					.cpanel.active{:data => w.title}
+						%a.button.green.glossy(data-icon=" " href="#upload")
+							%i.icon-upload-alt
+						%a.button.orange.glossy(data-icon=" " href="#magic")
+							%i.icon-magic

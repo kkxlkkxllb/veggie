@@ -11,11 +11,11 @@
 		#word_nav
 			%ul.clearfix	
 				%li.active
-					%a.button.glossy.xs.pink.skew(href="#all" ctag="*" data-icon=" ")
+					%a.button.xs.pink.skew(href="#all" ctag="*" data-icon=" ")
 						All
 				- @ctags.each do |t|
-					%li
-						%a.button.glossy.xs.green.skew{:ctag => "."+t}(href="#filter" data-icon=" ")
+					%li.active
+						%a.button.xs.green.skew{:ctag => "."+t}(href="#filter" data-icon=" ")
 							= t.capitalize
 		#word_ground
 			- @words.each do |w|

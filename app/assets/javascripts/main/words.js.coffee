@@ -57,9 +57,10 @@ class window.Words
 				Utils.flash(data.data.tags)
 	filter_word: ($wrap,$container = @$container) ->
 		$('ul',$wrap).find("a").click ->
-			if $(@).parent('li').hasClass "active"
+			if $(@).hasClass "pink"
 				false
-			$(@).parent('li').addClass("active").siblings().removeClass "active"
+			$('ul',$wrap).find("a.pink").removeClass("pink").addClass("green")
+			$(@).removeClass("green").addClass("pink")
 			$container.isotope({ filter: $(@).attr('ctag') })
 			false
 	clone_word: =>
