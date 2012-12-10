@@ -1,0 +1,5 @@
+.hidden
+	= form_tag '/words/upload_img',:remote => true do
+		= hidden_field_tag :id,wid
+		.hiddenfile
+			= file_field_tag :image,:onChange => "$(this).closest('form').submit()"

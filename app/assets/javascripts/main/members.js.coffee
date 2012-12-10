@@ -16,6 +16,7 @@ class window.Members
 		$container.isotope
 			itemSelector: item
 			layoutMode : 'masonry'
+
 	cpanel: ($wrap,$modal) ->
 		$("a[href='#magic']",$wrap).click ->
 			title = $(@).parent().attr "data"
@@ -27,5 +28,7 @@ class window.Members
 					$(".modal-body",$modal).html(html)				
 					Utils.loaded $modal
 			false
+		$("a[href='#upload']",$wrap).click ->			
+			$("input[type='file']",$(@).closest('.cpanel')).trigger "click"
 					
 			

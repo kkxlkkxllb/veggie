@@ -91,6 +91,16 @@ module Grape
     end
   end
   
+  class UWordImage < WordImage
+    def initialize(id)
+      @title = UWord.find(id).title
+      @dir = UWord::IMAGE_PATH + "#{id}/"
+      @original = @dir + "original.jpg"
+      @w = @dir + "w.png"
+      @new_image = @dir + "17up.jpg"
+    end
+  end
+  
   class ImageConvert
     def initialize(img_path,opts={})
       @opts = {

@@ -87,10 +87,9 @@ class WordsController < ApplicationController
 	# User
   # upload &image &id
   def upload_img
-    @word = Word.find(params[:id])
 		file = params[:image].tempfile.path
 		if File.size(file) < UWord::IMAGE_SIZE_LIMIT
-    	Grape::WordImage.new(@word.title).make(file)
+    	Grape::UWordImage.new(params[:id]).make(file)
 			render_json(0,"ok")
 		else
 			render_json(-1,"image too big,please resize it")
@@ -100,8 +99,7 @@ class WordsController < ApplicationController
 	# User
 	# input: img_url & id
 	def select_img
-		@word = Word.find(params[:id])
-		@status = Grape::WordImage.new(@word.title).make(params[:img_url])
+		@status = Grape::UWordImage.new(params[:id]).make(params[:img_url])
 		msg = @status < 0 ? "error img url" : "ok"
 		render_json(@status,msg)
 	end
