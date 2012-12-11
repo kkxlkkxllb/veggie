@@ -7,16 +7,17 @@ class window.Members
 		if $("#allen").length is 1
 			Allen.init()	
 	constructor: ->
+		$("html").addClass 'uhome'
 	setting: ($wrap) ->
 		$(".providers img",$wrap).tooltip()
 		activeTab = $('[href=' + location.hash + ']',$wrap)
 		activeTab && activeTab.tab('show')
 	show: ($container,item)->
-		$(item,$container).animate opacity:1
-		$container.isotope
-			itemSelector: item
-			layoutMode : 'masonry'
-
+		$container.imagesLoaded ->
+			$(item,$container).animate opacity:1
+			$container.isotope
+				itemSelector: item
+				layoutMode : 'masonry'
 	cpanel: ($wrap,$modal) ->
 		$("a[href='#magic']",$wrap).click ->
 			title = $(@).parent().attr "data"
@@ -30,5 +31,9 @@ class window.Members
 			false
 		$("a[href='#upload']",$wrap).click ->			
 			$("input[type='file']",$(@).closest('.cpanel')).trigger "click"
+			false
+		$("form input[type='file']",$wrap).change ->
+			$(@).closest('form').submit()
+
 					
 			

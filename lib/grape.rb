@@ -128,7 +128,7 @@ module Grape
     def self.draw_word(opts = {})
       opts = {
         :text => "17up",
-        :font_size => 30,
+        :font_size => 32,
         :type => 1,
         :word_path => "public/w.png",
         :font => "public/font/Lobster/Lobster.ttf"

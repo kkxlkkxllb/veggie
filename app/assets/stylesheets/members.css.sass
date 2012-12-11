@@ -23,6 +23,11 @@
 		.register
 			text-align: center
 			margin-top: 10px
+html.uhome
+	height: 100%
+	background: url(/assets/img/bg/bg_home.png) #DBEED5
+	body
+		background-color: transparent
 #user_home
 	#ground
 		margin: 0 auto 10px
@@ -38,6 +43,11 @@
 					padding: 2px
 					font-size: 20px
 					margin: 2px
+			.pic
+				margin: 5px
+				padding: 5px
+				background: #f5f5f5
+				@include text-shadow-inverse(#333)
 #user_setting
 	margin-top: 40px
 	.providers
@@ -62,6 +72,7 @@
 			img
 				width: 64px
 				height: 64px
+				border-radius: 24px
 			.name
 				width: 120px
 				line-height: 30px

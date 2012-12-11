@@ -90,9 +90,7 @@ class WordsController < ApplicationController
 		file = params[:image].tempfile.path
 		if File.size(file) < UWord::IMAGE_SIZE_LIMIT
     	Grape::UWordImage.new(params[:id]).make(file)
-			render_json(0,"ok")
-		else
-			render_json(-1,"image too big,please resize it")
+			@success = true
 		end
   end
 

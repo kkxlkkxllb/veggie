@@ -6,17 +6,20 @@
 				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
 		=# render "games/allen"
 	#ground
-		- @u_words.each do |w|
-			.word_item.active			
-				- if w.has_image
-					= image_tag(w.image)
-				- else
-					%span.word.button.pink(data-icon=" ")
-						= w.title
-					- if @owner
-						.cpanel.active{:data => w.title}
-							= render 'image_upload',:wid => w.id
-							%a.button.green.glossy(data-icon=" " href="#upload")
-								%i.icon-upload-alt
-							%a.button.orange.glossy(data-icon=" " href="#magic")
-								%i.icon-magic
+		- @u_words.each do |w|			
+			- if @owner
+				.word_item.active
+					%span.word.button{:class => (w.has_image ? 'green' : 'pink')}(data-icon=" ")
+						= w.title		
+					.cpanel.active{:data => w.title}
+						= render 'image_upload',:wid => w.id
+						%a.button.blue.glossy(data-icon=" " href="#upload")
+							%i.icon-upload-alt
+						%a.button.orange.glossy(data-icon=" " href="#magic")
+							%i.icon-magic
+					.pic.hidden
+						= image_tag(w.image)
+			- elsif w.has_image
+				.word_item
+					.pic
+						= image_tag(w.image)
