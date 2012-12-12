@@ -3,7 +3,7 @@ class window.Members
 		member = new Members()
 		member.setting($("#user_setting"))
 		member.show($("#ground"),".word_item")
-		member.cpanel $("#ground .cpanel"),$("#magic_images_modal")
+		member.cpanel $("#impress"),$("#magic_images_modal")
 		if $("#allen").length is 1
 			Allen.init()	
 	constructor: ->
@@ -19,6 +19,8 @@ class window.Members
 				itemSelector: item
 				layoutMode : 'masonry'
 	cpanel: ($wrap,$modal) ->
+		impress().init()
+		$wrap.show()
 		$("a[href='#magic']",$wrap).click ->
 			title = $(@).parent().attr "data"
 			$modal.modal()

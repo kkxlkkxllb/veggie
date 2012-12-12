@@ -5,21 +5,23 @@
 			= form_tag '/words/u_create',:remote => true do
 				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
 		=# render "games/allen"
-	#ground
-		- @u_words.each do |w|			
-			- if @owner
-				.word_item.active
-					%span.word.button{:class => (w.has_image ? 'green' : 'pink')}(data-icon=" ")
+	- if @t_words
+		#impress
+			- @t_words.each_with_index do |w,i|						
+				.word_item.step{:"data-y" => -i*1000,:"data-z" => -i*1500,:id => "_"+w.title}(data-x="0" data-scale="1")
+					%span.word.amienne
 						= w.title		
 					.cpanel.active{:data => w.title}
 						= render 'image_upload',:wid => w.id
-						%a.button.blue.glossy(data-icon=" " href="#upload")
+						%a.button.blue.glossy(data-icon=" " href="#upload" title="上传图片注释")
 							%i.icon-upload-alt
-						%a.button.orange.glossy(data-icon=" " href="#magic")
+						%a.button.orange.glossy(data-icon=" " href="#magic" title="获取魔法图片")
 							%i.icon-magic
-					.pic.hidden
-						= image_tag(w.image)
-			- elsif w.has_image
+				.step.word_pic{:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "p_"+w.title}(data-x="0" data-scale="1")
+					= image_tag(w.image)
+	- else
+		#ground
+			- @p_words.each do |w|
 				.word_item
 					.pic
 						= image_tag(w.image)

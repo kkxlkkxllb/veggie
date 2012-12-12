@@ -35,19 +35,26 @@ html.uhome
 			opacity: 0
 			img
 				width: 188px
-			.cpanel
-				margin: 0 1em
-				text-align: center
-				padding-bottom: 5px
-				a
-					padding: 2px
-					font-size: 20px
-					margin: 2px
 			.pic
 				margin: 5px
 				padding: 5px
 				background: #f5f5f5
 				@include text-shadow-inverse(#333)
+	#impress
+		.word_pic
+			text-align: center
+		.word_item
+			text-align: center
+			.word
+				font-size: 170px
+				@include text-shadow-inverse
+				@include text-shadow-3d
+			.cpanel
+				text-align: center
+				a
+					padding: 2px
+					font-size: 26px
+					margin: 0 10px
 #user_setting
 	margin-top: 40px
 	.providers
@@ -72,7 +79,6 @@ html.uhome
 			img
 				width: 64px
 				height: 64px
-				border-radius: 24px
 			.name
 				width: 120px
 				line-height: 30px
