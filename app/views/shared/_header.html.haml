@@ -31,7 +31,7 @@
 							= t("quote.title")
 				- if current_member
 					%ul.nav.pull-right
-						%li{:class => ("active" if @user == current_member)}
+						%li{:class => ("active" if action_name == "dashboard")}
 							%a{:href => account_path}
 								= current_member.name
 						%li{:class => ("active" if @setting)}

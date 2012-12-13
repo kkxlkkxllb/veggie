@@ -2,8 +2,8 @@ class window.Members
 	@init: ->
 		member = new Members()
 		member.setting($("#user_setting"))
-		member.show($("#ground"),".word_item")
-		member.cpanel $("#impress"),$("#magic_images_modal")
+		member.show($("#user_show"),".word_item")
+		member.dashboard $("#impress"),$("#magic_images_modal")
 		if $("#allen").length is 1
 			Allen.init()	
 	constructor: ->
@@ -18,9 +18,16 @@ class window.Members
 			$container.isotope
 				itemSelector: item
 				layoutMode : 'masonry'
-	cpanel: ($wrap,$modal) ->
-		impress().init()
-		$wrap.show()
+	dashboard: ($wrap,$modal) ->
+		if $wrap.length is 1
+			impress().init()
+			$wrap.show()
+			api = impress()
+			$(document).on 'impress:stepenter', (e) ->
+				audio = $(e.target).find("audio")[0]
+				if audio
+					audio.play()
+
 		$("a[href='#magic']",$wrap).click ->
 			title = $(@).parent().attr "data"
 			$modal.modal()

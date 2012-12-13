@@ -28,32 +28,36 @@ html.uhome
 	background: url(/assets/img/bg/bg_home.png) #DBEED5
 	body
 		background-color: transparent
+
+#user_show
+	margin: 0 auto 10px
+	.word_item
+		opacity: 0
+		img
+			width: 188px
+		.pic
+			margin: 5px
+			padding: 5px
+			background: #f5f5f5
+			@include text-shadow-inverse(#333)
 #user_home
-	#ground
-		margin: 0 auto 10px
-		.word_item
-			opacity: 0
-			img
-				width: 188px
-			.pic
-				margin: 5px
-				padding: 5px
-				background: #f5f5f5
-				@include text-shadow-inverse(#333)
 	#impress
 		.word_pic
 			text-align: center
 		.word_item
 			text-align: center
+			line-height: 1.3
+			.content
+				font-size: 16px
 			.word
 				font-size: 170px
 				@include text-shadow-inverse
 				@include text-shadow-3d
 			.cpanel
 				text-align: center
+				font-size: 26px
 				a
-					padding: 2px
-					font-size: 26px
+					padding: 2px					
 					margin: 0 10px
 #user_setting
 	margin-top: 40px

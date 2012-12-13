@@ -23,7 +23,7 @@ Veggie::Application.routes.draw do
     match '/' => "lhome#index"
   end
   
-  match "dashboard" => "members#show",:as => :account
+  match "dashboard" => "members#dashboard",:as => :account
   match "u/:id" => "members#show",:as => :member
   match "setting" => "members#edit",:as => :setting
 
@@ -32,7 +32,7 @@ Veggie::Application.routes.draw do
   match "welcome" => "home#index", :as => :welcome
   match "square" => "home#square", :as => :hot
   match "info" => "home#info", :as => :info
-  match "course" => "words#index", :as => :words
+  match "library" => "words#index", :as => :words
   match "quotes" => "home#quote", :as => :quote
   
 	# words

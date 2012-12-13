@@ -60,12 +60,14 @@ class Member < ActiveRecord::Base
     p ? p.user_name : "veggie"
   end
   
+  # p : string in [Provider::PROVIDERS]
   def has_provider?(p)
     self.providers.where(:provider => p).first
   end
   
+  # To-Do add index to uword db
   def has_u_word(w)
-    self.u_words.where(:word_id => w.id).first
+    UWord.where(:member_id => self.id,:word_id => w.id).first
   end
   
   def self.generate(prefix = Time.now.to_f.to_s.split(".")[1])
@@ -81,6 +83,15 @@ class Member < ActiveRecord::Base
     else
       self.generate(prefix + "v")
     end
+  end
+  
+  def as_json
+    {
+      :uid => uid,
+      :name => name,
+      :avatar => avatar,
+      :u_words_cnt => self.u_words.count
+    }
   end
   
   # sidekiq job
