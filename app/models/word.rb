@@ -59,10 +59,24 @@ class Word < ActiveRecord::Base
     return File.exist?(self.image_path) ? self.image_url : "/assets/icon/default.png"
   end
 
+  def rich_images
+    u_words.select{|w| w.has_image}.collect{|w| w.image}
+  end
+
   def as_json
-		{
-			:title => self.title,
-			:id => self.id
-		}
-	end
+    { 
+      :id => id,
+      :title => title,
+      :content => content
+    }
+  end
+
+  def as_full_json
+    as_json.merge({
+        :tag_str => hash_tags,
+        :audio => source_voice,
+        :image => image,
+        :tags => ctags.map(&:name)
+      })
+  end
 end

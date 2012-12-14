@@ -46,8 +46,9 @@ class UWord < ActiveRecord::Base
 
 	def as_json
 		{	
-			:title => self.title,
-			:id => self.id
+      :id => id,
+			:title => title,
+			:content => content
 		}
 	end
   

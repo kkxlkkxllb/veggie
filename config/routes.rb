@@ -23,34 +23,47 @@ Veggie::Application.routes.draw do
     match '/' => "lhome#index"
   end
   
+  # members
   match "dashboard" => "members#dashboard",:as => :account
   match "u/:id" => "members#show",:as => :member
   match "setting" => "members#edit",:as => :setting
-
-	post "provider/create"
   
+  # home
   match "welcome" => "home#index", :as => :welcome
   match "square" => "home#square", :as => :hot
-  match "info" => "home#info", :as => :info
-  match "library" => "words#index", :as => :words
+  match "info" => "home#info", :as => :info 
   match "quotes" => "home#quote", :as => :quote
   
 	# words
-  post "words/create"
-  post "words/u_create"
-  post "words/add_tag"
-  post "words/clone"
-  post "words/fetch_img"
-	post "words/upload_img"
-	post "words/select_img"
+  match "library" => "words#index", :as => :words
+  resources :words do
+    member do
+      get "course"
+      post "create"
+      post "u_create"
+      post "add_tag"
+      post "clone"
+      post "fetch_img"
+    	post "upload_img"
+    	post "select_img"
+      post "destroy"
+    end
+  end
   
+  # leafs
   match "t" => "leafs#index", :as => :leafs
-  match "leafs/destroy" => "leafs#destroy"
+  post "leafs/destroy"
+  post "provider/create"
   
-  match "olive" => "olive#index"
-  match "olive/sync" => "olive#sync"
-  match "olive/publish" => "olive#publish"
-	get "olive/fetch"
+  # olive
+  resources :olive do
+    member do
+      get "index"
+      post "sync"
+      post "publish"
+      get "fetch"
+    end
+  end
  
   root :to => 'home#door'
 

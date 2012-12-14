@@ -5,14 +5,27 @@ class WordsController < ApplicationController
   # 词汇
   def index   
     course = load_course  
-		cindex = params[:cid] ? "c#{params[:cid]}" : 'c1'
-    @ctitle = "※ " + course[cindex]['title'] + " ※"
-    @ctags = course[cindex]['ctags'].split(";")
-    @words = Word.tagged(@ctags)
+    @courses = course
+
     if current_member and current_member.admin?
       @admin = true
     end
-    set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))
+    set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))  
+  end
+
+  def course
+    course = load_course  
+    cindex = "c" + params[:cid].to_s
+    @ctitle = "※ " + course[cindex]['title'] + " ※"
+    @ctags = course[cindex]['ctags'].split(";")
+    if current_member and current_member.admin?
+      @admin = true
+    end
+    @words = Word.tagged(@ctags).map(&:as_full_json)
+    result = @words.map do |w|
+       w.merge!(:got => current_member&&current_member.has_u_word(w[:id]) ? true : false )
+    end
+    render_json(0,"ok",{:words => result,:admin => @admin ? 1 : 0,:ctitle => @ctitle,:ctags => @ctags})
   end
   
   # 新建词汇
@@ -30,7 +43,7 @@ class WordsController < ApplicationController
 #		        :partial => "word",
 #		        :locals => {:w => @word}
 #		        )
-		  render_json(0,"ok",@word.as_json.merge!(:tags => @word.hash_tags))
+		  render_json(0,"ok",@word.as_json)
 	  else
 	    render_json(-1,"fail")
     end
@@ -86,6 +99,7 @@ class WordsController < ApplicationController
   
 	# User
   # upload &image &id
+  # response with js.haml
   def upload_img
 		file = params[:image].tempfile.path
 		if File.size(file) < UWord::IMAGE_SIZE_LIMIT

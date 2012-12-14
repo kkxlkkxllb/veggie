@@ -12,13 +12,22 @@ class window.Words
 		$("input#id",$form).val(id)
 		$("input#tags",$form).val(tags)	
 		$modal.modal()
-	constructor: (@$container,item) ->
+	constructor: (@$container) ->
 		$container = @$container
-		$container.imagesLoaded ->
-			$(item,$container).animate opacity:1
-			$container.isotope
-				itemSelector: item
-				layoutMode : 'masonry'
+		
+	open_course: (cid,item,$wrap = $("#course_wrap")) ->
+		$("#course_catelog").hide()
+		$.get "/words/course"
+			cid: cid
+			(data) ->
+				if data.status is 0
+					$wrap.html JST['course'](data.data)
+					$container = $("#word_ground")
+					$container.imagesLoaded ->
+						$(item,$container).animate opacity:1
+						$container.isotope
+							itemSelector: item
+							layoutMode : 'masonry'
 	after_create: ($form,$modal,$tag_form) ->
 		$form.bind 'ajax:beforeSend', ->
 			$("input",$form).addClass "disable_event"
@@ -26,7 +35,7 @@ class window.Words
 		$form.bind 'ajax:success', (d,data) ->
 			if data.status is 0				
 				$("#new_word input").val("")
-				Words.tag_modal($modal,$tag_form,data.data.title,data.data.id,data.data.tags)
+				Words.tag_modal($modal,$tag_form,data.data.title,data.data.id,"")
 			else
 				Utils.flash("o_O 呃，失败了，单词没查到")
 			$("input",$form).removeClass("disable_event")
@@ -73,6 +82,8 @@ class window.Words
 						ele.addClass "cancel"
 					else if data.status is 1
 						ele.removeClass "cancel"
+					else
+						console.log "login required"
 			false
 	img_change: ($container = @$container) ->
 		$container.delegate "span.change_btn","click", ->

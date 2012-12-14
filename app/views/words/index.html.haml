@@ -1,22 +1,10 @@
-#course_wrap
+#library
 	- if @admin
 		#new_word
 			= form_tag '/words/create',:remote => true do
 				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
 		= render 'modal/new_word_tag'
-	.banner_wrap
-		%h3.banner_title.dancer
-			= @ctitle
-	.words_container
-		#word_nav
-			%ul.clearfix	
-				%li.active
-					%a.button.xs.pink.skew(href="#all" ctag="*" data-icon=" ")
-						All
-				- @ctags.each do |t|
-					%li.active
-						%a.button.xs.green.skew{:ctag => "."+t}(href="#filter" data-icon=" ")
-							= t.capitalize
-		#word_ground
-			- @words.each do |w|
-				= render 'word',:w => w
+	#course_catelog
+		- @courses.each do |c|
+			= c['title']
+	#course_wrap

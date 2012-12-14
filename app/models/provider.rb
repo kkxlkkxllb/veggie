@@ -22,9 +22,6 @@ class Provider < ActiveRecord::Base
   belongs_to :member,:foreign_key => "user_id"
   after_create :send_greet
   
-  acts_as_taggable
-  acts_as_taggable_on :tags
-  
   PROVIDERS = %w{twitter weibo github tumblr instagram youtube}
   
   def avatar(style = :mudium )

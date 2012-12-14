@@ -66,8 +66,8 @@ class Member < ActiveRecord::Base
   end
   
   # To-Do add index to uword db
-  def has_u_word(w)
-    UWord.where(:member_id => self.id,:word_id => w.id).first
+  def has_u_word(wid)
+    UWord.where(:member_id => self.id,:word_id => wid).first
   end
   
   def self.generate(prefix = Time.now.to_f.to_s.split(".")[1])

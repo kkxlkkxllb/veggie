@@ -2,7 +2,7 @@
   - actions(:root).each do |action|
     %li= link_to wording_for(:menu, action), { :action => action.action_name, :controller => 'rails_admin/main' }, :class => 'pjax'
   - if main_app_root_path = (main_app.root_path rescue false)
-    %li= link_to "Olive",'/olive'
+    %li= link_to "Olive","/olive/index"
     %li= link_to "17up", main_app_root_path
     - if user_link = edit_user_link
       %li= user_link
