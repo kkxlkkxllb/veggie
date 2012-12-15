@@ -35,7 +35,6 @@ class Member < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   has_many :providers,:foreign_key => "user_id",:dependent => :destroy
   has_many :u_words
-  after_create :send_greet
   
   EDIT_SIDENAV = %w{profile provider account}
   AVATAR_URL = "/system/images/member/"
@@ -94,18 +93,12 @@ class Member < ActiveRecord::Base
     }
   end
   
-  # sidekiq job
-  def send_greet
-		provider = self.providers.first
-		if provider
-			# download sns avatar
-			`mkdir -p #{AVATAR_PATH + self.id.to_s}`
-			data = open(provider.avatar(:large)){|f|f.read}
-			file = File.open(AVATAR_PATH + avatar_name,"wb") << data
-		  file.close
-			# greet
-			HardWorker::SendGreetJob.perform_async(provider.id)
-		end
+  # download sns avatar
+  def save_avatar_from(provider)
+		`mkdir -p #{AVATAR_PATH + self.id.to_s}`
+		data = open(provider.avatar(:large)){|f|f.read}
+		file = File.open(AVATAR_PATH + avatar_name,"wb") << data
+	  file.close
   end
   
 end

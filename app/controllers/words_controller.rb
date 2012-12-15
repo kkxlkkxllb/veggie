@@ -11,9 +11,11 @@ class WordsController < ApplicationController
     @course = Course.find(params[:id])
     @ctags = @course.ctags.split(";")
     @admin = current_member.admin? 
-    @words = Word.tagged(@ctags).map(&:as_full_json)
+    @words = Rails.cache.fetch("course/#{@course.id}",:expires_in => 1.day) do 
+      Word.tagged(@ctags).map(&:as_full_json)
+    end
     @result = @words.map do |w|
-       w.merge!(:got => current_member&&current_member.has_u_word(w[:id]) ? true : false )
+       w.merge!(:got => current_member.has_u_word(w[:id]) ? true : false )
     end
     set_seo_meta(@course.title,t('words.keywords'),t('words.describe'))  
   end

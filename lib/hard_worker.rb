@@ -11,7 +11,7 @@ module HardWorker
   class SendGreetJob < Base          
     def perform(pid, opts={})
       self.logger(pid)
-      Greet.new(pid).deliver
+      Greet.new(pid,opts).deliver
     end
   end
   

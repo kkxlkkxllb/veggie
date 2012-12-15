@@ -37,17 +37,15 @@ Veggie::Application.routes.draw do
 	# words
   match "library" => "words#index", :as => :words
   match "c/:id" => "words#course", :as => :course
-  resources :words do
-    member do
-      post "create"
-      post "u_create"
-      post "add_tag"
-      post "clone"
-      post "fetch_img"
-    	post "upload_img"
-    	post "select_img"
-      post "destroy"
-    end
+  namespace :words do
+    post "create"
+    post "u_create"
+    post "add_tag"
+    post "clone"
+    post "fetch_img"
+  	post "upload_img"
+  	post "select_img"
+    post "destroy"
   end
   
   # leafs
@@ -56,13 +54,11 @@ Veggie::Application.routes.draw do
   post "provider/create"
   
   # olive
-  resources :olive do
-    member do
-      get "index"
-      post "sync"
-      post "publish"
-      get "fetch"
-    end
+  match "o" => "olive#index", :as => :olive
+  namespace :olive do
+    post "sync"
+    post "publish"
+    get "fetch"
   end
  
   root :to => 'home#door'

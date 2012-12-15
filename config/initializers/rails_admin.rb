@@ -78,6 +78,18 @@ RailsAdmin.config do |config|
   #     # Here goes the fields configuration for the list view
   #   end
   # end
+  config.model Member do
+    list  do
+      fields :id,:uid,:current_sign_in_ip,:sign_in_count,:current_sign_in_at
+      field :email do
+        label "Avatar"
+        pretty_value do
+          bindings[:view].image_tag(bindings[:object].avatar)
+        end
+        column_width 55
+      end
+    end
+  end
   config.model Provider do
     list do
       fields :id,:provider,:uid,:created_at

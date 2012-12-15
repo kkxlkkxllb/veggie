@@ -10,29 +10,29 @@ zh-cn:
     describe: "为爱寻找一个理由"
   title: 17up
   keywords: "city,knowledge,peace,future,university,education"
-  describe: "这是一座天空之城，知识是这座城里的唯一财富，任何好学的你我都是这座城里的居民，放下烦恼，静静地仰望天空吧"
+  describe: "静谧的星空下，一个新生的世界正在一群神秘的年轻人带领下，悄悄生长，那是宁静、欢乐、充满希望之地：17up"
   door: "入口"
   flash:
     notice:
-      register: "欢迎进入 17up ，先逛逛吧!"
+      register: "欢迎进入 17up 的世界，先逛逛吧!"
       login: "学习，任何时候开始都不晚，欢迎回来！"
       bind: "绑定成功啦!"
   words:
     title: "图书馆"
     keywords: "词汇，文化，地域，历史"
-    describe: "图书馆位于城市的中心位置，历史悠久。"
+    describe: "图书馆位于 17up 世界的核心，汇聚了所有的正能量，想要进入这里要先注册成为 17up 的公民才行"
   leafs:
     title: "花园"
     keywords: "资讯，微博，文萃"
-    describe: "宁静而充满生机的花园，一入城门你就能看到，"
+    describe: "宁静而充满生机的花园，任何路过 17up 世界的人都可以欣赏这儿的美景"
   square:
     title: "广场"
     keywords: "友情链接,热门排行,类目"
-    describe: "这里就是广场，环抱着图书馆。"
+    describe: "位于花园和图书馆之间的地带，就是宽阔的 17up 广场"
   quote:
     title: "咖啡馆"
     keywords: "引用,名言"
-    describe: "离广场只有一个街区的咖啡馆"
+    describe: "离 17up 广场只有一个街区的咖啡馆"
   members:
     edit: "%{name} 档案"
     sidenav:
@@ -40,6 +40,6 @@ zh-cn:
       provider: "第三方帐号"
       account: "帐户"
   greet:
-    new_user: "[撒花] @%{name} 欢迎入住 17up 天空之城， 成为第 %{num} 位公民。［%{motto}］"
+    new_user: "[撒花] @%{name} 欢迎入住 17up ， 成为第 %{num} 位公民。［%{motto}］"
     new_leafs: "%{motto}，今天%{cast}度，%{num} 片新叶长成：http://17up.org"
     bind_provider: "[笑哈哈] @%{name} 交个朋友吧,［%{motto}］"
