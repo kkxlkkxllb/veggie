@@ -1,31 +1,21 @@
 # coding: utf-8
 class WordsController < ApplicationController
   before_filter :authenticate_member!,:except => [:index]
-  
-  # 词汇
-  def index   
-    course = load_course  
-    @courses = course
 
-    if current_member and current_member.admin?
-      @admin = true
-    end
+  def index       
+    @courses = Course.all
     set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))  
   end
 
   def course
-    course = load_course  
-    cindex = "c" + params[:cid].to_s
-    @ctitle = "※ " + course[cindex]['title'] + " ※"
-    @ctags = course[cindex]['ctags'].split(";")
-    if current_member and current_member.admin?
-      @admin = true
-    end
+    @course = Course.find(params[:id])
+    @ctags = @course.ctags.split(";")
+    @admin = current_member.admin? 
     @words = Word.tagged(@ctags).map(&:as_full_json)
-    result = @words.map do |w|
+    @result = @words.map do |w|
        w.merge!(:got => current_member&&current_member.has_u_word(w[:id]) ? true : false )
     end
-    render_json(0,"ok",{:words => result,:admin => @admin ? 1 : 0,:ctitle => @ctitle,:ctags => @ctags})
+    set_seo_meta(@course.title,t('words.keywords'),t('words.describe'))  
   end
   
   # 新建词汇

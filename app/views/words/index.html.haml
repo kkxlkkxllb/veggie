@@ -1,10 +1,8 @@
-#library
-	- if @admin
-		#new_word
-			= form_tag '/words/create',:remote => true do
-				%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
-		= render 'modal/new_word_tag'
+#library	
 	#course_catelog
 		- @courses.each do |c|
-			= c['title']
-	#course_wrap
+			.banner_wrap
+				%h3.banner_title.dancer
+					= c.title
+				%a.enroll.btn.btn-primary{:href => course_path(c)}
+					Enroll

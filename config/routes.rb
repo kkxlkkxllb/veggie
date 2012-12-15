@@ -36,9 +36,9 @@ Veggie::Application.routes.draw do
   
 	# words
   match "library" => "words#index", :as => :words
+  match "c/:id" => "words#course", :as => :course
   resources :words do
     member do
-      get "course"
       post "create"
       post "u_create"
       post "add_tag"

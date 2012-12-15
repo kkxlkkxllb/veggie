@@ -16,6 +16,6 @@
 				清空
 		#tags_area
 			%i.icon-tags
-			/ - @ctags.each do |t|
-			/ 	%span.label.label-success
-			/ 		= t
+				- @ctags.each do |t|
+					%span.label.label-success
+						= t

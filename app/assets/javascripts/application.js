@@ -14,9 +14,7 @@
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require twitter/bootstrap
-//= require hamlcoffee
 
 //= require_tree ./lib
 //= require_tree ./zlib
 //= require_tree ./main
-//= require_tree ./templates

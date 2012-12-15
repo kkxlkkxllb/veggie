@@ -12,22 +12,13 @@ class window.Words
 		$("input#id",$form).val(id)
 		$("input#tags",$form).val(tags)	
 		$modal.modal()
-	constructor: (@$container) ->
+	constructor: (@$container,item) ->
 		$container = @$container
-		
-	open_course: (cid,item,$wrap = $("#course_wrap")) ->
-		$("#course_catelog").hide()
-		$.get "/words/course"
-			cid: cid
-			(data) ->
-				if data.status is 0
-					$wrap.html JST['course'](data.data)
-					$container = $("#word_ground")
-					$container.imagesLoaded ->
-						$(item,$container).animate opacity:1
-						$container.isotope
-							itemSelector: item
-							layoutMode : 'masonry'
+		$container.imagesLoaded ->
+			$(item,$container).animate opacity:1
+			$container.isotope
+				itemSelector: item
+				layoutMode : 'masonry'			
 	after_create: ($form,$modal,$tag_form) ->
 		$form.bind 'ajax:beforeSend', ->
 			$("input",$form).addClass "disable_event"
