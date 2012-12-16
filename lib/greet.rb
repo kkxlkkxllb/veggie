@@ -9,9 +9,9 @@ class Greet
     else       
       @provider = Provider.find(pid)      
       if opts[:bind]
-        @content = I18n.t('greet.bind_provider',:name =>@provider.user_name,:motto => @motto)
+        @content = I18n.t('greet.bind_provider',:name =>@provider.at_name,:motto => @motto)
       else
-        @content = I18n.t('greet.new_user',:name =>@provider.user_name,:num => @provider.member.id,:motto => @motto)
+        @content = I18n.t('greet.new_user',:name =>@provider.at_name,:num => @provider.member.id,:motto => @motto)
       end
     end
   end

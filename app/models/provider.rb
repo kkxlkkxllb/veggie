@@ -47,6 +47,11 @@ class Provider < ActiveRecord::Base
     return name ? name : self.metadata[:nickname]
   end
   
+  # @twitter @weibo
+  def at_name
+    self.metadata[:nickname]
+  end
+  
   def weibo
     self.metadata[:weibo_url]
   end

@@ -18,7 +18,7 @@ class UWord < ActiveRecord::Base
   
   IMAGE_URL = "/system/images/u_word/"
   IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
-	IMAGE_SIZE_LIMIT = 700*1000 #700kb
+	IMAGE_SIZE_LIMIT = 2*1000*1000 #2m
   
   def title
     self.word.title
