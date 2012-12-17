@@ -1,20 +1,20 @@
 - @leafs.each do |leaf|
 	.leaf
-		- if current_member and current_member.admin?
-			%span.action.destroy.hide{:lid => leaf.id }
+		- if @admin
+			%span.action.destroy.hide{:lid => leaf[:id] }
 				%i.icon-remove
 			%span.action.edit.hide
-				%a{:href=>"/admin/leaf/#{leaf.id}/edit"}
+				%a{:href=>"/admin/leaf/#{leaf[:id]}/edit"}
 					%i.icon-pencil
 		.info.clearfix
 			%span.avatar.left
-				= my_image_tag(leaf.provider.avatar,leaf.provider.weibo)
+				= my_image_tag(leaf[:avatar],leaf[:url])
 			%span.name.left
-				= link_to leaf.provider.user_name,leafs_path(:pid => leaf.provider.id)
+				= link_to leaf[:name],leafs_path(:pid => leaf[:pid])
 			%span.time.right
-				= time_stamp(leaf.time_stamp)
+				= time_stamp(leaf[:time_stamp])
 		.content
-			= auto_link(leaf.content)
-		- if leaf.image
+			= auto_link(leaf[:content])
+		- if leaf[:img]
 			.img
-				= my_image_tag(leaf.image(:medium),leaf.image(:large))
+				= my_image_tag(leaf[:img],leaf[:img_large])

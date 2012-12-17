@@ -25,7 +25,7 @@ module HardWorker
   
   class GrowLeafJob < Base
     def perform(pid, opts={})
-      LeafGrow.new(Provider.find(pid)).grow
+      Provider.find(pid).grow_leaf(opts)
     end
   end
   

@@ -24,20 +24,21 @@ class Provider < ActiveRecord::Base
   
   PROVIDERS = %w{twitter weibo github tumblr instagram youtube}
   
-  def avatar(style = :mudium )
+  def avatar(style = :mudium)
+    image = metadata[:image] ? metadata[:image] : metadata[:avatar]
     case style
     when :mudium
-      self.metadata[:image]
+      image
     when :large
       case self.provider
       when "weibo"
-        self.metadata[:image].gsub("/50/","/180/")
+        image.gsub("/50/","/180/")
       when "twitter"
-        self.metadata[:image].gsub("_normal","")
+        image.gsub("_normal","")
       when "tumblr"
-        self.metadata[:avatar]
+        image.gsub("_64","_512")
       else
-        self.metadata[:image]
+        image
       end
     end
   end
@@ -52,28 +53,9 @@ class Provider < ActiveRecord::Base
     self.metadata[:nickname]
   end
   
-  def weibo
-    self.metadata[:weibo_url]
-  end
-  
-  def get_leafs(older)
-    if older
-      id = self.leafs.order("time_stamp ASC").first.weibo_id
-      return "&max_id=#{id}"
-    else
-      id = self.leafs.order("time_stamp DESC").first.weibo_id
-      return "&since_id=#{id}"
-    end
-  end
-  
-  def self.build_leaf(older = false,options = {})
-    if options[:provider]
-      LeafGrow.new(options[:provider]).grow(:older => older)
-    else
-      Provider.where("user_id is null").each do |p|
-        LeafGrow.new(p).grow(:older => older)
-      end
-    end
+  def url
+    url = self.metadata[:weibo_url]
+    return url ? url : self.metadata[:url]
   end
   
   def self.create_from_hash(user_id, omniauth, expires_time)
@@ -100,6 +82,23 @@ class Provider < ActiveRecord::Base
       end
       HardWorker::SendGreetJob.perform_async(self.id,option)
     end
+  end
+
+  # leaf
+  def get_leafs(older)
+    if older
+      id = self.leafs.order("time_stamp ASC").first.weibo_id
+      return "&max_id=#{id}"
+    else
+      id = self.leafs.order("time_stamp DESC").first.weibo_id
+      return "&since_id=#{id}"
+    end
+  end
+
+  # :older => true/false
+  def grow_leaf(opts = {})
+    p = self.provider.gsub("_#{$config[:name]}",'')
+    eval("Wheat::#{p.capitalize}").new(self).grow(opts)
   end
 
 end

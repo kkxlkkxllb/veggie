@@ -28,16 +28,16 @@ class UWord < ActiveRecord::Base
     self.word.content
   end
   
-  def image_path(style="17up")
+  def image_path(style=$config[:name])
     IMAGE_PATH + "#{self.id}/#{style}.jpg"
   end
   
-  def image_url(style="17up")
+  def image_url(style=$config[:name])
     IMAGE_URL + "#{self.id}/#{style}.jpg"
   end
   
   def image
-    return File.exist?(self.image_path) ? self.image_url : "/assets/icon/default.png"
+    return has_image ? self.image_url : "/assets/icon/default.png"
   end
   
   def has_image

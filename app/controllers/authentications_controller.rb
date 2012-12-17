@@ -58,6 +58,7 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
     def reset_token_secret(provider,omniauth,expires_time)    
         provider.update_attributes(:token => omniauth.credentials.token,
                                    :secret => omniauth.credentials.secret,
+                                   :metadata => omniauth.info,
                                    :expired_at => expires_time)
     end
 end

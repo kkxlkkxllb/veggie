@@ -18,6 +18,8 @@ $home_page ={
 }
 
 $config = {}
+$config[:author] = "veggie"
+$config[:name] = "17up"
 $config[:domain] = "17up.org"
 $config[:host] = "http://#{$config[:domain]}"
 $config[:mobile_host] = "http://m.#{$config[:domain]}"

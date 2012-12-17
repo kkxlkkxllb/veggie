@@ -56,7 +56,7 @@ class Member < ActiveRecord::Base
   # add profile
   def name
     p = self.providers.first
-    p ? p.user_name : "veggie"
+    p ? p.user_name : $config[:author]
   end
   
   # p : string in [Provider::PROVIDERS]
@@ -70,8 +70,8 @@ class Member < ActiveRecord::Base
   end
   
   def self.generate(prefix = Time.now.to_f.to_s.split(".")[1])
-    email = prefix + "@17up.org"
-    passwd = "veggie"
+    email = prefix + "@" + $config[:domain]
+    passwd = $config[:author]
     user = Member.new(
       :email => email,
       :password => passwd,

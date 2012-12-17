@@ -47,11 +47,11 @@ class Word < ActiveRecord::Base
   end  
   
   # style: 17up/original
-  def image_path(style="17up")
+  def image_path(style=$config[:name])
     IMAGE_PATH + self.title.parameterize.underscore + "/#{style}.jpg" 
   end
 
-  def image_url(style="17up")
+  def image_url(style=$config[:name])
     IMAGE_URL + self.title.parameterize.underscore + "/#{style}.jpg" 
   end
 

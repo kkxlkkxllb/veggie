@@ -70,4 +70,18 @@ class Leaf < ActiveRecord::Base
       Grape::LeafImage.new(l).download
     end
   end
+
+  def as_json
+    {
+      :id => id,
+      :url => provider.url,
+      :avatar => provider.avatar,
+      :pid => provider.id,
+      :name => provider.user_name,
+      :time_stamp => time_stamp,
+      :content => content,
+      :img => image(:medium),
+      :img_large => image(:large)
+    }
+  end
 end

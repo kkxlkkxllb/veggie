@@ -3,8 +3,9 @@ class LeafsController < ApplicationController
   before_filter :authenticate_member!,:except => :index
   
   def index
-    set_seo_meta(t('leafs.title'),t('leafs.keywords'),t('leafs.describe'))    
-    @leafs = source_leafs(params[:pid],params[:page],30)
+    set_seo_meta(t('leafs.title'),t('leafs.keywords'),t('leafs.describe'))  
+    @admin = current_member&&current_member.admin?   
+    @leafs = source_leafs(params[:pid],params[:page],30).map(&:as_json)
     respond_to do |format|
       format.html
 			format.json{
