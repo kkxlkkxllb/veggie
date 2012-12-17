@@ -19,29 +19,28 @@ class Leaf < ActiveRecord::Base
   before_destroy :clean_image
   after_create :fetch_image
   
-  GET_IMAGE_REMOTE = Rails.env == "production" ? false : true
   IMAGE_URL = "/system/images/leaf/"
   IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
   
-  def image(style = :large)
-    if GET_IMAGE_REMOTE
-      case style
-      when :thumb
-        self.image_url.sub('large','thumbnail')
-      when :medium
-        self.image_url.sub('large','bmiddle')
-      when :large
-        self.image_url
-      end
-    else# 本地图片
-      if self.image_url
-				case style
-				when :large
+  def image(style = :large,remote = !(Rails.env == "production"))
+    if image_url
+      if remote
+        case style
+        when :thumb
+          self.image_url.sub('large','thumbnail')
+        when :medium
+          self.image_url.sub('large','bmiddle')
+        when :large
+          self.image_url
+        end
+      else# 本地图片
+  			case style
+  			when :large
         	self.image_url
-				else
+  			else
         	ext = self.image_url.split('.')[-1]
         	IMAGE_URL + "#{self.id}/#{style}.#{ext}"
-				end
+  			end
       end
     end
   end

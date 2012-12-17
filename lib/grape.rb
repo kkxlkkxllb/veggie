@@ -27,8 +27,7 @@ module Grape
   
     def initialize(leaf)
       @leaf = leaf     
-      @image_urls = {:medium => leaf.image_url.sub('large','bmiddle'),
-                     :thumb => leaf.image_url.sub('large','thumbnail')}
+      @image_urls = {:medium => leaf.image(:medium,true),:thumb => leaf.image(:thumb,true)}
       @store_path = Leaf::IMAGE_PATH+"#{leaf.id}/"
     end
   

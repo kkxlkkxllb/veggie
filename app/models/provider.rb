@@ -30,7 +30,7 @@ class Provider < ActiveRecord::Base
     when :mudium
       image
     when :large
-      case self.provider
+      case provider_type
       when "weibo"
         image.gsub("/50/","/180/")
       when "twitter"
@@ -41,6 +41,10 @@ class Provider < ActiveRecord::Base
         image
       end
     end
+  end
+  
+  def provider_type
+    self.provider.sub("_#{$config[:name]}","")
   end
   
   def user_name
@@ -97,8 +101,7 @@ class Provider < ActiveRecord::Base
 
   # :older => true/false
   def grow_leaf(opts = {})
-    p = self.provider.gsub("_#{$config[:name]}",'')
-    eval("Wheat::#{p.capitalize}").new(self).grow(opts)
+    eval("Wheat::#{provider_type.capitalize}").new(self).grow(opts)
   end
 
 end

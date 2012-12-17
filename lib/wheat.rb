@@ -30,7 +30,7 @@ module Wheat
     end
 
     def get_image(data,provider)
-      case provider.provider
+      case provider.provider_type
       when 'weibo'
         return data["original_pic"]
       when 'twitter'
@@ -41,7 +41,7 @@ module Wheat
     end
     
     def user_info(user,provider)
-      case provider.provider
+      case provider.provider_type
       when 'weibo'
         {
           :nickname => user['screen_name'],
@@ -75,7 +75,7 @@ module Wheat
 
     def grow(options = {})
       opt = {}
-      if !options.blank?
+      if options.has_key?(:older)
         str = @provider.get_leafs(options[:older])
         opt.merge!(:since_id => str.split("=")[1])
       end 
@@ -100,7 +100,7 @@ module Wheat
 
     def grow(options = {})
       opt = {}
-      if !options.blank?
+      if options.has_key?(:older)
         str = @provider.get_leafs(options[:older])
         opt.merge!(:since_id => str.split("=")[1])
       end 
@@ -123,20 +123,36 @@ module Wheat
       @blog_name = "#{@provider.uid}.tumblr.com"
     end
     
-    def grow
-      data = @client.posts(@blog_name,:type => "photo")
-      
+    def look
+      @client.posts(@blog_name,:type => "photo")
+    end
+    
+    def grow(options = {})
+      opt = {
+        :type => "photo"
+      }.update(options)
+      data = @client.posts(@blog_name,opt)
+      p @client
       begin     
         data["posts"].each do |d|      
           if @provider.metadata.blank?
             @provider.metadata = user_info(data["blog"])
             @provider.save!
           end
-          Leaf.create(:provider_id => @provider.id,
+          grow = true
+          timestamp = Time.at(d["timestamp"].to_i)
+          if options.has_key?(:older)
+            if timestamp < Time.now - 1.day
+              grow = false
+            end
+          end
+          if grow
+            Leaf.create(:provider_id => @provider.id,
                       :content => CGI::unescapeHTML(strip_tags(d["caption"])),
-                      :time_stamp => Time.at(d["timestamp"].to_i),
+                      :time_stamp => timestamp,
                       :image_url => get_image(d,@provider),
                       :weibo_id => d["id"])
+          end
         end
       rescue StandardError => x
         Leaf.logger.error("ERROR provider:tumblr msg:#{x}")
