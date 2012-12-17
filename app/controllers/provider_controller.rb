@@ -6,8 +6,7 @@ class ProviderController < ApplicationController
                                   :provider => provider_params["provider"]+"_#{$config[:name]}")    
     end
     if @provider
-      #HardWorker::GrowLeafJob.perform_async(@provider.id)
-      @provider.grow_leaf
+      HardWorker::GrowLeafJob.perform_async(@provider.id)
       render_json(0,"ok")
     end
    
