@@ -23,11 +23,6 @@ Veggie::Application.routes.draw do
     match '/' => "lhome#index"
   end
   
-  # members
-  match "dashboard" => "members#dashboard",:as => :account
-  match "u/:id" => "members#show",:as => :member
-  match "setting" => "members#edit",:as => :setting
-  
   # home
   match "welcome" => "home#index", :as => :welcome
   match "square" => "home#square", :as => :hot
@@ -60,6 +55,11 @@ Veggie::Application.routes.draw do
     post "publish"
     get "fetch"
   end
+
+  # members
+  match "dashboard" => "members#dashboard",:as => :account  
+  match "setting" => "members#edit",:as => :setting
+  match ":role/:uid" => "members#show"
  
   root :to => 'home#door'
 

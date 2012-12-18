@@ -32,16 +32,34 @@ class Member < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:weibo,:twitter,:github,:tumblr,:instagram,:youtube]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me,:role,:uid
+  # uid 代替id，由用户自定义，长度限定
+  validates :uid, :uniqueness => {:scope => :role }
+
   has_many :providers,:foreign_key => "user_id",:dependent => :destroy
   has_many :u_words
   
   EDIT_SIDENAV = %w{profile provider account}
   AVATAR_URL = "/system/images/member/"
   AVATAR_PATH = "#{Rails.root}/public"+AVATAR_URL
+  ## role 用户组别 
+  ROLE = %w{a b u e}
+  # nil 三无用户，被清理对象
+  scope :x, where(["role is ?", nil])
+  # a 管理员，特权待遇 
+  # u 会员
+  # b 商家*
+  # e 作者*
+  ROLE.each do |r|
+    scope r.to_sym,where(["role = ?", r])
+  end
   
   def admin?
-    self.role == "admin"
+    self.role == "a"
+  end
+
+  def member_path
+    role ? "/#{role}/#{uid}" : "#"
   end
   
   def avatar
@@ -75,8 +93,7 @@ class Member < ActiveRecord::Base
     user = Member.new(
       :email => email,
       :password => passwd,
-      :password_confirmation => passwd,
-      :role => "u")
+      :password_confirmation => passwd)
     if user.save!
       user
     else
