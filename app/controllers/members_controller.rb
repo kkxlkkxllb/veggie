@@ -22,6 +22,7 @@ class MembersController < ApplicationController
     @setting = true
   end
 
+  # update uid then set role to u
   def update
     
   end

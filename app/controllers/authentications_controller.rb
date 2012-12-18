@@ -1,27 +1,10 @@
 # coding: utf-8
 class AuthenticationsController < Devise::OmniauthCallbacksController
-  def weibo
-    omniauth_process
-  end
-  
-  def twitter
-    omniauth_process
-  end
-  
-  def github
-    omniauth_process
-  end
-  
-  def tumblr
-    omniauth_process
-  end
-  
-  def instagram
-    omniauth_process
-  end
-  
-  def youtube
-    omniauth_process
+
+  Provider::PROVIDERS.each do |m|
+    define_method m do
+      omniauth_process
+    end
   end
   
   def passthru
