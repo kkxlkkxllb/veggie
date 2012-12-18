@@ -132,7 +132,6 @@ module Wheat
         :type => "photo"
       }.update(options)
       data = @client.posts(@blog_name,opt)
-      p @client
       begin     
         data["posts"].each do |d|      
           if @provider.metadata.blank?
