@@ -30,7 +30,7 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
         Provider.create_from_hash(new_user.id, omniauth, expires_time)
         sign_in(new_user)
         flash[:success] = t('flash.notice.register')
-        redirect_to account_path
+        redirect_to setting_path + "#account"
       end
     end
 

@@ -17,4 +17,8 @@ module ApplicationHelper
   #  link_to image_tag("data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",:'data-src' => url,:onload =>"lzld(this)",:onError=>"lzld(this)"),link,:target => "blank"
   #end
   
+  def trc(str,len)
+    truncate(str,:length => len)
+  end
+  
 end

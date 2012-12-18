@@ -1,7 +1,9 @@
-.avatar
+.avatar.item.button.blue.glossy(data-icon=" ")
 	= image_tag current_member.avatar
 	.name
 		= current_member.name
-.birthday
-	
+.birthday.item.button.green.glossy(data-icon=" ")
+	%p.tallys
+		it's your birthday on 17up
+	%p.tallys= time_stamp(current_member.created_at)
 	
