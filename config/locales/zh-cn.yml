@@ -10,11 +10,11 @@ zh-cn:
     describe: "为爱寻找一个理由"
   title: 17up
   keywords: "city,knowledge,peace,future,university,education"
-  describe: "静谧的星空下，一个新生的世界正在一群神秘的年轻人带领下，悄悄生长，那是宁静、欢乐、充满希望之地：17up"
+  describe: "静谧的星空下，一个新生的世界正在一群神秘的年轻人引领下，悄悄生长，那是宁静、欢乐、充满希望之地：17up"
   door: "入口"
   flash:
     notice:
-      register: "欢迎进入 17up 的世界，先逛逛吧!"
+      register: "欢迎进入 17up 的世界，先申领一个 ID 吧!"
       login: "学习，任何时候开始都不晚，欢迎回来！"
       bind: "绑定成功啦!"
     error:
@@ -22,7 +22,7 @@ zh-cn:
   words:
     title: "图书馆"
     keywords: "词汇，文化，地域，历史"
-    describe: "图书馆位于 17up 世界的核心，汇聚了所有的正能量，想要进入这里要先注册成为 17up 的公民才行"
+    describe: "图书馆位于 17up 世界的核心，汇聚了所有的智慧，想要进入这里请先注册成为 17up 的公民吧"
   leafs:
     title: "花园"
     keywords: "资讯，微博，文萃"

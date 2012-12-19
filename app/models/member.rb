@@ -38,6 +38,8 @@ class Member < ActiveRecord::Base
 
   has_many :providers,:foreign_key => "user_id",:dependent => :destroy
   has_many :u_words,:dependent => :destroy
+
+  after_destroy :clear_data
   
   EDIT_SIDENAV = %w{profile provider account}
   AVATAR_URL = "/system/images/member/"
@@ -85,9 +87,9 @@ class Member < ActiveRecord::Base
     UWord.where(:member_id => self.id,:word_id => wid).first
   end
   
-  def self.generate(prefix = Time.now.to_f.to_s.split(".")[1])
+  def self.generate(prefix = Utils.rand_passwd(7,:number => true))
     email = prefix + "@" + $config[:domain]
-    passwd = $config[:author]
+    passwd = Utils.rand_passwd
     user = Member.new(
       :email => email,
       :password => passwd,
@@ -114,6 +116,10 @@ class Member < ActiveRecord::Base
 		data = open(provider.avatar(:large)){|f|f.read}
 		file = File.open(AVATAR_PATH + avatar_name,"wb") << data
 	  file.close
+  end
+
+  def clear_data
+    `rm -rf #{AVATAR_PATH + self.id.to_s}`
   end
   
 end

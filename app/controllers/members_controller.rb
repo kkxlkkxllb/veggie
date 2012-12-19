@@ -22,9 +22,19 @@ class MembersController < ApplicationController
     @setting = true
   end
 
-  # update uid then set role to u
-  def update
-    
+  # just after register
+  def update  
+    if @user = Member.u.find_by_uid(params[:uid])
+      flash[:error] = "taken"
+    else
+      data = {
+        :role => "u",
+        :uid => params[:uid],
+        :email => params[:uid] + "@" + $config[:domain]
+      }
+      current_member.update_attributes(data)
+      flash[:notice] = "ok"
+    end
   end
 
 
