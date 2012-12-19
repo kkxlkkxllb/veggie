@@ -50,7 +50,7 @@ module Grape
     def initialize(title)
       @title = title
       @dir = Word::IMAGE_PATH + title.parameterize.underscore + "/"
-      @original = @dir + "original.jpg"
+      #@original = @dir + "original.jpg"
       @w = @dir + "w.png"
       @new_image = @dir + "17up.jpg"
     end
@@ -83,10 +83,11 @@ module Grape
         }
         ImageConvert.draw_word(opts)
       end
-      success = -> {        
-        ImageConvert.new(@original,:outfile => @new_image).draw(@w)  
-      }
-      img_save(@image,@original,success)
+      #success = -> {        
+      #  ImageConvert.new(@original,:outfile => @new_image).draw(@w)  
+      #}
+      #img_save(@image,@original,success)
+      ImageConvert.new(@image,:outfile => @new_image).draw(@w)
     end
   end
   
@@ -94,7 +95,7 @@ module Grape
     def initialize(id)
       @title = UWord.find(id).title
       @dir = UWord::IMAGE_PATH + "#{id}/"
-      @original = @dir + "original.jpg"
+      #@original = @dir + "original.jpg"
       @w = @dir + "w.png"
       @new_image = @dir + "17up.jpg"
     end
@@ -106,7 +107,6 @@ module Grape
         :outfile => img_path,#Tempfile.new("quote_image").path, 
         :size => "280"
       }.update(opts)
-      @original = img_path
       @img = MiniMagick::Image.open(img_path)
     end
     
@@ -156,7 +156,6 @@ module Grape
       end
       result.write(@opts[:outfile])
       `chmod 777 #{@opts[:outfile]}`
-      `rm #{@original}`
       return @opts[:outfile]
     end
 
