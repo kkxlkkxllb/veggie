@@ -18,7 +18,7 @@ class Provider < ActiveRecord::Base
   has_many :leafs, :dependent => :destroy
   serialize :metadata, Hash
   validates :provider, :presence => true
-  validates :uid, :presence => true, :uniqueness => {:scope => :provider }
+  validates :uid, :presence => true, :uniqueness => {:scope => :provider}
   belongs_to :member,:foreign_key => "user_id"
   after_create :send_greet
   

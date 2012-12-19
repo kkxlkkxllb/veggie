@@ -37,7 +37,7 @@ class Member < ActiveRecord::Base
   validates :uid, :uniqueness => {:scope => :role }
 
   has_many :providers,:foreign_key => "user_id",:dependent => :destroy
-  has_many :u_words
+  has_many :u_words,:dependent => :destroy
   
   EDIT_SIDENAV = %w{profile provider account}
   AVATAR_URL = "/system/images/member/"
@@ -70,8 +70,6 @@ class Member < ActiveRecord::Base
 		"#{self.id}/#{self.created_at.to_i}.jpg"
 	end
   
-	# to-do
-  # add profile
   def name
     p = self.providers.first
     p ? p.user_name : $config[:author]
