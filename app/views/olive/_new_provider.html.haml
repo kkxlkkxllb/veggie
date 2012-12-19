@@ -1,6 +1,6 @@
-%h3
+%h4.alert
 	新增Provider
-.modal-body
+%p
 	= form_for :provider,:url => "/provider/create",:remote => true,:html=>{:id=>"new_provider_form"} do |f|
 		.input-prepend.input-append
 			%span.btn-group
