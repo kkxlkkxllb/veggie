@@ -1,6 +1,6 @@
 # coding: utf-8
 class HomeController < ApplicationController
-  caches_page :index,:quote
+  caches_page :index,:quote,:info,:square
   
   def door
     agent = request.user_agent.downcase
@@ -26,8 +26,7 @@ class HomeController < ApplicationController
   
   def info
     set_seo_meta(nil,t('keywords'),t('describe'))
-    @request = request.remote_ip
-    @info = Utils.parse_ip(@request)
+    #Utils.parse_ip(request.remote_ip)
   end
   
   def quote

@@ -4,8 +4,8 @@ $dict_source[:english_v] = "http://tts.yeshj.com/uk/s/"
 
 $pic_search = "http://www.bing.com/images/search?q="
 
-$home_page ={
-  :fruit => [
+$game ={
+  :allen => [
               ["cherry","pink"],
               ["bramley","green"],
               ["banana","orange"],
@@ -17,10 +17,16 @@ $home_page ={
   
 }
 
+$contact = {}
+$contact[:twitter] = "https://twitter.com/He_Art_Me"
+$contact[:tumblr] = "http://veggie89.tumblr.com/"
+$contact[:weibo] = "http://weibo.com/17uporg"
+
 $config = {}
 $config[:author] = "veggie"
 $config[:name] = "17up"
 $config[:domain] = "17up.org"
+$config[:email] = $config[:author] + ".#{$config[:domain]}@gmail.com"
 $config[:host] = "http://#{$config[:domain]}"
 $config[:mobile_host] = "http://m.#{$config[:domain]}"
 $config[:love_host] = "http://love.#{$config[:domain]}"

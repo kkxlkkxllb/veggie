@@ -1,7 +1,7 @@
 #allen.clearfix
 	.nav_item
 		#weekdays.relative
-			- $home_page[:fruit].each do |f|
+			- $game[:allen].each do |f|
 				.weekday
 					= image_tag("fruit/#{f[0]}.png")
 					%span.button.xs.title.glossy.back{:class => f[1] }(data-icon=" ")

@@ -1,14 +1,13 @@
 #impress
 	#greet.step(data-x="0" data-y="0" data-scale="1")
 		%span
-			来自
-			= @info
-			的朋友，欢迎来到这里
+			欢迎来到 17up 
 	#contact.step.text_center(data-x="0" data-y="900" data-z="1500"  data-scale="1")
-		=contact_img_link "icon/twitter_big.png","https://twitter.com/He_Art_Me","Fo Me"
-		=contact_img_link "icon/tumblr_big.png","http://veggie89.tumblr.com/","On Tumblr"
-		=contact_img_link "icon/weibo_big.png","http://weibo.com/veggie89","求关注"
-	#look.step.text_center(data-x="0" data-y="1800" data-z="3000"  data-scale="1")
+		- $contact.each do |k,v|
+			= contact_img_link "icon/#{k}_big.png",v,k.to_s
+		%p
+			= mail_to $config[:email],$config[:email]
+	#thank.step.text_center(data-x="0" data-y="1800" data-z="3000"  data-scale="1")
 		%a.button.glossy.pink.skew(href="#" data-icon="✿")
 			ZARD
 		%a.button.serif.glass.blue.skew(href="#" data-icon="♛")
