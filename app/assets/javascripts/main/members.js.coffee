@@ -11,7 +11,10 @@ class window.Members
 	setting: ($wrap) ->
 		$(".providers img",$wrap).tooltip()
 		activeTab = $('[href=' + location.hash + ']',$wrap)
-		activeTab && activeTab.tab('show')
+		if activeTab.length is 1
+			activeTab.tab('show')
+		else
+			$("[href='#profile']",$wrap).tab('show')
 	show: ($container,item)->
 		$container.imagesLoaded ->
 			$(item,$container).animate opacity:1

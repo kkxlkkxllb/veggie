@@ -25,7 +25,7 @@ class MembersController < ApplicationController
   # just after register
   def update  
     if @user = Member.u.find_by_uid(params[:uid])
-      flash[:error] = "taken"
+      flash[:error] = t('flash.error.uid')
     else
       data = {
         :role => "u",
@@ -33,8 +33,9 @@ class MembersController < ApplicationController
         :email => params[:uid] + "@" + $config[:domain]
       }
       current_member.update_attributes(data)
-      flash[:notice] = "ok"
+      flash[:notice] = t('flash.notice.uid')
     end
+    redirect_to setting_path + "#account"
   end
 
 

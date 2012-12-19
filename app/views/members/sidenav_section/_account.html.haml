@@ -1,5 +1,16 @@
-%h3
-	请设置您的个性ID号，代表着你在 17up 世界里的唯一身份，注意是唯一的哦，赶紧抢先登记吧
-%p
-	马上就要做好这个功能了，稍等
+- if id = current_member.uid
+	%h3.alert
+		ID: 
+		= id
+	.alert.alert-error
+		非常友好的“公民行为指导手册”正在制作中，敬请期待
+- else
+	.alert
+		在这儿申领您的个性 ID 号，代表着你在 17up 世界里的唯一身份
+		%br
+		♛ 注意是唯一的哦，赶紧抢先登记吧
+	%p
+		= form_tag "/members/update",:id => "uid_form" do
+			= text_field_tag :uid,"",:placeholder => "ID"
+			= submit_tag "登记",:class => "btn btn-primary"
 	

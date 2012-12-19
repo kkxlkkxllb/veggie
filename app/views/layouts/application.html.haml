@@ -22,7 +22,7 @@
       = render "shared/flash_message"
       = yield   
     %footer
-      - if @is_root
+      - if @is_root or @need_footer
         = render 'shared/copyright'
     /
       Javascripts

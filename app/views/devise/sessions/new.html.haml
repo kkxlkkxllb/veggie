@@ -1,29 +1,33 @@
 #login_contain
 	- if params[:admin]
-		#login_form
-			.title
-				登录
-			= form_for(resource, :as => resource_name, :url => session_path(resource_name),:html => {:class => "form-horizontal"}) do |f|
-				.control-group
-					= f.label :email,"帐号",:class => "control-label"
-					.controls
-						= f.email_field :email,:placeholder => "Email"
-				.control-group
-					= f.label :password,"密码",:class => "control-label"
-					.controls
-						= f.password_field :password,:placeholder => "Password"
-
-				- if devise_mapping.rememberable?
+		= cache("sign_in/admin") do
+			#login_form
+				.title
+					登录
+				= form_for(resource, :as => resource_name, :url => session_path(resource_name),:html => {:class => "form-horizontal"}) do |f|
 					.control-group
+						= f.label :email,"帐号",:class => "control-label"
 						.controls
-							%label.checkbox
-								= f.check_box :remember_me
-								记住我
-							= f.submit "登录",:class => "btn"
+							= f.email_field :email,:placeholder => "Email"
+					.control-group
+						= f.label :password,"密码",:class => "control-label"
+						.controls
+							= f.password_field :password,:placeholder => "Password"
+					- if devise_mapping.rememberable?
+						.control-group
+							.controls
+								%label.checkbox
+									= f.check_box :remember_me
+									记住我
+								= f.submit "登录",:class => "btn"
 	- else
-		#register_form
-			.title
-				登录／注册
-			.register
-				- Provider::PROVIDERS.each do |x|
-					= link_to image_tag("icon/#{x}_big.png",:title => x),member_omniauth_authorize_path(x.to_sym)
+		= cache("sign_in/member") do
+			#logo.text_center
+				%span.logo
+			#register_form
+				.title
+					%span
+						登录／注册
+				.register
+					- Provider::PROVIDERS.each do |x|
+						= link_to image_tag("icon/#{x}_big.png",:title => x),member_omniauth_authorize_path(x.to_sym)
