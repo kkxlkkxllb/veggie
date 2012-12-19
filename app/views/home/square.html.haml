@@ -19,10 +19,3 @@
 					.name
 						= image_tag("icon/#{u.provider_type}.png")
 						= u.user_name
-		- if current_member and current_member.admin?
-			= render 'modal/new_provider'
-			#add_new_btn.user_item
-				.avatar
-					= image_tag('icon/default.png')
-				.name
-					+ 1
