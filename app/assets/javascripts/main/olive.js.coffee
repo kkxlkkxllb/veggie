@@ -3,6 +3,7 @@ class window.Olive
 		olive = new Olive($("#olive"))
 		olive.render_view()
 		olive.publish($(".cpanel span.publish"))
+		olive.add_provider_view $("form#new_provider_form")
 	constructor: (@$wrap) ->
 		$(".item",@$wrap).live "click",->
 			$(@).toggleClass "select"
@@ -41,3 +42,11 @@ class window.Olive
 				(data) ->
 					if data.status is 0
 						Utils.flash "(o_o) 成功执行#{data.data.num}个任务"
+	add_provider_view: ($form) ->
+		$("span.btn-group span.btn",$form).click ->
+			rel = $(@).attr 'rel'
+			$(@).addClass("actived").siblings().removeClass("actived")
+			$("#provider_provider",$form).val(rel)
+		$form.bind 'ajax:success', (d,data) ->
+			if data.status is 0
+				Utils.flash("Awesome Done!")

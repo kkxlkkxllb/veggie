@@ -73,7 +73,7 @@ class OliveController < ApplicationController
   private
   def authenticate_admin
     unless current_member and current_member.admin?
-      redirect_to root_path
+      redirect_to new_member_session_path(:admin => 1)
     end
   end
 
