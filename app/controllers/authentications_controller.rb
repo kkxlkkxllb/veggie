@@ -32,9 +32,8 @@ class AuthenticationsController < Devise::OmniauthCallbacksController
 				# 登录
         if provider
           reset_token_secret(provider, omniauth, expires_time)  
-          sign_in(provider.member)
           flash[:success] = t('flash.notice.login')
-          redirect_to account_path
+          sign_in_and_redirect(provider.member)
 				# 注册
         else
           new_user = Member.generate
