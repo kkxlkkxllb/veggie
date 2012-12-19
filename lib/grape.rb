@@ -106,7 +106,7 @@ module Grape
         :outfile => img_path,#Tempfile.new("quote_image").path, 
         :size => "280"
       }.update(opts)
-
+      @original = img_path
       @img = MiniMagick::Image.open(img_path)
     end
     
@@ -156,6 +156,7 @@ module Grape
       end
       result.write(@opts[:outfile])
       `chmod 777 #{@opts[:outfile]}`
+      `rm #{@original}`
       return @opts[:outfile]
     end
 
