@@ -78,5 +78,6 @@ class Word < ActiveRecord::Base
         :image => image,
         :tags => ctags.map(&:name)
       })
+    # dimensions
   end
 end

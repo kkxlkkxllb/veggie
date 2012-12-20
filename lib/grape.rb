@@ -111,7 +111,7 @@ module Grape
     def initialize(img_path,opts={})
       @opts = {
         :outfile => img_path,#Tempfile.new("quote_image").path, 
-        :size => "200"
+        :size => "280"
       }.update(opts)
       @img = MiniMagick::Image.open(img_path)
     end
@@ -133,7 +133,7 @@ module Grape
     def self.draw_word(opts = {})
       opts = {
         :text => "17up",
-        :font_size => 32,
+        :font_size => 36,
         :type => 1,
         :word_path => "public/w.png",
         :font => "public/font/Lobster/Lobster.ttf"
@@ -152,6 +152,11 @@ module Grape
                   -trim #{opts[:word_path]}`
                    
       end
+    end
+
+    def self.get_height(src,real_width)
+      img = MiniMagick::Image.open(src)
+      (img["height"].to_f/img["width"].to_f)*real_width.to_i
     end
     
 		# 合成单张

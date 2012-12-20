@@ -48,12 +48,15 @@ class UWord < ActiveRecord::Base
     type.scan(/(jpeg|png|gif)/).any? and File.size(file) < IMAGE_SIZE_LIMIT
   end
 
+  # for show
 	def as_json
 		{	
       :id => id,
 			:title => title,
-			:content => content
+			:content => content,
+      :image => image_url
 		}
+    # dimensions
 	end
   
 end

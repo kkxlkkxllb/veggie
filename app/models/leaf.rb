@@ -37,12 +37,16 @@ class Leaf < ActiveRecord::Base
   			case style
   			when :large
         	self.image_url
-  			else
-        	ext = self.image_url.split('.')[-1]
-        	IMAGE_URL + "#{self.id}/#{style}.#{ext}"
+  			else      	
+        	IMAGE_URL + local_image_name(style)
   			end
       end
     end
+  end
+
+  def local_image_name(style)
+    ext = image_url.split('.')[-1]
+    return "#{self.id}/#{style}.#{ext}"
   end
   
   def clean_image
@@ -80,7 +84,9 @@ class Leaf < ActiveRecord::Base
       :time_stamp => time_stamp,
       :content => content,
       :img => image(:medium),
-      :img_large => image(:large)
+      :img_large => image(:large),
+      :height => Grape::ImageConvert.get_height(IMAGE_PATH + local_image_name(:medium),180)
     }
+    # dimensions
   end
 end

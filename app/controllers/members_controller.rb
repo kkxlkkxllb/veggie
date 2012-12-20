@@ -11,7 +11,7 @@ class MembersController < ApplicationController
     role_ok = Member::ROLE.include?(params[:role])  
     if role_ok and @user = Member.send(params[:role]).find_by_uid(params[:uid])
       set_seo_meta(@user.name)
-      @p_words =  @user.u_words.select{|w| w.has_image}      
+      @p_words =  @user.u_words.select{|w| w.has_image}.map(&:as_json)      
     else
       redirect_to "/not_found"
     end
