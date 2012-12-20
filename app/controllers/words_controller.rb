@@ -94,9 +94,10 @@ class WordsController < ApplicationController
   # response with js.haml
   def upload_img
 		file = params[:image].tempfile.path
+    # image format check
 		if File.size(file) < UWord::IMAGE_SIZE_LIMIT
-    	Grape::UWordImage.new(params[:id]).make(file)
-			@success = true
+    	status = Grape::UWordImage.new(params[:id]).make(file)
+			@success = status == 0
 		end
   end
 

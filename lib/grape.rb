@@ -49,10 +49,23 @@ module Grape
     
     def initialize(title)
       @title = title
-      @dir = Word::IMAGE_PATH + title.parameterize.underscore + "/"
-      #@original = @dir + "original.jpg"
-      @w = @dir + "w.png"
-      @new_image = @dir + "17up.jpg"
+      @dir = Word::IMAGE_PATH + title.parameterize.underscore + "/"      
+    end
+
+    def set_name_by_dir(dir,title)
+      unless File.exist?(dir)
+        `mkdir -p #{dir}`
+      end
+      w = dir + "w.png"
+      unless File.exist?(w)
+        opts = {
+          :text => title,
+          :type => 2,
+          :word_path => w
+        }
+        ImageConvert.draw_word(opts)
+      end
+      return w,dir + "17up.jpg"#,dir + "original.jpg"
     end
 
     def parse(info="")
@@ -72,22 +85,17 @@ module Grape
     
     def make(url=nil)
       @image = url ? url : parse[0]
-      unless File.exist?(@dir)
-        `mkdir -p #{@dir}`
-      end
-      unless File.exist?(@w)
-        opts = {
-          :text => @title,
-          :type => 2,
-          :word_path => @w
-        }
-        ImageConvert.draw_word(opts)
-      end
+      @w,@new_image = set_name_by_dir(@dir,@title)
       #success = -> {        
       #  ImageConvert.new(@original,:outfile => @new_image).draw(@w)  
       #}
       #img_save(@image,@original,success)
-      ImageConvert.new(@image,:outfile => @new_image).draw(@w)
+      begin
+        ImageConvert.new(@image,:outfile => @new_image).draw(@w)
+        return 0
+      rescue
+        return -1
+      end
     end
   end
   
@@ -95,9 +103,6 @@ module Grape
     def initialize(id)
       @title = UWord.find(id).title
       @dir = UWord::IMAGE_PATH + "#{id}/"
-      #@original = @dir + "original.jpg"
-      @w = @dir + "w.png"
-      @new_image = @dir + "17up.jpg"
     end
   end
   
@@ -105,7 +110,7 @@ module Grape
     def initialize(img_path,opts={})
       @opts = {
         :outfile => img_path,#Tempfile.new("quote_image").path, 
-        :size => "280"
+        :size => "200"
       }.update(opts)
       @img = MiniMagick::Image.open(img_path)
     end
