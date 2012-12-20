@@ -18,8 +18,8 @@ $game ={
 }
 
 $contact = {}
-$contact[:twitter] = "https://twitter.com/He_Art_Me"
-$contact[:tumblr] = "http://veggie89.tumblr.com/"
+$contact[:twitter] = "https://twitter.com/17uporg"
+$contact[:tumblr] = "http://17uporg.tumblr.com/"
 $contact[:weibo] = "http://weibo.com/17uporg"
 
 $config = {}

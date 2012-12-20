@@ -9,7 +9,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
+# course & mission
 class Course < ActiveRecord::Base
   attr_accessible :ctags, :language, :title
 end

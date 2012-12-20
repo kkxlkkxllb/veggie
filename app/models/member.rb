@@ -34,7 +34,9 @@ class Member < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,:role,:uid
   # uid 代替id，由用户自定义，长度限定
-  validates :uid, :uniqueness => {:scope => :role }
+  validates :uid, :uniqueness => {:scope => :role },
+                  :length => {:in => 2..20 },
+                  :format => {:with => /^[A-Za-z0-9_]+$/ }
 
   has_many :providers,:foreign_key => "user_id",:dependent => :destroy
   has_many :u_words,:dependent => :destroy
@@ -45,13 +47,16 @@ class Member < ActiveRecord::Base
   AVATAR_URL = "/system/images/member/"
   AVATAR_PATH = "#{Rails.root}/public"+AVATAR_URL
   ## role 用户组别 
-  ROLE = %w{a b u e}
+  ROLE = %w{a u b e g v}
   # nil 三无用户，被清理对象
   scope :x, where(["role is ?", nil])
   # a 管理员，特权待遇 
   # u 会员
+  # ------
   # b 商家*
   # e 作者*
+  # g 组织
+  # v 名人
   ROLE.each do |r|
     scope r.to_sym,where(["role = ?", r])
   end
