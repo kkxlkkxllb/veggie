@@ -11,6 +11,8 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  video       :string(255)
+#  width       :integer
+#  height      :integer
 #
 
 class Leaf < ActiveRecord::Base
@@ -58,7 +60,7 @@ class Leaf < ActiveRecord::Base
   end
   
   def fetch_image
-    if Rails.env == "production" and !self.image_url.blank?
+    if Rails.env != "production" and !self.image_url.blank?
       Grape::LeafImage.new(self).download
     end
   end
@@ -68,9 +70,14 @@ class Leaf < ActiveRecord::Base
   end
   
   # 下载所有图
-  def self.fetch_all_image
+  def self.fetch_all_image(opts={})
     Leaf.where("image_url IS NOT NULL").each do |l|
-      Grape::LeafImage.new(l).download
+      if opts[:geo]
+        w,h = Grape::ImageConvert.geo(IMAGE_PATH + l.local_image_name(:medium))
+        l.update_attributes(:width => w,:height => h)
+      else
+        Grape::LeafImage.new(l).download
+      end
     end
   end
 
@@ -85,8 +92,14 @@ class Leaf < ActiveRecord::Base
       :content => content,
       :img => image(:medium),
       :img_large => image(:large),
-      :height => Grape::ImageConvert.get_height(IMAGE_PATH + local_image_name(:medium),180)
+      :height => real_height(194)
     }
-    # dimensions
+  end
+  
+  private
+  def real_height(real_width)
+    if height
+      (height.to_f/width.to_f)*real_width.to_i
+    end
   end
 end

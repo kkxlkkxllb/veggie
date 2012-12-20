@@ -38,7 +38,11 @@ module Grape
         `mkdir -p #{@store_path}`
         @image_urls.each do |k,v|
           filename = "#{k.to_s}.#{v.split('.')[-1]}"
-          img_save(v,@store_path+filename){ Leaf.logger.error("ERROR #{v} not found! skip") }
+          success = -> {        
+            w,h = ImageConvert.geo(@store_path+filename)
+            @leaf.update_attributes(:width => w,:height => h)
+          }
+          img_save(v,@store_path+filename,success){ Leaf.logger.error("ERROR #{v} not found! skip") }
         end
       end
     end
@@ -154,9 +158,9 @@ module Grape
       end
     end
 
-    def self.get_height(src,real_width)
+    def self.geo(src)
       img = MiniMagick::Image.open(src)
-      (img["height"].to_f/img["width"].to_f)*real_width.to_i
+      return img["width"],img["height"]
     end
     
 		# 合成单张

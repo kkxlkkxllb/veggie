@@ -8,6 +8,8 @@
 #  content    :string(255)      default(""), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  width      :integer
+#  height     :integer
 #
 
 require 'spec_helper'

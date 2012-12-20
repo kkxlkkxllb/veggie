@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218081918) do
+ActiveRecord::Schema.define(:version => 20121220143535) do
 
   create_table "courses", :force => true do |t|
     t.string   "title"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(:version => 20121218081918) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "video"
+    t.integer  "width"
+    t.integer  "height"
   end
 
   create_table "members", :force => true do |t|
@@ -99,6 +101,8 @@ ActiveRecord::Schema.define(:version => 20121218081918) do
     t.string   "content",    :default => "", :null => false
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.integer  "width"
+    t.integer  "height"
   end
 
   add_index "u_words", ["member_id", "word_id"], :name => "index_u_words_on_member_id_and_word_id", :unique => true
