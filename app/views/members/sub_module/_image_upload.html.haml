@@ -1,5 +1,6 @@
 .hidden
-	= form_tag '/words/upload_img',:remote => true do
-		= hidden_field_tag :id,wid
+	= form_tag url,:remote => true do
+		- if defined?(wid)
+			= hidden_field_tag :id,wid
 		.hiddenfile
 			= file_field_tag :image,:accept => 'image/png,image/gif,image/jpeg'

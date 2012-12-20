@@ -100,9 +100,10 @@ module Grape
   end
   
   class UWordImage < WordImage
-    def initialize(id)
-      @title = UWord.find(id).title
-      @dir = UWord::IMAGE_PATH + "#{id}/"
+    # uw: u_word obj
+    def initialize(uw)
+      @title = uw.title
+      @dir = UWord::IMAGE_PATH + "#{uw.id}/"
     end
   end
   

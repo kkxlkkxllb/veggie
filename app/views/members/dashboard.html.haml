@@ -2,9 +2,8 @@
 #user_home
 	#new_word.hide
 		= form_tag '/words/u_create',:remote => true do
-			%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
-	=# render "games/allen"
+			%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )	
 	- if @u_words
 		= render "members/sub_module/impress",:data => @u_words
 	- else
-		-# 引导
+		= render "games/allen"

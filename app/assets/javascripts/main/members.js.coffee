@@ -15,6 +15,11 @@ class window.Members
 			activeTab.tab('show')
 		else
 			$("[href='#profile']",$wrap).tab('show')
+		$("#profile .avatar").click ->
+			$("input[type='file']",$(@).parent()).trigger "click"
+			false
+		$("form input[type='file']",$wrap).change ->
+			$(@).closest('form').submit()
 	show: ($container,item)->
 		$container.imagesLoaded ->
 			$(item,$container).animate opacity:1

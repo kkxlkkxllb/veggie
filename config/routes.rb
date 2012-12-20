@@ -59,7 +59,10 @@ Veggie::Application.routes.draw do
   # members
   match "dashboard" => "members#dashboard",:as => :account  
   match "setting" => "members#edit",:as => :setting
-  post "members/update"
+  namespace :members do
+    post "update"
+    post "upload_avatar"
+  end
   match ":role/:uid" => "members#show"
  
   root :to => 'home#door'

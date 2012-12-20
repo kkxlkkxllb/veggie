@@ -81,8 +81,8 @@ class Provider < ActiveRecord::Base
         # 绑定
         option = {:bind => true}
       else
-        # 注册
-        self.member.save_avatar_from(self)
+        # 注册 save avatar from provider
+        self.member.save_avatar(avatar(:large))
       end
       HardWorker::SendGreetJob.perform_async(self.id,option)
     end

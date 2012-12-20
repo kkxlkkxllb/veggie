@@ -46,6 +46,7 @@ class Member < ActiveRecord::Base
   EDIT_SIDENAV = %w{profile provider account}
   AVATAR_URL = "/system/images/member/"
   AVATAR_PATH = "#{Rails.root}/public"+AVATAR_URL
+  AVATAR_SIZE_LIMIT = 500*1000 #500k
   ## role 用户组别 
   ROLE = %w{a u b e g v}
   # nil 三无用户，被清理对象
@@ -76,6 +77,10 @@ class Member < ActiveRecord::Base
 	def avatar_name
 		"#{self.id}/#{self.created_at.to_i}.jpg"
 	end
+
+  def validate_upload_avatar(file,type)
+    type.scan(/(jpeg|png|gif)/).any? and File.size(file) < IMAGE_SIZE_LIMIT
+  end
   
   def name
     p = self.providers.first
@@ -114,17 +119,16 @@ class Member < ActiveRecord::Base
       :u_words_cnt => self.u_words.count
     }
   end
-  
-  # download sns avatar
-  def save_avatar_from(provider)
-		`mkdir -p #{AVATAR_PATH + self.id.to_s}`
-		data = open(provider.avatar(:large)){|f|f.read}
-		file = File.open(AVATAR_PATH + avatar_name,"wb") << data
-	  file.close
+
+  def save_avatar(file_path)
+    `mkdir -p #{AVATAR_PATH + self.id.to_s}`
+    data = open(file_path){|f|f.read}
+    file = File.open(AVATAR_PATH + avatar_name,"wb") << data
+    file.close
   end
 
   def clear_data
     `rm -rf #{AVATAR_PATH + self.id.to_s}`
-  end
+  end 
   
 end

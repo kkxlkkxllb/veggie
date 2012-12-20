@@ -44,6 +44,10 @@ class UWord < ActiveRecord::Base
     return File.exist?(self.image_path)
   end
 
+  def validate_upload_image(file,type)
+    type.scan(/(jpeg|png|gif)/).any? and File.size(file) < IMAGE_SIZE_LIMIT
+  end
+
 	def as_json
 		{	
       :id => id,

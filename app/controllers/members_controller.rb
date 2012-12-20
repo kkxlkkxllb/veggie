@@ -38,5 +38,15 @@ class MembersController < ApplicationController
     redirect_to setting_path + "#account"
   end
 
+  # response with js.haml
+  def upload_avatar
+    file = params[:image].tempfile.path 
+    type = params[:image].content_type 
+    if current_member.validate_upload_avatar(file,type)
+      current_member.save_avatar(file)
+      @avatar = current_member.avatar + "?#{Time.now.to_i}"
+    end
+  end
+
 
 end
