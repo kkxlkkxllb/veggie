@@ -106,7 +106,7 @@ RailsAdmin.config do |config|
       fields :id,:content,:time_stamp,:weibo_id
       field :provider do
         pretty_value do
-          bindings[:view].link_to("weibo",bindings[:object].provider.weibo)
+          bindings[:view].link_to("weibo",bindings[:object].provider.url)
         end
       end
       field :image_url do
