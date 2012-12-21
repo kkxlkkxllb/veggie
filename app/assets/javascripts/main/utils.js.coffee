@@ -14,20 +14,22 @@ class window.Utils
 		setTimeout fuc,5000
 	@infinitescroll: ($wrap) ->
 		$wrap.infinitescroll
-	    navSelector  : "nav.pagination",
-	    nextSelector : "nav.pagination a",
-	    itemSelector : ".leaf",
-	    debug        : false,
-	    loading: 
-	      finishedMsg: '这是所有咯',
-	      msgText : "正在努力加载更多内容...",
-	      img: 'http://i.imgur.com/6RMhx.gif'
-	    ,
-	    (newElements) ->
-	      $newElems = $( newElements ).css opacity: 0
-	      $newElems.imagesLoaded ->
-	        $newElems.animate opacity: 1
-	        $wrap.masonry( 'appended', $newElems, true )
+			navSelector	 : "nav.pagination",
+			nextSelector : "nav.pagination a",
+			itemSelector : ".leaf",
+			debug				 : false,
+			loading: 
+				finishedMsg: '这是所有咯',
+				msgText : "正在努力加载更多内容...",
+				img: 'http://i.imgur.com/6RMhx.gif'
+			,
+			(newElements) ->
+				$newElems = $( newElements ).css opacity: 0
+				$newElems.imagesLoaded ->
+					$newElems.animate opacity: 1
+					$wrap.masonry( 'appended', $newElems, true )
+				$(".img img",$( newElements )).load ->
+					lzld(this)
 	@masonry: ($contain,item) ->
 		$contain.imagesLoaded ->	
 			$(item).animate opacity: 1
