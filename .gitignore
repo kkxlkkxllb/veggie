@@ -9,6 +9,8 @@ capybara-*.html
 /log/*
 /tmp/*
 /db/*.sqlite3
+/db/schema.rb
+/db/dump.rdb
 /public/system/*
 /coverage/
 /spec/tmp/*
@@ -18,3 +20,4 @@ pickle-email-*.html
 .DS_Store
 /config/database.yml
 /config/service.yml
+/public/assets
