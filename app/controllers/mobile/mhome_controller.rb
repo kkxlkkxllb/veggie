@@ -7,7 +7,7 @@ class Mobile::MhomeController < ApplicationController
   end
   
   def weibo
-    @leafs = source_leafs(params[:pid],params[:page],12)
+    @leafs = source_leafs(params[:pid],params[:page],12).map{|x| x.as_json(294)}
     if params[:pid]
       @users = ([Provider.find(params[:pid])] + Provider.where("user_id is null")).uniq
     end

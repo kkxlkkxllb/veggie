@@ -81,7 +81,7 @@ class Leaf < ActiveRecord::Base
     end
   end
 
-  def as_json
+  def as_json(rw = 194)
     {
       :id => id,
       :url => provider.url,
@@ -92,7 +92,8 @@ class Leaf < ActiveRecord::Base
       :content => content,
       :img => image(:medium),
       :img_large => image(:large),
-      :height => real_height(194)
+      :height => real_height(rw),
+      :video => video
     }
   end
   

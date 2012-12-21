@@ -13,16 +13,16 @@
 		.leaf
 			.info.clearfix
 				%span.avatar.left
-					= image_tag(leaf.provider.avatar)
+					= image_tag(leaf[:avatar])
 				%span.name.left
-					%a.l2p{:pid => leaf.provider.id }(href="#")
-						= leaf.provider.user_name
+					%a.l2p{:pid => leaf[:pid]}(href="#")
+						= leaf[:name]
 				%span.time.right
-					= time_stamp(leaf.time_stamp)
+					= time_stamp(leaf[:time_stamp])
 			.content
-				= auto_link(leaf.content)
-			- if leaf.image
+				= auto_link(leaf[:content])
+			- if leaf[:img]
 				.img
-					= image_tag(leaf.image(:medium))
-			- if !leaf.video.blank?
-				%video{:src => "#{leaf.video}"}(preload="auto" controls height=250 width=300 webkit-playsinline)
+					= image_tag(leaf[:img],:style =>"height:#{leaf[:height]}px")
+			- if leaf[:video]
+				%video{:src => leaf[:video]}(preload="auto" controls height=250 width=300 webkit-playsinline)
