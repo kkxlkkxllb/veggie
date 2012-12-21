@@ -7,6 +7,7 @@ class WordsController < ApplicationController
     set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))  
   end
 
+  # Course show
   def course
     @course = Course.find(params[:id])
     @ctags = @course.ctags.split(";")
@@ -20,9 +21,7 @@ class WordsController < ApplicationController
     set_seo_meta(@course.title,t('words.keywords'),t('words.describe'))  
   end
   
-  # 新建词汇
-  # 1. 通过输入框传入单词
-  # 2. 在文本区选择单词摘录
+  # Course Word New 
   def create
     unless @word = Word.where(:title => params[:word].downcase).first
       @word = Onion::FetchWord.new(word).insert
@@ -41,6 +40,8 @@ class WordsController < ApplicationController
     end
   end
   
+  # U Word New
+  # ----------
   def u_create
     unless @word = Word.where(:title => params[:word].downcase).first
       @word = Onion::FetchWord.new(word).insert
@@ -53,7 +54,8 @@ class WordsController < ApplicationController
     end
   end
   
-  # 克隆已有词汇到 u_words
+  # create or destroy u_word
+  # input &id
   def clone
 		@word = Word.find(params[:id])
 		if uw = current_member.has_u_word(@word)
@@ -77,7 +79,7 @@ class WordsController < ApplicationController
 		end
   end
   
-	# Editor
+	# Word
   # quick img make
   def fetch_img   
     @word = Word.find(params[:id])
@@ -89,7 +91,7 @@ class WordsController < ApplicationController
     render_json(0,"ok",{:pic => @word.image+"?#{Time.now.to_i}"})
   end
   
-	# User
+	# U Word
   # upload &image &id
   # response with js.haml
   def upload_img
@@ -102,12 +104,18 @@ class WordsController < ApplicationController
 		end
   end
 
-	# User
+	# U Word
 	# input: img_url & id
+  # json
 	def select_img
-		@status = Grape::UWordImage.new(params[:id]).make(params[:img_url])
-		msg = @status < 0 ? "error img url" : "ok"
-		render_json(@status,msg)
+    @uw = UWord.find(params[:id])
+		status = Grape::UWordImage.new(@uw).make(params[:img_url])
+    if status == 0
+      @new_image = @uw.image + "?#{Time.now.to_i}"
+      render_json 0,"ok",@new_image
+    else
+		  render_json status,"error"
+    end
 	end
   
   # TO-DO destroy u_word

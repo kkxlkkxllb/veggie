@@ -21,6 +21,9 @@ class UWord < ActiveRecord::Base
   IMAGE_URL = "/system/images/u_word/"
   IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
 	IMAGE_SIZE_LIMIT = 2*1000*1000 #2m
+  IMAGE_WIDTH = 280
+
+  scope :show, where(["height is not ?", nil])
   
   def title
     self.word.title
@@ -43,7 +46,8 @@ class UWord < ActiveRecord::Base
   end
   
   def has_image
-    return File.exist?(self.image_path)
+    #return File.exist?(self.image_path)
+    !height.nil?
   end
 
   def validate_upload_image(file,type)
@@ -56,9 +60,17 @@ class UWord < ActiveRecord::Base
       :id => id,
 			:title => title,
 			:content => content,
-      :image => image_url
+      :image => image_url,
+      :height => real_height(200)
 		}
     # dimensions
 	end
+
+  private
+  def real_height(real_width)
+    if height
+      (height.to_f/width.to_f)*real_width.to_i
+    end
+  end
   
 end

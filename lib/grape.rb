@@ -106,8 +106,20 @@ module Grape
   class UWordImage < WordImage
     # uw: u_word obj
     def initialize(uw)
+      @u_word = uw
       @title = uw.title
       @dir = UWord::IMAGE_PATH + "#{uw.id}/"
+    end
+
+    def make(url)
+      @w,@new_image = set_name_by_dir(@dir,@title)
+      begin
+        h = ImageConvert.new(url,:outfile => @new_image).draw(@w)
+        @u_word.update_attributes(:width => UWord::IMAGE_WIDTH,:height => h)
+        return 0
+      rescue
+        return -1
+      end
     end
   end
   
@@ -115,7 +127,7 @@ module Grape
     def initialize(img_path,opts={})
       @opts = {
         :outfile => img_path,#Tempfile.new("quote_image").path, 
-        :size => "280"
+        :size => UWord::IMAGE_WIDTH
       }.update(opts)
       @img = MiniMagick::Image.open(img_path)
     end
@@ -171,7 +183,7 @@ module Grape
       end
       result.write(@opts[:outfile])
       `chmod 777 #{@opts[:outfile]}`
-      return @opts[:outfile]
+      return @img["height"]
     end
 
 		# 多张合成gif

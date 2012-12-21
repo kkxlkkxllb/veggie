@@ -24,7 +24,7 @@ class Leaf < ActiveRecord::Base
   IMAGE_URL = "/system/images/leaf/"
   IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
   
-  def image(style = :large,remote = !(Rails.env == "production"))
+  def image(style = :large,remote = (Rails.env != "production"))
     if image_url
       if remote
         case style
@@ -60,7 +60,7 @@ class Leaf < ActiveRecord::Base
   end
   
   def fetch_image
-    if Rails.env != "production" and !self.image_url.blank?
+    if Rails.env == "production" and !self.image_url.blank?
       Grape::LeafImage.new(self).download
     end
   end
