@@ -1,8 +1,12 @@
 = render 'members/sub_module/image_upload',:url => "/members/upload_avatar"
-.avatar.item.button.blue.glossy(data-icon=" ")
+%h4.alert
+	亲爱的 
+	= current_member.name
+	,你的基本资料取自你的
+	= current_member.provider_name
+	身份
+.avatar.item.button.blue.glossy(data-icon=" " title="点我更换头像")
 	= image_tag current_member.avatar
-	.name
-		= current_member.name
 .birthday.item.button.green.glossy(data-icon=" ")
 	%p.tallys
 		✿ it's your birthday on 17up

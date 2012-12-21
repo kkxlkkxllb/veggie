@@ -79,12 +79,16 @@ class Member < ActiveRecord::Base
 	end
 
   def validate_upload_avatar(file,type)
-    type.scan(/(jpeg|png|gif)/).any? and File.size(file) < IMAGE_SIZE_LIMIT
+    type.scan(/(jpeg|png|gif)/).any? and File.size(file) < AVATAR_SIZE_LIMIT
   end
   
   def name
     p = self.providers.first
     p ? p.user_name : $config[:author]
+  end
+  
+  def provider_name
+    self.providers.first.provider
   end
   
   # p : string in [Provider::PROVIDERS]
@@ -122,9 +126,12 @@ class Member < ActiveRecord::Base
 
   def save_avatar(file_path)
     `mkdir -p #{AVATAR_PATH + self.id.to_s}`
-    data = open(file_path){|f|f.read}
-    file = File.open(AVATAR_PATH + avatar_name,"wb") << data
-    file.close
+    # data = open(file_path){|f|f.read}
+    # file = File.open(AVATAR_PATH + avatar_name,"wb") << data
+    # file.close
+    img = MiniMagick::Image.open(file_path)
+    img.resize("120x120")
+    img.write(AVATAR_PATH + avatar_name)
   end
 
   def clear_data

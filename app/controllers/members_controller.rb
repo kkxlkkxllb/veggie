@@ -19,7 +19,7 @@ class MembersController < ApplicationController
   
   def edit
     set_seo_meta(t("members.edit",:name => current_member.name))
-    @setting = true
+    @provider_num = current_member.providers.length
   end
 
   # just after register

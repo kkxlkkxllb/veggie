@@ -40,9 +40,9 @@ zh-cn:
   members:
     edit: "%{name} 档案"
     sidenav:
-      profile: "个人资料"
-      provider: "第三方帐号"
-      account: "帐户"
+      profile: "基本资料"
+      provider: "关联身份"
+      account: "公民育成"
   greet:
     new_user: "[撒花] @%{name} 欢迎入住 17up ， 成为第 %{num} 位公民。［%{motto}］"
     new_leafs: "%{motto}，今天%{cast}度，%{num} 片新叶长成：http://17up.org"
