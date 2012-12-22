@@ -53,14 +53,14 @@ module Grape
     
     def initialize(title)
       @title = title
-      @dir = Word::IMAGE_PATH + title.parameterize.underscore + "/"      
+      @dir = Word::IMAGE_PATH + title.parameterize.underscore + "/"    
     end
 
-    def set_name_by_dir(dir,title)
+    def set_name_by_dir(dir,title,w_dir=dir)
       unless File.exist?(dir)
         `mkdir -p #{dir}`
       end
-      w = dir + "w.png"
+      w = w_dir + "w.png"
       unless File.exist?(w)
         opts = {
           :text => title,
@@ -69,7 +69,7 @@ module Grape
         }
         ImageConvert.draw_word(opts)
       end
-      return w,dir + "17up.jpg"#,dir + "original.jpg"
+      return w,dir + "#{$config[:name]}.jpg"
     end
 
     def parse(info="")
@@ -90,16 +90,7 @@ module Grape
     def make(url=nil)
       @image = url ? url : parse[0]
       @w,@new_image = set_name_by_dir(@dir,@title)
-      #success = -> {        
-      #  ImageConvert.new(@original,:outfile => @new_image).draw(@w)  
-      #}
-      #img_save(@image,@original,success)
-      begin
-        ImageConvert.new(@image,:outfile => @new_image).draw(@w)
-        return 0
-      rescue
-        return -1
-      end
+      ImageConvert.new(@image,:outfile => @new_image).draw(@w)
     end
   end
   
@@ -112,7 +103,7 @@ module Grape
     end
 
     def make(url)
-      @w,@new_image = set_name_by_dir(@dir,@title)
+      @w,@new_image = set_name_by_dir(@dir,@title,@u_word.word.image_path(:w => true))
       begin
         h = ImageConvert.new(url,:outfile => @new_image).draw(@w)
         @u_word.update_attributes(:width => UWord::IMAGE_WIDTH,:height => h)
@@ -148,7 +139,7 @@ module Grape
     
     def self.draw_word(opts = {})
       opts = {
-        :text => "17up",
+        :text => $config[:name],
         :font_size => 36,
         :type => 1,
         :word_path => "public/w.png",
@@ -177,7 +168,7 @@ module Grape
     
 		# 合成单张
     def draw(word_path)
-      @img.resize @opts[:size]
+      @img.resize @opts[:size].to_s
       result = @img.composite(MiniMagick::Image.open(word_path)) do |c|
         c.gravity "center"
       end

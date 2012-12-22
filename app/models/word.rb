@@ -44,15 +44,17 @@ class Word < ActiveRecord::Base
   
   def hash_tags
     self.ctags.map{|t| "#"+t.name+" " }.join
-  end  
+  end 
   
   # style: 17up/original
-  def image_path(style=$config[:name])
-    IMAGE_PATH + self.title.parameterize.underscore + "/#{style}.jpg" 
+  def image_path(opt={})
+    name = opt[:w] ? "/w.png" : "/#{$config[:name]}.jpg"
+    IMAGE_PATH + self.title.parameterize.underscore + name
   end
 
-  def image_url(style=$config[:name])
-    IMAGE_URL + self.title.parameterize.underscore + "/#{style}.jpg" 
+  def image_url(opt={})
+    name = opt[:w] ? "/w.png" : "/#{$config[:name]}.jpg"
+    IMAGE_URL + self.title.parameterize.underscore + name
   end
 
   def image

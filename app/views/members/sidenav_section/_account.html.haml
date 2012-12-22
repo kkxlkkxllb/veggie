@@ -6,7 +6,9 @@
 	.alert.alert-info
 		现在，你可以带你的朋友来参观你的 17up 小屋啦
 		= link_to current_member.member_path do
-			%span.icon-home
+			%span.label.label-success
+				%i.icon-home
+				= $config[:host] + current_member.member_path
 	.alert.alert-error
 		非常友好的“公民行为指导手册”正在制作中，敬请期待。。。
 - else

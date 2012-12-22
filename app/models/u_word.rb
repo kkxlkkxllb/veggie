@@ -33,12 +33,12 @@ class UWord < ActiveRecord::Base
     self.word.content
   end
   
-  def image_path(style=$config[:name])
-    IMAGE_PATH + "#{self.id}/#{style}.jpg"
+  def image_path
+    IMAGE_PATH + "#{self.id}/#{$config[:name]}.jpg"
   end
   
-  def image_url(style=$config[:name])
-    IMAGE_URL + "#{self.id}/#{style}.jpg"
+  def image_url
+    IMAGE_URL + "#{self.id}/#{$config[:name]}.jpg"
   end
   
   def image

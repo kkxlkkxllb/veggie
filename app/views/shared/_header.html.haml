@@ -32,10 +32,10 @@
 					%ul.nav.pull-right
 						%li.member{:class => ("active" if action_name == "dashboard")}
 							%a{:href => account_path}
-								%i.icon-dashboard
+								%i.icon-home
 						%li.member{:class => ("active" if @provider_num)}
 							%a{:href => setting_path }
-								%i.icon-wrench
+								%i.icon-cogs
 						%li
 							%a(href = "/members/sign_out" data-method="delete" rel="nofollow")
 								%span.label.label-important
