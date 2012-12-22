@@ -13,26 +13,28 @@
 		display: block
 	.logo_text
 		display: none
-#impress
-	display: none
-	#greet
+#index_wrap
+	height: 300px
+	position: relative
+	.step
 		text-align: center
+		@include text-shadow-inverse
+		span.icon-circle-arrow-up
+			position: absolute
+			top: -5px
+			left: 48%
+	#register
+		img
+			margin: 5px
+		span.login_tip
+			@include text-shadow-inverse
+			font-size: 20px
+			margin-top: 20px
 	#contact
+		font-size: 40px
 		img
 			width: 64px
 			height: 64px
-	.step
-		position: relative
-		width: 900px
-		padding: 40px
-		margin: 20px auto
-		-webkit-box-sizing: border-box
-		-moz-box-sizing:		border-box
-		-ms-box-sizing:			border-box
-		-o-box-sizing:			border-box
-		box-sizing:					border-box
-		font-size: 48px
-		line-height: 1.5
 #quote_wrap
 	padding: 20px
 	background: white url(/assets/img/back_pattern/back_pattern.png)

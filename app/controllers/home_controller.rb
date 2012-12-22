@@ -1,6 +1,6 @@
 # coding: utf-8
 class HomeController < ApplicationController
-  caches_page :index,:quote,:info,:square
+  caches_page :index
   
   def door
     agent = request.user_agent.downcase
@@ -24,14 +24,11 @@ class HomeController < ApplicationController
     @fls = YAML.load_file(Rails.root.join("lib/cherry", "setting.yml")).fetch("friend_link")["course"]
   end
   
-  def info
-    set_seo_meta(nil,t('keywords'),t('describe'))
-    #Utils.parse_ip(request.remote_ip)
-  end
-  
   def quote
     set_seo_meta(t("quote.title"),t('quote.keywords'),t('quote.describe'))
-    @quotes = Onion::FetchQuote.new().done
+    @quotes = Rails.cache.fetch("quotes") do
+      Onion::FetchQuote.new().done
+    end
   end
   
 end

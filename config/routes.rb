@@ -26,7 +26,6 @@ Veggie::Application.routes.draw do
   # home
   match "welcome" => "home#index", :as => :welcome
   match "square" => "home#square", :as => :hot
-  match "info" => "home#info", :as => :info 
   match "quotes" => "home#quote", :as => :quote
   
 	# words
