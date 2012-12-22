@@ -5,6 +5,8 @@ class window.Mhome
 		fuc =-> $alert.fadeOut()
 		setTimeout fuc,5000
 	constructor: ($wrap) ->
+		if window.screen.height is 568
+			$("meta[name=viewport]").content = "width=320.1"
 		$("#m_nav .menu").click ->
 			page = $(@).attr "rel"		
 			$("#m_nav_back").show()
