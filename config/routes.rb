@@ -31,6 +31,7 @@ Veggie::Application.routes.draw do
 	# words
   match "library" => "words#index", :as => :words
   match "c/:id" => "words#course", :as => :course
+  match "course/new" => "words#new",:as => :new_course
   namespace :words do
     post "create"
     post "u_create"

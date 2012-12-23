@@ -1,10 +1,12 @@
 #impress
 	- data.each_with_index do |w,i|						
 		.word_item.step{:"data-y" => -i*1000,:"data-z" => -i*1500,:id => "#{i+1}_"+w.title}(data-x="0" data-scale="1")
-			%span.word.amienne
-				= w.title		
+			.title
+				%span.amienne
+					= w.title		
 			.content
-				= w.content
+				%span
+					= w.content
 			.cpanel.active{:data => w.title}
 				= render 'members/sub_module/image_upload',:wid => w.id,:url => '/words/upload_img'
 				%a.button.blue.glossy(data-icon=" " href="#upload" title="上传图片注释")
@@ -13,4 +15,5 @@
 					%i.icon-magic
 			%audio{:src => w.word.source_voice}
 		.step.word_pic{:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p_"+w.title}(data-x="0" data-scale="1")
-			= image_tag(w.image)
+			%span.img
+				= image_tag(w.image)

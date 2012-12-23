@@ -35,7 +35,6 @@ class window.Members
 				audio = $(e.target).find("audio")[0]
 				if audio
 					audio.play()
-
 		$("a[href='#magic']",$wrap).click ->
 			title = $(@).parent().attr "data"
 			$modal.modal()

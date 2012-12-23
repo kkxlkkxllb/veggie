@@ -16,7 +16,7 @@
     %link(href="/favicon.png" rel="apple-touch-icon-precomposed")
     %link(href="/favicon.png" rel="shortcut icon")
   %body{:"data-js" => controller_name}
-    - unless @is_root
+    - unless @is_root or @no_header
       = render "shared/header"
     #main
       = render "shared/flash_message"

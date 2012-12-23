@@ -6,12 +6,21 @@ class window.Utils
 			next()
 	@loaded: ($item) ->
 		$item.stop(true).css "opacity",1
-	@flash: (msg) ->
-		$alert = $("#flash_message .alert")
+	@flash: (msg,type='',style='') ->
+		$flash = $("#flash_message")
+		$flash.prepend("<div class='alert text_center hide'><strong></strong></div>")
+		$alert = $(".alert",$flash)
+		if type isnt ''
+			$alert.addClass "alert-#{type}"
+		if style isnt ''
+			$alert.addClass "alert-#{style}"
 		$("strong",$alert).text(msg)
 		$alert.slideDown()
-		fuc = -> $alert.slideUp()
+		fuc = -> 
+			$alert.slideUp ->
+				$alert.remove()
 		setTimeout fuc,5000
+		false
 	@infinitescroll: ($wrap) ->
 		$wrap.infinitescroll
 			navSelector	 : "nav.pagination",

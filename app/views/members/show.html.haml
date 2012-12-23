@@ -1,6 +1,11 @@
 -# To-Do
 -# User Profile Bar: 头像／昵称／赞
 -# word_item : 收录／分享
+#user_info
+	%span.avatar
+		= image_tag(@user.avatar)
+	%span.name
+		= @user.name
 #user_show
 	- @p_words.each do |w|
 		.word_item

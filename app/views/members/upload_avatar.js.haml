@@ -1,5 +1,5 @@
 - if @avatar
-	Utils.flash("Update avatar success!");
+	Utils.flash("#{t('flash.notice.avatar')}",'success');
 	$("#profile .avatar img").attr("src","#{@avatar}");
 - else
-	Utils.flash("Image too big or Image type error,please check it");
+	Utils.flash("#{t('flash.error.avatar')}",'error');

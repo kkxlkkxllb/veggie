@@ -1,4 +1,5 @@
 - if @new_image
-	Utils.flash("Great,upload your image success!");
+	$("#impress .step.active").next().find("span.img img").attr("src","#{@new_image}");
+	Utils.flash("#{t('flash.notice.image')}",'success','left');
 - else
-	Utils.flash("Image too big,please resize it");
+	Utils.flash("#{t('flash.error.image')}",'error','right');

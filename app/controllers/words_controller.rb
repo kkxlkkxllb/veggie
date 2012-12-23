@@ -21,6 +21,12 @@ class WordsController < ApplicationController
     set_seo_meta(@course.title,t('words.keywords'),t('words.describe'))  
   end
   
+  # To-Do
+  # Course New
+  def new
+    set_seo_meta(t('course.new'))
+  end
+  
   # Course Word New 
   def create
     unless @word = Word.where(:title => params[:word].downcase).first

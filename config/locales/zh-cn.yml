@@ -9,18 +9,22 @@ zh-cn:
     keywords: "爱情;feeling"
     describe: "为爱寻找一个理由"
   title: 17up
-  keywords: "city,knowledge,peace,future,university,education"
-  describe: "静谧的星空下，一个新生的世界正在一群神秘的年轻人引领下，悄悄生长，那是宁静、欢乐、充满希望之地：17up"
-  door: "入口"
+  keywords: "language,education,ship,city,knowledge,peace,future"
+  describe: "这是社区也是一座城市，能制造快乐给每一个愿意努力向上的人，语言，人类文明的基石，了解世界的钥匙。新纪元的开篇，让我们从重新认知审视这个世界开始，从记忆每个词汇开始，第一篇章：英语篇"
+  door: "序幕"
   flash:
     notice:
-      register: "欢迎进入 17up 的世界，先申领一个 ID 吧!"
+      register: "欢迎加入 17up 来完成属于你的冒险，先申领一个 ID 吧!"
       login: "学习，任何时候开始都不晚，欢迎回来！"
       bind: "绑定成功啦!"
-      uid: "恭喜你，ID 登记成功，你可以向好友们显摆了"
+      uid: "恭喜你，ID 登记成功，现在你正式成为这里的一份子了"
+      avatar: "哇噻，好酷的头像，更新成功了"
+      image: "(^_^) 加油！继续努力哟"
     error:
       bind: "啊哟，您要绑定的帐号已被使用嘞，如需帮助，请联系 %{email}"
-      uid: "遗憾呐，你想要的 ID 已经被抢占了"
+      uid: "遗憾呐，你想要的 ID 已经被抢占了，换一个试试"
+      avatar: "头像太大啦，图片格式仅支持 png、jpg、gif"
+      image: "图片最大 2M 限制"
   words:
     title: "图书馆"
     keywords: "词汇，文化，地域，历史"
@@ -37,8 +41,10 @@ zh-cn:
     title: "咖啡馆"
     keywords: "引用,名言"
     describe: "离 17up 广场只有一个街区的咖啡馆"
+  course:
+    new: "新建课程"
   members:
-    edit: "%{name} 档案"
+    edit: "%{name} 设定"
     sidenav:
       profile: "基本资料"
       provider: "关联身份"

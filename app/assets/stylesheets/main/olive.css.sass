@@ -2,22 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #olive
-	margin-top: 40px
+	margin-top: 30px
 	position: relative
+	ul.nav
+		border-right: none
+		li a
+			border: 1px solid transparent
+		li.active
+			a
+				background-color: #D9EDF7
+				border-color: #BCE8F1
+				color: #3A87AD
 	.tags
 		float: left
-		width: 100px
+		width: 130px
+		overflow: hidden
 		position: absolute
 		top: 170px
 		left: 0
 	.cpanel
-		padding-bottom: 10px
-		border-bottom: 1px solid #ddd
 		input
 			margin: 0
 			width: 110px
 	.result-container
-		padding-top: 10px
 		.item
 			float: left
 			margin: 1px

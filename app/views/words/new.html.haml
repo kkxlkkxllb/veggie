@@ -1,0 +1,3 @@
+#new_word
+	= form_tag '/words/u_create',:remote => true do
+		%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
