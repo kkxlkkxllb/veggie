@@ -35,6 +35,13 @@
 		img
 			width: 64px
 			height: 64px
+	#brand
+		img
+			@include transform(rotate(-60deg))
+			@include transition(1s)
+	#brand.present
+		img
+			@include transform(rotate(0deg))
 #login_contain
 	width: 800px
 	margin: 0 auto

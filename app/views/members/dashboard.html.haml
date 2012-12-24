@@ -1,6 +1,6 @@
 = render "modal/magic_images"
 #user_home
-	- if @u_words
+	- if @u_words.any?
 		= render "members/sub_module/impress",:data => @u_words
 	- else
 		= render "games/allen"

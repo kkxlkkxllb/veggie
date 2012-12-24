@@ -7,6 +7,9 @@
 					%span.button.xs.title.glossy.back{:class => f[1] }(data-icon=" ")
 						= f[0]
 	.nav_item
-		#rand_1.relative{:r => rand(6)}
+		#rand_1.relative
 	.nav_item
-		#rand_2.relative{:r => rand(6)}
+		#rand_2.relative
+	#panel.active
+		%a.button.xs.glossy.back.blue{href: "#try_again"}(data-icon="✈")
+			再玩一次
