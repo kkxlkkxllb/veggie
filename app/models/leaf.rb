@@ -29,16 +29,24 @@ class Leaf < ActiveRecord::Base
       if remote
         case style
         when :thumb
-          self.image_url.sub('large','thumbnail')
+          if provider.provider == "tumblr"
+            image_url.sub(/_\d+\./,"_100.")
+          else
+            image_url.sub('large','thumbnail')
+          end
         when :medium
-          self.image_url.sub('large','bmiddle')
+          if provider.provider == "tumblr"
+            image_url.sub(/_\d+\./,"_400.")
+          else
+            image_url.sub('large','bmiddle')
+          end
         when :large
-          self.image_url
+          image_url
         end
       else# 本地图片
   			case style
   			when :large
-        	self.image_url
+        	image_url
   			else      	
         	IMAGE_URL + local_image_name(style)
   			end
