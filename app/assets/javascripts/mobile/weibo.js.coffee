@@ -8,6 +8,8 @@ class window.Weibo
 			if data.status is 0
 				$wrap.append(data.data.html)
 		,"json").complete ->
+			$(".leaf .img img").load ->
+				lzld(this)
 			$wrap.infinitescroll
 				navSelector  : "nav.pagination",
 				nextSelector : "nav.pagination a",
@@ -20,6 +22,8 @@ class window.Weibo
 	     	,
 				(newElements) ->
 					$wrap.append(newElements)
+					$(".img img",$( newElements )).load ->
+						lzld(this)
 	filter_provider: ($wrap = @$wrap) ->
 		$("a.l2p",$wrap).live "click",->
 			pid = $(@).attr("pid")

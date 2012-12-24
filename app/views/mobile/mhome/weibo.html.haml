@@ -23,6 +23,6 @@
 				= auto_link(leaf[:content])
 			- if leaf[:img]
 				.img
-					= image_tag(leaf[:img],:style =>"height:#{leaf[:height]}px")
+					= my_image_tag(leaf[:img],"#",leaf[:height])
 			- if leaf[:video]
 				%video{:src => leaf[:video]}(preload="auto" controls height=250 width=300 webkit-playsinline)
