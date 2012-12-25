@@ -37,7 +37,7 @@ class window.Utils
 				$newElems.imagesLoaded ->
 					$newElems.animate opacity: 1
 					$wrap.masonry( 'appended', $newElems, true )
-				$(".img img",$( newElements )).load ->
+				$("img",$( newElements )).load ->
 					lzld(this)
 	@masonry: ($contain,item) ->
 		$contain.imagesLoaded ->	

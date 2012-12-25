@@ -8,7 +8,7 @@
 					%i.icon-pencil
 		.info.clearfix
 			%span.avatar.left
-				= my_image_tag(leaf[:avatar],leaf[:url])
+				= my_image_tag(leaf[:avatar],leaf[:url],25)
 			%span.name.left
 				= link_to leaf[:name],leafs_path(:pid => leaf[:pid])
 			%span.time.right

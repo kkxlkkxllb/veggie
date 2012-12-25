@@ -13,7 +13,7 @@
 		.leaf
 			.info.clearfix
 				%span.avatar.left
-					= image_tag(leaf[:avatar])
+					= my_image_tag(leaf[:avatar],nil,25)
 				%span.name.left
 					%a.l2p{:pid => leaf[:pid]}(href="#")
 						= leaf[:name]

@@ -28,7 +28,7 @@ class window.Weibo
 						$wrap.append html
 		,"json").complete ->
 			Weibo.page++
-			$(".leaf .img img").load ->
+			$(".leaf img").load ->
 				lzld(this)
 	filter_provider: ($wrap = @$wrap) ->
 		$("a.l2p",$wrap).live "click",->
@@ -38,5 +38,5 @@ class window.Weibo
 					$wrap.html(data.data.html)
 					$("#user_list").css "width":data.data.cnt*96
 			,"json").complete ->
-				$(".leaf .img img").load ->
+				$(".leaf img").load ->
 					lzld(this)

@@ -7,7 +7,7 @@ class window.Leafs
 		Utils.masonry(@$wrap,'.leaf')
 		$("div.leaf").live 'hover',->
 			$("span.action",$(@)).toggle()
-		$(".leaf .img img").load ->
+		$(".leaf img").load ->
 			lzld(this)
 	destroy_leaf: ($wrap = @$wrap) ->
 		$(".leaf span.destroy").live "click", ->
