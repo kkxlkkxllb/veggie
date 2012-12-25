@@ -1,2 +1,2 @@
 $ ->
-	home = new Mhome($("#home"))
+	home = new Mhome()

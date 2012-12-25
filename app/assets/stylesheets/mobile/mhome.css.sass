@@ -10,8 +10,7 @@ html
 	background: #1d1d1d
 a
 	color: #2D8CDF
-*:not(html)
-	-webkit-transform: translate3d(0,0,0)
+
 #home
 	margin: 0 auto
 	padding: 0
@@ -19,6 +18,8 @@ a
 	width: 100%
 	margin: 0
 	font-size: 120px
+	@include transition(0.3s)
+	position: absolute
 	.banner
 		height: 180px
 		line-height: 180px
@@ -32,6 +33,9 @@ a
 		background-color: #C1FF7D
 	.b4
 		background-color: #EA8072
+#m_nav.hide
+	@include transform(scale3d(1,0,0))
+	-webkit-transform-style: preserve-3d
 #m_nav_back
 	width:  100%
 	position: fixed

@@ -2,20 +2,32 @@ class window.Weibo
 	@page: 1
 	@init: ->
 		weibo = new Weibo($("#home"))
-		Weibo.get()
 		weibo.filter_provider()
-		weibo.more($("#load_more"))
+	@over: ->
+		$("#home").empty()
+		$("#load_more").remove()
 	constructor: (@$wrap) ->
-	more: ($ele)->
-		$('a',$ele).click ->
-			Weibo.get()
-			false
-	@get: (pid = null,$wrap = $("#home")) ->
-		$.post("/mobile/t",{page: @page},(data) ->
+		html = "<div id='load_more'>loading</div>"
+		@$wrap.after(html)
+		Weibo.get(true).complete ->
+			$("#load_more").text("more").click ->
+				Mhome.loading($(@))
+				$ele = $(@)
+				Weibo.get().complete ->
+					Mhome.loaded($ele)
+	@get: (init = false,$wrap = $("#home")) ->
+		$.post("/mobile/t",{page: (Weibo.page unless init)},(data) ->
 			if data.status is 0
-				$wrap.append(data.data.html)
+				if init
+					$wrap.html(data.data.html)
+				else
+					html = $(data.data.html).find(".leaf")
+					if html.length is 0
+						$("#load_more").unbind().text("that's all")
+					else
+						$wrap.append html
 		,"json").complete ->
-			@page++
+			Weibo.page++
 			$(".leaf .img img").load ->
 				lzld(this)
 	filter_provider: ($wrap = @$wrap) ->

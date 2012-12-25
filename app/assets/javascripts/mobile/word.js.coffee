@@ -1,6 +1,8 @@
 class window.Word
 	@init: ->
 		word = new Word($("#home"))
+	@over: ->
+		$("#home").empty()
 	constructor: ($wrap) ->
 		$.get("/mobile/word",(data) ->
 			if data.status is 0
