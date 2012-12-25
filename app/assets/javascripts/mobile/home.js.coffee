@@ -14,6 +14,5 @@ class window.Mhome
 			window[$.string(page).capitalize().str].init()
 		$("#m_nav_back").click ->
 			$(@).hide()
-			$wrap.infinitescroll("destroy").html("")
 			$("#m_nav").show()
 	
