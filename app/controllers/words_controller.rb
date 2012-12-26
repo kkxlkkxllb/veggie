@@ -4,7 +4,7 @@ class WordsController < ApplicationController
 
   def index       
     @courses = Course.all
-    set_seo_meta(t('words.title'),t('words.keywords'),t('words.describe'))  
+    set_seo_meta(t('center.title'),t('center.keywords'),t('center.describe'))  
   end
 
   # Course show
@@ -18,7 +18,7 @@ class WordsController < ApplicationController
     @result = @words.map do |w|
        w.merge!(:got => current_member.has_u_word(w[:id]) ? true : false )
     end
-    set_seo_meta(@course.title,t('words.keywords'),t('words.describe'))  
+    set_seo_meta(@course.title)  
   end
   
   # To-Do

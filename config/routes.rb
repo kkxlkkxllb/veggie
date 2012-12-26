@@ -25,11 +25,11 @@ Veggie::Application.routes.draw do
   
   # home
   match "welcome" => "home#index", :as => :welcome
-  match "square" => "home#square", :as => :hot
-  match "quotes" => "home#quote", :as => :quote
+  match "square" => "home#square", :as => :square
+  match "b" => "home#business", :as => :business
   
 	# words
-  match "library" => "words#index", :as => :words
+  match "c" => "words#index", :as => :center
   match "c/:id" => "words#course", :as => :course
   match "course/new" => "words#new",:as => :new_course
   namespace :words do

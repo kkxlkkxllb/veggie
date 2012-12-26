@@ -17,17 +17,17 @@
 							%i.icon-leaf
 							= t("leafs.title")
 					%li{:class => ("active" if @courses)}
-						= link_to words_path do
+						= link_to center_path do
 							%i.icon-book
-							= t("words.title")
+							= t("center.title")
 					%li{:class => ("active" if @users)}
-						= link_to hot_path do
+						= link_to square_path do
 							%i.icon-flag
 							= t("square.title")
 					%li{:class => ("active" if @quotes)}
-						= link_to quote_path do
+						= link_to business_path do
 							%i.icon-comments-alt
-							= t("quote.title")
+							= t("business.title")
 				- if current_member
 					%ul.nav.pull-right
 						%li.member{:class => ("active" if action_name == "dashboard")}

@@ -24,8 +24,8 @@ class HomeController < ApplicationController
     @fls = YAML.load_file(Rails.root.join("lib/cherry", "setting.yml")).fetch("friend_link")["course"]
   end
   
-  def quote
-    set_seo_meta(t("quote.title"),t('quote.keywords'),t('quote.describe'))
+  def business
+    set_seo_meta(t("business.title"),t('business.keywords'),t('business.describe'))
     @quotes = Rails.cache.fetch("quotes") do
       Onion::FetchQuote.new().done
     end
