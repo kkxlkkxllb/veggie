@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
       @title = "#{title}"
       @title += "&raquo;"+t('title')
     else
-      @title = t('title')
+      @title = t('title') + "  " + t('subtitle')
     end
     @subtitle = title
     @meta_keywords = keywords

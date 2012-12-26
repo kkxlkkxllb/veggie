@@ -34,8 +34,8 @@
 		font-size: 40px
 		img
 			width: 64px
-			height: 64px
-	#brand
+			height: 64px			
+	#brand			
 		img
 			@include transform(rotate(-60deg))
 			@include transition(1s)
@@ -77,9 +77,10 @@
 			margin: 10px 0
 			a
 				display: inline-block
-				margin: 0 5px			
+				margin: 0 5px		
+				position: relative	
 				@include transition(0.2s)
-				-webkit-box-reflect: below 10px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.7, transparent), to(#ff0000))
+				@include reflect
 				&:hover
 					@include transform(scale3d(1.1,1.1,1.1)) 
 #quote_wrap
@@ -87,9 +88,11 @@
 	background: white url(/assets/img/back_pattern/back_pattern.png)
 	.quote_cell
 		margin-bottom: 10px
-		padding-left: 10px
-		border-left: 5px solid #333
+		padding: 5px 10px
 		font-family: "Amienne", Consolas, monospace, sans-serif		
 		font-size: 30px
 		line-height: 32px
-		
+		background: rgba(194,194,194,.4)
+		color: #504f4f
+		text-shadow: 0px 2px 1px #bbbaba
+		@include shadow(0,2px,8px,rgba(0,0,0,0.5))
