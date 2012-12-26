@@ -1,2 +1,0 @@
-module Love::LhomeHelper
-end

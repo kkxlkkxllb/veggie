@@ -19,10 +19,6 @@ Veggie::Application.routes.draw do
     match "word" => "mhome#word"
   end
   
-  namespace :love do
-    match '/' => "lhome#index"
-  end
-  
   # home
   match "welcome" => "home#index", :as => :welcome
   match "square" => "home#square", :as => :square
