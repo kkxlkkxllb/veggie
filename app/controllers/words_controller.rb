@@ -23,6 +23,8 @@ class WordsController < ApplicationController
   
   # To-Do
   # Course New
+  # 权限要求：a e
+  # 直接新建课程，基本元素是单词，word,不生成u_word 
   def new
     set_seo_meta(t('course.new'))
   end
@@ -46,8 +48,9 @@ class WordsController < ApplicationController
     end
   end
   
+  # 未开放
   # U Word New
-  # ----------
+  # 权限要求：b v g 
   def u_create
     unless @word = Word.where(:title => params[:word].downcase).first
       @word = Onion::FetchWord.new(word).insert
@@ -85,19 +88,18 @@ class WordsController < ApplicationController
 		end
   end
   
+  # Re-work
 	# Word
-  # quick img make
-  def fetch_img   
+  # 权限：e a
+  # 为课程中的词汇选择图片，图源：Bing Search & Olive
+  def fetch_img
     @word = Word.find(params[:id])
-    @pics = Rails.cache.fetch("word/#{@word.id}/imgs",:expires_in => 1.weeks) do
-        Grape::WordImage.new(@word.title).parse(@word.ctag_list.join(" "))[0..17]
-      end
-    img = @pics[rand(@pics.length)]
-    Grape::WordImage.new(@word.title).make(img)
+    Grape::WordImage.new(@word.title).make(params[:img])
     render_json(0,"ok",{:pic => @word.image+"?#{Time.now.to_i}"})
   end
   
 	# U Word
+	# 用户上传图片
   # upload &image &id
   # response with js.haml
   def upload_img
@@ -111,6 +113,7 @@ class WordsController < ApplicationController
   end
 
 	# U Word
+	# 用户图片选取：从自己关联身份instagram，tumblr取
 	# input: img_url & id
   # json
 	def select_img

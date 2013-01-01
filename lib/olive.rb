@@ -41,12 +41,14 @@ module Olive
   
   class Tumblr < Base
 
-    def initialize      
+    def initialize(opts={})
       veggie = Provider.where(:provider => "tumblr").first
-      @client = ::Tumblr.new(
+      opts = {
         :oauth_token => veggie.token,
         :oauth_token_secret => veggie.secret
-      )
+      }.update(opts)
+      
+      @client = ::Tumblr.new(opts)
     end
 
     def tagged(tag)
@@ -64,6 +66,14 @@ module Olive
 	    logger("From Tumblr --  Num: #{@post.length}; Tag: #{tag}")
 
 	    return @post
+    end
+    
+    def magic(blog_name)
+      data = @client.posts(blog_name,:type => "photo")["posts"]
+      data.inject([]) do |result,d|
+        result << d["photos"][0]["original_size"]["url"].sub(/_\d+\./,"_400.")
+        result
+      end
     end
   
   end

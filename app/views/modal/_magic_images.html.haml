@@ -3,6 +3,11 @@
 		%button.close(type="button" data-dismiss="modal")
 			×
 		%h3
-			select a image from magic
+			你可以使用下列的魔法
 	.modal-body
+		.magic_items
+			- %w{instagram tumblr}.each do |p|
+				%a{data: p}(href = "#provider")
+					= image_tag("icon/#{p}_big.png")
+		.images
 		

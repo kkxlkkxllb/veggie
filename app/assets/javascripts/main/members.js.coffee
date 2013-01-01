@@ -2,6 +2,7 @@ class window.Members
 	@init: ->
 		member = new Members()
 		member.setting($("#user_setting"))
+		Utils.user_theme()
 		member.show($("#user_show"),".word_item")
 		member.dashboard $("#impress"),$("#magic_images_modal")
 		if $("#allen").length is 1
@@ -36,13 +37,15 @@ class window.Members
 				if audio
 					audio.play()
 		$("a[href='#magic']",$wrap).click ->
-			title = $(@).parent().attr "data"
 			$modal.modal()
+			false
+		$("a[href='#provider']",$modal).click ->
 			Utils.loading $modal
-			$.get "/olive/fetch?title=#{title}",(data) ->
+			provider = $(@).attr('data')
+			$.get "/olive/fetch?provider=#{provider}",(data) ->
 				if data.status is 0
 					html = ""					
-					$(".modal-body",$modal).html(html)				
+					$(".images",$modal).html(html)				
 					Utils.loaded $modal
 			false
 		$("a[href='#upload']",$wrap).click ->			

@@ -50,6 +50,7 @@ Veggie::Application.routes.draw do
     post "sync"
     post "publish"
     get "fetch"
+    get "magic"
   end
 
   # members

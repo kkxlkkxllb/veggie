@@ -1,12 +1,17 @@
 class MembersController < ApplicationController
   before_filter :authenticate_member!,:except => :show
   
+  # 个人学习系统界面
   def dashboard
     set_seo_meta(current_member.name)
     @u_words = current_member.u_words
   end
   
   # :role/:uid
+  # 根据不同用户类别，显示略有差异的个人秀，前提是该用户已登记uid
+  # 用户默认类别: u 见 Member::ROLE
+  # 名片展示：姓名／头像／关联的身份
+  # 个人秀可被操作的动作：7 js转发weibo
   def show
     role_ok = Member::ROLE.include?(params[:role])  
     if role_ok and @user = Member.send(params[:role]).find_by_uid(params[:uid])

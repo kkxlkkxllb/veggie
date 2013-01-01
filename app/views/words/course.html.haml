@@ -3,6 +3,7 @@
 		= form_tag '/words/create',:remote => true do
 			%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
 	= render 'modal/new_word_tag'
+	= render 'modal/editor_magic'
 #course_wrap
 	.banner_wrap
 		%h3.banner_title.dancer.text_center

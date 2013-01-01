@@ -54,8 +54,8 @@ class Member < ActiveRecord::Base
   # a 管理员，特权待遇 
   # u 会员
   # ------
-  # b 商家*
-  # e 作者*
+  # b 商家品牌*
+  # e 教育家*
   # g 组织
   # v 名人
   ROLE.each do |r|
@@ -96,7 +96,6 @@ class Member < ActiveRecord::Base
     self.providers.where(:provider => p).first
   end
   
-  # To-Do add index to uword db
   def has_u_word(wid)
     UWord.where(:member_id => self.id,:word_id => wid).first
   end

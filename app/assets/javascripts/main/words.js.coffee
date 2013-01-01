@@ -7,12 +7,14 @@ class window.Words
 		word.filter_word($("#word_nav"))
 		word.clone_word()
 		word.img_change()
+		Utils.user_theme()
 	@tag_modal: ($modal,$form,title,id,tags) ->
 		$("span.wtitle",$modal).text(title)
 		$("input#id",$form).val(id)
 		$("input#tags",$form).val(tags)	
 		$modal.modal()
 	constructor: (@$container,item) ->
+		$("html").addClass 'chome'
 		$container = @$container
 		$container.imagesLoaded ->
 			$(item,$container).animate opacity:1
@@ -76,17 +78,30 @@ class window.Words
 					else
 						console.log "login required"
 			false
-	img_change: ($container = @$container) ->
+	img_change: ($container = @$container,$modal = $("#editor_magic")) ->
 		$container.delegate "span.change_btn","click", ->
-			ele = $(@)
-			ele.hide()
-			$wrap = ele.closest('.word_item')
-			Utils.loading $('.pic img',$wrap)
-			$.post "/words/fetch_img"
-				id: $wrap.attr("wid")
-				(data) ->
-					if data.status is 0
-						$('.pic img',$wrap).attr("src",data.data.pic).load ->
-							$container.isotope()
-							Utils.loaded $(@)
-							ele.show()
+			$modal.modal()
+			$wrap = $(@).closest('.word_item')
+			$target = $('.pic img',$wrap)
+			wid = $wrap.attr("wid")
+			Utils.loading $modal
+			$.get "/olive/magic?id=#{wid}",(data) ->
+				if data.status is 0
+					html = ''
+					for i in data.data
+						html += "<div class='pic'><img src='#{i}' /></div>"
+					$(".images_wrap",$modal).html(html)
+					Utils.loaded $modal
+					$('.pic img',$(".images_wrap",$modal)).click ->
+						$modal.modal('hide')					
+						Utils.loading $target
+						img = $(@).attr('src')
+						$.post "/words/fetch_img"
+							id: wid
+							img: img
+							(data) ->
+								if data.status is 0
+									$target.attr("src",data.data.pic).load ->
+										Utils.loaded $target
+										$container.isotope()
+							

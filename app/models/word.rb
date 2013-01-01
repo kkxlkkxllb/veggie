@@ -53,7 +53,13 @@ class Word < ActiveRecord::Base
   end
 
   def image_url(opt={})
-    name = opt[:w] ? "/w.png" : "/#{$config[:name]}.jpg"
+    if opt[:w]
+      name = "/w.png"
+    elsif opt[:o]
+      name = "/original.jpg"
+    else
+      name = "/#{$config[:name]}.jpg"
+    end
     IMAGE_URL + self.title.parameterize.underscore + name
   end
 

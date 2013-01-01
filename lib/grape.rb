@@ -53,7 +53,7 @@ module Grape
     
     def initialize(title)
       @title = title
-      @dir = Word::IMAGE_PATH + title.parameterize.underscore + "/"    
+      @dir = Word::IMAGE_PATH + title.parameterize.underscore + "/" 
     end
 
     def set_name_by_dir(dir,title,w_dir=dir)
@@ -90,7 +90,7 @@ module Grape
     def make(url=nil)
       @image = url ? url : parse[0]
       @w,@new_image = set_name_by_dir(@dir,@title)
-      ImageConvert.new(@image,:outfile => @new_image).draw(@w)
+      ImageConvert.new(@image,:outfile => @new_image).draw(@w,:original => @dir + 'original.jpg')
     end
   end
   
@@ -167,8 +167,11 @@ module Grape
     end
     
 		# 合成单张
-    def draw(word_path)
+    def draw(word_path,opt = {})
       @img.resize @opts[:size].to_s
+      if opt[:original]
+        @img.write opt[:original]
+      end
       result = @img.composite(MiniMagick::Image.open(word_path)) do |c|
         c.gravity "center"
       end

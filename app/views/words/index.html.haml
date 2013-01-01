@@ -1,3 +1,5 @@
+.user_bg(data-o = "0.1")
+	= image_tag("img/theme/imagine/4.png")
 #library	
 	#course_catelog
 		- @courses.each do |c|
@@ -6,3 +8,4 @@
 					= c.title
 				%a.enroll.btn.btn-primary{:href => course_path(c)}
 					Enroll
+			%hr

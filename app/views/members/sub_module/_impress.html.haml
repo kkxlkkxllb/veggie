@@ -11,7 +11,7 @@
 				= render 'members/sub_module/image_upload',:wid => w.id,:url => '/words/upload_img'
 				%a.button.blue.glossy(data-icon=" " href="#upload" title="上传图片注释")
 					%i.icon-upload-alt
-				%a.button.orange.glossy(data-icon=" " href="#magic" title="获取魔法图片")
+				%a.button.orange.glossy(data-icon=" " href="#magic" title="获取魔法")
 					%i.icon-magic
 			%audio{:src => w.word.source_voice}
 		.step.word_pic{:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p_"+w.title}(data-x="0" data-scale="1")

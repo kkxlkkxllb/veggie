@@ -51,23 +51,43 @@ class OliveController < ApplicationController
     render_json(0,"ok",:num => data.length)
   end
 
-	# input :title
+  # Editor
+	# input :id
 	# cached
+	def magic
+	  @word = Word.find(params[:id])
+		title = @word.title
+    if params[:more]
+		  @pics = Rails.cache.fetch("olive/#{title}",:expires_in => 5.hours) do
+  			results = Parallel.map([Olive::Tumblr,Olive::Instagram,Olive::Px]) do |p|
+  				photos(p,title)
+  			end
+  			results[0] + results[1] + results[2]
+  		end
+  	else
+  	  opt = params[:ctag].blank? ? '' : @word.ctag_list.join(" ")
+      @pics = Grape::WordImage.new(title).parse(opt)[0..14]
+	  end
+
+		render_json 0,"ok",@pics
+	end
+	
+	# 当前用户关联身份下的相册图片
+	# params: provider
 	def fetch
-		title = params[:title]
-
-		result = Rails.cache.fetch("olive/#{title}",:expires_in => 5.hours) do
-			results = Parallel.map([Olive::Tumblr,Olive::Instagram,Olive::Px]) do |p|
-				photos(p,title)
-			end
-			{
-				:_tumblr => results[0],
-				:_instagram => results[1],
-				:_500px => results[2]
-			}
-		end
-
-		render_json(0,"ok",result)
+	  if provider = current_member.has_provider?(params[:provider])
+	    case provider.provider
+      when 'instagram'
+	      @result = Olive::Instagram.new(:access_token => provider.token).user_media_feed.map{|x| x[:photo]}
+      when 'tumblr'
+        @result = Olive::Tumblr.new.magic(provider.metadata[:blogs][0][:name]+".tumblr.com")
+      end
+    end	 
+    if !@result.blank?   
+      render_json 0,"ok",@result
+    else
+      render_json -1,"no content"
+    end
 	end
   
   private
