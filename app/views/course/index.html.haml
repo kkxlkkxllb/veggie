@@ -1,0 +1,17 @@
+.user_bg(data-o = "0.1")
+	= image_tag("img/theme/imagine/4.png")
+#library	
+	#course_catelog
+		- @courses.each do |c|
+			.banner_wrap
+				%h3.banner_title.dancer
+					= c['title']
+				.enroll
+					%span.label
+						%i.icon-list
+						= c['word_cnt']
+					%a.btn.btn-primary{:href => course_path(:id => c['id'])}						
+						预览
+					%a.btn.btn-success{:href => account_path(:course => c['id'])}
+						学习
+			%hr

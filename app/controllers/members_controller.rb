@@ -4,7 +4,13 @@ class MembersController < ApplicationController
   # 个人学习系统界面
   def dashboard
     set_seo_meta(current_member.name)
-    @u_words = current_member.u_words
+    if params[:course]
+      @course = Course.find(params[:course])
+      @course.check(current_member)
+    else
+      @course = current_member.current_course
+    end
+    @u_words = @course ? @course.words : []
   end
   
   # :role/:uid

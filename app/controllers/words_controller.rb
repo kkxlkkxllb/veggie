@@ -1,33 +1,6 @@
 # coding: utf-8
 class WordsController < ApplicationController
-  before_filter :authenticate_member!,:except => [:index]
-
-  def index       
-    @courses = Course.all
-    set_seo_meta(t('center.title'),t('center.keywords'),t('center.describe'))  
-  end
-
-  # Course show
-  def course
-    @course = Course.find(params[:id])
-    @ctags = @course.ctags.split(";")
-    @admin = current_member.admin? 
-    @words = Rails.cache.fetch("course/#{@course.id}",:expires_in => 1.day) do 
-      Word.tagged(@ctags).map(&:as_full_json)
-    end
-    @result = @words.map do |w|
-       w.merge!(:got => current_member.has_u_word(w[:id]) ? true : false )
-    end
-    set_seo_meta(@course.title)  
-  end
-  
-  # To-Do
-  # Course New
-  # 权限要求：a e
-  # 直接新建课程，基本元素是单词，word,不生成u_word 
-  def new
-    set_seo_meta(t('course.new'))
-  end
+  before_filter :authenticate_member!
   
   # Course Word New 
   def create

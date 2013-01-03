@@ -1,11 +1,10 @@
-class window.Words
+class window.Course
 	@init: ->
-		word = new Words($("#word_ground"),".word_item")
+		word = new Course($("#word_ground"),".word_item")
 		word.after_create $("#new_word form"),$("#new_word_tag_modal"),$("form#new_word_tag_form")
 		word.audio_play()
 		word.insert_tags $("form#new_word_tag_form"),$("#new_word_tag_modal")
 		word.filter_word($("#word_nav"))
-		word.clone_word()
 		word.img_change()
 		Utils.user_theme()
 	@tag_modal: ($modal,$form,title,id,tags) ->
@@ -28,7 +27,7 @@ class window.Words
 		$form.bind 'ajax:success', (d,data) ->
 			if data.status is 0				
 				$("#new_word input").val("")
-				Words.tag_modal($modal,$tag_form,data.data.title,data.data.id,"")
+				Course.tag_modal($modal,$tag_form,data.data.title,data.data.id,"")
 			else
 				Utils.flash("o_O 呃，失败了，单词没查到")
 			$("input",$form).removeClass("disable_event")
@@ -44,7 +43,7 @@ class window.Words
 				wid = $item.attr("wid")
 				wtitle = $("span.title",$item).text()
 				hash_tags = $("span.ctags",$item).text()
-				Words.tag_modal($modal,$form,wtitle,wid,hash_tags)
+				Course.tag_modal($modal,$form,wtitle,wid,hash_tags)
 			false
 		$("button.btn",$form).click ->
 			$form.submit()
@@ -65,21 +64,8 @@ class window.Words
 			$(@).removeClass("green").addClass("pink")
 			$container.isotope({ filter: $(@).attr('ctag') })
 			false
-	clone_word: =>
-		@$container.delegate "a.fetch","click", ->
-			ele = $(@)
-			$.post "/words/clone"
-				id: ele.parents('.word_item').attr("wid")
-				(data) ->
-					if data.status is 0
-						ele.addClass "cancel"
-					else if data.status is 1
-						ele.removeClass "cancel"
-					else
-						console.log "login required"
-			false
 	img_change: ($container = @$container,$modal = $("#editor_magic")) ->
-		$container.delegate "span.change_btn","click", ->
+		$container.delegate "a.change_btn","click", ->
 			$modal.modal()
 			$wrap = $(@).closest('.word_item')
 			$target = $('.pic img',$wrap)
@@ -104,4 +90,4 @@ class window.Words
 									$target.attr("src",data.data.pic).load ->
 										Utils.loaded $target
 										$container.isotope()
-							
+			false			

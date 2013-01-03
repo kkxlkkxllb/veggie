@@ -65,22 +65,15 @@ html.chome
 			@include text-shadow-inverse(#333)
 			border: 4px solid #f5f5f5
 			position: relative
-			@include shadow(0,1px,3px,rgba(0,0,0,.3))
-			a
+			@include shadow(0,1px,3px,rgba(0,0,0,.3))						
+			a.audio
+				left: 6px
+				top: 3px
 				color: #888
 				position: absolute
 				@include transition(0.4s,ease)
 				&:hover
-					color: #1d1d1d				
-			a.audio
-				left: 6px
-				top: 3px
-			a.fetch
-				right: 6px
-				top: 3px
-				font-size: 20px
-			a.cancel
-				color: red
+					color: #1d1d1d
 			span
 				padding: 3px 10px
 				display: block
@@ -94,27 +87,9 @@ html.chome
 				@include text-shadow-inverse
 				font-weight: bold
 				font-family: serif
-				a.itag
-					right: 6px
-					bottom: 0px
+			.cpanel
+				padding: 5px
+				text-align: right				
 			.pic
 				position: relative
 				background: #eee
-				span.change_btn
-					padding: 2px
-					cursor: pointer
-					position: absolute
-					top: -10px
-					right: -10px
-					height: 18px
-					width: 18px
-					line-height: 18px
-					text-align: center
-					background: #f5f5f5
-					@include round(18px)
-					@include shadow(0,1px,2px,rgba(0,0,0,.3))
-					color: #999
-					&:hover
-						color: #333
-					i
-						vertical-align: middle

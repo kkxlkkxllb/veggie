@@ -22,8 +22,6 @@
 		- @result.each do |w|
 			.word_item{:class => w[:tags], :wid => w[:id]}
 				.wd
-					%a.fetch{:class => ("cancel" if w[:got])}(href="#copy")
-						%i.icon-star-empty(title="收录")
 					%a.audio(href="#voice")
 						%i.icon-headphones(title="发音")
 						%audio{:src => w[:audio]}
@@ -31,13 +29,15 @@
 						= w[:title]		
 					%span.content
 						= w[:content]
+					%span.ctags
+						= w[:tag_str]
+				- if @admin
+					.cpanel
+						%a.change_btn.label(href="#magic")
+							%i.icon-refresh
+						%a.upload_btn.label(href="#upload")
+							%i.icon-upload-alt						
+						%a.itag.label(href="#edit")
+							%i.icon-tag(title="编辑")
 				.pic
 					= image_tag(w[:image],:title => w[:title])
-					- if @admin
-						%span.change_btn
-							%i.icon-refresh
-				%span.ctags
-					= w[:tag_str]
-					- if @admin
-						%a.itag(href="#edit")
-							%i.icon-cog(title="编辑")

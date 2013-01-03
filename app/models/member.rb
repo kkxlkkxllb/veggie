@@ -137,4 +137,17 @@ class Member < ActiveRecord::Base
     `rm -rf #{AVATAR_PATH + self.id.to_s}`
   end 
   
+  def personal
+    $redis.hgetall(personal_key)
+  end
+  
+  def current_course
+    k = personal["course"]
+    k ? Course.find(k) : nil
+  end
+  
+  def personal_key
+    "member/#{id}"
+  end
+  
 end
