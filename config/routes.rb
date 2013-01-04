@@ -38,7 +38,6 @@ Veggie::Application.routes.draw do
     post "create"
     post "u_create"
     post "add_tag"
-    post "clone"
     post "fetch_img"
   	post "upload_img"
   	post "select_img"

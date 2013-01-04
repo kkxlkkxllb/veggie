@@ -12,12 +12,19 @@
 	.alert.alert-error
 		非常友好的“公民行为指导手册”正在制作中，敬请期待。。。
 - else
-	.alert
-		在这儿申领您的公民 ID 号，代表着你在 17up 世界里的唯一身份
-		%br
-		♛ 注意是唯一的哦，赶紧抢先登记吧
+	%h4.alert
+		请在此申领您的公民 ID 号，代表着你在 17up 世界里的唯一身份
+	.alert.alert-info
+		♛ 注意是唯一的哦，赶紧抢先登记吧，一个好名字意味着良好的开端
 	%p
 		= form_tag "/members/update",:id => "uid_form" do
-			= text_field_tag :uid,"",:placeholder => "ID"
+			= text_field_tag :uid,"",:placeholder => "eg: i_love_you"
 			= submit_tag "登记",:class => "btn btn-primary"
+			%span.label.label-warning
+				ID 只能由 字母、数字、_构成
+.hello_course
+	= link_to account_path do
+		%span.btn.btn-success
+			%i.icon-book
+			立即体验课程
 	

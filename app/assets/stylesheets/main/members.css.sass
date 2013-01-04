@@ -10,12 +10,13 @@ html.uhome
 		.word_pic
 			text-align: center
 			span.img
-				background: #f5f5f5
+				background: rgba(255,255,255,0.3)
 				padding: 5px
 				display: inline-block
 				@include shadow(0px,1px,3px,rgba(0,0,0,.3))
 				@include transform(rotateX(30deg))
 				@include transition(0.8s)
+				opacity: 0.3
 				img
 					@include round(10px)
 		.word_item
@@ -32,6 +33,8 @@ html.uhome
 					opacity: 0
 			.title
 				line-height: 1
+				opacity: 0.5
+				@include transition(0.8s)
 				span
 					font-size: 170px
 					@include text-shadow-inverse
@@ -46,12 +49,16 @@ html.uhome
 					padding: 2px					
 					margin: 0 10px
 		.present
+			.title
+				opacity: 1
 			.cpanel
 				@include transform(translateX(0px)) 
 			.content span
 				opacity: 1
 			span.img
 				@include transform(rotateX(0deg))
+				@include transform(translateY(-100px))
+				opacity: 1
 #user_setting
 	margin-top: 30px
 	ul.nav

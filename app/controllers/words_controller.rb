@@ -35,19 +35,6 @@ class WordsController < ApplicationController
       render_json(-1,"fail")
     end
   end
-  
-  # create or destroy u_word
-  # input &id
-  def clone
-		@word = Word.find(params[:id])
-		if uw = current_member.has_u_word(@word)
-			uw.destroy
-			render_json(1,"canceled")
-		else
-		  current_member.u_words.create(:word_id => @word.id)
-    	render_json(0,"saved")
-		end
-  end
 
 	# Editor
   # Word ctag
@@ -76,9 +63,12 @@ class WordsController < ApplicationController
   # upload &image &id
   # response with js.haml
   def upload_img
+    @word = Word.find(params[:id])
+    unless @uw = current_member.has_u_word(@word)
+      @uw = current_member.u_words.create(:word_id => @word.id)
+    end
 		file = params[:image].tempfile.path
     type = params[:image].content_type
-    @uw = UWord.find(params[:id])
 		if @uw&&@uw.validate_upload_image(file,type)
     	status = Grape::UWordImage.new(@uw).make(file)
 			@new_image = status == 0 ? (@uw.image + "?#{Time.now.to_i}") : false
