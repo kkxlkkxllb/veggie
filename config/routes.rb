@@ -35,6 +35,7 @@ Veggie::Application.routes.draw do
   
 	# words
   namespace :words do
+    get "imagine"
     post "create"
     post "u_create"
     post "add_tag"

@@ -1,5 +1,6 @@
 - if @new_image
 	$("#impress .step.active").next().find("span.img img").attr("src","#{@new_image}");
-	Utils.flash("#{t('flash.notice.image')}",'success','left');
+	impress().next();
+	Utils.flash("#{t('flash.notice.image')}",'info','left');
 - else
 	Utils.flash("#{t('flash.error.image')}",'error','right');

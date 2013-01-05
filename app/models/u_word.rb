@@ -17,6 +17,7 @@ class UWord < ActiveRecord::Base
   belongs_to :word
   
   validates :member_id, :presence => true, :uniqueness => {:scope => :word_id }
+  after_destroy :clear_image
   
   IMAGE_URL = "/system/images/u_word/"
   IMAGE_PATH = "#{Rails.root}/public"+IMAGE_URL
@@ -48,6 +49,13 @@ class UWord < ActiveRecord::Base
   def has_image
     #return File.exist?(self.image_path)
     !height.nil?
+  end
+  
+  def clear_image
+    path = IMAGE_PATH + "#{self.id}"
+    if File.exist?(path)
+      `rm -rf #{path}`
+    end
   end
 
   def validate_upload_image(file,type)

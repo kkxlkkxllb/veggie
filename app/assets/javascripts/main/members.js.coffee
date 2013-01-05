@@ -33,9 +33,18 @@ class window.Members
 			$wrap.show()
 			api = impress()
 			$(document).on 'impress:stepenter', (e) ->
-				audio = $(e.target).find("audio")[0]
+				$current = $(e.target)
+				audio = $current.find("audio")[0]
 				if audio
 					audio.play()
+				if($current.hasClass 'word_pic') and ($current.find(".imagine").length is 0)
+					id = $current.attr 'wid'
+					$.get "/words/imagine?id=#{id}",(data) ->
+						html = ""
+						if data.status is 0			
+							for img in data.data
+								html += "<img src='" + img + "' />" 
+						$current.append("<div class='imagine'>" + html + "</div>")
 		$("a[href='#magic']",$wrap).click ->
 			$modal.modal()
 			false

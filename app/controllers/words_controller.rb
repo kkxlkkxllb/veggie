@@ -2,6 +2,22 @@
 class WordsController < ApplicationController
   before_filter :authenticate_member!
   
+  # 单词联想
+  # current_member & word_id
+  def imagine
+    imgs = []
+    @word = Word.find(params[:id])
+    if uw = current_member.has_u_word(@word)
+      imgs << uw.image
+    end
+    #imgs = imgs + @word.rich_images
+    if imgs.any?
+      render_json(0,'ok',imgs)
+    else
+      render_json(-1,"empty")
+    end
+  end
+  
   # Course Word New 
   def create
     unless @word = Word.where(:title => params[:word].downcase).first
@@ -63,10 +79,7 @@ class WordsController < ApplicationController
   # upload &image &id
   # response with js.haml
   def upload_img
-    @word = Word.find(params[:id])
-    unless @uw = current_member.has_u_word(@word)
-      @uw = current_member.u_words.create(:word_id => @word.id)
-    end
+    @uw = find_or_create_uw(params[:id])
 		file = params[:image].tempfile.path
     type = params[:image].content_type
 		if @uw&&@uw.validate_upload_image(file,type)
@@ -80,7 +93,7 @@ class WordsController < ApplicationController
 	# input: img_url & id
   # json
 	def select_img
-    @uw = UWord.find(params[:id])
+    @uw = find_or_create_uw(params[:id])
 		status = Grape::UWordImage.new(@uw).make(params[:img_url])
     if status == 0
       @new_image = @uw.image + "?#{Time.now.to_i}"
@@ -96,5 +109,14 @@ class WordsController < ApplicationController
       @word.destroy
       render_json(0,"ok")
     end
+  end
+  
+  private
+  def find_or_create_uw(id)
+    @word = Word.find(id)
+    unless @uw = current_member.has_u_word(@word)
+      @uw = current_member.u_words.create(:word_id => @word.id)
+    end
+    @uw
   end
 end

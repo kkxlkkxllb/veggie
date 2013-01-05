@@ -14,6 +14,9 @@
 # course & mission
 class Course < ActiveRecord::Base
   attr_accessible :ctags, :language, :title
+  def self.hello
+    Course.first
+  end
   
   def check(member)
     $redis.hset(member.personal_key,"course",id)

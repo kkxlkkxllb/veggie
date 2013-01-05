@@ -14,6 +14,6 @@
 				%a.button.orange.glossy(data-icon=" " href="#magic" title="获取魔法")
 					%i.icon-magic
 			%audio{:src => w[:audio]}
-		.step.word_pic{:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p_"+w[:title]}(data-x="0" data-scale="1")
+		.step.word_pic{:wid => w[:id],:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p_"+w[:title]}(data-x="0" data-scale="1")
 			%span.img
 				= image_tag(w[:image])
