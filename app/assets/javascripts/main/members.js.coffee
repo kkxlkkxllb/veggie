@@ -4,7 +4,7 @@ class window.Members
 		member.setting($("#user_setting"))
 		Utils.user_theme()
 		member.show($("#user_show"),".word_item")
-		member.dashboard $("#impress"),$("#magic_images_modal")
+		member.dashboard $("#impress"),$("#magic_images_modal"),$("#cpanel")
 		if $("#allen").length is 1
 			Allen.init()	
 	constructor: ->
@@ -27,25 +27,42 @@ class window.Members
 			$container.isotope
 				itemSelector: item
 				layoutMode : 'masonry'
-	dashboard: ($wrap,$modal) ->
+	dashboard: ($wrap,$modal,$cpanel) ->
 		if $wrap.length is 1
 			impress().init()
 			$wrap.show()
 			api = impress()
+			h = $(window).height()/3
+			$(".group",$cpanel).css "top": "#{h}px"
 			$(document).on 'impress:stepenter', (e) ->
 				$current = $(e.target)
-				audio = $current.find("audio")[0]
-				if audio
-					audio.play()
-				if($current.hasClass 'word_pic') and ($current.find(".imagine").length is 0)
+				if $current.find("audio").length is 1
+					audio = $current.find("audio")
+					unless audio[0].src isnt ''
+						audio[0].src = audio.attr('data')
+					audio[0].play()
+				if $current.hasClass 'word_pic'
+					$(".group-img",$cpanel).addClass 'active'
+					$(".group-word",$cpanel).removeClass 'active'
 					id = $current.attr 'wid'
-					$.get "/words/imagine?id=#{id}",(data) ->
-						html = ""
-						if data.status is 0			
-							for img in data.data
-								html += "<img src='" + img + "' />" 
-						$current.append("<div class='imagine'>" + html + "</div>")
-		$("a[href='#magic']",$wrap).click ->
+					$("input#id",$cpanel).val(id)
+					unless $current.hasClass 'loaded'						
+						$.get "/words/imagine?id=#{id}",(data) ->
+							html = ""
+							if data.status is 0	
+								if data.data.m
+									html += "<span class='img me'><img src='#{data.data.m}' /></span>"		
+								for img in data.data.imagine
+									html += "<span class='img imagine'><img src='#{img}' /></span>" 
+							$(".img_wrap",$current).append(html)
+						$current.addClass 'loaded'
+				else
+					unless $current.next().hasClass 'loaded'	
+						img = $current.next().find("span.img img")
+						img.attr("src",img.attr('data'))
+					$(".group-img",$cpanel).removeClass 'active'
+					$(".group-word",$cpanel).addClass 'active'
+		$("a[href='#magic']",$cpanel).click ->
 			$modal.modal()
 			false
 		$("a[href='#provider']",$modal).click ->
@@ -57,11 +74,26 @@ class window.Members
 					$(".images",$modal).html(html)				
 					Utils.loaded $modal
 			false
-		$("a[href='#upload']",$wrap).click ->			
-			$("input[type='file']",$(@).closest('.cpanel')).trigger "click"
+		$("a[href='#upload']",$cpanel).click ->	
+			if $("input#id",$cpanel).val() isnt "0"
+				$("input[type='file']",$cpanel).trigger "click"
 			false
-		$("form input[type='file']",$wrap).change ->
-			$(@).closest('form').submit()
-
+		$upload_form = $(".group-img form",$cpanel)
+		$("input[type='file']",$upload_form).change ->
+			$upload_form.submit()
+		$upload_form.bind 'ajax:success', (d,data) ->
+			console.log "ok"
+			if data.status is 0
+				if $current.find('.me').length is 1
+					$current.find('.me img').attr("src",data.data)
+				else
+					$("span.img",$current).first().after("<span class='img me'><img src='#{data.data}' ></span>")
+				Utils.flash(data.msg,'info','left')
+			else
+				Utils.flash(data.msg,'error','right')
+		$("a[href='#spell']",$cpanel).click ->
+			false
+		$("a[href='#annotate']",$cpanel).click ->
+			false
 					
 			

@@ -5,14 +5,13 @@ class WordsController < ApplicationController
   # 单词联想
   # current_member & word_id
   def imagine
-    imgs = []
     @word = Word.find(params[:id])
     if uw = current_member.has_u_word(@word)
-      imgs << uw.image
+      @my_pic = uw.image
     end
-    #imgs = imgs + @word.rich_images
+    imgs = @word.rich_images
     if imgs.any?
-      render_json(0,'ok',imgs)
+      render_json(0,'ok',{:m => @my_pic,:imagine => [] })
     else
       render_json(-1,"empty")
     end
@@ -84,8 +83,16 @@ class WordsController < ApplicationController
     type = params[:image].content_type
 		if @uw&&@uw.validate_upload_image(file,type)
     	status = Grape::UWordImage.new(@uw).make(file)
-			@new_image = status == 0 ? (@uw.image + "?#{Time.now.to_i}") : false
+			if status == 0
+			  @new_image = @uw.image + "?#{Time.now.to_i}"
+			  render_json 0,t('flash.notice.image'),@new_image
+		  else
+  		  render_json status,t('flash.error.image')
+      end
+    else
+      render_json -2,t('flash.error.image')
 		end
+		
   end
 
 	# U Word
