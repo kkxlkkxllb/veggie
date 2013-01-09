@@ -1,9 +1,5 @@
 Veggie::Application.routes.draw do
 
-  get "course/index"
-
-  get "course/show"
-
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   #mount Resque::Server, :at => "/resque" 
   require 'sidekiq/web'
@@ -26,7 +22,9 @@ Veggie::Application.routes.draw do
   # home
   match "welcome" => "home#index", :as => :welcome
   match "square" => "home#square", :as => :square
-  match "b" => "home#business", :as => :business
+  
+  # business
+  match "b" => "business#index", :as => :business
   
   #course
   match "c" => "course#index", :as => :center

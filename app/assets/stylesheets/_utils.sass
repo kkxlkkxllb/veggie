@@ -89,6 +89,14 @@
 @mixin text-shine
 	color: #fff
 	text-shadow: 0 0 150px #FFF, 0 0 60px #FFF, 0 0 10px #FFF
-	
+@mixin keyframes($name)
+	@-webkit-keyframes #{$name}
+		@content
+	@-moz-keyframes #{$name}
+		@content
+	@-ms-keyframes #{$name}
+		@content
+	@keyframes #{$name}
+		@content
 
 	

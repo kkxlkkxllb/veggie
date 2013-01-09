@@ -83,14 +83,7 @@ class WordsController < ApplicationController
     type = params[:image].content_type
 		if @uw&&@uw.validate_upload_image(file,type)
     	status = Grape::UWordImage.new(@uw).make(file)
-			if status == 0
-			  @new_image = @uw.image + "?#{Time.now.to_i}"
-			  render_json 0,t('flash.notice.image'),@new_image
-		  else
-  		  render_json status,t('flash.error.image')
-      end
-    else
-      render_json -2,t('flash.error.image')
+			@new_image = status == 0 ? (@uw.image + "?#{Time.now.to_i}") : false
 		end
 		
   end

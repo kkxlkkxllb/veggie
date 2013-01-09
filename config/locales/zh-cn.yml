@@ -6,12 +6,12 @@ zh-cn:
     title: 迷你版
   title: 17up
   subtitle: Imagine
-  keywords: "教育,语言,language,education,imagine,city,knowledge,peace,future"
+  keywords: "教育,语言,language,education,imagine,planet,knowledge,peace,future"
   describe: "这是社区也是一座城市，能制造快乐给每一个热爱学习的人，语言，人类文明的基石，了解世界的钥匙。新纪元的开篇，让我们从重新认知审视这个世界开始，从记忆每个词汇开始以一种特别的方式，第一篇章：英语篇"
   door: "start"
   flash:
     notice:
-      register: "欢迎加入 17up 来完成属于你的冒险，先申领一个 ID 吧!"
+      register: "欢迎来到 17up 星球，来完成属于你的冒险，先申领一个 ID 吧!"
       login: "学习，任何时候开始都不晚，欢迎回来！"
       bind: "绑定成功啦!"
       uid: "恭喜你，ID 登记成功，现在你正式成为这里的一份子了"
@@ -47,6 +47,6 @@ zh-cn:
       provider: "关联身份"
       account: "公民育成"
   greet:
-    new_user: "[撒花] @%{name} 欢迎入住 17up ， 成为第 %{num} 位公民。［%{motto}］"
+    new_user: "[撒花] @%{name} 欢迎来到 17up 星球， 成为第 %{num} 位公民。［%{motto}］"
     new_leafs: "%{motto}，今天%{cast}度，%{num} 片新叶长成：http://17up.org"
     bind_provider: "[笑哈哈] @%{name} 交个朋友吧,［%{motto}］"

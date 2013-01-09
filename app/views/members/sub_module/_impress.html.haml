@@ -22,5 +22,7 @@
 			%audio{:data => w[:audio]}
 		.step.word_pic{:wid => w[:id],:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p_"+w[:title]}(data-x="0" data-scale="1")
 			.img_wrap
-				%span.img
+				%span.img.origin
 					= image_tag('icon/default.png',:data => w[:image])
+				%span.img.me
+					= image_tag('icon/default.png')

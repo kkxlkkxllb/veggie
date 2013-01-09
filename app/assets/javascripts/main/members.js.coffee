@@ -51,14 +51,14 @@ class window.Members
 							html = ""
 							if data.status is 0	
 								if data.data.m
-									html += "<span class='img me'><img src='#{data.data.m}' /></span>"		
+									$current.find('.me img').attr "src",data.data.m		
 								for img in data.data.imagine
 									html += "<span class='img imagine'><img src='#{img}' /></span>" 
 							$(".img_wrap",$current).append(html)
 						$current.addClass 'loaded'
 				else
 					unless $current.next().hasClass 'loaded'	
-						img = $current.next().find("span.img img")
+						img = $current.next().find("span.origin img")
 						img.attr("src",img.attr('data'))
 					$(".group-img",$cpanel).removeClass 'active'
 					$(".group-word",$cpanel).addClass 'active'
@@ -81,16 +81,6 @@ class window.Members
 		$upload_form = $(".group-img form",$cpanel)
 		$("input[type='file']",$upload_form).change ->
 			$upload_form.submit()
-		$upload_form.bind 'ajax:success', (d,data) ->
-			console.log "ok"
-			if data.status is 0
-				if $current.find('.me').length is 1
-					$current.find('.me img').attr("src",data.data)
-				else
-					$("span.img",$current).first().after("<span class='img me'><img src='#{data.data}' ></span>")
-				Utils.flash(data.msg,'info','left')
-			else
-				Utils.flash(data.msg,'error','right')
 		$("a[href='#spell']",$cpanel).click ->
 			false
 		$("a[href='#annotate']",$cpanel).click ->
