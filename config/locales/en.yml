@@ -2,6 +2,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  title: 17UP
-  door: School Gate
+  title: 17up
+  subtitle: Imagine Planet
+  door: start
   

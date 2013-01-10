@@ -31,7 +31,7 @@ class window.Members
 		if $wrap.length is 1
 			impress().init()
 			$wrap.show()
-			api = impress()
+			Home.header_fade()
 			h = $(window).height()/3
 			$(".group",$cpanel).css "top": "#{h}px"
 			$(document).on 'impress:stepenter', (e) ->

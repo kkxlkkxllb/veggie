@@ -26,12 +26,10 @@ html.uhome
 				@include transform(translateX(0px))
 	#impress
 		.word_pic
-			text-align: center
 			z-index: 1
 			position: relative
 			.img_wrap
-				span.img
-					background: #f5f5f5
+				span.img					
 					padding: 5px
 					display: inline-block
 					@include shadow(0px,1px,3px,rgba(0,0,0,.3))
@@ -40,6 +38,10 @@ html.uhome
 					opacity: 0.3
 					img
 						@include round(10px)
+				.origin
+					background: #f5f5f5
+				.me
+					background: #00bbff
 		.word_item
 			text-align: center
 			line-height: 1.3
