@@ -11,17 +11,17 @@
 			= link_to image_tag("icon/weibo_big.png"),member_omniauth_authorize_path(:weibo)
 			%a(href="#/belief")
 				%span.icon-circle-arrow-up
-		#belief.step.tallys(data-x="0" data-y="900" data-z="1500" data-scale="1")
+		#belief.step.tallys(data-x="0" data-y="950" data-z="1500" data-scale="1")
 			✿ Love can change anything
-		#queen.amienne.step(data-x="0" data-y="0" data-z="0" data-scale="1")
+		#queen.amienne.step(data-x="0" data-y="100" data-z="0" data-scale="1")
 			♛ the show must go on
-		#contact.step.text_center(data-x="0" data-y="-900" data-z="1500"  data-scale="1")
+		#contact.step.text_center(data-x="0" data-y="-800" data-z="1500"  data-scale="1")
 			- $contact.each do |k,v|
 				= contact_img_link "icon/#{k}_big.png",v,k.to_s
 			= mail_to $config[:email],image_tag("icon/gmail.png")
 			%p.amienne
 				contact me
-		#brand.step(data-x="0" data-y="-1800" data-z="3000" data-scale="1")
+		#brand.step(data-x="0" data-y="-1800" data-z="3000")
 			= image_tag("/favicon.png")
 			%p.dancer
 				imagine

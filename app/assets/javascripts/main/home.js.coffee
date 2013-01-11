@@ -4,20 +4,21 @@ class window.Home
 		home.info($("#impress"))
 		if $("#top_nav").length is 0
 			$("html").addClass("home")
-	@header_fade: ->
-		$header = $("#top_nav")
-		fade = ->
-			$header.css 'width': '80px'
-		fade()
-		$header.hover(
-			-> $(@).css 'width': '100%'
-			-> fade()
+	@menu_fade: ->
+		$nav = $("#top_nav")
+		fadeIn = -> 
+			setTimeout(
+				-> $nav.css 'opacity':'0.4'
+				2000
+			)
+		fadeIn()
+		$nav.hover(
+			-> $(@).css 'opacity':'1'
+			-> fadeIn()
 		)
-			
 	constructor: ->
 		Utils.masonry($("#user_list"),'.user_item')				
 	info: ($wrap)->
 		if $wrap.length is 1 and !$('body').hasClass("impress-not-supported")
-			impress().init()
+			$wrap.jmpress()
 			$wrap.show()
-			api = impress()

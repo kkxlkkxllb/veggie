@@ -69,7 +69,6 @@ Veggie::Application.routes.draw do
   root :to => 'home#door'
 
   # See how all your routes lay out with "rake routes"
-  
   unless Rails.application.config.consider_all_requests_local
     match '*not_found', to: 'errors#error_404'
   end

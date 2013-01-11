@@ -28,40 +28,54 @@ class window.Members
 				itemSelector: item
 				layoutMode : 'masonry'
 	dashboard: ($wrap,$modal,$cpanel) ->
+		play_audio = ($audio) ->
+			if $audio.length is 1
+				unless $audio[0].src isnt ''
+					$audio[0].src = $audio.attr('data')
+				$audio[0].play()
+		# 联想
+		imagine = ($current,wid) ->
+			unless $current.hasClass 'loaded'
+				$current_img = $current.next()
+				img = $current_img.find("span.origin img")
+				img.attr("src",img.attr('data'))
+				$.get "/words/imagine?id=#{wid}",(data) ->
+					html = ""
+					if data.status is 0	
+						if data.data.m
+							$current_img.find('.me img').attr "src",data.data.m		
+						for img in data.data.imagine
+							html += "<span class='img imagine'><img src='#{img}' /></span>" 
+					$(".img_wrap",$current_img).append(html)
+				$current.addClass 'loaded'
+		step_handle = ($current,$cpanel) ->
+			id = $current.attr 'wid'
+			play_audio($current.find("audio"))				
+			if $current.hasClass 'word_pic'
+				$(".group-img",$cpanel).addClass 'active'
+				$(".group-word",$cpanel).removeClass 'active'					
+				$("input#id",$cpanel).val(id)
+			else
+				$(".group-img",$cpanel).removeClass 'active'
+				$(".group-word",$cpanel).addClass 'active'
+				imagine($current,id)
+				
 		if $wrap.length is 1
-			impress().init()
+			$wrap.jmpress
+				keyboard:
+					keys:
+						9: null
+						32: null
+						37: null
+						39: null
+						
+			step_handle($(".step.active",$wrap),$cpanel)
+			Home.menu_fade()
 			$wrap.show()
-			Home.header_fade()
 			h = $(window).height()/3
 			$(".group",$cpanel).css "top": "#{h}px"
-			$(document).on 'impress:stepenter', (e) ->
-				$current = $(e.target)
-				if $current.find("audio").length is 1
-					audio = $current.find("audio")
-					unless audio[0].src isnt ''
-						audio[0].src = audio.attr('data')
-					audio[0].play()
-				if $current.hasClass 'word_pic'
-					$(".group-img",$cpanel).addClass 'active'
-					$(".group-word",$cpanel).removeClass 'active'
-					id = $current.attr 'wid'
-					$("input#id",$cpanel).val(id)
-					unless $current.hasClass 'loaded'						
-						$.get "/words/imagine?id=#{id}",(data) ->
-							html = ""
-							if data.status is 0	
-								if data.data.m
-									$current.find('.me img').attr "src",data.data.m		
-								for img in data.data.imagine
-									html += "<span class='img imagine'><img src='#{img}' /></span>" 
-							$(".img_wrap",$current).append(html)
-						$current.addClass 'loaded'
-				else
-					unless $current.next().hasClass 'loaded'	
-						img = $current.next().find("span.origin img")
-						img.attr("src",img.attr('data'))
-					$(".group-img",$cpanel).removeClass 'active'
-					$(".group-word",$cpanel).addClass 'active'
+			$(".step",$wrap).on 'enterStep', (e) ->
+				step_handle($(e.target),$cpanel)
 		$("a[href='#magic']",$cpanel).click ->
 			$modal.modal()
 			false

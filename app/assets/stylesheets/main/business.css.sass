@@ -16,6 +16,7 @@
 		opacity: 1
 	100%
 		opacity: 0.3
+
 #business
 	padding: 30px
 	background: white url(/assets/img/bg/bg.jpg)
@@ -56,8 +57,6 @@
 			@include animation-timing-function(linear)
 #quote_wrap
 	padding: 20px
-	@include perspective(1500px)
-	@include perspective-origin(50% 50%)
 	.quote_cell
 		@include radial-gradient(center 40%, circle cover, #F41 0%, #8A0000 100%)
 		margin-bottom: 10px
@@ -70,19 +69,8 @@
 		@include text-shine
 		position: relative
 		@include transition(0.8s,ease-in-out)
-		@include transform-origin(0 50%)
-		@include transform(matrix3d(1, -0.10, -0.65, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 10, 0, 1))
-		-webkit-transform-style: preserve-3d
-		&:hover
-			@include transform(matrix3d(1, 0, 0, 0, 0, 1, 0, 0,0, 0, 1, 0, 0, 0, 0, 1))
 		a
 			color: #410
 			text-shadow: none
 			&:hover
 				@include text-shine
-	.q1	
-		z-index: 99
-	.q2
-		z-index: 98		
-	.q3
-		z-index: 97

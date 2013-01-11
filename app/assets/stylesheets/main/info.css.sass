@@ -21,7 +21,7 @@
 		@include text-shadow-inverse
 		span.icon-circle-arrow-up
 			position: absolute
-			top: -5px
+			top: -30px
 			left: 48%
 	#register
 		img
@@ -37,9 +37,10 @@
 			height: 64px			
 	#brand			
 		img
+			width: 190px
 			@include transform(rotate(-60deg))
 			@include transition(1s)
-	#brand.present
+	#brand.active
 		img
 			@include transform(rotate(0deg))
 #login_contain
