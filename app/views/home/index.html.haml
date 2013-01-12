@@ -1,7 +1,6 @@
 .logo_text
 	17up
-.sorry_tip
-	Sorry ! IE is never supported!
+= render 'sorry'
 #index_wrap
 	#impress
 		#register.step(data-x="0" data-y="1800" data-z="3000" data-scale="1")
@@ -13,8 +12,8 @@
 				%span.icon-circle-arrow-up
 		#belief.step.tallys(data-x="0" data-y="950" data-z="1500" data-scale="1")
 			✿ Love can change anything
-		#queen.amienne.step(data-x="0" data-y="100" data-z="0" data-scale="1")
-			♛ the show must go on
+		#principle.amienne.step(data-x="0" data-y="100" data-z="0" data-scale="1")
+			♛ the show must go on			
 		#contact.step.text_center(data-x="0" data-y="-800" data-z="1500"  data-scale="1")
 			- $contact.each do |k,v|
 				= contact_img_link "icon/#{k}_big.png",v,k.to_s

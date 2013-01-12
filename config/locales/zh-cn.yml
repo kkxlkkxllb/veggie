@@ -2,6 +2,7 @@ zh-cn:
   errors:
     not_found: 页面不存在
     crash: 囧啊，宕机了
+    browser: 对不起，你的浏览器不被本星球支持，建议你下载
   mobile:
     title: 迷你版
   title: 17up

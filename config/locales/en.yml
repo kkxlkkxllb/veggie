@@ -2,6 +2,10 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  errors:
+    not_found: Page Not Found
+    crash: holy shit
+    browser: sorry your browser is not supported by us
   title: 17up
   subtitle: Imagine Planet
   door: start

@@ -1,7 +1,7 @@
 class window.Home
 	@init: ->
 		home = new Home()
-		home.info($("#impress"))
+		home.welcome($("#impress"))
 		if $("#top_nav").length is 0
 			$("html").addClass("home")
 	@menu_fade: ->
@@ -18,7 +18,7 @@ class window.Home
 		)
 	constructor: ->
 		Utils.masonry($("#user_list"),'.user_item')				
-	info: ($wrap)->
-		if $wrap.length is 1 and !$('body').hasClass("impress-not-supported")
+	welcome: ($wrap)->
+		if $wrap.length is 1
 			$wrap.jmpress()
 			$wrap.show()

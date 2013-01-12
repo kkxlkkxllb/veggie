@@ -552,7 +552,7 @@
 		// CHECK FOR SUPPORT
 		if (checkSupport() === false) {
 			if (settings.notSupportedClass) {
-				jmpress.addClass(settings.notSupportedClass);
+				jmpress.parents('body').addClass(settings.notSupportedClass);
 			}
 			return;
 		} else {

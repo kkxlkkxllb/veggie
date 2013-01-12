@@ -1,21 +1,29 @@
 @import "utils"
-
+.not-supported
+	.sorry_tip
+		display: block
+	.step
+		display: none
+	#index_wrap
+		height: 0px
 .logo_text
 	text-align: center
 	font: bold 12em sans-serif
 	@include text-3d
 .sorry_tip
 	text-align: center
-	font: bold 10em sans-serif
 	display: none
-.impress-not-supported
-	.sorry_tip
-		display: block
-	.logo_text
-		display: none
+	h1
+		margin: 40px 0
+		font: bold 10em sans-serif
+		font-size: 40px		
+	.help_link
+		margin: 40px 0
+		a
+			display: inline-block
 #index_wrap
 	height: 300px
-	position: relative
+	position: relative		
 	.step
 		text-align: center
 		@include text-shadow-inverse
