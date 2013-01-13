@@ -37,29 +37,40 @@ class window.Members
 		imagine = ($current,wid) ->
 			unless $current.hasClass 'loaded'
 				$current_img = $current.next()
-				img = $current_img.find("span.origin img")
-				img.attr("src",img.attr('data'))
+				Utils.image_imagine $current_img
 				$.get "/words/imagine?id=#{wid}",(data) ->
 					html = ""
 					if data.status is 0	
 						if data.data.m
-							$current_img.find('.me img').attr "src",data.data.m		
+							$img = $current_img.find('.me img')
+							$img.attr("src",data.data.m)
+							$img.fadeIn()
 						for img in data.data.imagine
 							html += "<span class='img imagine'><img src='#{img}' /></span>" 
 					$(".img_wrap",$current_img).append(html)
 				$current.addClass 'loaded'
-		step_handle = ($current,$cpanel) ->
+		step_handle = ($current,$cpanel,max = $(".step").length) ->
 			id = $current.attr 'wid'
-			play_audio($current.find("audio"))				
+			play_audio($current.find("audio"))
+			percent = ($(".step").index($current) + 1)*100/max
+			$("#progress .current_bar").css "width": "#{percent}%"	
 			if $current.hasClass 'word_pic'
 				$(".group-img",$cpanel).addClass 'active'
 				$(".group-word",$cpanel).removeClass 'active'					
 				$("input#id",$cpanel).val(id)
-			else
+			else if $current.hasClass 'word_item'
 				$(".group-img",$cpanel).removeClass 'active'
 				$(".group-word",$cpanel).addClass 'active'
 				imagine($current,id)
-				
+		start_learn = ->
+			$("#start_page").fadeOut()
+			Home.menu_fade()
+			$("#progress").addClass 'active'					
+			step_handle($(".step.active",$wrap),$cpanel)									
+			h = $(window).height()/3
+			$(".group",$cpanel).css "top": "#{h}px"
+			$(".step",$wrap).on 'enterStep', (e) ->
+				step_handle($(e.target),$cpanel)
 		if $wrap.length is 1
 			$wrap.jmpress
 				keyboard:
@@ -68,14 +79,16 @@ class window.Members
 						32: null
 						37: null
 						39: null
-						
-			step_handle($(".step.active",$wrap),$cpanel)
-			Home.menu_fade()
 			$wrap.show()
-			h = $(window).height()/3
-			$(".group",$cpanel).css "top": "#{h}px"
-			$(".step",$wrap).on 'enterStep', (e) ->
-				step_handle($(e.target),$cpanel)
+			if $.cookie "course_status"
+				start_learn()
+			else
+				$("#start_page").fadeIn()
+				$("#top_nav").css 'opacity':'0'
+				$("#startup").click ->
+					$.cookie "course_status", "start", expires: 7
+					$wrap.jmpress "goTo",$('.step').first()
+					start_learn()
 		$("a[href='#magic']",$cpanel).click ->
 			$modal.modal()
 			false
@@ -84,8 +97,13 @@ class window.Members
 			provider = $(@).attr('data')
 			$.get "/olive/fetch?provider=#{provider}",(data) ->
 				if data.status is 0
-					html = ""					
+					html = ""
+					for img in data.data
+						html += "<img src='#{img}' />"				
 					$(".images",$modal).html(html)				
+					Utils.loaded $modal
+				else
+					$(".errors",$modal).fadeIn()
 					Utils.loaded $modal
 			false
 		$("a[href='#upload']",$cpanel).click ->	

@@ -1,3 +1,5 @@
+#progress
+	.current_bar
 #cpanel.active
 	.group-img.group
 		= render 'members/sub_module/image_upload',:wid => 0,:url => '/words/upload_img'
@@ -23,6 +25,6 @@
 		.word_pic.step{:wid => w[:id],:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p_"+w[:title]}(data-x="0" data-scale="1")
 			.img_wrap
 				%span.img.origin
-					= image_tag('icon/default.png',:data => w[:image])
+					= image_tag(w[:image])
 				%span.img.me
 					= image_tag('icon/default.png')

@@ -5,8 +5,12 @@ class MembersController < ApplicationController
   def dashboard
     set_seo_meta(current_member.name)
     if params[:course]
-      @course = Course.find(params[:course])
-      @course.check(current_member)
+      begin
+        @course = Course.open.find(params[:course])
+        @course.check(current_member)
+      rescue
+        nil
+      end
     else
       @course = current_member.current_course
     end

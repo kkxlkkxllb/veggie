@@ -6,10 +6,13 @@ class WordsController < ApplicationController
   # current_member & word_id
   def imagine
     @word = Word.find(params[:id])
+    # 个人图解
     if uw = current_member.has_u_word(@word)
       @my_pic = uw.image
     end
+    # 关联图解
     imgs = @word.rich_images
+
     if imgs.any?
       render_json(0,'ok',{:m => @my_pic,:imagine => [] })
     else
