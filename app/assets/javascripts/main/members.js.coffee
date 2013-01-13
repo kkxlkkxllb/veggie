@@ -71,6 +71,7 @@ class window.Members
 			$(".group",$cpanel).css "top": "#{h}px"
 			$(".step",$wrap).on 'enterStep', (e) ->
 				step_handle($(e.target),$cpanel)
+				
 		if $wrap.length is 1
 			$wrap.jmpress
 				keyboard:
@@ -80,13 +81,14 @@ class window.Members
 						37: null
 						39: null
 			$wrap.show()
-			if $.cookie "course_status"
+			cid = $("#start_page").attr 'cid'
+			if $.cookie "course_#{cid}"
 				start_learn()
 			else
-				$("#start_page").fadeIn()
+				$("#start_page").fadeIn()				
 				$("#top_nav").css 'opacity':'0'
 				$("#startup").click ->
-					$.cookie "course_status", "start", expires: 7
+					$.cookie "course_#{cid}", true, expires: 7
 					$wrap.jmpress "goTo",$('.step').first()
 					start_learn()
 		$("a[href='#magic']",$cpanel).click ->

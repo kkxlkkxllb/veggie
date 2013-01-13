@@ -1,4 +1,4 @@
-#start_page.clearfix
+#start_page.clearfix{:cid => c["id"]}
 	#course_summary.left
 		%h1.title.tallys
 			= c["title"]
@@ -13,7 +13,8 @@
 				= c["word_cnt"]*1.5
 				分钟
 		.start
-			%input#startup.btn.btn-success.btn-large(type="button" autofocus="autofocus" value="Ready Go")
+			%span#startup.btn.btn-success.btn-large
+				Ready Go
 		.alert.tags
 			tags:
 			- c["ctags"].split(";").each do |tag|
