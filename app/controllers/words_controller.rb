@@ -97,12 +97,8 @@ class WordsController < ApplicationController
 	def upload_mov
 		file = params[:mov]
 		data = open(file.tempfile.path){|f|f.read}
-    file = File.open(File.join("public/",file.original_filename),"wb") << data
+    file = File.open(File.join("public/system",file.original_filename),"wb") << data
     file.close
-		respond_to do |format|
-			format.js
-			format.html
-		end
 	end
 
 	# U Word

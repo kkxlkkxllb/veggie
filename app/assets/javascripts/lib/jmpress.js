@@ -1620,7 +1620,7 @@
 		});
 		// KEYDOWN EVENT
 		$(settings.fullscreen ? document : jmpress)
-			.bind("keydown"+current.keyboardNamespace, function( event ) {
+			.bind("keyup"+current.keyboardNamespace, function( event ) {
 			var eventTarget = $(event.target);
 
 			if ( !settings.fullscreen && !eventTarget.closest(jmpress).length || !keyboardSettings.use ) {
@@ -2400,7 +2400,7 @@
 	'use strict';
 	$.jmpress("register", "toggle", function( key, config, initial ) {
 		var jmpress = this;
-		$(document).bind("keydown", function( event ) {
+		$(document).bind("keyup", function( event ) {
 			if ( event.keyCode === key ) {
 				if ($(jmpress).jmpress("initialized")) {
 					$(jmpress).jmpress("deinit");

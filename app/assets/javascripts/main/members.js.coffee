@@ -95,18 +95,32 @@ class window.Members
 			$modal.modal()
 			false
 		$("a[href='#provider']",$modal).click ->
-			Utils.loading $modal
+			# deinit jmpress
+			Utils.loading $(".images",$modal)
 			provider = $(@).attr('data')
+			$(".magic_items a").removeClass 'active'
+			$(@).addClass 'active'
 			$.get "/olive/fetch?provider=#{provider}",(data) ->
 				if data.status is 0
 					html = ""
 					for img in data.data
 						html += "<img src='#{img}' />"				
-					$(".images",$modal).html(html)				
-					Utils.loaded $modal
+					$(".images",$modal).html(html)
+					$('img',$(".images",$modal)).click ->
+						$img = $(@)
+						Utils.loading $img								
+						$current = $(".step.active",$wrap)
+						$.post "/words/select_img"
+							id: $current.attr('wid')
+							img_url: $img.attr('src')
+							(data) ->
+								if data.status is 0	
+									$modal.modal('hide')
+									$current.find('.me img').attr("src",data.data).fadeIn()
+								Utils.loaded $img
 				else
 					$(".errors",$modal).fadeIn()
-					Utils.loaded $modal
+				Utils.loaded $(".images",$modal)
 			false
 		$("a[href='#upload']",$cpanel).click ->	
 			if $("input#id",$cpanel).val() isnt "0"

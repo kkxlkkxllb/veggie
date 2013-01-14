@@ -70,10 +70,10 @@ html.uhome
 			position: relative
 			a.left				
 				left: 0
-				@include transform(translateX(-1000px))
+				@include transform(translateX(-400px))
 			a.right
 				right: 0
-				@include transform(translateX(1000px))
+				@include transform(translateX(400px))
 		.group.active
 			a.left
 				@include transform(translateX(0px))
@@ -90,14 +90,12 @@ html.uhome
 				text-align: center
 				span.img												
 					img
-						@include round(10px)					
-				.origin
-					img
-						@include shadow(0px,1px,3px,rgba(0,0,0,.3))
+						@include round(10px)
+						@include shadow(0px,1px,3px,rgba(0,0,0,.3))			
 				.me				
 					img
 						display: none
-						@include shadow(0px,0px,20px,#00bbff)
+						
 		.word_item
 			text-align: center
 			line-height: 1.3

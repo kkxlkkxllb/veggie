@@ -75,10 +75,10 @@ class window.Course
 				if data.status is 0
 					html = ''
 					for i in data.data
-						html += "<div class='pic'><img src='#{i}' /></div>"
-					$(".images_wrap",$modal).html(html)
+						html += "<img src='#{i}' />"
+					$(".images",$modal).html(html)
 					Utils.loaded $modal
-					$('.pic img',$(".images_wrap",$modal)).click ->
+					$('img',$(".images",$modal)).click ->
 						$modal.modal('hide')					
 						Utils.loading $target
 						img = $(@).attr('src')

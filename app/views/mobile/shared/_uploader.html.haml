@@ -1,6 +1,0 @@
-.hidden
-	= form_tag url,:multipart => true do
-		- if defined?(wid)
-			= hidden_field_tag :id,wid
-		.hiddenfile
-			= file_upload_for(type)
