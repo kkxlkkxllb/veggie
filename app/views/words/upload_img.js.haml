@@ -1,0 +1,6 @@
+- if @new_image
+	var $current = $("#impress .step.active");
+	$current.find('.me img').attr("src","#{@new_image}").fadeIn();
+	Utils.flash("#{t('flash.notice.image')}",'info','left');
+- else
+	Utils.flash("#{t('flash.error.image')}",'error','right');

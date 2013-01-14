@@ -1,0 +1,11 @@
+#business
+	#map-center
+		%span.dancer
+			love
+		%span.moon
+			✈
+	#quote_wrap
+		- r_num = (rand(@quotes.length - 4)).abs
+		- @quotes[r_num..(r_num+2)].each_with_index do |q,i|
+			.quote_cell{:class => "q#{i+1}"}
+				=raw q

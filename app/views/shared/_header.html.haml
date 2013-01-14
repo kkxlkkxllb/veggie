@@ -1,0 +1,44 @@
+#top_nav.navbar.navbar-fixed-top
+	.navbar-inner
+		.container-fluid
+			%button.btn.btn-navbar(type="button" data-toggle="collapse" data-target=".nav-collapse")
+				- 3.times do
+					%span.icon-bar
+			%span.brand.dancer
+				17up
+				- if @leafs and params[:pid]
+					%span.tag
+						&raquo;
+						= Provider.find(params[:pid]).user_name
+			.container.nav-collapse
+				%ul.nav
+					%li{:class => ("active" if @leafs)}
+						= link_to leafs_path do
+							%i.icon-leaf
+							= t("leafs.title")
+					%li{:class => ("active" if @courses)}
+						= link_to center_path do
+							%i.icon-book
+							= t("center.title")
+					%li{:class => ("active" if @users)}
+						= link_to square_path do
+							%i.icon-flag
+							= t("square.title")
+					%li{:class => ("active" if @quotes)}
+						= link_to business_path do
+							%i.icon-comments-alt
+							= t("business.title")
+				- if current_member
+					%ul.nav.pull-right
+						%li.member{:class => ("active" if action_name == "dashboard")}
+							%a{:href => account_path}
+								%i.icon-home
+						%li.member{:class => ("active" if @provider_num)}
+							%a{:href => setting_path }
+								%i.icon-cogs
+						%li
+							%a(href = "/members/sign_out" data-method="delete" rel="nofollow")
+								%span.label.label-important
+									%i.icon-off
+									登出
+		

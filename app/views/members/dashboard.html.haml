@@ -1,0 +1,9 @@
+= render "modal/magic_images"
+.user_bg(data-o = "0.1")
+	= image_tag("img/theme/imagine/1.jpg")
+#user_home
+	- if @u_words.any?		
+		= render "members/sub_module/start_page",:c => @course.as_json
+		= render "members/sub_module/impress",:data => @u_words
+	- else
+		= render "games/allen"

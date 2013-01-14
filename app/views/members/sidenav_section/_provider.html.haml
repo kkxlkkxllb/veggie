@@ -1,0 +1,16 @@
+%h4.alert
+	%span.icon-link
+	已关联 
+	= @provider_num
+	个身份
+- if @provider_num != Provider::PROVIDERS.length
+	.alert.alert-info
+		任何你所关联的身份都可以用来登录哦，赶紧都关联上吧，好处多多
+.providers.clearfix
+	- Provider::PROVIDERS.each do |p|	
+		- if current_member.has_provider?(p)
+			.item.pull-left.binded
+				= image_tag("icon/#{p}_big.png",:title => p)
+		- else
+			.item.pull-left
+				= link_to image_tag("icon/#{p}_big.png",:title => p),member_omniauth_authorize_path(p)

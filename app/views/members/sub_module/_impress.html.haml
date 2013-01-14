@@ -1,0 +1,30 @@
+#progress
+	.current_bar
+#cpanel.active
+	.group-img.group
+		= render 'shared/uploader',:wid => 0,:url => '/words/upload_img',:type => "image"
+		%a.button.blue.glossy.left(data-icon=" " href="#upload" title="上传图片注释")
+			%i.icon-upload-alt
+		%a.button.orange.glossy.right(data-icon=" " href="#magic" title="获取魔法")
+			%i.icon-magic
+	.group-word.group
+		%a.button.green.glossy.left(data-icon=" " href="#spell" title="拼写练习")
+			%i.icon-edit
+		%a.button.pink.glossy.right(data-icon=" " href="#annotate" title="添加注释")
+			%i.icon-fire
+#impress
+	- data.each_with_index do |w,i|						
+		.word_item.step{:wid => w[:id],:"data-y" => -i*1000,:"data-z" => -i*1500,:id => "#{i+1}_"+w[:title]}(data-x="0" data-scale="1")
+			.title
+				%span.amienne
+					= w[:title]		
+			.content
+				%span
+					= w[:content]
+			%audio{:data => w[:audio]}
+		.word_pic.step{:wid => w[:id],:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p_"+w[:title]}(data-x="0" data-scale="1")
+			.img_wrap
+				%span.img.origin
+					= image_tag(w[:image])
+				%span.img.me
+					= image_tag('icon/default.png')

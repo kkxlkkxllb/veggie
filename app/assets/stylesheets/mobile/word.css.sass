@@ -1,0 +1,53 @@
+@import "utils"
+
+#words_wrap
+	padding-top: 35px
+.word:first-child
+	border-top: none
+.word:last-child
+	border-bottom: none
+.word
+	margin: 0 auto
+	width: 300px
+	border-bottom: 1px solid #000
+	border-top: 1px solid #323232
+	padding: 10px 0
+	.title
+		height: 50px
+		font-size: 30px
+		line-height: 50px
+		@include text-shadow-content-white
+	.field
+		color: #999
+		font-size: 14px
+		padding: 8px
+		border: 1px solid #1d1d1d
+		position: relative
+		@include transition(.2s)
+	.good
+		background: rgba(0,0,0,0.25)
+		@include glass
+		@include text-shadow-field
+	.f_0
+		border-left: 5px solid #555
+	.f_1
+		border-left: 5px solid #3DACE0
+	.f_2
+		border-left: 5px solid #C1FF7D
+	.f_3
+		border-left: 5px solid #EA8072
+#reset
+	text-align: center
+	span.reset_btn
+		padding: 5px
+		display: block
+		background: rgba(0,0,0,0.25)
+		@include glass
+		@include text-shadow-field
+		@include round(8px)
+	span.tag_btn
+		padding: 5px
+		margin: 5px
+		display: block
+		@include text-shadow-content-white
+		background: #3DACE0

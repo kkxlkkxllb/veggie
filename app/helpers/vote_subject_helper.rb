@@ -1,0 +1,2 @@
+module VoteSubjectHelper
+end

@@ -1,0 +1,53 @@
+zh-cn:
+  errors:
+    not_found: 页面不存在
+    crash: 囧啊，宕机了
+    browser: 对不起，你的浏览器不被本星球支持，建议你下载
+  mobile:
+    title: 迷你版
+  title: 17up
+  subtitle: Imagine
+  keywords: "教育,语言,language,education,imagine,planet,knowledge,peace,future"
+  describe: "这是社区也是一座城市，能制造快乐给每一个热爱学习的人，语言，人类文明的基石，了解世界的钥匙。新纪元的开篇，让我们从重新认知审视这个世界开始，从记忆每个词汇开始以一种特别的方式，第一篇章：英语篇"
+  door: "start"
+  flash:
+    notice:
+      register: "欢迎来到 17up 星球，来完成属于你的冒险，先申领一个 ID 吧!"
+      login: "学习，任何时候开始都不晚，欢迎回来！"
+      bind: "绑定成功啦!"
+      uid: "恭喜你，ID 登记成功，现在你正式成为这里的一份子了"
+      avatar: "哇噻，好酷的头像，更新成功了"
+      image: "好棒！单词快到脑子里来"
+    error:
+      bind: "啊哟，您要绑定的帐号已被使用嘞，如需帮助，请联系 %{email}"
+      uid: "遗憾呐，你想要的 ID 已经被抢占了，换一个试试"
+      avatar: "头像太大啦，图片格式仅支持 png、jpg、gif"
+      image: "图片最大 2M 限制"
+  center:
+    title: "学院"
+    keywords: "授课,词汇,文化,地域,历史"
+    describe: "学院位于 17up 世界的核心，汇聚了所有的智慧，想要进入这里请先注册成为 17up 的公民吧"
+  leafs:
+    title: "花园"
+    keywords: "资讯,微博,文萃"
+    describe: "宁静而充满生机的花园，任何路过 17up 世界的人都可以欣赏这儿的美景"
+  square:
+    title: "广场"
+    keywords: "友情链接,热门排行,推荐"
+    describe: "位于花园和学院之间的地带，就是宽阔的 17up 广场"
+  business:
+    title: "生活区"
+    keywords: "商业街,business,life,style"
+    describe: "从广场穿过花园就到 17up 居民的生活区了"
+  course:
+    new: "新建课程"
+  members:
+    edit: "%{name} 设定"
+    sidenav:
+      profile: "基本资料"
+      provider: "关联身份"
+      account: "公民育成"
+  greet:
+    new_user: "[撒花] @%{name} 欢迎来到 17up 星球， 成为第 %{num} 位公民。［%{motto}］"
+    new_leafs: "%{motto}，今天%{cast}度，%{num} 片新叶长成：http://17up.org"
+    bind_provider: "[笑哈哈] @%{name} 交个朋友吧,［%{motto}］"

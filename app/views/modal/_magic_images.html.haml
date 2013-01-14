@@ -1,0 +1,17 @@
+#magic_images_modal.hide.modal.fade
+	.modal-header
+		%button.close(type="button" data-dismiss="modal")
+			×
+		%h3
+			你可以使用下列技能取图
+	.modal-body
+		.errors.alert.alert-error
+			TAT，你还没有这些技能呢，快去关联对应的帐户吧
+			= link_to (setting_path + "#provider") do
+				%span.icon-share-alt
+		.magic_items
+			- %w{instagram tumblr}.each do |p|
+				%a{data: p}(href = "#provider")
+					= image_tag("icon/#{p}_big.png")
+		.images
+		

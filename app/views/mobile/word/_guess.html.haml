@@ -1,0 +1,8 @@
+- @words.each do |w|
+	.word
+		.title{:rel => w.title}
+			%span.w_name
+				= w.title
+		- w.word_guess(@tag).each_with_index do |f,i|
+			.field{:rel => f.title,:class => "f_#{i}"}
+				= f.content

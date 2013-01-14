@@ -1,0 +1,72 @@
+@import "utils"
+@import url(http://fonts.googleapis.com/css?family=Dancing+Script:700)
+
+.dancer
+	font-family: "Dancing Script", cursive
+.user_bg
+	opacity: 0
+	position: absolute
+	top: 0
+	left: 50%
+	margin-left: -480px
+	z-index: -1
+	img
+		width: 960px
+		height: 100%	
+.break_line
+	font-size: 26px
+	margin: 30px 0
+	text-align: center
+	b
+		height: 2px
+		margin-top: 12px
+		background: #1d1d1d
+		width: 45%
+.break_line.thin
+	margin: 0
+	font-size: 18px
+	b
+		height: 1px
+		width: 48%		
+html.home
+	height: 100%
+	@include radial-gradient(50% 50%,circle cover,#9dcce1,#52a2c8)
+	body
+		background-color: transparent 
+#infscr-loading
+	@include loader(45%)
+
+.masonry
+	@include transition-masonry
+	.masonry-brick
+		@include transition-masonry-brick
+
+#footer
+	text-align: center
+	color: #171717
+	font-size: 16px
+	.tool
+		padding: 20px
+#top_nav
+	@include transition(.8s,ease)
+	overflow: hidden
+	.brand
+		font-size: 24px
+	li
+		font-size: 16px
+	li.member	
+		font-size: 19px
+#impress
+	display: none
+	.step
+		position: relative
+		width: 900px
+		-webkit-box-sizing: border-box
+		-moz-box-sizing:		border-box
+		-ms-box-sizing:			border-box
+		-o-box-sizing:			border-box
+		box-sizing:					border-box
+		font-size: 48px
+		line-height: 1.5
+#main
+	width: 100%

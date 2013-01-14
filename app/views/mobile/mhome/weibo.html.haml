@@ -1,0 +1,28 @@
+- if @users
+	#user_list_wrap
+		#user_list.clearfix{:cnt => @users.length }
+			- @users.each do |u|
+				%a.l2p{:pid => u.id }(href="#")
+					.user_item
+						.avatar
+							= image_tag(u.avatar(:large))
+						.name
+							= u.user_name
+#leafs_wrap
+	- @leafs.each do |leaf|
+		.leaf
+			.info.clearfix
+				%span.avatar.left
+					= my_image_tag(leaf[:avatar],nil,25)
+				%span.name.left
+					%a.l2p{:pid => leaf[:pid]}(href="#")
+						= leaf[:name]
+				%span.time.right
+					= time_stamp(leaf[:time_stamp])
+			.content
+				= auto_link(leaf[:content])
+			- if leaf[:img]
+				.img
+					= my_image_tag(leaf[:img],nil,leaf[:height])
+			- if leaf[:video]
+				%video{:src => leaf[:video]}(preload="auto" controls height=250 width=300 webkit-playsinline)

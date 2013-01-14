@@ -1,0 +1,15 @@
+#allen.clearfix
+	.nav_item
+		#weekdays.relative
+			- $game[:allen].each do |f|
+				.weekday
+					= image_tag("fruit/#{f[0]}.png")
+					%span.button.xs.title.glossy.back{:class => f[1] }(data-icon=" ")
+						= f[0]
+	.nav_item
+		#rand_1.relative
+	.nav_item
+		#rand_2.relative
+	#panel.active
+		%a.button.xs.glossy.back.blue{href: "#try_again"}(data-icon="✈")
+			再玩一次

@@ -1,0 +1,95 @@
+@import "utils"
+.not-supported
+	.sorry_tip
+		display: block
+	.step
+		display: none
+	#index_wrap
+		height: 0px
+.logo_text
+	text-align: center
+	font: bold 12em sans-serif
+	@include text-3d
+.sorry_tip
+	text-align: center
+	display: none
+	h1
+		margin: 40px 0
+		font: bold 10em sans-serif
+		font-size: 40px		
+	.help_link
+		margin: 40px 0
+		a
+			display: inline-block
+#index_wrap
+	height: 300px
+	position: relative		
+	.step
+		text-align: center
+		@include text-shadow-inverse
+		span.icon-circle-arrow-up
+			position: absolute
+			top: -30px
+			left: 48%
+	#register
+		img
+			margin: 5px
+		span.login_tip
+			@include text-shadow-inverse
+			font-size: 20px
+			margin-top: 20px
+	#contact
+		font-size: 40px
+		img
+			width: 64px
+			height: 64px			
+	#brand			
+		img
+			width: 190px
+			@include transform(rotate(-60deg))
+			@include transition(1s)
+	#brand.active
+		img
+			@include transform(rotate(0deg))
+#login_contain
+	width: 800px
+	margin: 0 auto
+	padding: 20px 0
+	.title
+		padding-bottom: 10px
+		font-size: 16px
+		text-align: center
+	#login_form
+		width: 270px
+		margin: 0 auto
+		margin-bottom: 50px
+		padding: 20px
+		background: white url(/assets/img/back_pattern/back_pattern.png)
+		@include inset-shadow(0,2px,5px,#999)
+		@include round(15px)
+	#logo
+		font-size: 30px
+		.logo
+			display: inline-block
+			width: 170px
+			height: 170px
+			background-image: url(/assets/icon/default.png)
+			background-size: 170px 170px
+	#register_form
+		padding: 20px
+		height: 114px
+		background: white url(/assets/img/back_pattern/back_pattern.png)
+		@include inset-shadow(0,2px,5px,#999)
+		@include round(15px)
+		margin: 30px 0
+		.register
+			text-align: center
+			margin: 10px 0
+			a
+				display: inline-block
+				margin: 0 5px		
+				position: relative	
+				@include transition(0.2s)
+				@include reflect
+				&:hover
+					@include transform(scale3d(1.1,1.1,1.1)) 

@@ -1,0 +1,73 @@
+@import "utils"
+
+@include font-face("Tallys","/font/Tallys/Tallys")
+@include font-face("Lobster","/font/Lobster/Lobster",400)
+@include font-face("Droid Sans","/font/Droid Sans/Droid Sans",700)
+@include font-face("Amienne","/font/Amienne/Amienne")
+
+body
+	font-family: "Droid Sans","Microsoft YaHei",Consolas,monospace, sans-serif
+
+.tallys
+	font-family: "Tallys", sans-serif
+	
+.amienne
+	font-family: "Amienne", sans-serif
+
+a img, img
+	border: none
+	vertical-align: middle
+
+a
+	text-decoration: none
+	color: #5185bc
+	&:hover
+		color: #3e6a9a
+		text-decoration: none
+.pagination
+	height: 0px
+	margin: 0
+.pagination a
+	border: 0
+.text_center
+	text-align: center
+
+.text_right
+	text-align: right
+
+.left
+	float: left
+
+.right
+	float: right
+
+.as_link
+	cursor: pointer
+
+.disable_event
+	pointer-events: none
+.w1000
+	width: 1000px
+	margin: 0 auto
+.round
+	@include round(8px)
+	
+.hiddenfile
+	width: 0px
+	height: 0px
+	overflow: hidden
+	position: absolute
+	bottom: 0
+	left: 0
+
+.my_shadow
+	@include shadow(0px,6px,10px,#5e5e5e)
+#flash_message
+	.alert
+		margin: 8px 20px
+	.alert-right
+		width: 200px
+		float: right
+	.alert-left
+		width: 200px
+		float: left

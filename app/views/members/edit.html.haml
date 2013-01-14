@@ -1,0 +1,11 @@
+#user_setting.container.tabbable.tabs-left
+	%ul.nav.nav-tabs
+		- Member::EDIT_SIDENAV.each do |n|
+			%li
+				= link_to "##{n}",:"data-toggle" => "tab" do
+					= t("members.sidenav.#{n}")
+					%i.icon-chevron-right
+	.tab-content
+		- Member::EDIT_SIDENAV.each do |s|
+			.tab-pane{:id => s}
+				= render "members/sidenav_section/#{s}",:s => s

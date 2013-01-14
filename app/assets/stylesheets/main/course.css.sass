@@ -1,0 +1,89 @@
+@import "utils"
+
+html.chome
+	height: 100%
+	background: url(/assets/img/bg/bg_home.png) #D8ECFF
+	body
+		background-color: transparent
+.banner_wrap
+	padding: 10px 20px		
+	.banner_title
+		font-size: 24px
+		margin: 0
+#new_word
+	text-align: center
+	@include fibre
+	padding: 20px
+	position: relative
+	form
+		margin: 0
+	input
+		margin: 0
+		padding: 5px
+		width: 280px
+#library
+	margin-bottom: 40px
+	#course_catelog
+		.banner_wrap
+			position: relative
+			.banner_title
+				@include text-shadow-3d
+			.enroll
+				position: absolute
+				right: 20px
+				top: 15px
+#course_wrap
+	margin-bottom: 40px
+	background: url(/assets/img/subtle_stripes/subtle_stripes.png)		
+	#word_nav
+		padding: 10px 20px
+		background: #F4FEFF url(/assets/img/noise.png)	
+		position: relative
+		@include inset-shadow(0,2px,5px,#999)
+		ul
+			list-style: none
+			margin: 0
+			li
+				float: left
+		span.btn-group
+			position: absolute
+			right: 20px
+			top: 15px
+	#word_ground
+		margin: 0 auto 10px
+		.word_item
+			opacity: 0
+			margin: 5px
+			width: 188px
+			background: #eee
+			@include text-shadow-inverse(#333)
+			border: 4px solid #f5f5f5
+			position: relative
+			@include shadow(0,1px,3px,rgba(0,0,0,.3))						
+			a.audio
+				left: 6px
+				top: 3px
+				color: #888
+				position: absolute
+				@include transition(0.4s,ease)
+				&:hover
+					color: #1d1d1d
+			span
+				padding: 3px 10px
+				display: block
+			span.title	
+				padding-left: 24px
+				border-bottom: 2px solid #f5f5f5
+			span.content
+				border-top: 1px solid #ccc
+			span.ctags
+				height: 20px
+				@include text-shadow-inverse
+				font-weight: bold
+				font-family: serif
+			.cpanel
+				padding: 5px
+				text-align: right				
+			.pic
+				position: relative
+				background: #eee

@@ -1,0 +1,20 @@
+- @leafs.each do |leaf|
+	.leaf
+		- if @admin
+			%span.action.destroy.hide{:lid => leaf[:id] }
+				%i.icon-remove
+			%span.action.edit.hide
+				%a{:href=>"/admin/leaf/#{leaf[:id]}/edit"}
+					%i.icon-pencil
+		.info.clearfix
+			%span.avatar.left
+				= my_image_tag(leaf[:avatar],leaf[:url],25)
+			%span.name.left
+				= link_to leaf[:name],leafs_path(:pid => leaf[:pid])
+			%span.time.right
+				= time_stamp(leaf[:time_stamp])
+		.content
+			= auto_link(leaf[:content])
+		- if leaf[:img]
+			.img
+				= my_image_tag(leaf[:img],leaf[:img_large],leaf[:height])

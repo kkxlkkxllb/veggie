@@ -1,0 +1,36 @@
+@import "utils"
+
+#allen
+	width: 960px
+	margin: 0 auto
+	.nav_item
+		overflow: hidden
+		float: left
+		margin: 5px
+		background: #F4FEFF
+		width: 310px
+		height: 250px
+		line-height: 250px
+		font-size: 80px
+		text-align: center
+		position: relative
+		@include inset-shadow(0,2px,5px,#ccc)
+		@include round(15px)
+		@include transition(0.5s)
+		.relative
+			position: relative
+		#weekdays
+			.weekday
+				position: relative
+				span.title
+					position: absolute
+		span.title
+			position: absolute
+			bottom: 20px
+			left: 103px
+		&:hover
+			background: #fff
+	#panel
+		text-align: center
+		clear: both
+		padding-top: 20px

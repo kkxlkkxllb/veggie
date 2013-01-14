@@ -1,0 +1,75 @@
+@import "utils"
+
+body
+	margin: 0
+.hidden
+	display: none
+img
+	max-width: 100%
+html
+	background: #1d1d1d
+a
+	color: #2D8CDF
+
+#home
+	margin: 0 auto
+	padding: 0
+#m_nav
+	width: 100%
+	margin: 0
+	font-size: 120px
+	@include transition(0.3s)
+	position: absolute
+	.banner
+		height: 180px
+		line-height: 180px
+		text-align: center
+		@include text-shadow-inverse
+	.b1
+		background-color: #555		
+	.b2
+		background-color: #3DACE0
+	.b3
+		background-color: #C1FF7D
+	.b4
+		background-color: #EA8072
+#m_nav.hide
+	@include transform(scale3d(1,0,0))
+	-webkit-transform-style: preserve-3d
+#m_nav_back
+	width:  100%
+	position: fixed
+	top: 0
+	background: rgba(0,0,0,0.5)
+	@include text-shadow-content-white
+	font-size: 18px
+	height: 35px
+	text-align: center
+	line-height: 35px
+	z-index: 90
+#m_flash
+	width:  100%
+	position: fixed
+	top: 0
+	background: rgb(0,153,247)
+	@include text-shadow-content-white
+	font-size: 18px
+	height: 35px
+	text-align: center
+	line-height: 35px
+	z-index: 99
+.clearfix
+	&:after
+		visibility: hidden
+		display: block
+		font-size: 0
+		content: " "
+		clear: both
+		height: 0
+		display: block
+
+html[xmlns] .clearfix
+	display: block
+
+* .clearfix
+	height: 1%

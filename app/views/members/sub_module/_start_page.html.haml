@@ -1,0 +1,40 @@
+#start_page.clearfix{:cid => c["id"]}
+	#course_summary.left
+		%h1.title.tallys
+			= c["title"]
+		.type
+			%span.label.label-info
+				= c["language"]
+			%span.label.label-warning
+				词汇量
+				= c["word_cnt"]
+			%span.label.label-success
+				预计学习时间
+				= c["word_cnt"]*1.5
+				分钟
+		.start
+			%span#startup.btn.btn-success.btn-large
+				Ready Go
+		.alert.tags
+			tags:
+			- c["ctags"].split(";").each do |tag|
+				%i
+					= "##{tag}"
+		.alert.description.alert-info
+			= c["description"]
+	#manual.right
+		%h3
+			操作说明
+		%p
+			请使用键盘方向键导航
+			%br
+			上下键为纵向进度推进
+			%br
+			左右键为横向拓展联想
+		.m1
+			%i.icon-arrow-up
+		.m2
+			%span.icon-arrow-left
+			%span.icon-arrow-down
+			%span.icon-arrow-right
+			

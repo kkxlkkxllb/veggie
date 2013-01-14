@@ -1,0 +1,22 @@
+!!!
+%html
+	%head
+		%title=raw @title
+		%meta(content="text/html; charset=UTF-8" http-equiv="content-type")
+		%meta{'name' => "description", :content => "#{@meta_description}"}
+		%meta{'name' => "keywords", :content => "#{@meta_keywords}"}
+		%meta(name="author" content="veggie")
+		%meta(name="viewport" content="user-scalable=0,width=320.1")
+		%meta(name="apple-mobile-web-app-title" content="17up")
+		%meta(name="apple-mobile-web-app-capable" content="no")
+		%meta(name="apple-mobile-web-app-status-bar-style" content="black")
+		= csrf_meta_tag
+		= javascript_include_tag "mobile/application"
+		= stylesheet_link_tag "mobile/application", :media => "all"	
+		%link(rel="apple-touch-icon" href="/favicon.png")
+	%body
+		%nav
+			= yield :head
+		%section
+			#main
+				= yield

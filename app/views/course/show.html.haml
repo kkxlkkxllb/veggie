@@ -1,0 +1,43 @@
+- if @admin
+	#new_word
+		= form_tag '/words/create',:remote => true do
+			%input(type="search" name="word" id="word" placeholder="输入单词" required="required" autocomplete="off" disableautocomplete )
+	= render 'modal/new_word_tag'
+	= render 'modal/editor_magic'
+#course_wrap
+	.banner_wrap
+		%h3.banner_title.dancer.text_center
+			= "※ " + @course.title + " ※"
+	#word_nav
+		%ul.clearfix	
+			%li.active
+				%a.button.xs.pink.skew(href="#all" ctag="*" data-icon=" ")
+					All
+			- @ctags.each do |t|
+				%li.active
+					%a.button.xs.green.skew{:ctag => "."+t}(href="#filter" data-icon=" ")
+						= t.capitalize
+
+	#word_ground
+		- @result.each do |w|
+			.word_item{:class => w[:tags], :wid => w[:id]}
+				.wd
+					%a.audio(href="#voice")
+						%i.icon-headphones(title="发音")
+						%audio{:src => w[:audio]}
+					%span.title
+						= w[:title]		
+					%span.content
+						= w[:content]
+					%span.ctags
+						= w[:tag_str]
+				- if @admin
+					.cpanel
+						%a.change_btn.label(href="#magic")
+							%i.icon-refresh
+						%a.upload_btn.label(href="#upload")
+							%i.icon-upload-alt						
+						%a.itag.label(href="#edit")
+							%i.icon-tag(title="编辑")
+				.pic
+					= image_tag(w[:image],:title => w[:title])

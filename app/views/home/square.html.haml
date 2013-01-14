@@ -1,0 +1,21 @@
+#square_wrap
+	.banner_wrap
+		%h3.banner_title.text_center
+			友情链接
+	#friend_link
+		%ul.clearfix
+			- @fls.each do |link|
+				%li
+					=link_to link[0].capitalize,link[1],:target => "blank"
+	.banner_wrap
+		%h3.banner_title.text_center
+			✰ 达人
+	#user_list
+		- @users.each do |u|
+			%a{:href => leafs_path(:pid => u.id)}
+				.user_item
+					.avatar
+						= image_tag(u.avatar(:large))
+					.name
+						= image_tag("icon/#{u.provider_type}.png")
+						= u.user_name
