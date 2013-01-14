@@ -30,5 +30,6 @@ module ApplicationHelper
 		end
 		file_field_tag type.to_sym,:accept => accept
 	end
+
   
 end
