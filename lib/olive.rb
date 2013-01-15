@@ -125,7 +125,7 @@ module Olive
 
 		def user_media_feed
 			resp = @client.user_media_feed
-			@post = get_post(resp)
+			@post = get_post(resp.data)
 		end
     
     private
