@@ -68,12 +68,16 @@ module Olive
 	    return @post
     end
     
-    def magic(blog_name)
+    def user_media(blog_name)
       data = @client.posts(blog_name,:type => "photo")["posts"]
       data.inject([]) do |result,d|
         result << d["photos"][0]["original_size"]["url"].sub(/_\d+\./,"_400.")
         result
       end
+    end
+    
+    def user_liked_media
+      data = @client.likes
     end
   
   end
@@ -126,6 +130,11 @@ module Olive
 		def user_media_feed
 			resp = @client.user_media_feed
 			@post = get_post(resp.data)
+		end
+		
+		def user_liked_media
+		  resp = @client.user_liked_media
+		  @post = get_post(resp.data)
 		end
     
     private

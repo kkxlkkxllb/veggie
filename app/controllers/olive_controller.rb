@@ -80,7 +80,7 @@ class OliveController < ApplicationController
       when 'instagram'
 	      @result = Olive::Instagram.new(:access_token => provider.token).user_media_feed.map{|x| x[:photo]}
       when 'tumblr'
-        @result = Olive::Tumblr.new.magic(provider.metadata[:blogs][0][:name]+".tumblr.com")
+        @result = Olive::Tumblr.new.user_media(provider.metadata[:blogs][0][:name]+".tumblr.com")
       end
     end	 
     if !@result.blank?   

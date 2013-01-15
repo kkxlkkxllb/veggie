@@ -53,7 +53,7 @@ class window.Members
 			id = $current.attr 'wid'
 			play_audio($current.find("audio"))
 			percent = ($(".step").index($current) + 1)*100/max
-			$("#progress .current_bar").css "width": "#{percent}%"	
+			$("#progress .current_bar").css "width": "#{percent}%"
 			if $current.hasClass 'word_pic'
 				$(".group-img",$cpanel).addClass 'active'
 				$(".group-word",$cpanel).removeClass 'active'					
