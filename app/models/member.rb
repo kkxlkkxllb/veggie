@@ -35,6 +35,7 @@ class Member < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,:role,:uid
   # uid 代替id，由用户自定义，长度限定
   validates :uid, :uniqueness => {:scope => :role },
+									:allow_blank => true,
                   :length => {:in => 2..20 },
                   :format => {:with => /^[A-Za-z0-9_]+$/ }
 
