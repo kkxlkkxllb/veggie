@@ -2,7 +2,7 @@
 	.current_bar
 #cpanel.active
 	.group-img.group
-		= render 'shared/uploader',:wid => 0,:url => '/words/upload_img',:type => "image"
+		= render 'shared/uploader',:wid => 0,:url => '/words/upload_img_u',:type => "image"
 		%a.button.blue.glossy.left(data-icon=" " href="#upload" title="上传图片注释")
 			%i.icon-upload-alt
 		%a.button.orange.glossy.right(data-icon=" " href="#magic" title="获取魔法")
@@ -14,7 +14,7 @@
 			%i.icon-fire
 #impress
 	- data.each_with_index do |w,i|						
-		.word_item.step{:wid => w[:id],:"data-y" => -i*1000,:"data-z" => -i*1500,:id => "#{i+1}_"+w[:title]}(data-x="0" data-scale="1")
+		.word_item.step{:wid => w[:id],:"data-y" => -i*1000,:"data-z" => -i*1500,:id => i+1}(data-x="0" data-scale="1")
 			.title
 				%span.amienne
 					= w[:title]		
@@ -22,10 +22,33 @@
 				%span
 					= w[:content]
 			%audio{:data => w[:audio]}
-		.word_pic.step{:wid => w[:id],:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p_"+w[:title]}(data-x="0" data-scale="1")
+		.word_pic.step{:wid => w[:id],:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p"}(data-x="0" data-scale="1")
 			.img_wrap
 				%span.img.origin
 					= image_tag(w[:image])
 				%span.img.me
 					= image_tag('icon/default.png')
-
+	#start_exam.step.text_center{:"data-y" => -(data.length*1000+240),:"data-z" => -(data.length*1500+150)}(data-x="0" data-scale="1")
+		%h3
+			本课程到此为止咯，是否有所收获呢，检验下成果吧！
+		%p.active.exam
+			%a.button.pink.glossy(data-icon=" " href="#exam")
+				开始测试
+		.break_line.clearfix
+			%b.left
+			%i.icon-screenshot
+			%b.right
+		%h3
+			或者你也可以再复习一次
+		%p.active.again
+			%a.button.green.glossy(data-icon=" " href="#again")
+				温故知新
+		.break_line.clearfix
+			%b.left
+			%i.icon-group
+			%b.right								
+		%h3
+			一个人学习太寂寞？邀请朋友一起来比试下吧
+		%p.active.invite
+			%a.button.orange.glossy(data-icon=" " href="#invite")
+				邀请友人

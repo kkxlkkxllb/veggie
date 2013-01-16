@@ -39,10 +39,11 @@ Veggie::Application.routes.draw do
     post "u_create"
     post "add_tag"
     post "fetch_img"
-  	post "upload_img"
-		post "upload_mov"
-  	post "select_img"
-    post "destroy"
+  	post "upload_img_u"
+  	post "upload_img_c"
+		post "upload_mov_u"
+  	post "select_img_u"
+    post "destroy_u"
   end
   
   # leafs

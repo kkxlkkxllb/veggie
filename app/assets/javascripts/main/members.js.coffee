@@ -62,6 +62,9 @@ class window.Members
 				$(".group-img",$cpanel).removeClass 'active'
 				$(".group-word",$cpanel).addClass 'active'
 				imagine($current,id)
+			else
+				$(".group-img",$cpanel).removeClass 'active'
+				$(".group-word",$cpanel).removeClass 'active'
 		start_learn = ->
 			$("#start_page").fadeOut()
 			Home.menu_fade()
@@ -71,6 +74,10 @@ class window.Members
 			$(".group",$cpanel).css "top": "#{h}px"
 			$(".step",$wrap).on 'enterStep', (e) ->
 				step_handle($(e.target),$cpanel)
+		start_exam = ($exam = $("#start_exam")) ->
+			$("a[href='#again']",$exam).click ->
+				$wrap.jmpress "goTo",$('.step').first()
+				false
 				
 		if $wrap.length is 1
 			$wrap.jmpress
@@ -80,7 +87,11 @@ class window.Members
 						32: null
 						37: null
 						39: null
+			# forbin auto loop
+			$wrap.jmpress("route", "#start_exam", true)
+			$wrap.jmpress("route", "#1", true, true)			
 			$wrap.show()
+			start_exam()
 			cid = $("#start_page").attr 'cid'
 			if $.cookie "course_#{cid}"
 				start_learn()
@@ -91,11 +102,14 @@ class window.Members
 					$.cookie "course_#{cid}", true, expires: 7
 					$wrap.jmpress "goTo",$('.step').first()
 					start_learn()
+
 		$("a[href='#magic']",$cpanel).click ->
-			$modal.modal()
+			$current = $(".step.active",$wrap)
+			$modal.attr "data-current",$current.attr("id")	
+			$modal.modal().on "hidden",->
+				$wrap.jmpress "goTo",$current
 			false
 		$("a[href='#provider']",$modal).click ->
-			# deinit jmpress
 			Utils.loading $(".images",$modal)
 			provider = $(@).attr('data')
 			$(".magic_items a").removeClass 'active'
@@ -109,8 +123,8 @@ class window.Members
 					$('img',$(".images",$modal)).click ->
 						$img = $(@)
 						Utils.loading $img								
-						$current = $(".step.active",$wrap)
-						$.post "/words/select_img"
+						$current = $("#"+$modal.attr("data-current"))
+						$.post "/words/select_img_u"
 							id: $current.attr('wid')
 							img_url: $img.attr('src')
 							(data) ->

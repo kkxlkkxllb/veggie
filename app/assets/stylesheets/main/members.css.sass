@@ -80,6 +80,17 @@ html.uhome
 			a.right
 				@include transform(translateX(0px))
 	#impress
+		#start_exam
+			h3
+				margin: 0
+			.break_line
+				margin: 20px 0
+			p
+				@include transition(1s,ease-in-out)
+				opacity: 0			
+		#start_exam.active
+			p
+				opacity: 1
 		.word_pic
 			z-index: 1
 			position: relative

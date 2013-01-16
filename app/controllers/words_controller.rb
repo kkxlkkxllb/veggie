@@ -66,9 +66,8 @@ class WordsController < ApplicationController
 		end
   end
   
-  # Re-work
 	# Word
-  # 权限：e a
+  # 权限：a
   # 为课程中的词汇选择图片，图源：Bing Search & Olive
   def fetch_img
     @word = Word.find(params[:id])
@@ -76,11 +75,20 @@ class WordsController < ApplicationController
     render_json(0,"ok",{:pic => @word.image+"?#{Time.now.to_i}"})
   end
   
+  # C Word
+  # 权限 e a
+  # 上传图片，为c_word合成图
+  def upload_img_c
+    @cw = find_or_create_cw(params[:id])
+    file = params[:image].tempfile.path
+    type = params[:image].content_type
+  end
+  
 	# U Word
 	# 用户上传图片
   # upload &image &id
   # response with js.haml
-  def upload_img
+  def upload_img_u
     @uw = find_or_create_uw(params[:id])
 		file = params[:image].tempfile.path
     type = params[:image].content_type
@@ -94,7 +102,7 @@ class WordsController < ApplicationController
 	# U word
 	# 用户上传视频
 	# &mov
-	def upload_mov
+	def upload_mov_u
 		file = params[:mov]
 		data = open(file.tempfile.path){|f|f.read}
     file = File.open(File.join("public/system",file.original_filename),"wb") << data
@@ -105,7 +113,7 @@ class WordsController < ApplicationController
 	# 用户图片选取：从自己关联身份instagram，tumblr取
 	# input: img_url & id
   # json
-	def select_img
+	def select_img_u
     @uw = find_or_create_uw(params[:id])
 		status = Grape::UWordImage.new(@uw).make(params[:img_url])
     if status == 0
@@ -117,7 +125,7 @@ class WordsController < ApplicationController
 	end
   
   # TO-DO destroy u_word
-  def destroy  
+  def destroy_u  
     if @word = UWord.find(params[:id])
       @word.destroy
       render_json(0,"ok")
@@ -131,5 +139,9 @@ class WordsController < ApplicationController
       @uw = current_member.u_words.create(:word_id => @word.id)
     end
     @uw
+  end
+  
+  def find_or_create_cw(id)
+    @word = Word.find(id)
   end
 end
