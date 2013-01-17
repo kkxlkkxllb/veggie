@@ -82,12 +82,14 @@ class OliveController < ApplicationController
       when 'tumblr'
         @result = Olive::Tumblr.new.user_media(provider.metadata[:blogs][0][:name]+".tumblr.com")
       end
-    end	 
-    if !@result.blank?   
-      render_json 0,"ok",@result
+      if !@result.blank?   
+        render_json 0,"ok",@result
+      else
+        render_json -1,"no content"
+      end
     else
-      render_json -1,"no content"
-    end
+      render_json -2,"no provider"
+    end	 
 	end
   
   private

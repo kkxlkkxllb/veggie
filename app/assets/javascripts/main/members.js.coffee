@@ -108,33 +108,40 @@ class window.Members
 			$modal.attr "data-current",$current.attr("id")	
 			$modal.modal().on "hidden",->
 				$wrap.jmpress "goTo",$current
+			$(".magic_items a:first-child",$modal).click()
 			false
-		$("a[href='#provider']",$modal).click ->
-			Utils.loading $(".images",$modal)
+		$(".magic_items a",$modal).click ->			
 			provider = $(@).attr('data')
-			$(".magic_items a").removeClass 'active'
-			$(@).addClass 'active'
-			$.get "/olive/fetch?provider=#{provider}",(data) ->
-				if data.status is 0
-					html = ""
-					for img in data.data
-						html += "<img src='#{img}' />"				
-					$(".images",$modal).html(html)
-					$('img',$(".images",$modal)).click ->
-						$img = $(@)
-						Utils.loading $img								
-						$current = $("#"+$modal.attr("data-current"))
-						$.post "/words/select_img_u"
-							id: $current.attr('wid')
-							img_url: $img.attr('src')
-							(data) ->
-								if data.status is 0	
-									$modal.modal('hide')
-									$current.find('.me img').attr("src",data.data).fadeIn()
-								Utils.loaded $img
-				else
-					$(".errors",$modal).fadeIn()
-				Utils.loaded $(".images",$modal)
+			$images_wrap = $("##{provider}",$modal)
+			$(@).addClass('active').siblings().removeClass 'active'
+			$(".images",$modal).hide()
+			$images_wrap.show()
+			unless $images_wrap.html() isnt ""
+				Utils.loading $(".magic_items",$modal)
+				$.get "/olive/fetch?provider=#{provider}",(data) ->
+					if data.status is 0
+						html = ""
+						for img in data.data
+							html += "<img src='#{img}' />"				
+						$images_wrap.html(html)
+						$('img',$images_wrap).click ->
+							$img = $(@)
+							Utils.loading $img								
+							$current = $("#"+$modal.attr("data-current"))
+							$.post "/words/select_img_u"
+								id: $current.attr('wid')
+								img_url: $img.attr('src')
+								(data) ->
+									if data.status is 0	
+										$modal.modal('hide')
+										$current.find('.me img').attr("src",data.data).fadeIn()
+									Utils.loaded $img
+					else
+						if data.status is -2
+							$images_wrap.html $(".errors",$modal).fadeIn()
+						else
+							$images_wrap.html("<div class='errors alert alert-error'>还没有任何内容哦</div>")				
+					Utils.loaded $(".magic_items",$modal)
 			false
 		$("a[href='#upload']",$cpanel).click ->	
 			if $("input#id",$cpanel).val() isnt "0"

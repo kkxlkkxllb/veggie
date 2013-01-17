@@ -7,14 +7,12 @@
 			你可以使用关联身份取图
 	.modal-body
 		.errors.alert.alert-error
-			%button(type="button" class="close" data-dismiss="alert")
-				%span.icon-remove-circle
-			TAT，你还没有这些技能呢，快去关联对应的帐户吧
-			= link_to (setting_path + "#provider") do
-				%span.icon-fighter-jet
+			TAT，你还没有关联对应的帐号呢！
+			= link_to "立即关联",(setting_path + "#provider")
 		.magic_items
 			- %w{instagram tumblr}.each do |p|
-				%a{data: p}(href = "#provider")
+				%a{data: p}(href = "#")
 					= image_tag("icon/#{p}_big.png",:title => p)
-		.images
+		- %w{instagram tumblr}.each do |p|
+			.images.hide{id: p}
 		
