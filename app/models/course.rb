@@ -49,6 +49,18 @@ class Course < ActiveRecord::Base
     Course.official.first
   end
   
+  def ctags_to_a
+    ctags.split(";")
+  end
+  
+  def hash_tags
+    ctags_to_a.map{|t| "#"+t+" " }.join
+  end
+  
+  def cover_image
+    words.first[:image].sub("17up","original")
+  end
+  
   def check(member)
     $redis.hset(member.personal_key,"course",id)
     if ctype == 2
@@ -61,7 +73,7 @@ class Course < ActiveRecord::Base
     case ctype
     when 1
       Rails.cache.fetch("course/#{self.id}",:expires_in => 1.day) do 
-        Word.tagged(self.ctags.split(";")).map(&:as_full_json)
+        Word.tagged(ctags_to_a).map(&:as_full_json)
       end
     when 2
       # c_words
@@ -71,6 +83,11 @@ class Course < ActiveRecord::Base
   end
   
   def as_json
-    super(:only => [:id,:title,:ctags,:language,:description]).merge("word_cnt" => words.length)
+    ext = {
+      "ctags" => hash_tags,
+      "word_cnt" => words.length,
+      "thumb" => cover_image
+    }
+    super(:only => [:id,:title,:language,:description]).merge(ext)
   end
 end

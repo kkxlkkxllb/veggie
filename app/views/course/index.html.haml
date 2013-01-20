@@ -1,19 +1,9 @@
-.user_bg(data-o = "0.1")
-	= image_tag("img/theme/imagine/4.png")
-#library	
-	#course_catelog
-		- @courses.each do |c|
-			.banner_wrap
-				%h3.banner_title.dancer
-					= c['title']
-				.enroll
-					%span.badge
-						= c['word_cnt']
-					%a.btn.btn-primary{:href => course_path(:id => c['id'])}						
-						预览
-					%a.btn.btn-success{:href => account_path(:course => c['id'])}
-						学习
-			.break_line.clearfix.thin
-				%b.left
-				%i.icon-fighter-jet
-				%b.right
+#course_catelog	
+	#official
+		.c-title.tallys
+			= "« #{course_index_title} »"
+		.c-container
+			- if current_member
+				= render 'course_list',:c_user => current_member,:courses => @courses
+			- else
+				= render 'course_list',:courses => @courses

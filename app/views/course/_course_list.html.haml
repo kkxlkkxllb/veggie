@@ -1,0 +1,20 @@
+- courses.each do |c|
+	.course-item
+		.thumb
+			= image_tag(c['thumb'])
+		.content
+			%h3.banner_title.dancer
+				= c['title']
+			%span.badge
+				= c['word_cnt']
+			.info
+				%i.tags
+					= c["ctags"]
+				.description
+					= c['description']
+		.enroll			
+			%a.btn.btn-primary{:href => course_path(:id => c['id'])}
+				= t('course.action.preview')
+			- if defined?(c_user)
+				%a.btn.btn-success{:href => account_path(:course => c['id'])}
+					= t('course.action.start')

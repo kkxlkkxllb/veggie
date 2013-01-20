@@ -41,6 +41,9 @@ zh-cn:
     describe: "从广场穿过花园就到 17up 居民的生活区了"
   course:
     new: "新建课程"
+    action:
+      preview: "预览"
+      start: "学习"
   members:
     edit: "%{name} 设定"
     sidenav:

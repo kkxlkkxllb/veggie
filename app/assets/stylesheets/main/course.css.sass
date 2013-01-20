@@ -2,13 +2,13 @@
 
 html.chome
 	height: 100%
-	background: url(/assets/img/bg/bg_home.png) #D8ECFF
+	background: url(/assets/img/subtle_stripes/subtle_stripes.png)
 	body
 		background-color: transparent
 .banner_wrap
 	padding: 10px 20px		
 	.banner_title
-		font-size: 24px
+		font-size: 26px
 		margin: 0
 #new_word
 	text-align: center
@@ -21,17 +21,52 @@ html.chome
 		margin: 0
 		padding: 5px
 		width: 280px
-#library
+#course_catelog
 	margin-bottom: 40px
-	#course_catelog
-		.banner_wrap
-			position: relative
-			.banner_title
-				@include text-shadow-3d
-			.enroll
-				position: absolute
-				right: 20px
-				top: 15px
+	#official
+		.c-title
+			font-size: 26px
+			text-align: center
+			line-height: 2.5
+		.c-container
+
+			.course-item
+				position: relative
+				padding: 5px 20px
+				height: 110px
+				overflow: hidden
+				.thumb
+					position: absolute
+					left: 20px
+					top: 5px
+					img
+						width: 120px
+						height: 110px
+				.content
+					margin: 0 150px 0 130px
+					height: 100%
+					padding: 0 10px
+					background: #f5f5f5
+					position: relative
+					.badge
+						position: absolute
+						right: 5px
+						top: 10px
+					.info
+						line-height: 1.2
+						font-size: 18px
+						padding: 5px
+						background: #fff
+						text-shadow-inverse
+						font-family: serif	
+					.banner_title
+						@include text-shadow-3d
+						margin: 0 0 10px 0
+				.enroll
+					position: absolute
+					right: 20px
+					top: 15px
+				
 #course_wrap
 	margin-bottom: 40px
 	background: url(/assets/img/subtle_stripes/subtle_stripes.png)		

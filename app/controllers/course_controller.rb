@@ -1,7 +1,7 @@
 class CourseController < ApplicationController
   before_filter :authenticate_member!,:except => [:index]
   
-  def index       
+  def index           
     @courses = Course.open.all.map(&:as_json)
     set_seo_meta(t('center.title'),t('center.keywords'),t('center.describe'))  
   end

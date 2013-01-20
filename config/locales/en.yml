@@ -9,4 +9,8 @@ en:
   title: 17up
   subtitle: Imagine Planet
   door: start
-  
+  course:
+    new: "new course"
+    action:
+      preview: "preview"
+      start: "check in"

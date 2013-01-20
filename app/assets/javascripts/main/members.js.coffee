@@ -52,7 +52,8 @@ class window.Members
 		step_handle = ($current,$cpanel,max = $(".step").length) ->
 			id = $current.attr 'wid'
 			play_audio($current.find("audio"))
-			percent = ($(".step").index($current) + 1)*100/max
+			step = $(".step").index($current) + 1		
+			percent = step*100/max
 			$("#progress .current_bar").css "width": "#{percent}%"
 			if $current.hasClass 'word_pic'
 				$(".group-img",$cpanel).addClass 'active'
@@ -74,10 +75,20 @@ class window.Members
 			$(".group",$cpanel).css "top": "#{h}px"
 			$(".step",$wrap).on 'enterStep', (e) ->
 				step_handle($(e.target),$cpanel)
+				put_course($(e.target).attr("id"))
 		start_exam = ($exam = $("#start_exam")) ->
 			$("a[href='#again']",$exam).click ->
 				$wrap.jmpress "goTo",$('.step').first()
 				false
+			$("a[href='#exam']",$exam).click ->
+				put_course(0)
+				false
+		put_course = (val = 1,cid = window.cid) ->
+			if val is 0
+				val = null
+			$.cookie "course_#{cid}", val, expires: 7
+		get_course = (cid = window.cid) ->
+			$.cookie "course_#{cid}"
 				
 		if $wrap.length is 1
 			$wrap.jmpress
@@ -92,14 +103,15 @@ class window.Members
 			$wrap.jmpress("route", "#1", true, true)			
 			$wrap.show()
 			start_exam()
-			cid = $("#start_page").attr 'cid'
-			if $.cookie "course_#{cid}"
+			window.cid = $("#start_page").attr 'cid'
+			if step = get_course()
+				$wrap.jmpress "goTo",$("##{step}")
 				start_learn()
 			else
 				$("#start_page").fadeIn()				
 				$("#top_nav").css 'opacity':'0'
 				$("#startup").click ->
-					$.cookie "course_#{cid}", true, expires: 7
+					put_course()
 					$wrap.jmpress "goTo",$('.step').first()
 					start_learn()
 
