@@ -95,11 +95,20 @@ class WordsController < ApplicationController
 		if @uw&&@uw.validate_upload_image(file,type)
     	status = Grape::UWordImage.new(@uw).make(file)
 			@new_image = status == 0 ? (@uw.image + "?#{Time.now.to_i}") : false
-		end
-		
+		end	
+  end
+  
+  # U word
+  # 自定义注释
+  def annotate_u
+    @uw = find_or_create_uw(params[:id])
+    @uw.content = params[:annotate]
+    @uw.save
+    render_json 0,"ok"
   end
 
 	# U word
+	# To-Do
 	# 用户上传视频
 	# &mov
 	def upload_mov_u

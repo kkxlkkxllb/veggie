@@ -41,6 +41,7 @@ Veggie::Application.routes.draw do
     post "fetch_img"
   	post "upload_img_u"
   	post "upload_img_c"
+  	post "annotate_u"
 		post "upload_mov_u"
   	post "select_img_u"
     post "destroy_u"

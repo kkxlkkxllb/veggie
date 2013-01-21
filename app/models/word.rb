@@ -68,7 +68,7 @@ class Word < ActiveRecord::Base
   end
 
   def rich_images
-    u_words.collect{|w| w.image}
+    u_words.select{|x| x.has_image }.collect{|w| w.image}
   end
 
   def as_json
