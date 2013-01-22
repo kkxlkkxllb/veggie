@@ -4,7 +4,7 @@ class window.Members
 		member.setting($("#user_setting"))
 		Utils.user_theme()
 		member.show($("#user_show"),".word_item")
-		member.dashboard $("#impress"),$("#magic_images_modal"),$("#cpanel")
+		member.dashboard $("#impress"),$("#cpanel")
 		if $("#allen").length is 1
 			Allen.init()	
 	constructor: ->
@@ -27,7 +27,13 @@ class window.Members
 			$container.isotope
 				itemSelector: item
 				layoutMode : 'masonry'
-	dashboard: ($wrap,$modal,$cpanel) ->
+	dashboard: ($wrap,$cpanel) ->
+		modal_init = ($modal) ->
+			$current = $(".step.active",$wrap)
+			$("span.title",$modal).text $current.attr("wtitle")
+			$modal.attr "data-current",$current.attr("id")
+			$modal.modal().on "hidden",->
+				$wrap.jmpress "goTo",$current
 		play_audio = ($audio) ->
 			if $audio.length is 1
 				unless $audio[0].src isnt ''
@@ -89,7 +95,7 @@ class window.Members
 			$.cookie "course_#{cid}", val, expires: 7
 		get_course = (cid = window.cid) ->
 			$.cookie "course_#{cid}"
-				
+		# jmpress init		
 		if $wrap.length is 1
 			$wrap.jmpress
 				keyboard:
@@ -114,12 +120,10 @@ class window.Members
 					put_course()
 					$wrap.jmpress "goTo",$('.step').first()
 					start_learn()
-
-		$("a[href='#magic']",$cpanel).click ->
-			$current = $(".step.active",$wrap)
-			$modal.attr "data-current",$current.attr("id")	
-			$modal.modal().on "hidden",->
-				$wrap.jmpress "goTo",$current
+		# magic images
+		$modal = $("#magic_images_modal")
+		$("a[href='#magic']",$cpanel).click ->			
+			modal_init($modal)			
 			$(".magic_items a:first-child",$modal).click()
 			false
 		$(".magic_items a",$modal).click ->			
@@ -155,6 +159,7 @@ class window.Members
 							$images_wrap.html("<div class='errors alert alert-error'>还没有任何内容哦</div>")				
 					Utils.loaded $(".magic_items",$modal)
 			false
+		# upload image
 		$("a[href='#upload']",$cpanel).click ->	
 			if $("input#id",$cpanel).val() isnt "0"
 				$("input[type='file']",$cpanel).trigger "click"
@@ -162,9 +167,14 @@ class window.Members
 		$upload_form = $(".group-img form",$cpanel)
 		$("input[type='file']",$upload_form).change ->
 			$upload_form.submit()
+		# spell test
 		$("a[href='#spell']",$cpanel).click ->
 			false
+			
+		# annotate
 		$("a[href='#annotate']",$cpanel).click ->
+			$annotate_modal = $("#annotate_modal")			
+			modal_init($annotate_modal)
 			false
 					
 			

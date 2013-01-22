@@ -65,19 +65,16 @@ class window.Course
 			$container.isotope({ filter: $(@).attr('ctag') })
 			false
 	img_change: ($container = @$container,$modal = $("#editor_magic")) ->
-		$container.delegate "a.change_btn","click", ->
-			$modal.modal()
-			$wrap = $(@).closest('.word_item')
-			$target = $('.pic img',$wrap)
-			wid = $wrap.attr("wid")
-			Utils.loading $modal
-			$.get "/olive/magic?id=#{wid}",(data) ->
+		response = ($target,wid,params) ->
+			$(".images",$modal).empty()
+			Utils.loading $(".modal-header",$modal)
+			$.get "/olive/magic?#{params}",(data) ->
 				if data.status is 0
 					html = ''
 					for i in data.data
 						html += "<img src='#{i}' />"
 					$(".images",$modal).html(html)
-					Utils.loaded $modal
+					Utils.loaded $(".modal-header",$modal)
 					$('img',$(".images",$modal)).click ->
 						$modal.modal('hide')					
 						Utils.loading $target
@@ -90,4 +87,15 @@ class window.Course
 									$target.attr("src",data.data.pic).load ->
 										Utils.loaded $target
 										$container.isotope()
+		$container.delegate "a.change_btn","click", ->
+			$modal.modal()
+			$wrap = $(@).closest('.word_item')
+			$target = $('.pic img',$wrap)
+			wid = $wrap.attr("wid")			
+			response($target,wid,"id=#{wid}")
+			$("span.title",$modal).text($("span.title",$wrap).text())
+			$("a.more").show().click ->
+				$(@).hide()
+				response($target,wid,"more=1&id=#{wid}")
+				false
 			false			

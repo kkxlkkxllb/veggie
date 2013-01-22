@@ -1,11 +1,15 @@
-#magic_images_modal.hide.modal.magic
+#annotate_modal.hide.modal.magic
 	.modal-header
 		%button.close(type="button" data-dismiss="modal")
 			%span.icon-remove-circle
 		%h3
-			给
-			%span.word
-			录入我的注释
+			%i.icon-fire
+			为
+			%span.title
+			添加注释
 	.modal-body
-		
+		.original_content
+			原意：
+		.custom_content
+			= text_field_tag :w_annotate,''
 		
