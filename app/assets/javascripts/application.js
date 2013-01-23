@@ -13,7 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.remotipart
-//= require twitter/bootstrap
+//= require twitter/bootstrap/bootstrap-modal
+//= require twitter/bootstrap/bootstrap-tab
+//= require twitter/bootstrap/bootstrap-tooltip
+//= require twitter/bootstrap/bootstrap-button
+//= require twitter/bootstrap/bootstrap-alert
+//= require twitter/bootstrap/bootstrap-transition
 
 //= require_tree ./lib
 //= require_tree ./zlib

@@ -6,7 +6,6 @@ class window.Course
 		word.insert_tags $("form#new_word_tag_form"),$("#new_word_tag_modal")
 		word.filter_word($("#word_nav"))
 		word.img_change()
-		Utils.user_theme()
 	@tag_modal: ($modal,$form,title,id,tags) ->
 		$("span.wtitle",$modal).text(title)
 		$("input#id",$form).val(id)
