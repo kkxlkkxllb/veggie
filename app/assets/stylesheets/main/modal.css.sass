@@ -26,6 +26,7 @@
 		max-height: 100%
 		padding: 0
 		background: #eee
+		overflow: auto
 	a.more
 		display: block
 		padding: 5px
@@ -37,24 +38,45 @@
 			@include shadow(0px,1px,3px,rgba(0,0,0,.3))
 			width: 100px
 			height: 90px
+#magic_images_modal.show
+	@include transform(translateY(7px))
 #magic_images_modal
-	.errors
-		display: none
-		margin: 20px
-		span
-			font-size: 26px
-	.modal-body	
-		.magic_items
-			position: absolute
-			left: 0
-			width: 80px
-			height: 100%
-			border-right: 2px solid #fff
-			a
-				padding: 10px
-				display: block
-			a.active
-				background: #fff
-		.images
-			padding-left: 80px
-			height: 100%
+	background: rgba(0,0,0,0.6)
+	@include round(10px)
+	margin: 0 auto
+	width: 800px
+	height: 158px	
+	overflow-y: hidden
+	position: relative
+	z-index: 999
+	@include shadow(0,4px,7px,#333)
+	@include transform(translateY(-700px))
+	@include transition(0.8s,ease-out)
+	.provider-tip
+		padding: 8px 20px
+		color: white
+		border-bottom: 1px solid #777
+		font-size: 16px
+		a.cog
+			color: #0bf
+	.images_wrap
+		overflow-x: scroll
+		width: 800px
+		-webkit-overflow-scrolling: touch
+	.images
+		border-top: 1px solid #1d1d1d
+		padding: 10px
+		p
+			text-align: center
+			color: #FF866A
+			line-height: 90px
+			font-size: 30px			
+		img
+			cursor: pointer
+			margin: 5px
+			@include shadow(0px,1px,3px,rgba(0,0,0,.3))
+			width: 100px
+			height: 90px
+			@include transition(0.25s)
+			&:hover
+				@include transform(scale(1.1))

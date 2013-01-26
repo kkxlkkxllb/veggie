@@ -1,19 +1,10 @@
-#magic_images_modal.hide.modal.magic
-	.modal-header
-		%button.close(type="button" data-dismiss="modal")
-			%span.icon-remove-circle
-		%h3
-			%i.icon-magic
-			从您其他帐号中提取图片 » 
-			%span.title
-	.modal-body
-		.errors.alert.alert-error
-			TAT，你还没有关联对应的帐号呢！
-			= link_to "立即关联",(setting_path + "#provider")
-		.magic_items
-			- %w{instagram tumblr}.each do |p|
-				%a{data: p}(href = "#")
-					= image_tag("icon/#{p}_big.png",:title => p)
-		- %w{instagram tumblr}.each do |p|
-			.images.hide{id: p}
+#magic_images_modal
+	.provider-tip
+		images from your
+		= %w{instagram tumblr}.join(' & ')
+		%a.cog{:href => setting_path + "#provider"}
+			%i.icon-cog
+		[ tips: esc / ← / → ]
+	.images_wrap
+		.images
 		

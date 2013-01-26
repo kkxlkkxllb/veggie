@@ -28,12 +28,17 @@ class window.Members
 				itemSelector: item
 				layoutMode : 'masonry'
 	dashboard: ($wrap,$cpanel) ->
-		modal_init = ($modal) ->
-			$current = $(".step.active",$wrap)
-			$("span.title",$modal).text $current.attr("wtitle")
-			$modal.attr "data-current",$current.attr("id")
-			$modal.modal().on "hidden",->
-				$wrap.jmpress "goTo",$current
+		magic_image = (action,$current) ->
+			$modal = $("#magic_images_modal")
+			if action is 'show'
+				$(".img_wrap",$current).css 'opacity','0.2'	
+				$modal.addClass 'show'
+				$('a',$cpanel).addClass 'disable_event'
+			else
+				$(".img_wrap",$current).css 'opacity','1'
+				$modal.removeClass 'show'
+				$('a',$cpanel).removeClass 'disable_event'
+			$modal
 		play_audio = ($audio) ->
 			if $audio.length is 1
 				unless $audio[0].src isnt ''
@@ -61,6 +66,7 @@ class window.Members
 			step = $(".step").index($current) + 1		
 			percent = step*100/max
 			$("#progress .current_bar").css "width": "#{percent}%"
+			magic_image('hide',$current)
 			if $current.hasClass 'word_pic'
 				$(".group-img",$cpanel).addClass 'active'
 				$(".group-word",$cpanel).removeClass 'active'					
@@ -120,44 +126,40 @@ class window.Members
 					put_course()
 					$wrap.jmpress "goTo",$('.step').first()
 					start_learn()
-		# magic images
-		$modal = $("#magic_images_modal")
-		$("a[href='#magic']",$cpanel).click ->			
-			modal_init($modal)			
-			$(".magic_items a:first-child",$modal).click()
-			false
-		$(".magic_items a",$modal).click ->			
-			provider = $(@).attr('data')
-			$images_wrap = $("##{provider}",$modal)
-			$(@).addClass('active').siblings().removeClass 'active'
-			$(".images",$modal).hide()
-			$images_wrap.show()
-			unless $images_wrap.html() isnt ""
-				Utils.loading $(".magic_items",$modal)
-				$.get "/olive/fetch?provider=#{provider}",(data) ->
+		# magic images	
+		$("a[href='#magic']",$cpanel).click ->				
+			$current = $(".step.active",$wrap)	
+			$modal = magic_image('show',$current)		
+			$images_wrap = $(".images",$modal)			
+			if $images_wrap.html() is ""
+				$(document).keyup (e) ->
+					switch e.keyCode
+						when 27
+							magic_image('hide',$current)
+						when 37
+							$images_wrap.animate left:'100px'
+						when 39
+							$images_wrap.animate right:'100px'
+				$.get "/olive/fetch",(data) ->
 					if data.status is 0
 						html = ""
 						for img in data.data
 							html += "<img src='#{img}' />"				
-						$images_wrap.html(html)
+						$images_wrap.html(html).css "width":data.data.length*110
 						$('img',$images_wrap).click ->
-							$img = $(@)
-							Utils.loading $img								
-							$current = $("#"+$modal.attr("data-current"))
+							magic_image('hide',$current)
+							$img = $(@)								
+							$target = $current.find('.me img')	
+							Utils.loading $target.show()											
 							$.post "/words/select_img_u"
 								id: $current.attr('wid')
 								img_url: $img.attr('src')
 								(data) ->
 									if data.status is 0	
-										$modal.modal('hide')
-										$current.find('.me img').attr("src",data.data).fadeIn()
-									Utils.loaded $img
+										$target.attr("src",data.data)
+									Utils.loaded $target											
 					else
-						if data.status is -2
-							$images_wrap.html $(".errors",$modal).fadeIn()
-						else
-							$images_wrap.html("<div class='errors alert alert-error'>还没有任何内容哦</div>")				
-					Utils.loaded $(".magic_items",$modal)
+						$images_wrap.html "<p>ooh! no images yet</p>"		
 			false
 		# upload image
 		$("a[href='#upload']",$cpanel).click ->	
@@ -173,8 +175,7 @@ class window.Members
 			
 		# annotate
 		$("a[href='#annotate']",$cpanel).click ->
-			$annotate_modal = $("#annotate_modal")			
-			modal_init($annotate_modal)
+
 			false
 					
 			

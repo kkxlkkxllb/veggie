@@ -54,6 +54,7 @@ class window.Utils
 			$("img",$bg_wrap).load ->
 				$(@).css 'opacity':opacity
 				$bg_wrap.animate opacity: 1
+				
 	@image_imagine: ($wrap) ->
 		$container = $(".img_wrap",$wrap)
 		

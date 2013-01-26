@@ -73,23 +73,24 @@ class OliveController < ApplicationController
 	end
 	
 	# 当前用户关联身份下的相册图片
-	# params: provider
+	# tumblr & instagram
 	def fetch
-	  if provider = current_member.has_provider?(params[:provider])
-	    case provider.provider
-      when 'instagram'
-	      @result = Olive::Instagram.new(:access_token => provider.token).user_media_feed.map{|x| x[:photo]}
-      when 'tumblr'
-        @result = Olive::Tumblr.new.user_media(provider.metadata[:blogs][0][:name]+".tumblr.com")
-      end
-      if !@result.blank?   
-        render_json 0,"ok",@result
-      else
-        render_json -1,"no content"
-      end
+	  @result = %w{tumblr instagram}.inject([]) do |result,p_name|
+	    if provider = current_member.has_provider?(p_name)
+  	    case provider.provider
+        when 'instagram'
+  	      result = result + Olive::Instagram.new(:access_token => provider.token).user_media_feed.map{|x| x[:photo]}
+        when 'tumblr'
+          result = result + Olive::Tumblr.new.user_media(provider.metadata[:blogs][0][:name]+".tumblr.com")
+        end
+      end	
+      result
+    end
+    if !@result.blank?   
+      render_json 0,"ok",@result
     else
-      render_json -2,"no provider"
-    end	 
+      render_json -1,"no content"
+    end
 	end
   
   private
