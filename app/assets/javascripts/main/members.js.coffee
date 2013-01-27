@@ -28,17 +28,61 @@ class window.Members
 				itemSelector: item
 				layoutMode : 'masonry'
 	dashboard: ($wrap,$cpanel) ->
-		magic_image = (action,$current) ->
+		# control magic_image_modal 'show'&'hide'
+		magic_image = (action,$current = $(".step.active",$wrap)) ->
 			$modal = $("#magic_images_modal")
 			if action is 'show'
-				$(".img_wrap",$current).css 'opacity','0.2'	
+				$current.addClass 'opacity'	
 				$modal.addClass 'show'
 				$('a',$cpanel).addClass 'disable_event'
 			else
-				$(".img_wrap",$current).css 'opacity','1'
+				$current.removeClass 'opacity'
 				$modal.removeClass 'show'
 				$('a',$cpanel).removeClass 'disable_event'
 			$modal
+		# key control for magic image
+		# per screen 7 images 
+		# image width: 110px
+		enable_key_control = ($modal,$scroll_row,ele_size)->
+			$scroll_row.css "width":ele_size*110
+			screen_width = $modal.width()
+			if ele_size%7 is 0
+				screen_count = ele_size/7
+			else 
+				screen_count = parseInt(ele_size/7) + 1
+			current_screen = 1
+			$num = $(".badge",$modal).text "1 / #{screen_count}"
+			$(document).bind "keyup.magic", (e) ->
+				if $modal.hasClass 'show'					
+					switch e.keyCode
+						when 27
+							magic_image('hide')
+							false
+						when 37 #left
+							current_screen++
+							if current_screen > screen_count						
+								current_screen = 1
+						when 39 #right
+							current_screen--
+							if current_screen < 1
+								current_screen = screen_count
+					target_offset = (1 - current_screen)*screen_width
+					$scroll_row.animate left:"#{target_offset}px",500,'easeInOutQuart'
+					$num.text "#{current_screen} / #{screen_count}"
+		enable_click_image = ($scroll_row) ->
+			$('img',$scroll_row).click ->
+				magic_image('hide')
+				$img = $(@)					
+				$current = $(".step.active",$wrap)							
+				$target = $current.find('.me img')	
+				Utils.loading $target.show()											
+				$.post "/words/select_img_u"
+					id: $current.attr('wid')
+					img_url: $img.attr('src')
+					(data) ->
+						if data.status is 0	
+							$target.attr("src",data.data)
+						Utils.loaded $target
 		play_audio = ($audio) ->
 			if $audio.length is 1
 				unless $audio[0].src isnt ''
@@ -47,18 +91,17 @@ class window.Members
 		# 联想
 		imagine = ($current,wid) ->
 			unless $current.hasClass 'loaded'
-				$current_img = $current.next()
-				Utils.image_imagine $current_img
+				Utils.image_imagine $current
 				$.get "/words/imagine?id=#{wid}",(data) ->
 					html = ""
 					if data.status is 0	
 						if data.data.m
-							$img = $current_img.find('.me img')
+							$img = $current.find('.me img')
 							$img.attr("src",data.data.m)
 							$img.fadeIn()
 						for img in data.data.imagine
 							html += "<span class='img imagine'><img src='#{img}' /></span>" 
-					$(".img_wrap",$current_img).append(html)
+					$(".img_wrap",$current).append(html)
 				$current.addClass 'loaded'
 		step_handle = ($current,$cpanel,max = $(".step").length) ->
 			id = $current.attr 'wid'
@@ -66,15 +109,15 @@ class window.Members
 			step = $(".step").index($current) + 1		
 			percent = step*100/max
 			$("#progress .current_bar").css "width": "#{percent}%"
-			magic_image('hide',$current)
+			magic_image('hide')
 			if $current.hasClass 'word_pic'
 				$(".group-img",$cpanel).addClass 'active'
 				$(".group-word",$cpanel).removeClass 'active'					
 				$("input#id",$cpanel).val(id)
+				imagine($current,id)
 			else if $current.hasClass 'word_item'
 				$(".group-img",$cpanel).removeClass 'active'
 				$(".group-word",$cpanel).addClass 'active'
-				imagine($current,id)
 			else
 				$(".group-img",$cpanel).removeClass 'active'
 				$(".group-word",$cpanel).removeClass 'active'
@@ -129,37 +172,19 @@ class window.Members
 		# magic images	
 		$("a[href='#magic']",$cpanel).click ->				
 			$current = $(".step.active",$wrap)	
-			$modal = magic_image('show',$current)		
+			$modal = magic_image('show')		
 			$images_wrap = $(".images",$modal)			
-			if $images_wrap.html() is ""
-				$(document).keyup (e) ->
-					switch e.keyCode
-						when 27
-							magic_image('hide',$current)
-						when 37
-							$images_wrap.animate left:'100px'
-						when 39
-							$images_wrap.animate right:'100px'
+			if $images_wrap.find('img').length is 0
 				$.get "/olive/fetch",(data) ->
 					if data.status is 0
 						html = ""
 						for img in data.data
-							html += "<img src='#{img}' />"				
-						$images_wrap.html(html).css "width":data.data.length*110
-						$('img',$images_wrap).click ->
-							magic_image('hide',$current)
-							$img = $(@)								
-							$target = $current.find('.me img')	
-							Utils.loading $target.show()											
-							$.post "/words/select_img_u"
-								id: $current.attr('wid')
-								img_url: $img.attr('src')
-								(data) ->
-									if data.status is 0	
-										$target.attr("src",data.data)
-									Utils.loaded $target											
+							html += "<img class='pic' src='#{img}' />"				
+						$images_wrap.html(html)
+						enable_key_control($modal,$images_wrap,data.data.length)
+						enable_click_image($images_wrap)											
 					else
-						$images_wrap.html "<p>ooh! no images yet</p>"		
+						$images_wrap.html $(".error",$modal).html()		
 			false
 		# upload image
 		$("a[href='#upload']",$cpanel).click ->	

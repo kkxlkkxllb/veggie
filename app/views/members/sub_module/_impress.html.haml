@@ -14,7 +14,7 @@
 			%i.icon-fire
 #impress
 	- data.each_with_index do |w,i|						
-		.word_item.step{:wid => w[:id],:wtitle => w[:title],:"data-y" => -i*1000,:"data-z" => -i*1500,:id => i+1}(data-x="0" data-scale="1")
+		.word_item.step{:wid => w[:id],:"data-y" => -i*1000,:"data-z" => -i*1500,:id => i+1}(data-x="0" data-scale="1")
 			.title
 				%span.amienne
 					= w[:title]		
@@ -22,7 +22,7 @@
 				%span
 					= w[:content]
 			%audio{:data => w[:audio]}
-		.word_pic.step{:wid => w[:id],:wtitle => w[:title],:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p"}(data-x="0" data-scale="1")
+		.word_pic.step{:wid => w[:id],:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p"}(data-x="0" data-scale="1")
 			.img_wrap
 				%span.img.origin
 					= image_tag(w[:image])

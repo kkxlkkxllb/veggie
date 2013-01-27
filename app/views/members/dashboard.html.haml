@@ -1,7 +1,5 @@
 = render "modal/magic_images"
-= render "members/sub_module/annotate"
-.user_bg(data-o = "0.1")
-	= image_tag("img/theme/imagine/1.jpg")
+= render "modal/annotate"
 #user_home
 	- if @u_words.any?		
 		= render "members/sub_module/start_page",:c => @course.as_json
