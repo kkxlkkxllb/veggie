@@ -200,7 +200,17 @@ class window.Members
 			
 		# annotate
 		$("a[href='#annotate']",$cpanel).click ->
-
+			$modal = $("#annotate_modal").addClass 'show'
+			$form = $("form",$modal)
+			$current = $(".step.active",$wrap)
+			$brother = $(".content",$current)
+			top = $brother.offset().top + $brother.height()
+			$modal.css 'top':"#{top}px"		
+			$("input[name='id']",$form).val $current.attr("wid")
+			$text_input = $("input#annotate",$form).focus()
+			$form.bind 'ajax:success', (d,data) ->
+				if data.status is 0
+					$text_input.addClass 'done'
 			false
 					
 			
