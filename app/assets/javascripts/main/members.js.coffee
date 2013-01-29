@@ -90,18 +90,22 @@ class window.Members
 				$audio[0].play()
 		# 联想
 		imagine = ($current,wid) ->
+			$current_images = $current.next()
 			unless $current.hasClass 'loaded'
-				Utils.image_imagine $current
+				Utils.image_imagine $current_images
 				$.get "/words/imagine?id=#{wid}",(data) ->
 					html = ""
 					if data.status is 0	
-						if data.data.m
-							$img = $current.find('.me img')
-							$img.attr("src",data.data.m)
+						if data.data.content
+							$modal = $(".annotate",$current).addClass 'show'
+							$("input[type='text']",$modal).val(data.data.content).addClass 'done'
+						if data.data.img
+							$img = $current_images.find('.me img')
+							$img.attr("src",data.data.img)
 							$img.fadeIn()
 						for img in data.data.imagine
 							html += "<span class='img imagine'><img src='#{img}' /></span>" 
-					$(".img_wrap",$current).append(html)
+					$(".img_wrap",$current_images).append(html)
 				$current.addClass 'loaded'
 		step_handle = ($current,$cpanel,max = $(".step").length) ->
 			id = $current.attr 'wid'
@@ -114,10 +118,11 @@ class window.Members
 				$(".group-img",$cpanel).addClass 'active'
 				$(".group-word",$cpanel).removeClass 'active'					
 				$("input#id",$cpanel).val(id)
-				imagine($current,id)
+				imagine($current.prev(),id)
 			else if $current.hasClass 'word_item'
 				$(".group-img",$cpanel).removeClass 'active'
 				$(".group-word",$cpanel).addClass 'active'
+				imagine($current,id)
 			else
 				$(".group-img",$cpanel).removeClass 'active'
 				$(".group-word",$cpanel).removeClass 'active'
@@ -200,14 +205,10 @@ class window.Members
 			
 		# annotate
 		$("a[href='#annotate']",$cpanel).click ->
-			$modal = $("#annotate_modal").addClass 'show'
-			$form = $("form",$modal)
 			$current = $(".step.active",$wrap)
-			$brother = $(".content",$current)
-			top = $brother.offset().top + $brother.height()
-			$modal.css 'top':"#{top}px"		
-			$("input[name='id']",$form).val $current.attr("wid")
-			$text_input = $("input#annotate",$form).focus()
+			$modal = $(".annotate",$current).addClass 'show'
+			$form = $("form",$modal)
+			$text_input = $("input[type='text']",$form).removeClass("done").focus()
 			$form.bind 'ajax:success', (d,data) ->
 				if data.status is 0
 					$text_input.addClass 'done'

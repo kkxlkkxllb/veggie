@@ -1,0 +1,4 @@
+.annotate
+	= form_tag "/words/annotate_u",:remote => true do
+		%input{:value => wid}(type='hidden' name='id')
+		%input(type="text" name="annotate" placeholder="添加注释")

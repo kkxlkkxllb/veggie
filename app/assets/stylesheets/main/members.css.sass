@@ -134,7 +134,27 @@ html.uhome
 					font-size: 170px
 					@include text-shadow-inverse
 					@include text-shadow-3d
-		
+			.annotate.show					
+				opacity: 1
+			.annotate
+				width: 100%
+				text-align: center
+				opacity: 0
+				@include transition(0.7s,ease-out)
+				input
+					padding: 10px
+					font-size: 18px
+					background: #C4FFAF
+					border: 0
+					margin: 0
+					text-align: center
+					width: 270px
+					&:focus
+						outline: none
+						box-shadow: none
+				input.done
+					background: #ECD5F2
+					pointer-events: none
 		.word_item.active
 			z-index: 99
 			.title,.content

@@ -86,26 +86,3 @@
 				@include transition(0.25s)
 				&:hover
 					@include transform(scale(1.1))
-#annotate_modal.show					
-	opacity: 1
-#annotate_modal
-	width: 100%
-	position: absolute
-	text-align: center
-	z-index: 999
-	opacity: 0
-	@include transition(0.7s,ease-out)
-	input
-		padding: 10px
-		font-size: 18px
-		background: #C4FFAF
-		border: 0
-		margin: 0
-		text-align: center
-		width: 270px
-		&:focus
-			outline: none
-			box-shadow: none
-	input.done
-		background: #ECD5F2
-		pointer-events: none

@@ -30,10 +30,6 @@ class UWord < ActiveRecord::Base
     self.word.title
   end
   
-  def content
-    self.word.content
-  end
-  
   def image_path
     IMAGE_PATH + "#{self.id}/#{$config[:name]}.jpg"
   end
@@ -67,7 +63,7 @@ class UWord < ActiveRecord::Base
 		{	
       :id => id,
 			:title => title,
-			:content => content,
+			:content => word.content,
       :image => image_url,
       :height => real_height(200)
 		}

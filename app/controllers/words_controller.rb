@@ -8,16 +8,14 @@ class WordsController < ApplicationController
     @word = Word.find(params[:id])
     # 个人图解
     if uw = current_member.has_u_word(@word)
-      @my_pic = uw.image
+      @uw_info = {
+        :img => uw.has_image ? uw.image_url : nil,
+        :content => uw.content
+      }
     end
     # 关联图解
     imgs = @word.rich_images
-
-    if imgs.any?
-      render_json(0,'ok',{:m => @my_pic,:imagine => [] })
-    else
-      render_json(-1,"empty")
-    end
+    render_json(0,'ok',{:imagine => [] }.merge!(@uw_info))
   end
   
   # Course Word New 
