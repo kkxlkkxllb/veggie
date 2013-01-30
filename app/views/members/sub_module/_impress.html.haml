@@ -10,8 +10,8 @@
 	.group-word.group
 		%a.button.green.glossy.left(data-icon=" " href="#spell" title="拼写练习")
 			%i.icon-edit
-		%a.button.pink.glossy.right(data-icon=" " href="#annotate" title="添加注释")
-			%i.icon-fire
+		%a.button.pink.glossy.right(data-icon=" " href="#voice" title="发音练习")
+			%i.icon-headphones
 #impress
 	- data.each_with_index do |w,i|						
 		.word_item.step{:wid => w[:id],:"data-y" => -i*1000,:"data-z" => -i*1500,:id => i+1}(data-x="0" data-scale="1")

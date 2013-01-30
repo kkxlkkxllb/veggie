@@ -97,8 +97,7 @@ class window.Members
 					html = ""
 					if data.status is 0	
 						if data.data.content
-							$modal = $(".annotate",$current).addClass 'show'
-							$("input[type='text']",$modal).val(data.data.content).addClass 'done'
+							$(".annotate input[type='text']",$current).val(data.data.content).addClass 'done'
 						if data.data.img
 							$img = $current_images.find('.me img')
 							$img.attr("src",data.data.img)
@@ -187,7 +186,8 @@ class window.Members
 							html += "<img class='pic' src='#{img}' />"				
 						$images_wrap.html(html)
 						enable_key_control($modal,$images_wrap,data.data.length)
-						enable_click_image($images_wrap)											
+						enable_click_image($images_wrap)	
+
 					else
 						$images_wrap.html $(".error",$modal).html()		
 			false
@@ -203,15 +203,15 @@ class window.Members
 		$("a[href='#spell']",$cpanel).click ->
 			false
 			
-		# annotate
-		$("a[href='#annotate']",$cpanel).click ->
-			$current = $(".step.active",$wrap)
-			$modal = $(".annotate",$current).addClass 'show'
-			$form = $("form",$modal)
-			$text_input = $("input[type='text']",$form).removeClass("done").focus()
-			$form.bind 'ajax:success', (d,data) ->
-				if data.status is 0
-					$text_input.addClass 'done'
+		$("a[href='#voice']",$cpanel).click ->
+
 			false
-					
-			
+		# annotate
+		$form = $(".annotate form",$wrap)
+		$form.bind 'ajax:success', (d,data) ->
+			if data.status is 0
+				$("input[type='text']",$(@)).addClass 'done'
+		$("input[type='text']",$form).focus ->
+			$(@).removeClass("done")
+		$("input[type='text']",$form).change ->
+			$(@).closest("form").submit()
