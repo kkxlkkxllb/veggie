@@ -66,6 +66,10 @@ class Member < ActiveRecord::Base
   def admin?
     self.role == "a"
   end
+  
+  def is_member?
+    !role.blank?
+  end
 
   def member_path
     role ? "/#{role}/#{uid}" : "#"

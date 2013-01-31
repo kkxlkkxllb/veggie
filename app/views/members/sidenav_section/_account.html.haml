@@ -1,4 +1,4 @@
-- if id = current_member.uid
+- if false#id = current_member.uid
 	%h4.alert
 		%span.icon-user
 		您的 17up 公民身份 ID: 
@@ -11,7 +11,7 @@
 				= $config[:host] + current_member.member_path
 	.alert.alert-error
 		非常友好的“公民行为指导手册”正在制作中，敬请期待。。。
-- else
+- elsif false#current_member.is_member?
 	%h4.alert
 		请在此申领您的公民 ID 号，代表着你在 17up 世界里的唯一身份
 	.alert.alert-info
@@ -23,13 +23,29 @@
 			= submit_tag "登记",:class => "btn btn-primary btn-large"
 			%span.label.label-warning
 				ID 只能由 字母、数字、_构成
-- unless current_member.current_course
-	.break_line
-		%b.left
-		%i.icon-book
-		%b.right
-	.hello_course.text_center
-		= link_to account_path do
-			%span.btn.btn-success.btn-large			
-				立即体验课程
+- else
+	#guide_1.guide
+		%h4.alert.text_center
+			17up 星球能为你做什么？
+		.alert.alert-info.text_center
+			嘿嘿，初次造访，这也许是你最想问的问题
+			%br
+			一句话概括：17up 将努力为热爱学习的你提供新鲜美味的知识
+			%br
+			首先我们将围绕英语学习开始
+			%br
+			如果你仍有兴趣的话，立即开始体验第一课，你会发现这里很特别
+		- unless current_member.current_course
+			.break_line
+				%b.left
+				%i.icon-book
+				%b.right
+			.hello_course.text_center
+				= link_to account_path do
+					%span.btn.btn-success.btn-large			
+						立即体验课程
+	#guide_2.guide
+		%h4.alert.text_center
+			17up 学习攻略
+	
 	

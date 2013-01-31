@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
   before_filter :authenticate_member!,:except => :show
-  
+  before_filter :require_member!,:only => :update
   # 个人学习系统界面
   def dashboard
     set_seo_meta(current_member.name)
@@ -37,19 +37,29 @@ class MembersController < ApplicationController
     set_seo_meta(t("members.edit",:name => current_member.name))
     @provider_num = current_member.providers.length
   end
+  
+  # 会员入口
+  # 付费成功后回调
+  def apply_uid
+    current_member.update_attribute(:role,"u")
+    HardWorker::SendGreetJob.perform_async(current_member.id)
+  end
 
-  # just after register
+  # set uid
   def update  
-    if @user = Member.u.find_by_uid(params[:uid])
-      flash[:error] = t('flash.error.uid')
+    if params[:uid].blank?
+      flash[:error] = t('flash.error.blank')
     else
-      data = {
-        :role => "u",
-        :uid => params[:uid],
-        :email => params[:uid] + "@" + $config[:domain]
-      }
-      current_member.update_attributes(data)
-      flash[:notice] = t('flash.notice.uid')
+      if @user = Member.u.find_by_uid(params[:uid])
+        flash[:error] = t('flash.error.uid')
+      else
+        data = {
+          :uid => params[:uid],
+          :email => params[:uid] + "@" + $config[:domain]
+        }
+        current_member.update_attributes(data)
+        flash[:notice] = t('flash.notice.uid')
+      end
     end
     redirect_to setting_path + "#account"
   end
@@ -64,5 +74,11 @@ class MembersController < ApplicationController
     end
   end
 
+  private
+  def require_member!
+    unless current_member.is_member?
+      render :status => :unauthorized
+    end
+  end
 
 end

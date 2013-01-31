@@ -2,7 +2,7 @@ zh-cn:
   errors:
     not_found: 页面不存在
     crash: 囧啊，宕机了
-    browser: 对不起，你的浏览器不被本星球支持，建议你下载
+    browser: 对不起，你的浏览器太落后啦，建议你下载
   mobile:
     title: 迷你版
   title: 17up
@@ -12,7 +12,7 @@ zh-cn:
   door: "start"
   flash:
     notice:
-      register: "欢迎来到 17up 星球，来完成属于你的冒险，先申领一个 ID 吧!"
+      register: "勇敢的少年／少女，欢迎来到 17up 星球，来完成属于你的冒险!"
       login: "学习，任何时候开始都不晚，欢迎回来！"
       bind: "绑定成功啦!"
       uid: "恭喜你，ID 登记成功，现在你正式成为这里的一份子了"
@@ -20,6 +20,7 @@ zh-cn:
       image: "好棒！单词快到脑子里来"
     error:
       bind: "啊哟，您要绑定的帐号已被使用嘞，如需帮助，请联系 %{email}"
+      blank: "不能为空，请认真填写！"
       uid: "遗憾呐，你想要的 ID 已经被抢占了，换一个试试"
       avatar: "头像太大啦，图片格式仅支持 png、jpg、gif"
       image: "图片最大 2M 限制"

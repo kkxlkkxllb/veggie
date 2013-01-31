@@ -76,15 +76,13 @@ class Provider < ActiveRecord::Base
   
   def send_greet
     if self.member 
-      option = {}
       if self.member.providers.length > 1
         # 绑定
-        option = {:bind => true}
+        HardWorker::SendGreetJob.perform_async(self.id,{:bind => true})
       else
         # 注册 save avatar from provider
         self.member.save_avatar(avatar(:large))
-      end
-      HardWorker::SendGreetJob.perform_async(self.id,option)
+      end     
     end
   end
 
