@@ -7,13 +7,15 @@
 				%span.amienne
 					= w[:title]
 			= render "members/sub_module/annotate",:wid => w[:id],:original => w[:content]
-			= render "members/sub_module/audio",:source => w[:audio]
+			%audio{:data => w[:audio]}
 		.word_pic.step{:wid => w[:id],:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p"}(data-x="0" data-scale="1")
 			.img_wrap
 				%span.img.origin
 					= image_tag(w[:image])
 				%span.img.me
 					= image_tag('icon/default.png')
+		.word_audio.step{:wid => w[:id],:"data-y" => -(i*1000+480),:"data-z" => -(i*1500+300),:id => "#{i+1}a"}(data-x="0" data-scale="1")
+			= render "members/sub_module/audio",:source => w[:audio]
 	#start_exam.step.text_center{:"data-y" => -(data.length*1000+240),:"data-z" => -(data.length*1500+150)}(data-x="0" data-scale="1")
 		%h3
 			本课程到此为止咯，是否有所收获呢，检验下成果吧！

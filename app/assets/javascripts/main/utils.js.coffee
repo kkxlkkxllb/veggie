@@ -46,15 +46,4 @@ class window.Utils
 			$contain.masonry
 				itemSelector : item,
 				isAnimated: false,
-				isFitWidth: true
-	@user_theme: ($bg_wrap = $(".user_bg")) ->
-		if $bg_wrap.length is 1
-			opacity = $bg_wrap.attr("data-o")
-			$("img",$bg_wrap).load ->
-				$(@).css 'opacity':opacity
-				$bg_wrap.animate opacity: 1
-				
-	@image_imagine: ($wrap) ->
-		$container = $(".img_wrap",$wrap)
-		
-		
+				isFitWidth: true		

@@ -1,5 +1,14 @@
-.audio
-	.original
-		%audio{:data => source}
-	.custom
+.original
+	%audio{:data => source}
+.custom
+	.header-tip
+		录音
+	.container
+		%a.record.btn(href="#record")
+			%i.icon-circle
+			%i.icon-spinner.icon-spin
+		%audio.output(src = '')
+		%a.record-play.btn.disabled.btn-success(href="#play")
+			%i.icon-play
+
 		

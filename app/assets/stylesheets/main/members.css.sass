@@ -152,9 +152,6 @@ html.uhome
 							box-shadow: none
 					input.done
 						background: #ECD5F2
-			.audio
-				.custom
-					
 		.word_item.active
 			z-index: 99
 			.title,.annotate
@@ -165,6 +162,24 @@ html.uhome
 				@include transform(rotateX(0deg))
 				@include transform(translateY(-60px))
 				opacity: 1
+		.word_audio
+			text-align: center
+			.custom
+				.btn.disabled
+					pointer-events: none
+				.record
+					color: red
+					font-size: 18px
+					.icon-spin
+						display: none
+					.icon-circle			
+						display: inline
+				.record.ing
+					pointer-events: none
+					.icon-spin
+						display: inline-block
+					.icon-circle
+						display: none
 #user_setting
 	margin-top: 30px
 	ul.nav

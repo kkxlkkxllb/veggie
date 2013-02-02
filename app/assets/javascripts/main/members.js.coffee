@@ -2,7 +2,6 @@ class window.Members
 	@init: ->
 		member = new Members()
 		member.setting($("#user_setting"))
-		Utils.user_theme()
 		member.show($("#user_show"),".word_item")
 		member.dashboard $("#impress"),$("#cpanel")
 		if $("#allen").length is 1
@@ -27,50 +26,33 @@ class window.Members
 			$container.isotope
 				itemSelector: item
 				layoutMode : 'masonry'
-	dashboard: ($wrap,$cpanel) ->
-		
+	dashboard: ($wrap,$cpanel) ->		
 		play_audio = ($audio) ->
 			if $audio.length is 1
 				unless $audio[0].src isnt ''
 					$audio[0].src = $audio.attr('data')
 				$audio[0].play()
-		# 联想
-		imagine = ($current,wid) ->
-			$current_images = $current.next()
-			unless $current.hasClass 'loaded'
-				Utils.image_imagine $current_images
-				$.get "/words/imagine?id=#{wid}",(data) ->
-					html = ""
-					if data.status is 0	
-						if data.data.content
-							$(".annotate input[type='text']",$current).val(data.data.content).addClass 'done'
-						if data.data.img
-							$img = $current_images.find('.me img')
-							$img.attr("src",data.data.img)
-							$img.fadeIn()
-						for img in data.data.imagine
-							html += "<span class='img imagine'><img src='#{img}' /></span>" 
-					$(".img_wrap",$current_images).append(html)
-				$current.addClass 'loaded'
 		step_handle = ($current,$cpanel,max = $(".step").length) ->
-			id = $current.attr 'wid'
-			play_audio($current.find(".original audio"))
+			id = $current.attr 'wid'			
 			step = $(".step").index($current) + 1		
 			percent = step*100/max
 			$("#progress .current_bar").css "width": "#{percent}%"
 			MagicModal.hide()
 			if $current.hasClass 'word_pic'
-				$(".group-img",$cpanel).addClass 'active'
-				$(".group-word",$cpanel).removeClass 'active'					
+				$(".group-img",$cpanel).addClass 'active'				
 				$("input#id",$cpanel).val(id)
-				imagine($current.prev(),id)
+				unless $current.hasClass 'loaded'
+					Imagine.images($current,id)
 			else if $current.hasClass 'word_item'
+				play_audio($current.find("audio"))
 				$(".group-img",$cpanel).removeClass 'active'
-				$(".group-word",$cpanel).addClass 'active'
-				imagine($current,id)
+				unless $current.hasClass 'loaded'
+					Imagine.annotate($current,id)
+			else if $current.hasClass 'word_audio'
+				play_audio($current.find(".original audio"))
+				$(".group-img",$cpanel).removeClass 'active'
 			else
 				$(".group-img",$cpanel).removeClass 'active'
-				$(".group-word",$cpanel).removeClass 'active'
 		start_learn = ->
 			$("#start_page").fadeOut()
 			Home.menu_fade()
@@ -131,15 +113,7 @@ class window.Members
 			false
 		$upload_form = $(".group-img form",$cpanel)
 		$("input[type='file']",$upload_form).change ->
-			$upload_form.submit()
-		# spell test
-		$("a[href='#spell']",$cpanel).click ->
-			false
-		#audio
-		$("a[href='#voice']",$cpanel).click ->
-			modal = new MagicModal $("#audio_input_modal")
-			modal.init_audios()
-			false		
+			$upload_form.submit()	
 		# annotate
 		$form = $(".annotate form",$wrap)
 		$form.bind 'ajax:success', (d,data) ->

@@ -2,20 +2,24 @@
 class WordsController < ApplicationController
   before_filter :authenticate_member!,:except => [:upload_mov]
   
-  # 单词联想
+  # 单词联想 u_word
   # current_member & word_id
+  # type 1: content
+  # type 2: images
+  # type 3: audios
   def imagine
     @word = Word.find(params[:id])
-    # 个人图解
-    if uw = current_member.has_u_word(@word)
-      @uw_info = {
-        :img => uw.has_image ? uw.image_url : nil,
-        :content => uw.content
-      }
-    end
-    # 关联图解
-    imgs = @word.rich_images
-    render_json(0,'ok',{:imagine => [] }.merge!(@uw_info))
+    @uw = current_member.has_u_word(@word)      
+    case params[:type].to_i
+    when 1
+      data = @uw ? @uw.content : nil
+    when 2
+      data = {:imagine => []}
+      if @uw&&@uw.has_image
+        data = data.merge!(:img => @uw.image_url) 
+      end
+    end 
+    render_json 0,'ok',data
   end
   
   # Course Word New 

@@ -20,15 +20,6 @@ class window.MagicModal
 					self.enable_click_image($images_wrap)	
 				else
 					$images_wrap.html $(".error",$modal).html()
-	init_audios: ($modal = @$modal,self = this) ->
-		recorder = new AudioRecorder()
-		$modal.on "click","a.record", ->		
-			recorder.startRecording($(@))
-			false
-		$modal.on "click","a.record-play", ->
-			audio = $(@).prev('audio')
-			audio[0].play()
-			false
 	# key control for magic image
 	# per screen 7 images 
 	# image width: 110px
