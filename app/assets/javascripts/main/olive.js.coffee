@@ -5,7 +5,7 @@ class window.Olive
 		olive.publish($(".cpanel span.publish"))
 		olive.add_provider_view $("form#new_provider_form")
 	constructor: (@$wrap) ->
-		$(".item",@$wrap).live "click",->
+		$(@$wrap).on "click",".item",->
 			$(@).toggleClass "select"
 	render_view: =>
 		$(".cpanel span.btn-success",@$wrap).click ->

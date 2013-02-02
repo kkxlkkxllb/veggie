@@ -1715,8 +1715,8 @@
 		,zoomBindWheel: true
 	};
 	var keys = defaults.keyboard.keys;
-	keys[$.browser.mozilla?107:187] = "zoomIn";  // +
-	keys[$.browser.mozilla?109:189] = "zoomOut"; // -
+	keys[187] = "zoomIn";  // +
+	keys[189] = "zoomOut"; // -
 	defaults.reasonableAnimation.resize = {
 		transitionDuration: '0s'
 		,transitionDelay: '0ms'

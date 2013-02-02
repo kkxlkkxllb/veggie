@@ -33,7 +33,7 @@ gem 'acts-as-taggable-on'
 gem 'nokogiri', '~>1.5.0'
 gem 'mechanize'
 gem 'kaminari'
-gem "remotipart", "~> 1.0"
+gem "remotipart", :git => "git@github.com:kkxlkkxllb/remotipart.git"
 gem 'rails_admin'
 
 gem "devise"

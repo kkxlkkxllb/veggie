@@ -5,12 +5,12 @@ class window.Leafs
 	constructor: (@$wrap = $("#t_wrap")) ->
 		Utils.infinitescroll(@$wrap)
 		Utils.masonry(@$wrap,'.leaf')
-		$("div.leaf").live 'hover',->
+		$(".leaf").on 'click',->
 			$("span.action",$(@)).toggle()
 		$(".leaf img").load ->
 			lzld(this)
 	destroy_leaf: ($wrap = @$wrap) ->
-		$(".leaf span.destroy").live "click", ->
+		$(".leaf").on "click","span.destroy", ->
 			ele = $(@)
 			$.post "/leafs/destroy"
 				id: ele.attr("lid")
