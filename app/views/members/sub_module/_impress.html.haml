@@ -2,19 +2,19 @@
 	.current_bar
 #impress
 	- data.each_with_index do |w,i|						
-		.word_item.step{:wid => w[:id],:"data-y" => -i*1000,:"data-z" => -i*1500,:id => i+1}(data-x="0" data-scale="1")
+		.word_item.step{:wid => w[:id],:"data-y" => -i*1000,:"data-z" => -i*1500,:id => i+1}(data-x="0" data-scale="1" rel="annotate")
 			.title
 				%span.amienne
 					= w[:title]
 			= render "members/sub_module/annotate",:wid => w[:id],:original => w[:content]
 			%audio{:data => w[:audio]}
-		.word_pic.step{:wid => w[:id],:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p"}(data-x="0" data-scale="1")
+		.word_pic.step{:wid => w[:id],:"data-y" => -(i*1000+240),:"data-z" => -(i*1500+150),:id => "#{i+1}p"}(data-x="0" data-scale="1" rel="images")
 			.img_wrap
 				%span.img.origin
 					= image_tag(w[:image])
 				%span.img.me
 					= image_tag('icon/default.png')
-		.word_audio.step{:wid => w[:id],:"data-y" => -(i*1000+480),:"data-z" => -(i*1500+300),:id => "#{i+1}a"}(data-x="0" data-scale="1")
+		.word_audio.step{:wid => w[:id],:"data-y" => -(i*1000+480),:"data-z" => -(i*1500+300),:id => "#{i+1}a"}(data-x="0" data-scale="1" rel="audios")
 			= render "members/sub_module/audio",:source => w[:audio]
 	#start_exam.step.text_center{:"data-y" => -(data.length*1000+240),:"data-z" => -(data.length*1500+150)}(data-x="0" data-scale="1")
 		%h3

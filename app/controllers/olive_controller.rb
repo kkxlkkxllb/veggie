@@ -79,10 +79,21 @@ class OliveController < ApplicationController
 	    if provider = current_member.has_provider?(p_name)
   	    case provider.provider
         when 'instagram'
-  	      result = result + Olive::Instagram.new(:access_token => provider.token).user_media_feed.map{|x| x[:photo]}
+          insta = Olive::Instagram.new(:access_token => provider.token)
+          if params[:fav]
+            olive = insta.user_liked_media.map{|x| x[:photo]}
+          else
+  	        olive = insta.user_media_feed.map{|x| x[:photo]}
+          end
         when 'tumblr'
-          result = result + Olive::Tumblr.new.user_media(provider.metadata[:blogs][0][:name]+".tumblr.com")
+          tumblr = Olive::Tumblr.new(:provider => provider)
+          if params[:fav]
+            olive = tumblr.user_liked_media
+          else
+            olive = tumblr.user_media(provider.metadata[:blogs][0][:name]+".tumblr.com")
+          end
         end
+        result = result + olive
       end	
       result
     end

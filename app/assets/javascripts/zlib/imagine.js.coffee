@@ -18,12 +18,13 @@ class window.Imagine
 				if data.data
 					$(".annotate input[type='text']",$current).val(data.data).addClass 'done'
 		$current.addClass 'loaded'
-	audios: ->
+	@audios: ($current,wid) ->
 		recorder = new AudioRecorder()
-		$modal.on "click","a.record", ->		
-			recorder.startRecording($(@))
+		$current.on "click","a[href='#record']", ->		
+			recorder.startRecording($(@).parent())
 			false
-		$modal.on "click","a.record-play", ->
+		$current.on "click","a[href='#play']", ->
 			audio = $(@).prev('audio')
 			audio[0].play()
 			false
+		$current.addClass 'loaded'

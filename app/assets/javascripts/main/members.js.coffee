@@ -32,36 +32,31 @@ class window.Members
 				unless $audio[0].src isnt ''
 					$audio[0].src = $audio.attr('data')
 				$audio[0].play()
-		step_handle = ($current,$cpanel,max = $(".step").length) ->
-			id = $current.attr 'wid'			
+		step_handle = ($current,max = $(".step").length) ->
+			id = $current.attr 'wid'	
+			rel =	$current.attr 'rel'
 			step = $(".step").index($current) + 1		
 			percent = step*100/max
-			$("#progress .current_bar").css "width": "#{percent}%"
-			MagicModal.hide()
+			$("#progress .current_bar").css "width": "#{percent}%"					
 			if $current.hasClass 'word_pic'
 				$(".group-img",$cpanel).addClass 'active'				
-				$("input#id",$cpanel).val(id)
-				unless $current.hasClass 'loaded'
-					Imagine.images($current,id)
-			else if $current.hasClass 'word_item'
-				play_audio($current.find("audio"))
-				$(".group-img",$cpanel).removeClass 'active'
-				unless $current.hasClass 'loaded'
-					Imagine.annotate($current,id)
-			else if $current.hasClass 'word_audio'
-				play_audio($current.find(".original audio"))
-				$(".group-img",$cpanel).removeClass 'active'
+				$("input#id",$("#cpanel")).val(id)
 			else
+				MagicModal.hide()	
 				$(".group-img",$cpanel).removeClass 'active'
+				play_audio($current.find("audio"))
+			unless $current.hasClass 'loaded'
+				Imagine[rel]($current,id)
+
 		start_learn = ->
 			$("#start_page").fadeOut()
 			Home.menu_fade()
 			$("#progress").addClass 'active'					
-			step_handle($(".step.active",$wrap),$cpanel)									
+			step_handle($(".step.active",$wrap))									
 			h = $(window).height()/3
 			$(".group",$cpanel).css "top": "#{h}px"
 			$(".step",$wrap).on 'enterStep', (e) ->
-				step_handle($(e.target),$cpanel)
+				step_handle($(e.target))
 				put_course($(e.target).attr("id"))
 		start_exam = ($exam = $("#start_exam")) ->
 			$("a[href='#again']",$exam).click ->
@@ -79,6 +74,8 @@ class window.Members
 		# jmpress init		
 		if $wrap.length is 1
 			$wrap.jmpress
+				mouse:
+					clickSelects: false
 				keyboard:
 					keys:
 						9: null

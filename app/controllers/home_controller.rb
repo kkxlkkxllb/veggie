@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     agent = request.user_agent.downcase
     if current_member
       redirect_to account_path
-    elsif agent.include?("iphone") or agent.include?("android")
+    elsif agent.include?("iphone") or agent.include?("mobile")
       redirect_to $config[:mobile_host]
     else
       redirect_to welcome_path

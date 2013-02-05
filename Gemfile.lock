@@ -1,9 +1,3 @@
-GIT
-  remote: git@github.com:kkxlkkxllb/remotipart.git
-  revision: 84a31d05d1c85673f86ef74e16901a284ac933d7
-  specs:
-    remotipart (1.0.3)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -125,7 +119,7 @@ GEM
       hashie (>= 0.4.0)
       multi_json (~> 1.0, >= 1.0.3)
     journey (1.0.4)
-    jquery-rails (2.2.0)
+    jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (3.0.1)
@@ -137,7 +131,7 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kgio (2.8.0)
+    kgio (2.7.4)
     less (2.2.2)
       commonjs (~> 0.2.6)
     less-rails (2.2.6)
@@ -280,6 +274,7 @@ GEM
     redis-store (1.1.3)
       redis (>= 2.2.0)
     ref (1.0.2)
+    remotipart (1.0.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.10.0)
@@ -351,7 +346,7 @@ GEM
     unf (0.0.5)
       unf_ext
     unf_ext (0.0.5)
-    unicorn (4.5.0)
+    unicorn (4.3.1)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -382,7 +377,7 @@ DEPENDENCIES
   haml
   haml-rails
   instagram (~> 0.8.5)
-  jquery-rails
+  jquery-rails (= 2.1.4)
   kaminari
   less-rails
   mechanize
@@ -403,7 +398,7 @@ DEPENDENCIES
   rails_autolink
   redis
   redis-rails
-  remotipart!
+  remotipart (~> 1.0)
   rspec-rails (~> 2.10.0)
   sass-rails (~> 3.2.3)
   sidekiq

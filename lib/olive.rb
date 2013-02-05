@@ -42,13 +42,14 @@ module Olive
   class Tumblr < Base
 
     def initialize(opts={})
-      veggie = Provider.where(:provider => "tumblr").first
-      opts = {
-        :oauth_token => veggie.token,
-        :oauth_token_secret => veggie.secret
-      }.update(opts)
+      provider = opts[:provider] || Provider.where(:provider => "tumblr").first
       
-      @client = ::Tumblr.new(opts)
+      ::Tumblr.configure do |config| 
+        config.oauth_token = provider.token
+        config.oauth_token_secret = provider.secret
+      end
+      
+      @client = ::Tumblr.new
     end
 
     def tagged(tag)
@@ -77,7 +78,13 @@ module Olive
     end
     
     def user_liked_media
-      data = @client.likes
+      data = @client.likes["liked_posts"]
+      data.inject([]) do |result,d|
+        if d["photos"]
+          result << d["photos"][0]["original_size"]["url"].sub(/_\d+\./,"_400.")
+        end
+        result
+      end
     end
   
   end

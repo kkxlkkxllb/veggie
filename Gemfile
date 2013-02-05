@@ -15,7 +15,7 @@ group :assets do
   gem 'bourbon'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '2.1.4'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -33,7 +33,7 @@ gem 'acts-as-taggable-on'
 gem 'nokogiri', '~>1.5.0'
 gem 'mechanize'
 gem 'kaminari'
-gem "remotipart", :git => "git@github.com:kkxlkkxllb/remotipart.git"
+gem "remotipart", '~> 1.0'
 gem 'rails_admin'
 
 gem "devise"

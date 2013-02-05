@@ -1,38 +1,41 @@
 class window.AudioRecorder
 	duration: 5000
 	constructor: ->
-		window.AudioContext = window.AudioContext || window.webkitAudioContext
-		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
-		window.URL = window.URL || window.webkitURL			
-		audio_context = new AudioContext
-		unless navigator.getUserMedia
-			alert "not support"
+		self = this
+		if !navigator.getUserMedia 
+			window.AudioContext = window.AudioContext || window.webkitAudioContext
+			navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
+			window.URL = window.URL || window.webkitURL			
+			self.audio_context = new AudioContext
+			unless navigator.getUserMedia
+				alert "not support"
 			
-		startUserMedia = (stream) ->
-			input = audio_context.createMediaStreamSource(stream)
-			input.connect(audio_context.destination)		
-			this.recorder = new Recorder(input)
-		navigator.getUserMedia
-			audio: true
-			startUserMedia
-			(e) ->
-				console.log('No live audio input: ' + e)
-	
 	startRecording: (button) ->
-		try
-			recorder && recorder.record()
-			button.addClass 'ing'
-			self = this			
-			setTimeout(
-				-> self.stopRecording(button)
-				self.duration
-			)
-		catch error
-			Utils.flash("请允许使用您的麦克风哦！","error","right")
+		self = this		
+		startUserMedia = (stream) ->
+			input = self.audio_context.createMediaStreamSource(stream)
+			input.connect(self.audio_context.destination)
+			recorder = new Recorder(input)
+			recorder		
+		unless navigator.getUserMedia					
+			navigator.getUserMedia
+				audio: true
+				startUserMedia
+				(e) ->
+					Utils.flash("请允许使用您的麦克风哦！","error","right")
+					false
+	
+		startUserMedia.record()
+		button.addClass 'ing'
+		setTimeout(
+			-> self.stopRecording(button)
+			self.duration
+		)
+				
 	stopRecording: (button) ->
 		recorder && recorder.stop()
 		button.removeClass 'ing'
-		this.createDownloadLink(button.next("audio.output"))
+		this.createDownloadLink(button.next().find("audio.output"))
 		recorder.clear()
 	createDownloadLink: (audio) ->
 		recorder and recorder.exportWAV (blob) ->
