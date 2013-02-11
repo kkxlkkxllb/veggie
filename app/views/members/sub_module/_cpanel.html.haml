@@ -3,5 +3,6 @@
 		= render 'shared/uploader',:wid => 0,:url => '/words/upload_img_u',:type => "image"
 		%a.button.blue.glossy.left(data-icon=" " href="#upload" title="上传图片注释")
 			%i.icon-upload-alt
+		= render "modal/magic_images"
 		%a.button.orange.glossy.right(data-icon=" " href="#magic" title="获取魔法")
 			%i.icon-magic

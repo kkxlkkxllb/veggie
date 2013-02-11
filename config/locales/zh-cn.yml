@@ -37,9 +37,9 @@ zh-cn:
     keywords: "友情链接,热门排行,推荐"
     describe: "位于花园和学院之间的地带，就是宽阔的 17up 广场"
   business:
-    title: "生活区"
-    keywords: "商业街,business,life,style"
-    describe: "从广场穿过花园就到 17up 居民的生活区了"
+    title: "社区"
+    keywords: "games,business,life,style"
+    describe: "从广场穿过花园就到 17up 居民社区了"
   course:
     new: "新建课程"
     action:

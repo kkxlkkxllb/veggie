@@ -1,4 +1,4 @@
-- if false#id = current_member.uid
+- if id = current_member.uid
 	%h4.alert
 		%span.icon-user
 		您的 17up 公民身份 ID: 
@@ -9,20 +9,21 @@
 			%span.label.label-success
 				%i.icon-home
 				= $config[:host] + current_member.member_path
-	.alert.alert-error
-		非常友好的“公民行为指导手册”正在制作中，敬请期待。。。
-- elsif false#current_member.is_member?
-	%h4.alert
-		请在此申领您的公民 ID 号，代表着你在 17up 世界里的唯一身份
 	.alert.alert-info
-		♛ 注意是唯一的哦，赶紧抢先登记吧!
+		= link_to "#" do
+			%span.btn.btn-success.btn-large			
+				申请成为教师
+- elsif current_member.is_member?
+	%h4.alert.text_center
+		请在此申领您的公民 ID 号，代表着你在 17up 世界里的唯一身份
+	.alert.alert-info.text_center
 		❝ 一个好名字意味着良好的开端 ❞
-	#set_uid.text_center
+	#set_uid.alert.alert-warning.text_center
+		ID 只能由 字母、数字、_构成
 		= form_tag "/members/update" do
 			= text_field_tag :uid,"",:placeholder => "eg: i_love_u_17",:autocomplete => "off"
-			= submit_tag "登记",:class => "btn btn-primary btn-large"
-			%span.label.label-warning
-				ID 只能由 字母、数字、_构成
+			= submit_tag "登记",:class => "btn btn-primary"
+				
 - else
 	#guide_1.guide
 		%h4.alert.text_center
@@ -35,17 +36,11 @@
 			首先我们将围绕英语学习开始
 			%br
 			如果你仍有兴趣的话，立即开始体验第一课，你会发现这里很特别
-		- unless current_member.current_course
-			.break_line
-				%b.left
-				%i.icon-book
-				%b.right
-			.hello_course.text_center
-				= link_to account_path do
-					%span.btn.btn-success.btn-large			
-						立即体验课程
+		.hello_course.text_center
+			= link_to account_path do
+				%span.btn.btn-success.btn-large			
+					立即体验课程
 	#guide_2.guide
-		%h4.alert.text_center
-			17up 学习攻略
+		= render "members/sub_module/user_guide"
 	
 	

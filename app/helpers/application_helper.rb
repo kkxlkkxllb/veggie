@@ -1,11 +1,15 @@
 # coding: utf-8 
 module ApplicationHelper
-  def time_stamp(datatime)
-    if datatime.today?
+  def time_stamp(datetime)
+    if datetime.today?
       "今天"
     else
-      datatime.strftime("%m月%d日")
+      datetime.strftime("%m月%d日")
     end
+  end
+
+  def format_date(datetime)
+    datetime.strftime("%Y-%m-%d")
   end
  
   def my_image_tag(url,link,height='')

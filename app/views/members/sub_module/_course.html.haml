@@ -1,0 +1,26 @@
+- data.each_with_index do |w,i|			
+	- y = (i + 1)*1000	
+	- z = (i + 1)*1500	
+	.word_item.step{:wid => w[:id],:"data-y" => -y,:"data-z" => -z,:id => i+1}
+		.title
+			%span.amienne
+				= w[:title]
+		%audio{:data => w[:audio]}
+	.word_pic.step{:wid => w[:id],:"data-y" => -(y+240),:"data-z" => -(z+150),:id => "#{i+1}p"}(rel="images")
+		.img_wrap
+			%span.img.origin
+				= image_tag(w[:image])
+			%span.img.me
+				= image_tag('icon/default.png')
+	.word_audio.step{:wid => w[:id],:"data-y" => -(y+480),:"data-z" => -(z+300),:id => "#{i+1}a"}(rel="audios")
+		= render "members/sub_module/audio",:source => w[:audio]
+- round2_y = -(data.length + 1)*1000
+- round2_z = -(data.length + 1)*1500
+- data.each_with_index do |w,i|	
+	.word_annotate.step{:wid => w[:id],:"data-x" => i*1000,:"data-y" => round2_y,:"data-z" => round2_z,:id => "#{i+1}n"}(rel="annotate")
+		.title
+			%span.amienne
+				= w[:title]
+		= render "members/sub_module/annotate",:wid => w[:id],:original => w[:content]
+= render "members/sub_module/end_page",:y => round2_y,:z => round2_z,:x => data.length*1000
+	

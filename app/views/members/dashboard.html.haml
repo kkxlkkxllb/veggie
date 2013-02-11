@@ -1,8 +1,9 @@
-= render "members/sub_module/cpanel"
-= render "modal/magic_images"
 #user_home
-	- if @u_words.any?		
-		= render "members/sub_module/start_page",:c => @course.as_json
-		= render "members/sub_module/impress",:data => @u_words
+	- if @u_words.any?
+		#progress
+			.current_bar
+		#impress
+			= render "members/sub_module/start_page",:c => @course.as_json
+			= render "members/sub_module/course",:data => @u_words
 	- else
 		= render "games/allen"

@@ -42,6 +42,24 @@ class Provider < ActiveRecord::Base
       end
     end
   end
+
+  def link
+    case provider
+    when "weibo"
+      link = metadata[:urls][:Weibo]
+      link.blank? ? "http://weibo.com/#{uid}" : link
+    when "twitter"
+      metadata[:urls][:Twitter]
+    when "tumblr"
+      metadata[:blogs][0][:url]
+    when "instagram"
+      "http://instagram.com/#{at_name}"
+    when "github"
+      metadata[:urls][:GitHub]
+    when "youtube"
+      metadata[:channel_url]
+    end
+  end
   
   def provider_type
     self.provider.sub("_#{$config[:name]}","")
@@ -57,6 +75,7 @@ class Provider < ActiveRecord::Base
     self.metadata[:nickname]
   end
   
+  # wheat
   def url
     url = self.metadata[:weibo_url]
     return url ? url : self.metadata[:url]

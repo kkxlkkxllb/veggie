@@ -5,71 +5,34 @@ html.uhome
 	background: url(/assets/img/bg/bg_home.png) #DBEED5
 	body
 		background-color: transparent
-#cpanel
-	font-size: 66px	
-	a
-		@include transition(0.8s,ease-in-out)
-		position: absolute
-	.group
-		position: relative
-		a.left				
-			left: 0
-			@include transform(translateX(-400px))
-		a.right
-			right: 0
-			@include transform(translateX(400px))
-	.group.active
-		a.left
-			@include transform(translateX(0px))
-		a.right
-			@include transform(translateX(0px))
+
 #user_home
 	.opacity
 		opacity: 0.3
-	#start_page
-		width: 100%
-		height: 100%
-		position: absolute
-		top: 0
-		left: 0
-		background: rgba(0,0,0,0.6)
-		z-index: 10
-		display: none
-		#course_summary		
-			width: 400px
-			height: 100%	
-			@include text-shine			
-			h1.title						
-				margin: 50px 0 20px 0
-				font-size: 50px
-				text-align: center
-			.type
-				font-size: 13px
-				text-align: center
-				margin-bottom: 20px
-			p
-				text-align: center
-				font-size: 18px
-			.description
-				font-size: 26px
-				margin: 30px 0
-			.start
-				margin: 20px 0
-				text-align: center
-				input:focus
-					outline: none
-					
-		#manual
-			width: 400px
-			color: white
-			margin-top: 30px
+	#manual
+		background: rgba(0,0,0,0.5)
+		width: 400px
+		color: white
+		margin-top: 30px
+		text-align: center
+		p
+			line-height: 2
+		.m1
+			font-size: 80px
+		.m2
+			font-size: 80px
+	#start
+		h1.title						
+			margin: 50px 0 20px 0
+			font-size: 50px
 			text-align: center
-			p
-				line-height: 2
-			.m1
-				font-size: 80px
-			.m2
-				font-size: 80px
+		p
+			text-align: center
+			font-size: 18px
+		.description
+			font-size: 26px
+			margin: 30px 0
+					
 	#progress
 		position: absolute
 		top: 42px
@@ -207,32 +170,38 @@ html.uhome
 		.binded
 			border: 2px solid transparent
 	#profile
-		.item
-			width: 120px
-			height: 110px
-			position: relative
-			text-align: center
-			float: left
+		position: relative
 		.avatar		
 			cursor: pointer
+			@include box-shadow(0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset)
 			img
 				width: 120px
 				height: 120px
-				@include round(40px)
-				margin-top: -5px
+			&:hover
+				@include transform(rotate(-3deg))
+		.info
+			margin-left: 20px
+			.name
+				font-size: 20px
+			.providers
+				img
+					width: 35px
+					height: 35px
+
+		.date
+			position: absolute
+			color: #cde0e5
+			right: 10px
+			bottom: 5px
 	#account
-		#set_uid
-			margin-top: 40px			
+		#set_uid		
 			form
-				margin: 0
+				margin-top: 20px
 				input#uid
 					margin: 0
-					border: 0
-					padding: 12px
-					font-size: 22px
-				span.label
-					font-size: 18px
-					line-height: 1.4
+					padding: 5px
+					font-size: 20px
+		
 		.guide
 			.alert-info
 				line-height: 2

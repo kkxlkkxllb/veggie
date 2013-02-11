@@ -47,7 +47,7 @@ class Member < ActiveRecord::Base
   EDIT_SIDENAV = %w{profile provider account}
   AVATAR_URL = "/system/images/member/"
   AVATAR_PATH = "#{Rails.root}/public"+AVATAR_URL
-  AVATAR_SIZE_LIMIT = 500*1000 #500k
+  AVATAR_SIZE_LIMIT = 3000*1000 #3m
   ## role 用户组别 
   ROLE = %w{a u b e g v}
   # nil 三无用户，被清理对象
@@ -90,10 +90,6 @@ class Member < ActiveRecord::Base
   def name
     p = self.providers.first
     p ? p.user_name : $config[:author]
-  end
-  
-  def provider_name
-    self.providers.first.provider
   end
   
   # p : string in [Provider::PROVIDERS]

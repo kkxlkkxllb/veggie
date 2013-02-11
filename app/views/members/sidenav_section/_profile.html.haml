@@ -1,16 +1,12 @@
-= render 'shared/uploader',:url => "/members/upload_avatar",:type => "image"
-%h4.alert
-	%span.icon-heart-empty
-	亲爱的 
-	= current_member.name
-	,你的基本资料取自你的
-	= current_member.provider_name
-	身份
-.alert.alert-info
-	你可以点击更改你的头像
-.avatar.item.button.blue.glossy(data-icon=" " title="点我更换头像")
-	= image_tag current_member.avatar
-.birthday.item.button.green.glossy(data-icon=" ")
-	%p.tallys
-		✿ it's your birthday on 17up
-	%p.tallys= time_stamp(current_member.created_at)
+.card.alert.clearfix
+	= render 'shared/uploader',:url => "/members/upload_avatar",:type => "image"
+	.avatar.pull-left(title="点我更换头像")
+		= image_tag current_member.avatar
+	.info.pull-left
+		.name
+			= current_member.name
+		.providers
+			- current_member.providers.each do |p|
+				= link_to image_tag("icon/#{p.provider}_big.png"),p.link,:target => "blank"
+	.date
+		%i= format_date(current_member.created_at)

@@ -1,42 +1,13 @@
-#start_page.clearfix{:cid => c["id"]}
-	#course_summary.left
-		%h1.title.tallys
-			= c["title"]	
-		.type
-			= c["language"]
-		%p
-			%i
-				Cost
-				= c["word_cnt"]*1.5
-				minutes				
-		%p
-			%i
-				Learn
-				= c["word_cnt"]
-				words
-		%p
-			%i
-				About
-				= c["ctags"]
-		%p.dancer.description
-			= c["description"]
-		.start
-			%span#startup.btn.btn-success.btn-large
-				Ready Go	
+#start.step{:cid => c["id"]}(data-y= "0" data-z= "0"  data-x="0" data-scale="1")
+	%h1.title.tallys
+		= c["title"]		
+	%p
+		= c["word_cnt"]
+		words
+	%p
+		= c["ctags"]
+	%p.dancer.description
+		= c["description"]
 			
-	#manual.right
-		%h3
-			%span.icon-warning-sign
-		%p
-			请使用键盘方向键导航
-			%br
-			上下键为纵向进度推进
-			%br
-			左右键为横向拓展联想
-		.m1
-			%i.icon-arrow-up
-		.m2
-			%span.icon-arrow-left
-			%span.icon-arrow-down
-			%span.icon-arrow-right
+	
 			

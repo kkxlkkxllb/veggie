@@ -26,7 +26,7 @@ class window.Members
 			$container.isotope
 				itemSelector: item
 				layoutMode : 'masonry'
-	dashboard: ($wrap,$cpanel) ->		
+	dashboard: ($wrap) ->		
 		play_audio = ($audio) ->
 			if $audio.length is 1
 				unless $audio[0].src isnt ''
@@ -34,27 +34,18 @@ class window.Members
 				$audio[0].play()
 		step_handle = ($current,max = $(".step").length) ->
 			id = $current.attr 'wid'	
-			rel =	$current.attr 'rel'
+			rel = $current.attr 'rel'
 			step = $(".step").index($current) + 1		
 			percent = step*100/max
-			$("#progress .current_bar").css "width": "#{percent}%"					
-			if $current.hasClass 'word_pic'
-				$(".group-img",$cpanel).addClass 'active'				
-				$("input#id",$("#cpanel")).val(id)
-			else
-				MagicModal.hide()	
-				$(".group-img",$cpanel).removeClass 'active'
-				play_audio($current.find("audio"))
-			unless $current.hasClass 'loaded'
+			$("#progress .current_bar").css "width": "#{percent}%"
+			play_audio($current.find("audio"))
+			unless $current.hasClass('loaded') or (rel is undefined)
 				Imagine[rel]($current,id)
 
 		start_learn = ->
-			$("#start_page").fadeOut()
 			Home.menu_fade()
 			$("#progress").addClass 'active'					
 			step_handle($(".step.active",$wrap))									
-			h = $(window).height()/3
-			$(".group",$cpanel).css "top": "#{h}px"
 			$(".step",$wrap).on 'enterStep', (e) ->
 				step_handle($(e.target))
 				put_course($(e.target).attr("id"))
@@ -84,33 +75,24 @@ class window.Members
 						39: null
 			# forbin auto loop
 			$wrap.jmpress("route", "#start_exam", true)
-			$wrap.jmpress("route", "#1", true, true)			
+			$wrap.jmpress("route", "#start", true, true)			
 			$wrap.show()
 			start_exam()
-			window.cid = $("#start_page").attr 'cid'
+			window.cid = $("#start").attr 'cid'
 			if step = get_course()
 				$wrap.jmpress "goTo",$("##{step}")
-				start_learn()
 			else
-				$("#start_page").fadeIn()				
-				$("#top_nav").css 'opacity':'0'
-				$("#startup").click ->
-					put_course()
-					$wrap.jmpress "goTo",$('.step').first()
-					start_learn()
-		# magic images	
-		$("a[href='#magic']",$cpanel).click ->				
-			modal = new MagicModal $("#magic_images_modal")	
-			modal.init_images()
-			false
+				put_course()
+			start_learn()
+
 		# upload image
-		$("a[href='#upload']",$cpanel).click ->	
-			if $("input#id",$cpanel).val() isnt "0"
-				$("input[type='file']",$cpanel).trigger "click"
-			false
-		$upload_form = $(".group-img form",$cpanel)
-		$("input[type='file']",$upload_form).change ->
-			$upload_form.submit()	
+		# $("a[href='#upload']",$cpanel).click ->	
+		# 	if $("input#id",$cpanel).val() isnt "0"
+		# 		$("input[type='file']",$cpanel).trigger "click"
+		# 	false
+		# $upload_form = $(".group-img form",$cpanel)
+		# $("input[type='file']",$upload_form).change ->
+		# 	$upload_form.submit()	
 		# annotate
 		$form = $(".annotate form",$wrap)
 		$form.bind 'ajax:success', (d,data) ->

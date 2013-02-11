@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:kkxlkkxllb/omniauth-youtube.git
+  revision: 6bbf6031858ce372dcfca3d78e807765e7331d1d
+  specs:
+    omniauth-youtube (2.1.1)
+      omniauth-oauth2 (~> 1.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -198,8 +205,6 @@ GEM
     omniauth-weibo-oauth2 (0.2.0)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
-    omniauth-youtube (2.1)
-      omniauth-oauth2 (~> 1.0)
     orm_adapter (0.4.0)
     parallel (0.6.1)
     polyglot (0.3.3)
@@ -389,7 +394,7 @@ DEPENDENCIES
   omniauth-tumblr
   omniauth-twitter
   omniauth-weibo-oauth2 (~> 0.2.0)
-  omniauth-youtube
+  omniauth-youtube!
   parallel
   puma
   quiet_assets
