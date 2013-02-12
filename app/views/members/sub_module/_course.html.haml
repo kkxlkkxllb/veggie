@@ -5,13 +5,14 @@
 		.title
 			%span.amienne
 				= w[:title]
+		.original
+			%span
+				= w[:content]
 		%audio{:data => w[:audio]}
 	.word_pic.step{:wid => w[:id],:"data-y" => -(y+240),:"data-z" => -(z+150),:id => "#{i+1}p"}(rel="images")
-		.img_wrap
-			%span.img.origin
+		.wrap.clearfix
+			.item.origin.active
 				= image_tag(w[:image])
-			%span.img.me
-				= image_tag('icon/default.png')
 	.word_audio.step{:wid => w[:id],:"data-y" => -(y+480),:"data-z" => -(z+300),:id => "#{i+1}a"}(rel="audios")
 		= render "members/sub_module/audio",:source => w[:audio]
 - round2_y = -(data.length + 1)*1000

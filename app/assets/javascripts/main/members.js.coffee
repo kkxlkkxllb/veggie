@@ -49,6 +49,27 @@ class window.Members
 			$(".step",$wrap).on 'enterStep', (e) ->
 				step_handle($(e.target))
 				put_course($(e.target).attr("id"))
+			$(document).bind "keyup.imagine", (e) ->
+				$current = $(".step.active")
+				if $current.hasClass 'loaded'
+					$active = $current.find(".item.active")
+					$container = $current.find(".wrap")
+					item_width = $active.width()
+					$left = $container.position().left
+					switch e.keyCode
+						when 37#left
+							$next = $active.next()
+							if $next.length isnt 0
+								$next.addClass 'active'
+								$active.removeClass 'active'
+								$container.css "left":($left - item_width) + "px"
+						when 39#right
+							$prev = $active.prev()
+							if $prev.length isnt 0
+								$prev.addClass 'active'
+								$active.removeClass 'active'
+								$container.css "left":($left + item_width) + "px"
+							play_audio($prev.find("audio"))
 		start_exam = ($exam = $("#start_exam")) ->
 			$("a[href='#again']",$exam).click ->
 				$wrap.jmpress "goTo",$('.step').first()
@@ -70,7 +91,6 @@ class window.Members
 				keyboard:
 					keys:
 						9: null
-						32: null
 						37: null
 						39: null
 			# forbin auto loop
@@ -84,7 +104,7 @@ class window.Members
 			else
 				put_course()
 			start_learn()
-
+			
 		# upload image
 		# $("a[href='#upload']",$cpanel).click ->	
 		# 	if $("input#id",$cpanel).val() isnt "0"

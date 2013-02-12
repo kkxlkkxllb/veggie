@@ -9,30 +9,24 @@ html.uhome
 #user_home
 	.opacity
 		opacity: 0.3
-	#manual
-		background: rgba(0,0,0,0.5)
-		width: 400px
-		color: white
-		margin-top: 30px
-		text-align: center
-		p
-			line-height: 2
-		.m1
-			font-size: 80px
-		.m2
-			font-size: 80px
+	#navigate		
+
 	#start
+		.sans-serif
+			font-family: sans-serif
 		h1.title						
-			margin: 50px 0 20px 0
+			margin-bottom: 100px
 			font-size: 50px
 			text-align: center
 		p
 			text-align: center
 			font-size: 18px
+		.tags
+			font-style: italic
 		.description
 			font-size: 26px
 			margin: 30px 0
-					
+			
 	#progress
 		position: absolute
 		top: 42px
@@ -61,18 +55,24 @@ html.uhome
 		.word_pic
 			z-index: 1
 			position: relative
-			.img_wrap
+			.wrap
 				opacity: 0.3
+				width: 9000px
 				@include transform(rotateX(30deg))
-				@include transition(0.8s)
-				text-align: center
-				span.img												
+				left: 310px
+				@include transition(0.8s,ease-out)
+				position: relative
+				.item
+					opacity: 0.3
+					float: left
+					@include transform(scale(0.6))
+					@include transition(0.8s,ease-out)
 					img
 						@include round(10px)
-						@include shadow(0px,1px,3px,rgba(0,0,0,.3))			
-				.me				
-					img
-						display: none
+						@include shadow(0px,1px,3px,rgba(0,0,0,.3))	
+				.item.active
+					opacity: 1
+					@include transform(scale(1))
 						
 		.word_item
 			text-align: center
@@ -87,6 +87,65 @@ html.uhome
 					font-size: 170px
 					@include text-shadow-inverse
 					@include text-shadow-3d
+			.original
+				opacity: 0
+				@include transition(0.8s)
+				span
+					font-size: 16px
+					background: #f5f5f5
+					padding: 8px
+					@include round(10px)
+					@include shadow(0px,1px,3px,rgba(0,0,0,.3))
+		.word_item.active
+			.title,.original
+				opacity: 1
+
+		.word_pic.active,.word_audio.active
+			z-index: 99 
+			.wrap 
+				@include transform(rotateX(0deg))
+				@include transform(translateY(-60px))
+				opacity: 1
+
+		.word_audio
+			z-index: 1
+			position: relative
+			.wrap
+				opacity: 0.2
+				width: 9000px
+				@include transform(rotateX(30deg))
+				left: 150px
+				@include transition(0.8s,ease-out)
+				position: relative
+				.item
+					opacity: 0.3
+					float: left
+					@include transform(scale(0.6))
+					@include transition(0.8s,ease-out)
+					width: 200px
+					text-align: center
+				.item.active
+					opacity: 1
+					@include transform(scale(1))
+				.original
+
+				.custom
+					.btn.disabled
+						pointer-events: none
+					.record					
+						font-size: 18px
+						.icon-spin
+							display: none
+						.icon-circle			
+							display: inline
+							color: red
+					.record.ing
+						pointer-events: none
+						.icon-spin
+							display: inline-block
+						.icon-circle
+							display: none
+		.word_annotate
 			.annotate
 				width: 100%
 				text-align: center
@@ -115,34 +174,6 @@ html.uhome
 							box-shadow: none
 					input.done
 						background: #ECD5F2
-		.word_item.active
-			z-index: 99
-			.title,.annotate
-				opacity: 1
-		.word_pic.active
-			z-index: 99 
-			.img_wrap 
-				@include transform(rotateX(0deg))
-				@include transform(translateY(-60px))
-				opacity: 1
-		.word_audio
-			text-align: center
-			.custom
-				.btn.disabled
-					pointer-events: none
-				.record
-					color: red
-					font-size: 18px
-					.icon-spin
-						display: none
-					.icon-circle			
-						display: inline
-				.record.ing
-					pointer-events: none
-					.icon-spin
-						display: inline-block
-					.icon-circle
-						display: none
 #user_setting
 	margin-top: 30px
 	ul.nav

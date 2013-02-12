@@ -1,17 +1,14 @@
 class window.Imagine
 	@images: ($current,wid) ->
-		$container = $(".img_wrap",$current)
+		$container = $(".wrap",$current)
 		$.get "/words/imagine?id=#{wid}&type=2",(data) ->
 			html = ""
 			if data.status is 0	
-				if data.data.img
-					$img = $current.find('.me img')
-					$img.attr("src",data.data.img)
-					$img.fadeIn()
-				for img in data.data.imagine
-					html += "<span class='img imagine'><img src='#{img}' /></span>" 
-			$(".img_wrap",$current).append(html)
-		$current.addClass 'loaded'
+				for img in data.data
+					html += "<div class='item imagine'><img src='#{img}' /></div>" 
+				width = (data.data.length + 1)*280
+				$(".wrap",$current).append(html).css 'width': "#{width}px"
+		$current.addClass 'loaded' 
 	@annotate: ($current,wid) ->
 		$.get "/words/imagine?id=#{wid}&type=1",(data) ->
 			if data.status is 0	
@@ -19,9 +16,9 @@ class window.Imagine
 					$(".annotate input[type='text']",$current).val(data.data).addClass 'done'
 		$current.addClass 'loaded'
 	@audios: ($current,wid) ->
-		recorder = new AudioRecorder()
+		window.recorder = window.recorder || new AudioRecorder()
 		$current.on "click","a[href='#record']", ->		
-			recorder.startRecording($(@).parent())
+			window.recorder.startRecording($(@).parent())
 			false
 		$current.on "click","a[href='#play']", ->
 			audio = $(@).prev('audio')

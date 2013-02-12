@@ -14,10 +14,7 @@ class WordsController < ApplicationController
     when 1
       data = @uw ? @uw.content : nil
     when 2
-      data = {:imagine => []}
-      if @uw&&@uw.has_image
-        data = data.merge!(:img => @uw.image_url) 
-      end
+      data = @word.rich_images
     end 
     render_json 0,'ok',data
   end

@@ -1,15 +1,19 @@
-.original
-	%audio{:data => source}
-.custom
-	.header-tip
-		录音
-	.record
-		%a.btn(href="#record")
-			%i.icon-circle
-			%i.icon-spinner.icon-spin
-	.record-play
-		%audio.output(src = '')
-		%a.btn.disabled.btn-success(href="#play")
-			%i.icon-play
+.wrap.clearfix
+	.item.original
+		%audio{:data => source}
+		%i.icon-volume-up
+		.info
+			发音
+	.item.custom.active
+		.header-tip
+			录音
+		.record
+			%a.btn(href="#record")
+				%i.icon-circle
+				%i.icon-spinner.icon-spin
+		.record-play
+			%audio.output(src = '')
+			%a.btn.disabled.btn-success(href="#play")
+				%i.icon-play
 
 		
