@@ -24,6 +24,9 @@ class UWord < ActiveRecord::Base
 	IMAGE_SIZE_LIMIT = 2*1000*1000 #2m
   IMAGE_WIDTH = 280
 
+  AUDIO_URL = "/system/audios/u_word/"
+  AUDIO_PATH = "#{Rails.root}/public"+AUDIO_URL
+
   scope :show, where(["height is not ?", nil])
   
   def title
@@ -43,8 +46,19 @@ class UWord < ActiveRecord::Base
   end
   
   def has_image
-    #return File.exist?(self.image_path)
     !height.nil?
+  end
+
+  def audio_path
+    AUDIO_PATH + "#{self.id}/#{$config[:name]}.wav"
+  end
+
+  def audio_url
+    AUDIO_URL + "#{self.id}/#{$config[:name]}.wav"
+  end
+
+  def has_audio
+    return File.exist?(audio_path)
   end
   
   def clear_image

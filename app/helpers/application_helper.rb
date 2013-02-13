@@ -31,6 +31,8 @@ module ApplicationHelper
 			accept = 'image/png,image/gif,image/jpeg'
 		when "mov"
 			accept = "video/*"
+    when "audio"
+      accept = "audio/*"
 		end
 		file_field_tag type.to_sym,:accept => accept
 	end

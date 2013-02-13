@@ -46,4 +46,12 @@ class window.AudioRecorder
 			url = URL.createObjectURL(blob)	 
 			audio[0].src = url
 			audio[0].play()
-			audio.next().removeClass "disabled"
+			audio.parent().fadeIn()
+			wid = audio.closest(".word_audio").attr "wid"
+			form = new FormData()
+			form.append("file", blob)
+			form.append("id",wid)
+			form.append("authenticity_token",$("#audio_uploader form").find("input[name='authenticity_token']").val())
+			oReq = new XMLHttpRequest()
+			oReq.open("POST", '/words/upload_audio_u')
+			oReq.send(form)

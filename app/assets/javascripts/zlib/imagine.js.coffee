@@ -16,12 +16,18 @@ class window.Imagine
 					$(".annotate input[type='text']",$current).val(data.data).addClass 'done'
 		$current.addClass 'loaded'
 	@audios: ($current,wid) ->
+		$audio = $("audio",$current)
 		window.recorder = window.recorder || new AudioRecorder()
 		$current.on "click","a[href='#record']", ->		
 			window.recorder.startRecording($(@).parent())
 			false
 		$current.on "click","a[href='#play']", ->
-			audio = $(@).prev('audio')
-			audio[0].play()
+			$btn = $(@)
+			$audio = $btn.prev('audio')
+			$audio[0].play()
 			false
+		$audio.on 'play', ->
+			$(@).next().html "<i class='icon-spinner icon-spin'></i>"
+		$audio.on 'ended', ->
+			$(@).next().text "▶"
 		$current.addClass 'loaded'

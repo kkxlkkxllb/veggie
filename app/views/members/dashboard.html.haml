@@ -5,5 +5,7 @@
 		#impress
 			= render "members/sub_module/start_page",:c => @course.as_json
 			= render "members/sub_module/course",:data => @u_words
+		#audio_uploader
+			= render 'shared/uploader',:wid => 0,:url => "#",:type => "audio"
 	- else
 		= render "games/allen"

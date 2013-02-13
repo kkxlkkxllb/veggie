@@ -113,7 +113,7 @@ html.uhome
 				opacity: 0.2
 				width: 9000px
 				@include transform(rotateX(30deg))
-				left: 150px
+				left: 350px
 				@include transition(0.8s,ease-out)
 				position: relative
 				.item
@@ -126,13 +126,8 @@ html.uhome
 				.item.active
 					opacity: 1
 					@include transform(scale(1))
-				.original
-
 				.custom
-					.btn.disabled
-						pointer-events: none
-					.record					
-						font-size: 18px
+					.record
 						.icon-spin
 							display: none
 						.icon-circle			
@@ -144,6 +139,9 @@ html.uhome
 							display: inline-block
 						.icon-circle
 							display: none
+					.record-play
+						a
+							text-shadow: 2px 2px 5px #999
 		.word_annotate
 			.title
 				opacity: 1

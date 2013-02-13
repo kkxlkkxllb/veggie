@@ -1,19 +1,10 @@
 .wrap.clearfix
-	.item.original
-		%audio{:data => source}
-		%i.icon-volume-up
-		.info
-			发音
 	.item.custom.active
-		.header-tip
-			录音
-		.record
-			%a.btn(href="#record")
+		.record.active
+			%a.button(href="#record" title="录制你自己的发音" data-icon=" ")
 				%i.icon-circle
 				%i.icon-spinner.icon-spin
-		.record-play
+		.record-play.active.hide
 			%audio.output(src = '')
-			%a.btn.disabled.btn-success(href="#play")
-				%i.icon-play
-
-		
+			%a(href="#play")
+				▶

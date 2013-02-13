@@ -7,7 +7,6 @@ class ProviderController < ApplicationController
     end
     if @provider
       HardWorker::GrowLeafJob.perform_async(@provider.id)
-      #@provider.grow_leaf
       render_json(0,"ok")
     end
    

@@ -106,6 +106,21 @@ class WordsController < ApplicationController
     render_json 0,"ok"
   end
 
+  # U word
+  # 个人发音
+  def upload_audio_u
+    @uw = find_or_create_uw(params[:id])
+    file = params[:file]
+    data = open(file.tempfile.path){|f|f.read}
+    @store_path = UWord::AUDIO_PATH + "#{@uw.id}"
+    unless File.exist?(@store_path)
+      `mkdir -p #{@store_path}`
+    end
+    file = File.open(@uw.audio_path,"wb") << data
+    file.close
+    render_json 0,"ok"
+  end
+
 	# U word
 	# To-Do
 	# 用户上传视频

@@ -49,6 +49,7 @@ class window.Members
 			$(".step",$wrap).on 'enterStep', (e) ->
 				step_handle($(e.target))
 				put_course($(e.target).attr("id"))
+			$(".record a").tooltip()
 			$(document).bind "keyup.imagine", (e) ->
 				$current = $(".step.active")
 				if $current.hasClass 'loaded'
@@ -63,6 +64,7 @@ class window.Members
 								$next.addClass 'active'
 								$active.removeClass 'active'
 								$container.css "left":($left - item_width) + "px"
+							play_audio($next.find("audio"))
 						when 39#right
 							$prev = $active.prev()
 							if $prev.length isnt 0

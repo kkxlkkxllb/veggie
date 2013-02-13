@@ -9,12 +9,13 @@
 			%span
 				= w[:content]
 		%audio{:data => w[:audio]}
-	.word_pic.step{:wid => w[:id],:"data-y" => -(y+240),:"data-z" => -(z+150),:id => "#{i+1}p"}(rel="images")
+	.word_audio.step{:wid => w[:id],:"data-y" => -(y+140),:"data-z" => -(z+100),:id => "#{i+1}a"}(rel="audios")
+		= render "members/sub_module/audio",:source => w[:audio]
+	.word_pic.step{:wid => w[:id],:"data-y" => -(y+300),:"data-z" => -(z+300),:id => "#{i+1}p"}(rel="images")
 		.wrap.clearfix
 			.item.origin.active
 				= image_tag(w[:image])
-	.word_audio.step{:wid => w[:id],:"data-y" => -(y+480),:"data-z" => -(z+300),:id => "#{i+1}a"}(rel="audios")
-		= render "members/sub_module/audio",:source => w[:audio]
+	
 - round2_y = -(data.length + 1)*1000
 - round2_z = -(data.length + 1)*1500
 - data.each_with_index do |w,i|	
