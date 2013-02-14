@@ -5,7 +5,7 @@ class window.Leafs
 	constructor: (@$wrap = $("#t_wrap")) ->
 		Utils.infinitescroll(@$wrap)
 		Utils.masonry(@$wrap,'.leaf')
-		$(".leaf").on 'click',->
+		@$wrap.on 'click',".leaf",->
 			$("span.action",$(@)).toggle()
 		$(".leaf img").load ->
 			lzld(this)
