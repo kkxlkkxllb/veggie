@@ -10,7 +10,23 @@ html.uhome
 	.opacity
 		opacity: 0.3
 	#navigate		
-
+		text-align: center
+		background: rgba(135,206,235,0.3)
+		width: 100%
+		position: absolute
+		top: 25px
+		@include transform(rotateX(57deg))
+		@include shadow(0px,2px,3px,rgba(0,0,0,.3))	
+		@include text-shadow-3d
+		.tip
+			position: absolute
+			line-height: 144px
+			font-size: 36px
+			color: #666
+		.tip.p-left
+			left: 50px
+		.tip.p-right
+			right: 50px
 	#start
 		.sans-serif
 			font-family: sans-serif

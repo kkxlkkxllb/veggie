@@ -1,6 +1,8 @@
 #start.step{:cid => c["id"]}(data-y= "0" data-z= "0"  data-x="0" data-scale="1")
 	%h1.tallys
-		= c["title"]		
+		= c["title"]
+	- if c["id"] == Course.hello.id
+		= render "members/sub_module/quick_help"		
 	%p
 		= c["word_cnt"]
 		words
@@ -8,6 +10,7 @@
 		= c["ctags"]
 	%p.description.sans-serif
 		= c["description"]
+	
 			
 	
 			
