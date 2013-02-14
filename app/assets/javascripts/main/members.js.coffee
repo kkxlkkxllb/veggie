@@ -38,7 +38,8 @@ class window.Members
 			step = $(".step").index($current) + 1		
 			percent = step*100/max
 			$("#progress .current_bar").css "width": "#{percent}%"
-			play_audio($current.find("audio"))
+			if $current.hasClass "word_item"
+				play_audio($current.find("audio"))
 			unless $current.hasClass('loaded') or (rel is undefined)
 				Imagine[rel]($current,id)
 
@@ -49,7 +50,7 @@ class window.Members
 			$(".step",$wrap).on 'enterStep', (e) ->
 				step_handle($(e.target))
 				put_course($(e.target).attr("id"))
-			$(".record a").tooltip()
+			$(".record a,.speech input").tooltip()
 			$(document).bind "keyup.imagine", (e) ->
 				$current = $(".step.active")
 				if $current.hasClass 'loaded'
@@ -124,3 +125,13 @@ class window.Members
 			$(@).removeClass("done")
 		$("input[type='text']",$form).change ->
 			$(@).closest("form").submit()
+		$speech = $(".word_item .speech input")
+		if document.createElement('input').webkitSpeech is undefined
+			$speech.remove()
+		else
+			$speech.bind "webkitspeechchange", -> 
+				key = $(@).attr "key"
+				if $(@).val() is key
+					Utils.flash("发音很准哦！","success","left")
+				else
+					Utils.flash("还差一点，加油！","error","right")

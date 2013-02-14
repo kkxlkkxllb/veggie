@@ -15,6 +15,10 @@ class WordsController < ApplicationController
       data = @uw ? @uw.content : nil
     when 2
       data = @word.rich_images
+    when 3
+      r_audios = @word.u_words.select{|x| x.has_audio }.collect{|w| w.audio_url}
+      u_audio = @uw && (@uw.has_audio ? @uw.audio_url : nil)
+      data = {:me => u_audio,:imagine => r_audios}
     end 
     render_json 0,'ok',data
   end
@@ -107,7 +111,7 @@ class WordsController < ApplicationController
   end
 
   # U word
-  # 个人发音
+  # 个人发音,自动上传
   def upload_audio_u
     @uw = find_or_create_uw(params[:id])
     file = params[:file]

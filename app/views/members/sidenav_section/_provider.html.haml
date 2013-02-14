@@ -5,7 +5,7 @@
 	个身份
 - if @provider_num != Provider::PROVIDERS.length
 	.alert.alert-info
-		任何你所关联的身份都可以用来登录哦，赶紧都关联上吧，好处多多
+		任何你所关联的身份都可以用来登录哦，如果你已经拥有下面的身份，赶紧关联吧
 .providers.clearfix
 	- Provider::PROVIDERS.each do |p|	
 		- if current_member.has_provider?(p)

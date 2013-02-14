@@ -168,7 +168,10 @@ module Grape
     
 		# 合成单张
     def draw(word_path,opt = {})
+      # 先缩小尺寸
       @img.resize @opts[:size].to_s
+      # 再裁剪
+      @img.crop "280x400+0+0"
       if opt[:original]
         @img.write opt[:original]
       end

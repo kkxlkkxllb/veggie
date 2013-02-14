@@ -1,14 +1,9 @@
 - if id = current_member.uid
 	%h4.alert
 		%span.icon-user
-		您的 17up 公民身份 ID: 
-		= id
-	.alert.alert-info
-		现在，你可以带你的朋友来参观你的 17up 个人秀啦
+		您的 17up 公民 ID: 
 		= link_to current_member.member_path do
-			%span.label.label-success
-				%i.icon-home
-				= $config[:host] + current_member.member_path
+			= id
 	.alert.alert-info
 		= link_to "#" do
 			%span.btn.btn-success.btn-large			

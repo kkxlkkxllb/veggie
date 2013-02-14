@@ -14,7 +14,7 @@ html.uhome
 	#start
 		.sans-serif
 			font-family: sans-serif
-		h1.title						
+		h1						
 			margin-bottom: 100px
 			font-size: 50px
 			text-align: center
@@ -62,6 +62,7 @@ html.uhome
 				left: 310px
 				@include transition(0.8s,ease-out)
 				position: relative
+				line-height: 400px
 				.item
 					opacity: 0.3
 					float: left
@@ -95,6 +96,12 @@ html.uhome
 					padding: 8px
 					@include round(10px)
 					@include shadow(0px,1px,3px,rgba(0,0,0,.3))
+			.speech 
+				margin-top: 20px
+				input
+					width: 17px 
+					border: 0
+					background: #f5f5f5
 		.word_item.active
 			.title,.original
 				opacity: 1
@@ -142,37 +149,55 @@ html.uhome
 					.record-play
 						a
 							text-shadow: 2px 2px 5px #999
+		.word_annotate.active
+			.wrap
+				opacity: 1
 		.word_annotate
 			.title
 				opacity: 1
 				text-align: center
-			.annotate
-				width: 100%
-				text-align: center
-				@include transition(0.8s,ease-out)		
-				.original
-					span
-						font-size: 16px
-						background: #f5f5f5
-						padding: 8px
-						@include round(10px)
-						@include shadow(0px,1px,3px,rgba(0,0,0,.3))
-				.custom
-					input
-						padding: 10px
-						font-size: 18px
-						background: rgba(255,255,255,.5)
-						@include transition(0.3s,ease-out)
-						border: 0
-						margin: 0
-						text-align: center
-						width: 270px
-						&:focus
-							background: #C4FFAF
-							outline: none
-							box-shadow: none
-					input.done
-						background: #ECD5F2
+			.wrap
+				opacity: 0
+				width: 9000px
+				left: 150px
+				@include transition(0.8s,ease-out)
+				position: relative
+				.item
+					opacity: 0.3
+					float: left
+					@include transform(scale(0.6))
+					@include transition(0.8s,ease-out)
+					width: 600px
+					text-align: center
+				.item.active
+					opacity: 1
+					@include transform(scale(1))
+				.annotate
+					text-align: center
+					@include transition(0.8s,ease-out)		
+					.original
+						span
+							font-size: 16px
+							background: #f5f5f5
+							padding: 8px
+							@include round(10px)
+							@include shadow(0px,1px,3px,rgba(0,0,0,.3))
+					.custom
+						input
+							padding: 10px
+							font-size: 18px
+							background: rgba(255,255,255,.5)
+							@include transition(0.3s,ease-out)
+							border: 0
+							margin: 0
+							text-align: center
+							width: 270px
+							&:focus
+								background: #C4FFAF
+								outline: none
+								box-shadow: none
+						input.done
+							background: #ECD5F2
 #user_setting
 	margin-top: 30px
 	ul.nav
@@ -203,7 +228,7 @@ html.uhome
 		position: relative
 		.avatar		
 			cursor: pointer
-			@include box-shadow(0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset)
+			@include box-shadow(0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset)		
 			img
 				width: 120px
 				height: 120px

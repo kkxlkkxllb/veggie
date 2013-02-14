@@ -1,28 +1,33 @@
 - data.each_with_index do |w,i|			
-	- y = (i + 1)*1000	
-	- z = (i + 1)*1500	
-	.word_item.step{:wid => w[:id],:"data-y" => -y,:"data-z" => -z,:id => i+1}
+	- round1_y = -(i + 1)*1000	
+	- round1_z = -(i + 1)*1500	
+	- num = i + 1
+	.word_item.step{:wid => w[:id],:"data-y" => round1_y,:"data-z" => round1_z,:id => num}
 		.title
 			%span.amienne
 				= w[:title]
 		.original
 			%span
 				= w[:content]
+		.speech
+			%input{:key => w[:title]}(type="text" x-webkit-speech lang="en" x-webkit-grammar="builtin:translate" title="测试你的发音")
 		%audio{:data => w[:audio]}
-	.word_audio.step{:wid => w[:id],:"data-y" => -(y+140),:"data-z" => -(z+100),:id => "#{i+1}a"}(rel="audios")
-		= render "members/sub_module/audio",:source => w[:audio]
-	.word_pic.step{:wid => w[:id],:"data-y" => -(y+300),:"data-z" => -(z+300),:id => "#{i+1}p"}(rel="images")
+		
+	.word_pic.step{:wid => w[:id],:"data-y" => round1_y - 200,:"data-z" => round1_z - 150,:id => "#{num}p"}(rel="images")
 		.wrap.clearfix
 			.item.origin.active
 				= image_tag(w[:image])
 	
-- round2_y = -(data.length + 1)*1000
-- round2_z = -(data.length + 1)*1500
 - data.each_with_index do |w,i|	
-	.word_annotate.step{:wid => w[:id],:"data-x" => i*1000,:"data-y" => round2_y,:"data-z" => round2_z,:id => "#{i+1}n"}(rel="annotate")
+	- round2_y = -(data.length + 1 + i)*1000
+	- round2_z = -(data.length + 1 + i)*1500
+	- num = i + 1
+	.word_annotate.step{:wid => w[:id],:"data-y" => round2_y,:"data-z" => round2_z,:id => "#{num}n"}(rel="annotate")
 		.title
 			%span.amienne
 				= w[:title]
 		= render "members/sub_module/annotate",:wid => w[:id],:original => w[:content]
-= render "members/sub_module/end_page",:y => round2_y,:z => round2_z,:x => data.length*1000
+	.word_audio.step{:wid => w[:id],:"data-y" => round2_y - 200,:"data-z" => round2_z - 150,:id => "#{num}a"}(rel="audios")
+		= render "members/sub_module/audio",:source => w[:audio]
+= render "members/sub_module/end_page",:y => -(2*data.length + 1)*1000,:z => -(2*data.length + 1)*1500,:x => 0
 	

@@ -1,11 +1,12 @@
--# To-Do
--# User Profile Bar: 头像／昵称／赞
--# word_item : 收录／分享
 #user_info
-	%span.avatar
+	.avatar
 		= image_tag(@user.avatar)
-	%span.name
-		= @user.name
+	.info
+		.name
+			= @user.name
+		.providers
+			- @user.providers.each do |p|
+				= link_to image_tag("icon/#{p.provider}_big.png"),p.link,:target => "blank"
 #user_show
 	- @p_words.each do |w|
 		.word_item

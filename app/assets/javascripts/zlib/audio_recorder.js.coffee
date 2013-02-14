@@ -2,14 +2,10 @@ class window.AudioRecorder
 	duration: 5000
 	constructor: ->
 		self = this
-		if !navigator.getUserMedia 
-			window.AudioContext = window.AudioContext || window.webkitAudioContext
-			navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
-			window.URL = window.URL || window.webkitURL			
-			self.audio_context = new AudioContext
-			unless navigator.getUserMedia
-				alert "not support"
-			
+		window.AudioContext = window.AudioContext || window.webkitAudioContext
+		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
+		window.URL = window.URL || window.webkitURL			
+		self.audio_context = new AudioContext
 	startRecording: (button) ->
 		self = this
 		start_record = ->
