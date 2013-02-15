@@ -10,6 +10,7 @@
 #  updated_at :datetime         not null
 #  width      :integer
 #  height     :integer
+#  grasp      :boolean
 #
 
 require 'spec_helper'

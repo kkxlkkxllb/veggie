@@ -1,5 +1,5 @@
 class window.AudioRecorder
-	duration: 5000
+	duration: 3000
 	constructor: ->
 		self = this
 		window.AudioContext = window.AudioContext || window.webkitAudioContext

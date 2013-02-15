@@ -131,7 +131,9 @@ class window.Members
 		else
 			$speech.bind "webkitspeechchange", -> 
 				key = $(@).attr "key"
-				if $(@).val() is key
+				w = $(@).val()
+				if w.toLowerCase() is key
 					Utils.flash("发音很准哦！","success","left")
 				else
-					Utils.flash("还差一点，加油！","error","right")
+					Utils.flash("#{w}? 还差一点，加油！","error","right")
+				$(@).blur()

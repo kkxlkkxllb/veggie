@@ -10,8 +10,11 @@
 #  updated_at :datetime         not null
 #  width      :integer
 #  height     :integer
+#  grasp      :boolean
 #
 
+# 用户词汇
+# 包含：自定义词义／图片解释／语音／是否掌握
 class UWord < ActiveRecord::Base
   belongs_to :member
   belongs_to :word

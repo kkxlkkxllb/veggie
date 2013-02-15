@@ -17,6 +17,7 @@
 #  updated_at             :datetime
 #  role                   :string(255)
 #  uid                    :string(255)
+#  gem                    :integer
 #
 
 class Member < ActiveRecord::Base
