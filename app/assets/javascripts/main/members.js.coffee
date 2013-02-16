@@ -83,9 +83,9 @@ class window.Members
 		put_course = (val = 1,cid = window.cid) ->
 			if val is 0
 				val = null
-			$.cookie "course_#{cid}", val, expires: 7
+			$.jStorage.set "course_#{cid}", val
 		get_course = (cid = window.cid) ->
-			$.cookie "course_#{cid}"
+			$.jStorage.get "course_#{cid}"
 		# jmpress init		
 		if $wrap.length is 1
 			$wrap.jmpress
@@ -129,6 +129,8 @@ class window.Members
 		if document.createElement('input').webkitSpeech is undefined
 			$speech.remove()
 		else
+			$speech.focus ->
+  				$(@).blur()
 			$speech.bind "webkitspeechchange", -> 
 				key = $(@).attr "key"
 				w = $(@).val()
@@ -137,3 +139,4 @@ class window.Members
 				else
 					Utils.flash("#{w}? 还差一点，加油！","error","right")
 				$(@).blur()
+				$(@).val('')

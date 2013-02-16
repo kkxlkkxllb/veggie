@@ -53,11 +53,11 @@ class UWord < ActiveRecord::Base
   end
 
   def audio_path
-    AUDIO_PATH + "#{self.id}/#{$config[:name]}.wav"
+    AUDIO_PATH + "#{self.id}/#{$config[:name]}.ogg"
   end
 
   def audio_url
-    AUDIO_URL + "#{self.id}/#{$config[:name]}.wav"
+    AUDIO_URL + "#{self.id}/#{$config[:name]}.ogg"
   end
 
   def has_audio

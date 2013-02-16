@@ -115,13 +115,12 @@ class WordsController < ApplicationController
   def upload_audio_u
     @uw = find_or_create_uw(params[:id])
     file = params[:file]
-    data = open(file.tempfile.path){|f|f.read}
     @store_path = UWord::AUDIO_PATH + "#{@uw.id}"
     unless File.exist?(@store_path)
       `mkdir -p #{@store_path}`
     end
-    file = File.open(@uw.audio_path,"wb") << data
-    file.close
+    # 压缩成 ogg
+    `oggenc -q 4 #{file.tempfile.path} -o #{@uw.audio_path}`
     render_json 0,"ok"
   end
 

@@ -18,7 +18,7 @@ a
 	width: 100%
 	margin: 0
 	font-size: 120px
-	@include transition(0.3s)
+	display: block
 	position: absolute
 	.banner
 		height: 180px
@@ -26,16 +26,14 @@ a
 		text-align: center
 		@include text-shadow-inverse
 	.b1
-		background-color: #555		
+		@include radial-gradient(center 40%, circle cover, #F41 0%, #8A0000 100%)
+		@include text-shine
 	.b2
-		background-color: #3DACE0
+		background-color: #C1FF7D 
 	.b3
-		background-color: #C1FF7D
-	.b4
-		background-color: #EA8072
+		background-color: #3DACE0
 #m_nav.hide
-	@include transform(scale3d(1,0,0))
-	-webkit-transform-style: preserve-3d
+	display: none
 #m_nav_back
 	width:  100%
 	position: fixed

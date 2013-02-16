@@ -10,7 +10,7 @@
 			%span
 				= w[:content]
 		.speech
-			%input{:key => w[:title]}(type="text" x-webkit-speech lang="en" x-webkit-grammar="builtin:translate" title="测试你的发音")
+			%input{:key => w[:title]}(x-webkit-speech lang="en" x-webkit-grammar="builtin:translate" title="测试你的发音")
 		%audio{:data => w[:audio]}
 		
 	.word_pic.step{:wid => w[:id],:"data-y" => round1_y - 200,:"data-z" => round1_z - 150,:id => "#{num}p"}(rel="images")
