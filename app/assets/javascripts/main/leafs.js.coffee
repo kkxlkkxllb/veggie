@@ -5,10 +5,11 @@ class window.Leafs
 	constructor: (@$wrap = $("#t_wrap")) ->
 		Utils.infinitescroll(@$wrap)
 		Utils.masonry(@$wrap,'.leaf')
-		@$wrap.on 'click',".leaf",->
-			$("span.action",$(@)).toggle()
 		$(".leaf img").load ->
 			lzld(this)
+		$(document).bind "keyup.leaf",(e)->
+			if e.keyCode is 17
+				$(".leaf .action").toggle()
 	destroy_leaf: ($wrap = @$wrap) ->
 		$(".leaf").on "click","span.destroy", ->
 			ele = $(@)
