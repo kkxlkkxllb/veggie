@@ -63,29 +63,25 @@ class window.Course
 			$(@).removeClass("green").addClass("pink")
 			$container.isotope({ filter: $(@).attr('ctag') })
 			false
-	img_change: ($container = @$container,$modal = $("#editor_magic")) ->
-		response = ($target,wid,params) ->
-			$(".images",$modal).empty()
-			Utils.loading $(".modal-header",$modal)
-			$.get "/olive/magic?#{params}",(data) ->
-				if data.status is 0
-					html = ''
-					for i in data.data
-						html += "<img src='#{i}' />"
-					$(".images",$modal).html(html)
-					Utils.loaded $(".modal-header",$modal)
-					$('img',$(".images",$modal)).click ->
-						$modal.modal('hide')					
-						Utils.loading $target
-						img = $(@).attr('src')
-						$.post "/words/fetch_img"
-							id: wid
-							img: img
-							(data) ->
-								if data.status is 0
-									$target.attr("src",data.data.pic).load ->
-										Utils.loaded $target
-										$container.isotope()
+	img_change: ($container = @$container,$modal = $("#editor_magic")) ->		
+		
+		response = ($target,wid,params) ->	
+			$wrap = $(".images",$modal)		
+			$wrap.empty()
+			$(".images",$modal).isotope("destroy")
+			if html = $.jStorage.get("magic-#{wid}")
+				$wrap.html(html).isotope
+					itemSelector: "img"
+					layoutMode : 'masonry'
+			else
+				$.get "/olive/magic?#{params}",(data) ->
+					if data.status is 0
+						html = ''
+						for i in data.data
+							html += "<img src='#{i}' />"
+						$wrap.html(html)
+						$.jStorage.set "magic-#{wid}",html
+
 		$container.delegate "a.change_btn","click", ->
 			$modal.modal()
 			$wrap = $(@).closest('.word_item')
@@ -97,4 +93,16 @@ class window.Course
 				$(@).hide()
 				response($target,wid,"more=1&id=#{wid}")
 				false
+			$(".images",$modal).on "click",'img', ->
+				$modal.modal('hide')					
+				Utils.loading $target
+				img = $(@).attr('src')
+				$.post "/words/fetch_img"
+					id: wid
+					img: img
+					(data) ->
+						if data.status is 0
+							$target.attr("src",data.data.pic).load ->
+								Utils.loaded $target
+								$container.isotope()
 			false			
